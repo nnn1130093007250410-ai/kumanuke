@@ -60,7 +60,4 @@ body {
 /* ── Comparison table ── */
 .comparison-table { border-collapse: collapse; }
 .comparison-table th { background: #143D1E; color: #fff; }
-.comparison-table th:last-child { background: #E07A30; }
-.comparison-table td:last-child { background: #FFF4ED; }
 .comparison-table tr:nth-child(even) td { background: #F8F8F6; }
-.comparison-table tr:nth-child(even) td:last-child { background: #FFF4ED; }
