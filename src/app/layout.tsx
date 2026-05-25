@@ -34,8 +34,8 @@ export const metadata: Metadata = {
     'キャンプ 熊対策', '畑 熊対策', 'ゴミ置き場 熊対策',
     '登山 熊対策', 'エリア散布', '植物由来', '熊遭遇予防',
   ],
-  authors: [{ name: 'KUMANUKE' }],
-  creator: 'KUMANUKE',
+  authors: [{ name: 'BUBUWORKS合同会社' }],
+  creator: 'BUBUWORKS合同会社',
   openGraph: {
     type: 'website',
     locale: 'ja_JP',
@@ -44,20 +44,11 @@ export const metadata: Metadata = {
     title: 'KUMANUKE | 植物由来 エリア散布型 野生動物対策スプレー',
     description:
       '植物由来成分のエリア散布型野生動物対策。熊との遭遇予防を目的とした事前散布型対策スプレー。OCガス・カプサイシン不使用。',
-    images: [
-      {
-        url: '/images/og-image.png',
-        width: 1200,
-        height: 630,
-        alt: 'KUMANUKE 野生動物対策スプレー',
-      },
-    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'KUMANUKE | 植物由来 エリア散布型 野生動物対策スプレー',
     description: '植物由来成分のエリア散布型野生動物対策スプレー。熊との遭遇予防に。',
-    images: ['/images/og-image.png'],
   },
   robots: {
     index: true,
@@ -88,6 +79,20 @@ const jsonLd = {
       url: 'https://kumanuke.jp',
       name: 'KUMANUKE',
       description: '植物由来 エリア散布型 野生動物対策スプレー',
+    },
+    {
+      '@type': 'Organization',
+      name: 'BUBUWORKS合同会社',
+      url: 'https://kumanuke.jp',
+      email: 'kumanuke@bubuworks.co.jp',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: '安積荒井1-169 C102',
+        addressLocality: '郡山市',
+        addressRegion: '福島県',
+        postalCode: '963-0201',
+        addressCountry: 'JP',
+      },
     },
     {
       '@type': 'FAQPage',

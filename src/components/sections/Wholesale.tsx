@@ -12,12 +12,42 @@ const wholesaleTargets = [
   '廃棄物処理・清掃業者',
 ]
 
+const INQUIRY_TYPES = [
+  '卸販売について',
+  '大量購入について',
+  'OEM・PB対応について',
+  'その他',
+]
+
 export default function Wholesale() {
   const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [errorMsg, setErrorMsg] = useState('')
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setSubmitted(true)
+    setLoading(true)
+    setErrorMsg('')
+
+    const form = e.currentTarget
+    const data = new FormData(form)
+
+    try {
+      const res = await fetch('https://formsubmit.co/ajax/kumanuke@bubuworks.co.jp', {
+        method: 'POST',
+        body: data,
+        headers: { Accept: 'application/json' },
+      })
+      if (res.ok) {
+        setSubmitted(true)
+      } else {
+        setErrorMsg('送信に失敗しました。しばらくしてから再度お試しください。')
+      }
+    } catch {
+      setErrorMsg('ネットワークエラーが発生しました。メールでのお問い合わせもご利用いただけます。')
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -47,8 +77,8 @@ export default function Wholesale() {
             <p style={{ marginTop: 20, fontSize: 13, color: '#5A5A55' }}>
               数量・価格条件・販売エリア等についてはお問い合わせください。OEM・PB対応についても別途ご相談承ります。
             </p>
-            <a href="mailto:info@kumanuke.jp" style={{ display: 'inline-block', marginTop: 16, color: '#143D1E', fontWeight: 700, fontSize: 14, textDecoration: 'none' }}>
-              📧 info@kumanuke.jp
+            <a href="mailto:kumanuke@bubuworks.co.jp" style={{ display: 'inline-block', marginTop: 16, color: '#143D1E', fontWeight: 700, fontSize: 14, textDecoration: 'none' }}>
+              📧 kumanuke@bubuworks.co.jp
             </a>
           </div>
 
@@ -63,11 +93,16 @@ export default function Wholesale() {
               </div>
             ) : (
               <form onSubmit={handleSubmit}>
+                {/* FormSubmit設定 */}
+                <input type="hidden" name="_subject" value="【KUMANUKE】卸・法人お問い合わせ" />
+                <input type="hidden" name="_captcha" value="false" />
+                <input type="hidden" name="_template" value="table" />
+
                 {[
-                  { label: '会社名・団体名', placeholder: '株式会社〇〇 / 〇〇農業組合', required: true, type: 'text' },
-                  { label: 'ご担当者名', placeholder: '山田 太郎', required: true, type: 'text' },
-                  { label: 'メールアドレス', placeholder: 'info@example.co.jp', required: true, type: 'email' },
-                  { label: '電話番号', placeholder: '03-0000-0000', required: false, type: 'tel' },
+                  { label: '会社名・団体名', name: 'company', placeholder: '株式会社〇〇 / 〇〇農業組合', required: true, type: 'text' },
+                  { label: 'ご担当者名', name: 'contact', placeholder: '山田 太郎', required: true, type: 'text' },
+                  { label: 'メールアドレス', name: 'email', placeholder: 'info@example.co.jp', required: true, type: 'email' },
+                  { label: '電話番号', name: 'phone', placeholder: '03-0000-0000', required: false, type: 'tel' },
                 ].map((f) => (
                   <div key={f.label} style={{ marginBottom: 14 }}>
                     <label style={{ display: 'block', fontSize: 12, fontWeight: 700, color: '#4A4A45', marginBottom: 5 }}>
@@ -75,34 +110,43 @@ export default function Wholesale() {
                     </label>
                     <input
                       type={f.type}
+                      name={f.name}
                       placeholder={f.placeholder}
                       required={f.required}
+                      disabled={loading}
                       style={{ width: '100%', padding: '10px 12px', border: '1px solid #DDDDD8', borderRadius: 4, fontSize: 14, fontFamily: 'inherit', background: '#fff', outline: 'none' }}
                     />
                   </div>
                 ))}
                 <div style={{ marginBottom: 14 }}>
                   <label style={{ display: 'block', fontSize: 12, fontWeight: 700, color: '#4A4A45', marginBottom: 5 }}>お問い合わせ種別</label>
-                  <select style={{ width: '100%', padding: '10px 12px', border: '1px solid #DDDDD8', borderRadius: 4, fontSize: 14, fontFamily: 'inherit', background: '#fff' }}>
-                    <option>卸販売について</option>
-                    <option>大量購入について</option>
-                    <option>OEM・PB対応について</option>
-                    <option>その他</option>
+                  <select
+                    name="type"
+                    disabled={loading}
+                    style={{ width: '100%', padding: '10px 12px', border: '1px solid #DDDDD8', borderRadius: 4, fontSize: 14, fontFamily: 'inherit', background: '#fff' }}
+                  >
+                    {INQUIRY_TYPES.map((t) => <option key={t}>{t}</option>)}
                   </select>
                 </div>
                 <div style={{ marginBottom: 16 }}>
                   <label style={{ display: 'block', fontSize: 12, fontWeight: 700, color: '#4A4A45', marginBottom: 5 }}>ご要望・ご質問</label>
                   <textarea
+                    name="message"
                     placeholder="ご希望数量・販売チャネル・ご質問等をご記入ください"
                     rows={4}
+                    disabled={loading}
                     style={{ width: '100%', padding: '10px 12px', border: '1px solid #DDDDD8', borderRadius: 4, fontSize: 14, fontFamily: 'inherit', background: '#fff', resize: 'vertical', outline: 'none' }}
                   />
                 </div>
+                {errorMsg && (
+                  <p style={{ fontSize: 12, color: '#dc2626', marginBottom: 10 }}>{errorMsg}</p>
+                )}
                 <button
                   type="submit"
-                  style={{ width: '100%', background: '#143D1E', color: '#fff', fontWeight: 700, fontSize: 15, padding: 14, borderRadius: 4, border: 'none', cursor: 'pointer', fontFamily: 'inherit' }}
+                  disabled={loading}
+                  style={{ width: '100%', background: loading ? '#5A8A68' : '#143D1E', color: '#fff', fontWeight: 700, fontSize: 15, padding: 14, borderRadius: 4, border: 'none', cursor: loading ? 'not-allowed' : 'pointer', fontFamily: 'inherit', transition: 'background 0.2s' }}
                 >
-                  送信する
+                  {loading ? '送信中…' : '送信する'}
                 </button>
                 <p style={{ fontSize: 11, color: '#9A9A95', marginTop: 10, textAlign: 'center' }}>通常2営業日以内にご返信いたします</p>
               </form>
