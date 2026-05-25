@@ -8,6 +8,7 @@ import Ingredients from '@/components/sections/Ingredients'
 import Comparison from '@/components/sections/Comparison'
 import HowToUse from '@/components/sections/HowToUse'
 import FAQ from '@/components/sections/FAQ'
+import Research from '@/components/sections/Research'
 import Caution from '@/components/sections/Caution'
 import Wholesale from '@/components/sections/Wholesale'
 import CTA from '@/components/sections/CTA'
@@ -29,6 +30,7 @@ export default function Home() {
         <Comparison />
         <HowToUse />
         <FAQ />
+        <Research />
         <Caution />
         <Wholesale />
         <CTA />
