@@ -36,6 +36,8 @@ export function Features() {
   )
 }
 
+import Image from 'next/image'
+
 /* Scenes */
 const scenes = [
   { label: 'キャンプ', title: 'キャンプ・野営地', text: 'テントサイト周辺・食料保管エリアへの事前散布。就寝前のエリア対策として。', grad: 'linear-gradient(160deg,#1a3a1c,#2d5a32,#3d7a45)' },
@@ -52,13 +54,24 @@ export function Scenes() {
       <div style={{ maxWidth: 1040, margin: '0 auto' }}>
         <div className="section-label">USE CASES</div>
         <h2 className="section-title" style={{ fontSize: 'clamp(20px,3vw,30px)', marginBottom: 14 }}>使用シーン</h2>
-        <p style={{ fontSize: 15, color: '#5A5A55', lineHeight: 1.85, marginBottom: 40 }}>
+        <p style={{ fontSize: 15, color: '#5A5A55', lineHeight: 1.85, marginBottom: 32 }}>
           幅広いシーンでの野生動物の寄り付き対策・遭遇予防の事前散布としてご活用いただけます。
         </p>
+
+        {/* シーン一覧画像 */}
+        <div className="fade-up" style={{ position: 'relative', borderRadius: 10, overflow: 'hidden', marginBottom: 32, aspectRatio: '4/3' }}>
+          <Image
+            src="/scenes.jpg"
+            alt="KUMANUKEの使用シーン：自宅・農園・ゴミ置き場・キャンプ・車周辺・山道など"
+            fill
+            style={{ objectFit: 'cover', objectPosition: 'top' }}
+          />
+        </div>
+
         <div className="fade-up" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px,1fr))', gap: 16 }}>
           {scenes.map((s) => (
             <div key={s.title} style={{ borderRadius: 8, overflow: 'hidden', border: '1px solid #DDDDD8' }}>
-              <div style={{ background: s.grad, height: 130, display: 'flex', alignItems: 'flex-end', padding: '14px 14px' }}>
+              <div style={{ background: s.grad, height: 80, display: 'flex', alignItems: 'flex-end', padding: '10px 14px' }}>
                 <span style={{ background: '#143D1E', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 9px', borderRadius: 3 }}>{s.label}</span>
               </div>
               <div style={{ padding: '14px 16px', background: '#fff' }}>
@@ -97,6 +110,17 @@ export function Ingredients() {
         <p style={{ fontSize: 15, color: '#5A5A55', maxWidth: 600, lineHeight: 1.85, marginBottom: 40 }}>
           KUMANUKEは植物由来の香気成分を主体とした処方を採用。刺激の強い化学合成成分の使用を避け、エリア対策に特化した配合設計です。
         </p>
+        {/* 6種植物由来オイル画像 */}
+        <div className="fade-up" style={{ position: 'relative', borderRadius: 10, overflow: 'hidden', marginBottom: 40, maxHeight: 360 }}>
+          <Image
+            src="/ingredients.jpg"
+            alt="KUMANUKEに使用する6種の植物由来オイル：シトロネラ・クローブ・シナモン・ユーカリ・ティーツリー・レモングラス"
+            width={1040}
+            height={360}
+            style={{ objectFit: 'cover', objectPosition: 'center top', width: '100%', height: 'auto', maxHeight: 360 }}
+          />
+        </div>
+
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px,1fr))', gap: 48, alignItems: 'start' }}>
           <div>
             <ul style={{ listStyle: 'none', padding: 0 }}>
@@ -254,6 +278,17 @@ export function HowToUse() {
         <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 8, padding: '18px 22px', marginTop: 32, fontSize: 13, color: 'rgba(255,255,255,0.5)' }}>
           <strong style={{ color: 'rgba(255,255,255,0.75)' }}>散布のポイント：</strong>
           風向きを考慮してエリア外周に散布。降雨前後・定期的（目安：1〜2週間ごと）の再散布により対策を維持してください。使用環境・天候により効果の持続時間は異なります。
+        </div>
+
+        {/* 使い方 3STEP 画像 */}
+        <div className="fade-up" style={{ position: 'relative', borderRadius: 10, overflow: 'hidden', marginTop: 40 }}>
+          <Image
+            src="/howto.jpg"
+            alt="KUMANUKEの使い方3ステップ：振る・地面に向けて構える・シュッと吹く"
+            width={1040}
+            height={520}
+            style={{ objectFit: 'cover', width: '100%', height: 'auto' }}
+          />
         </div>
       </div>
     </section>
