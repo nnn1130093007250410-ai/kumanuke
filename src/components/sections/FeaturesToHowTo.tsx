@@ -209,16 +209,16 @@ export function Ingredients() {
 }
 
 /* Comparison */
-type Row = { label: string; area: string; stim: string; prev: string; carry: string; cost: string; kumanuke: string }
+type Row = { label: string; kumanuke: boolean; area: string; stim: string; prev: string; carry: string; cost: string }
 const rows: Row[] = [
-  { label: '熊鈴・音対策', area: '△', stim: 'なし', prev: '△（同行者のみ）', carry: '高い', cost: '低い', kumanuke: '—' },
-  { label: '唐辛子系忌避剤', area: '○', stim: 'あり（強）', prev: '○', carry: '中程度', cost: '中程度', kumanuke: '—' },
-  { label: 'OCガス系スプレー', area: '△（接触型）', stim: 'あり（強）', prev: '✕（護身用）', carry: '高い', cost: '中程度', kumanuke: '—' },
-  { label: '電気柵', area: '◎（固定区域）', stim: 'なし', prev: '◎', carry: '低い', cost: '高い', kumanuke: '—' },
-  { label: '一般的化学忌避剤', area: '○', stim: 'あり（中）', prev: '○', carry: '中程度', cost: '中程度', kumanuke: '—' },
-  { label: 'KUMANUKE', area: '○', stim: '植物由来のみ', prev: '○', carry: '高い（200ml）', cost: '低〜中', kumanuke: '◎' },
+  { label: 'KUMANUKE',       kumanuke: true,  area: '○',           stim: '植物由来のみ',  prev: '○',          carry: '高い（200ml）', cost: '低〜中' },
+  { label: '熊鈴・音対策',   kumanuke: false, area: '△',           stim: 'なし',          prev: '△（同行者のみ）', carry: '高い',    cost: '低い' },
+  { label: '唐辛子系忌避剤', kumanuke: false, area: '○',           stim: 'あり（強）',    prev: '○',          carry: '中程度',       cost: '中程度' },
+  { label: 'OCガス系スプレー', kumanuke: false, area: '△（接触型）', stim: 'あり（強）',   prev: '✕（護身用）', carry: '高い',        cost: '中程度' },
+  { label: '電気柵',         kumanuke: false, area: '◎（固定区域）', stim: 'なし',         prev: '◎',          carry: '低い',         cost: '高い' },
+  { label: '一般的化学忌避剤', kumanuke: false, area: '○',          stim: 'あり（中）',    prev: '○',          carry: '中程度',       cost: '中程度' },
 ]
-const heads = ['対策の種類', 'エリア散布', '刺激成分', '事前対策', '携帯性', 'コスト', 'KUMANUKE']
+const heads = ['対策の種類', 'エリア散布', '刺激成分', '事前対策', '携帯性', 'コスト']
 
 export function Comparison() {
   return (
@@ -230,7 +230,7 @@ export function Comparison() {
           各種対策の特性を参考として整理しています。使用環境・目的に応じてご検討ください。
         </p>
         <div style={{ overflowX: 'auto' }}>
-          <table className="comparison-table" style={{ width: '100%', fontSize: 13, minWidth: 640 }}>
+          <table className="comparison-table" style={{ width: '100%', fontSize: 13, minWidth: 560 }}>
             <thead>
               <tr>
                 {heads.map((h, i) => (
@@ -250,10 +250,38 @@ export function Comparison() {
             </thead>
             <tbody>
               {rows.map((r) => (
-                <tr key={r.label}>
-                  <td style={{ padding: '11px 14px', fontWeight: r.label === 'KUMANUKE' ? 700 : 600, color: r.label === 'KUMANUKE' ? '#143D1E' : '#1A1A16' }}>{r.label}</td>
-                  {[r.area, r.stim, r.prev, r.carry, r.cost, r.kumanuke].map((v, i) => {
-                    const good = v === '○' || v === '◎' || v === 'なし' || v === '高い' || v === '高い（200ml）' || v === '低い' || v === '低〜中'
+                <tr
+                  key={r.label}
+                  style={r.kumanuke ? {
+                    background: '#EFF7F0',
+                    outline: '2px solid #143D1E',
+                    outlineOffset: '-2px',
+                  } : {}}
+                >
+                  <td style={{
+                    padding: '11px 14px',
+                    fontWeight: 700,
+                    color: r.kumanuke ? '#143D1E' : '#1A1A16',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 8,
+                  }}>
+                    {r.kumanuke && (
+                      <span style={{
+                        background: '#143D1E',
+                        color: '#fff',
+                        fontSize: 9,
+                        fontWeight: 700,
+                        padding: '2px 6px',
+                        borderRadius: 3,
+                        letterSpacing: '0.05em',
+                        flexShrink: 0,
+                      }}>当製品</span>
+                    )}
+                    {r.label}
+                  </td>
+                  {[r.area, r.stim, r.prev, r.carry, r.cost].map((v, i) => {
+                    const good = v === '○' || v === '◎' || v === 'なし' || v === '高い' || v === '高い（200ml）' || v === '低い' || v === '低〜中' || v === '植物由来のみ'
                     const bad = v === '✕（護身用）' || v === 'あり（強）' || v === '△（接触型）'
                     return (
                       <td
