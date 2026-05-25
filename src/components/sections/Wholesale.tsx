@@ -30,21 +30,35 @@ export default function Wholesale() {
     setErrorMsg('')
 
     const form = e.currentTarget
-    const data = new FormData(form)
+    const body = {
+      '会社名・団体名': (form.elements.namedItem('company') as HTMLInputElement).value,
+      'ご担当者名':     (form.elements.namedItem('contact') as HTMLInputElement).value,
+      'メールアドレス': (form.elements.namedItem('email') as HTMLInputElement).value,
+      '電話番号':       (form.elements.namedItem('phone') as HTMLInputElement).value,
+      'お問い合わせ種別': (form.elements.namedItem('type') as HTMLSelectElement).value,
+      'ご要望・ご質問': (form.elements.namedItem('message') as HTMLTextAreaElement).value,
+      _subject:  '【KUMANUKE】卸・法人お問い合わせ',
+      _captcha:  'false',
+      _template: 'table',
+    }
 
     try {
       const res = await fetch('https://formsubmit.co/ajax/kumanuke@bubuworks.co.jp', {
         method: 'POST',
-        body: data,
-        headers: { Accept: 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify(body),
       })
-      if (res.ok) {
+      const json = await res.json().catch(() => ({}))
+      if (res.ok && json.success) {
         setSubmitted(true)
       } else {
         setErrorMsg('送信に失敗しました。しばらくしてから再度お試しください。')
       }
     } catch {
-      setErrorMsg('ネットワークエラーが発生しました。メールでのお問い合わせもご利用いただけます。')
+      setErrorMsg('送信に失敗しました。お手数ですが kumanuke@bubuworks.co.jp までメールにてお問い合わせください。')
     } finally {
       setLoading(false)
     }
