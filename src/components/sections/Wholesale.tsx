@@ -43,7 +43,7 @@ export default function Wholesale() {
     }
 
     try {
-      const res = await fetch('https://formsubmit.co/ajax/kumanuke@bubuworks.co.jp', {
+      const res = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
