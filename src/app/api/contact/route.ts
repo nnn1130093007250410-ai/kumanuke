@@ -55,9 +55,10 @@ export async function POST(req: NextRequest) {
     })
 
     if (!res.ok) {
-      const err = await res.text().catch(() => '')
-      console.error('Resend error:', res.status, err)
-      return NextResponse.json({ success: false }, { status: 502 })
+      const errJson = await res.json().catch(() => null)
+      const errText = errJson ? JSON.stringify(errJson) : ''
+      console.error('Resend error:', res.status, errText)
+      return NextResponse.json({ success: false, resendError: errJson ?? errText }, { status: 502 })
     }
 
     return NextResponse.json({ success: true })

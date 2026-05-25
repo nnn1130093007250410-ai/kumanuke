@@ -55,7 +55,8 @@ export default function Wholesale() {
       if (res.ok && json.success) {
         setSubmitted(true)
       } else {
-        setErrorMsg('送信に失敗しました。しばらくしてから再度お試しください。')
+        const detail = json.resendError?.message ?? json.resendError ?? ''
+        setErrorMsg(`送信に失敗しました。${detail ? `（${detail}）` : 'しばらくしてから再度お試しください。'}`)
       }
     } catch {
       setErrorMsg('送信に失敗しました。お手数ですが kumanuke@bubuworks.co.jp までメールにてお問い合わせください。')
