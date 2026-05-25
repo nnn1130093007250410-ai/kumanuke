@@ -56,6 +56,7 @@ export const metadata: Metadata = {
     googleBot: { index: true, follow: true, 'max-image-preview': 'large' },
   },
   alternates: { canonical: 'https://kumanuke.bubuworks.co.jp' },
+  verification: { google: '59t4CPVWs5pqhP2kXA31OTvt18MMUrvsXVCm0UuoH78' },
 }
 
 const jsonLd = {
