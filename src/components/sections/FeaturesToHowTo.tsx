@@ -38,14 +38,44 @@ export function Features() {
 
 import Image from 'next/image'
 
-/* Scenes */
-const scenes = [
-  { label: 'キャンプ', title: 'キャンプ・野営地', text: 'テントサイト周辺・食料保管エリアへの事前散布。就寝前のエリア対策として。', grad: 'linear-gradient(160deg,#1a3a1c,#2d5a32,#3d7a45)' },
-  { label: '登山・山道', title: '登山・ハイキング', text: '登山口・休憩ポイント周辺への散布。山行前の事前対策として活用。', grad: 'linear-gradient(160deg,#1a2a3a,#2d4a6a,#3d6a9a)' },
-  { label: '農業・畑', title: '農地・畑の周囲', text: '農地外周・入口付近への定期散布。作物へのアクセス対策を目的とした継続使用に。', grad: 'linear-gradient(160deg,#3a5a1a,#5a8a2d,#7aaa45)' },
-  { label: 'ゴミ置き場', title: 'ゴミ集積所・置き場', text: 'ゴミ置き場の周囲への定期散布。収集日前日など特に対策が必要な時間帯に。', grad: 'linear-gradient(160deg,#2a2a2a,#3a4a3a,#4a5a4a)' },
-  { label: '倉庫・施設', title: '倉庫・農業施設', text: '倉庫の出入口・換気口周辺への散布。食品・農産物を保管する施設の対策として。', grad: 'linear-gradient(160deg,#4a3a1a,#7a5a2d,#aa8a45)' },
-  { label: '通学路・生活道路', title: '通学路・山間道路', text: '山沿いの通学路や生活道路の周辺への散布。行政・自治会での活用にも。', grad: 'linear-gradient(160deg,#1a2a1a,#2d4a2d,#4a7a4a)' },
+/* Scenes — 各シーン専用のストック写真を使用 */
+const scenes: { label: string; title: string; text: string; src: string; pos: string; alt: string }[] = [
+  {
+    label: 'キャンプ', title: 'キャンプ・野営地',
+    text: 'テントサイト周辺・食料保管エリアへの事前散布。就寝前のエリア対策として。',
+    src: '/scene-camp.jpg', pos: 'center center',
+    alt: 'テント内から森を見るキャンプシーン',
+  },
+  {
+    label: '登山・山道', title: '登山・ハイキング',
+    text: '登山口・休憩ポイント周辺への散布。山行前の事前対策として活用。',
+    src: '/scene-hike.jpg', pos: 'center 40%',
+    alt: '山岳トレイルを歩くハイカー',
+  },
+  {
+    label: '農業・畑', title: '農地・畑の周囲',
+    text: '農地外周・入口付近への定期散布。作物へのアクセス対策を目的とした継続使用に。',
+    src: '/scene-farm.jpg', pos: 'center center',
+    alt: '夕日の麦畑・農地',
+  },
+  {
+    label: 'ゴミ置き場', title: 'ゴミ集積所・置き場',
+    text: 'ゴミ置き場の周囲への定期散布。収集日前日など特に対策が必要な時間帯に。',
+    src: '/scene-trash.jpg', pos: 'center center',
+    alt: '山に隣接する住宅地・夜間の動物侵入対策',
+  },
+  {
+    label: '倉庫・施設', title: '倉庫・農業施設',
+    text: '倉庫の出入口・換気口周辺への散布。食品・農産物を保管する施設の対策として。',
+    src: '/scene-warehouse.jpg', pos: 'center center',
+    alt: '農産物を保管する農業施設',
+  },
+  {
+    label: '通学路・生活道路', title: '通学路・山間道路',
+    text: '山沿いの通学路や生活道路の周辺への散布。行政・自治会での活用にも。',
+    src: '/scene-road.jpg', pos: 'center center',
+    alt: '山林を抜ける山間道路',
+  },
 ]
 
 export function Scenes() {
@@ -54,26 +84,43 @@ export function Scenes() {
       <div style={{ maxWidth: 1040, margin: '0 auto' }}>
         <div className="section-label">USE CASES</div>
         <h2 className="section-title" style={{ fontSize: 'clamp(20px,3vw,30px)', marginBottom: 14 }}>使用シーン</h2>
-        <p style={{ fontSize: 15, color: '#5A5A55', lineHeight: 1.85, marginBottom: 32 }}>
+        <p style={{ fontSize: 15, color: '#5A5A55', lineHeight: 1.85, marginBottom: 36 }}>
           幅広いシーンでの野生動物の寄り付き対策・遭遇予防の事前散布としてご活用いただけます。
         </p>
 
-        {/* シーン一覧画像 */}
-        <div className="fade-up" style={{ position: 'relative', borderRadius: 10, overflow: 'hidden', marginBottom: 32, aspectRatio: '4/3' }}>
-          <Image
-            src="/scenes.jpg"
-            alt="KUMANUKEの使用シーン：自宅・農園・ゴミ置き場・キャンプ・車周辺・山道など"
-            fill
-            style={{ objectFit: 'cover', objectPosition: 'top' }}
-          />
-        </div>
-
-        <div className="fade-up" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px,1fr))', gap: 16 }}>
+        <div className="fade-up" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
           {scenes.map((s) => (
-            <div key={s.title} style={{ borderRadius: 8, overflow: 'hidden', border: '1px solid #DDDDD8' }}>
-              <div style={{ background: s.grad, height: 80, display: 'flex', alignItems: 'flex-end', padding: '10px 14px' }}>
-                <span style={{ background: '#143D1E', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 9px', borderRadius: 3 }}>{s.label}</span>
+            <div key={s.title} style={{ borderRadius: 8, overflow: 'hidden', border: '1px solid #DDDDD8', boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
+              {/* 写真エリア */}
+              <div style={{ position: 'relative', height: 160, overflow: 'hidden' }}>
+                <Image
+                  src={s.src}
+                  alt={s.alt}
+                  fill
+                  style={{ objectFit: 'cover', objectPosition: s.pos }}
+                />
+                {/* ラベルオーバーレイ */}
+                <div style={{
+                  position: 'absolute',
+                  inset: 0,
+                  background: 'linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 55%)',
+                  pointerEvents: 'none',
+                }} />
+                <span style={{
+                  position: 'absolute',
+                  bottom: 10,
+                  left: 12,
+                  background: '#143D1E',
+                  color: '#fff',
+                  fontSize: 11,
+                  fontWeight: 700,
+                  padding: '3px 9px',
+                  borderRadius: 3,
+                }}>
+                  {s.label}
+                </span>
               </div>
+              {/* テキスト */}
               <div style={{ padding: '14px 16px', background: '#fff' }}>
                 <h3 style={{ fontSize: 14, fontWeight: 700, color: '#1A1A16', marginBottom: 5 }}>{s.title}</h3>
                 <p style={{ fontSize: 12, color: '#5A5A55', lineHeight: 1.7 }}>{s.text}</p>
@@ -110,17 +157,6 @@ export function Ingredients() {
         <p style={{ fontSize: 15, color: '#5A5A55', maxWidth: 600, lineHeight: 1.85, marginBottom: 40 }}>
           KUMANUKEは植物由来の香気成分を主体とした処方を採用。刺激の強い化学合成成分の使用を避け、エリア対策に特化した配合設計です。
         </p>
-        {/* 6種植物由来オイル画像 */}
-        <div className="fade-up" style={{ position: 'relative', borderRadius: 10, overflow: 'hidden', marginBottom: 40, maxHeight: 360 }}>
-          <Image
-            src="/ingredients.jpg"
-            alt="KUMANUKEに使用する6種の植物由来オイル：シトロネラ・クローブ・シナモン・ユーカリ・ティーツリー・レモングラス"
-            width={1040}
-            height={360}
-            style={{ objectFit: 'cover', objectPosition: 'center top', width: '100%', height: 'auto', maxHeight: 360 }}
-          />
-        </div>
-
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px,1fr))', gap: 48, alignItems: 'start' }}>
           <div>
             <ul style={{ listStyle: 'none', padding: 0 }}>
