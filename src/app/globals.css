@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-jp: var(--font-noto-sans), 'Hiragino Kaku Gothic ProN', sans-serif;
+  --font-serif: var(--font-noto-serif), serif;
+  --font-en: var(--font-dm-sans), sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-jp);
+  background: #ffffff;
+  color: #1A1A16;
+  overflow-x: hidden;
+}
+
+/* ── Fade-up animation ── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.fade-up.delay-1 { transition-delay: 0.1s; }
+.fade-up.delay-2 { transition-delay: 0.2s; }
+.fade-up.delay-3 { transition-delay: 0.3s; }
+
+/* ── Section helpers ── */
+.section-label {
+  font-family: var(--font-en);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #C05A18;
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  line-height: 1.4;
+  color: #143D1E;
+}
+
+/* ── FAQ accordion ── */
+.faq-item { border-bottom: 1px solid #EFEFED; }
+.faq-toggle { transition: transform 0.2s ease; }
+.faq-item.open .faq-toggle { transform: rotate(45deg); }
+.faq-answer { display: none; }
+.faq-item.open .faq-answer { display: block; }
+
+/* ── Comparison table ── */
+.comparison-table { border-collapse: collapse; }
+.comparison-table th { background: #143D1E; color: #fff; }
+.comparison-table th:last-child { background: #E07A30; }
+.comparison-table td:last-child { background: #FFF4ED; }
+.comparison-table tr:nth-child(even) td { background: #F8F8F6; }
+.comparison-table tr:nth-child(even) td:last-child { background: #FFF4ED; }
