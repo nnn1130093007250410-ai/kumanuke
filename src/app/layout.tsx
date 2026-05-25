@@ -22,7 +22,7 @@ const dmSans = DM_Sans({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://kumanuke.jp'),
+  metadataBase: new URL('https://kumanuke.bubuworks.co.jp'),
   title: {
     default: 'KUMANUKE | 植物由来 エリア散布型 野生動物対策スプレー',
     template: '%s | KUMANUKE',
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'ja_JP',
-    url: 'https://kumanuke.jp',
+    url: 'https://kumanuke.bubuworks.co.jp',
     siteName: 'KUMANUKE',
     title: 'KUMANUKE | 植物由来 エリア散布型 野生動物対策スプレー',
     description:
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     follow: true,
     googleBot: { index: true, follow: true, 'max-image-preview': 'large' },
   },
-  alternates: { canonical: 'https://kumanuke.jp' },
+  alternates: { canonical: 'https://kumanuke.bubuworks.co.jp' },
 }
 
 const jsonLd = {
@@ -76,14 +76,14 @@ const jsonLd = {
     },
     {
       '@type': 'WebSite',
-      url: 'https://kumanuke.jp',
+      url: 'https://kumanuke.bubuworks.co.jp',
       name: 'KUMANUKE',
       description: '植物由来 エリア散布型 野生動物対策スプレー',
     },
     {
       '@type': 'Organization',
       name: 'BUBUWORKS合同会社',
-      url: 'https://kumanuke.jp',
+      url: 'https://kumanuke.bubuworks.co.jp',
       email: 'kumanuke@bubuworks.co.jp',
       address: {
         '@type': 'PostalAddress',

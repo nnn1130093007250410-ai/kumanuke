@@ -17,7 +17,7 @@ export default function PrivacyPage() {
             ['事業者名', 'BUBUWORKS合同会社'],
             ['所在地', '福島県郡山市安積荒井1-169 C102'],
             ['メールアドレス', 'info@bubuworks.co.jp'],
-            ['運営サービス', 'KUMANUKE 公式サイト（https://kumanuke.jp）'],
+            ['運営サービス', 'KUMANUKE 公式サイト（https://kumanuke.bubuworks.co.jp）'],
           ].map(([k, v]) => (
             <tr key={k} style={{ borderBottom: '1px solid #EFEFED' }}>
               <td style={{ padding: '10px 0', color: '#5A5A55', fontWeight: 600, width: '40%', verticalAlign: 'top' }}>{k}</td>
