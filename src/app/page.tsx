@@ -8,6 +8,7 @@ import Ingredients from '@/components/sections/Ingredients'
 import Comparison from '@/components/sections/Comparison'
 import HowToUse from '@/components/sections/HowToUse'
 import FAQ from '@/components/sections/FAQ'
+import GuideTeaser from '@/components/sections/GuideTeaser'
 import Research from '@/components/sections/Research'
 import Caution from '@/components/sections/Caution'
 import Wholesale from '@/components/sections/Wholesale'
@@ -30,6 +31,7 @@ export default function Home() {
         <Comparison />
         <HowToUse />
         <FAQ />
+        <GuideTeaser />
         <Research />
         <Caution />
         <Wholesale />

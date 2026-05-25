@@ -6,6 +6,7 @@ const NAV_LINKS = [
   { href: '#about',     label: '製品について' },
   { href: '#scenes',    label: '使用シーン' },
   { href: '#faq',       label: 'FAQ' },
+  { href: '/guide',     label: '対策ガイド' },
 ]
 
 export default function Nav() {
