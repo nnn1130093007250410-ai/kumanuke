@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'KUMANUKE フォーム <onboarding@resend.dev>',
+        from: 'KUMANUKE フォーム <noreply@kumanuke.bubuworks.co.jp>',
         to: [TO],
         reply_to: body['メールアドレス'] ?? '',
         subject: `【KUMANUKE】卸・法人お問い合わせ - ${body['会社名・団体名'] ?? ''}`,
