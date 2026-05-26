@@ -91,7 +91,7 @@ export default function BearOlfactorySciencePage() {
               color: '#92400E',
             },
           ].map((item) => (
-            <div key={item.title} style={{ borderLeft: `4px solid ${item.color}`, background: '#FAFAFA', border: `1px solid #EFEFED`, borderLeft: `4px solid ${item.color}`, borderRadius: 8, padding: '18px 20px' }}>
+            <div key={item.title} style={{ background: '#FAFAFA', border: `1px solid #EFEFED`, borderLeft: `4px solid ${item.color}`, borderRadius: 8, padding: '18px 20px' }}>
               <div style={{ fontWeight: 700, color: item.color, fontSize: 14, marginBottom: 8 }}>{item.title}</div>
               <p style={{ fontSize: 14, color: '#4A4A45', lineHeight: 1.85, margin: 0 }}>{item.body}</p>
             </div>
