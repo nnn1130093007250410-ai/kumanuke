@@ -36,3 +36,33 @@ export const TYPE_LABELS: Record<string, string> = {
   '住宅侵入': '侵入',
   '痕跡': '痕跡',
 }
+
+// ── WORLD BEAR REPORT ──────────────────────────────────────────
+export interface WorldBearReport {
+  id: string
+  date: string
+  country: string
+  region: string
+  city: string
+  type: string
+  bear_type: string
+  title_en: string
+  summary_ja: string
+  source_name: string
+  source_url: string
+  importance_level: 1 | 2 | 3
+  lat: number
+  lng: number
+}
+
+export const WORLD_IMPORTANCE_LABELS: Record<number, string> = {
+  1: '参考情報',
+  2: '重要',
+  3: '重大',
+}
+
+export const WORLD_IMPORTANCE_COLORS: Record<number, string> = {
+  1: '#6B7280',
+  2: '#3B82F6',
+  3: '#7C3AED',
+}

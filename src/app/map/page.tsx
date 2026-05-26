@@ -10,6 +10,12 @@ import {
   DANGER_COLORS,
   DANGER_LABELS,
 } from '@/lib/bear-data'
+import {
+  loadWorldBearData,
+  getLatestWorldReports,
+  WORLD_IMPORTANCE_LABELS,
+  WORLD_IMPORTANCE_COLORS,
+} from '@/lib/bear-world'
 import { PREFECTURES, getSlugByName } from '@/lib/prefectures'
 
 const MapClient = dynamic(() => import('@/components/map/MapClient'), {
@@ -44,6 +50,8 @@ export const metadata: Metadata = {
     '熊出没', '熊出没マップ', '熊目撃情報', 'クマ出没', 'クマ情報',
     '北海道 ヒグマ', '福島 熊', '秋田 熊', '長野 熊', '岐阜 熊',
     '熊出没地図', '野生動物情報', 'クマ注意', '熊対策',
+    '世界 熊 出没', '海外 熊被害', 'カナダ 熊', 'アメリカ ベアスプレー',
+    'ルーマニア 熊', '世界の熊ニュース', 'WORLD BEAR REPORT',
   ],
 }
 
@@ -75,6 +83,9 @@ export default function MapPage({
       : typeFilter === '被害'
       ? allSightings.filter((s) => ['被害', '人身被害', '住宅侵入'].includes(s.type))
       : allSightings
+
+  const worldSightings = loadWorldBearData()
+  const latestWorld = getLatestWorldReports(worldSightings)
 
   const updateLog = loadUpdateLog()
   const latest = getLatestSightings(sightings, 30)
@@ -169,7 +180,7 @@ export default function MapPage({
               overflow: 'hidden',
             }}
           >
-            <MapClient sightings={sightings} centerLng={137.0} centerLat={36.5} zoom={5} />
+            <MapClient sightings={sightings} worldSightings={worldSightings} centerLng={137.0} centerLat={36.5} zoom={5} />
           </div>
         </div>
       </div>
@@ -483,10 +494,125 @@ export default function MapPage({
           </div>
         </div>
 
+        {/* WORLD BEAR REPORT section */}
+        <div style={{ marginTop: 56 }}>
+          {/* Header */}
+          <div
+            style={{
+              background: '#1E3A5F',
+              borderRadius: '10px 10px 0 0',
+              padding: '20px 24px 18px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              flexWrap: 'wrap',
+              gap: 12,
+            }}
+          >
+            <div>
+              <p style={{ fontSize: 10, fontWeight: 700, color: '#60A5FA', letterSpacing: '0.15em', margin: '0 0 4px' }}>
+                WORLD BEAR REPORT
+              </p>
+              <h2 style={{ fontSize: 20, fontWeight: 700, color: '#fff', margin: 0 }}>
+                🌍 世界の熊ニュース
+              </h2>
+            </div>
+            <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', margin: 0 }}>
+              {latestWorld.length}件・重要度順
+            </p>
+          </div>
+
+          {/* Cards */}
+          <div
+            style={{
+              border: '1px solid #DDDDD8',
+              borderTop: 'none',
+              borderRadius: '0 0 10px 10px',
+              overflow: 'hidden',
+            }}
+          >
+            {latestWorld.map((w, i) => (
+              <div
+                key={w.id}
+                style={{
+                  padding: '16px 20px',
+                  borderBottom: i < latestWorld.length - 1 ? '1px solid #EFEFED' : 'none',
+                  background: '#fff',
+                  display: 'grid',
+                  gridTemplateColumns: 'auto 1fr',
+                  gap: '4px 16px',
+                  alignItems: 'start',
+                  borderLeft: `4px solid ${WORLD_IMPORTANCE_COLORS[w.importance_level]}`,
+                }}
+              >
+                {/* Left column */}
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    gap: 5,
+                    minWidth: 44,
+                  }}
+                >
+                  <span
+                    style={{
+                      background: WORLD_IMPORTANCE_COLORS[w.importance_level],
+                      color: '#fff',
+                      fontSize: 9,
+                      fontWeight: 700,
+                      padding: '2px 6px',
+                      borderRadius: 3,
+                      whiteSpace: 'nowrap',
+                      textAlign: 'center',
+                    }}
+                  >
+                    {WORLD_IMPORTANCE_LABELS[w.importance_level]}
+                  </span>
+                  <span style={{ fontSize: 10, color: '#AAA', textAlign: 'center' }}>
+                    {w.date.substring(5).replace('-', '/')}
+                  </span>
+                </div>
+
+                {/* Right column */}
+                <div>
+                  <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap', marginBottom: 4 }}>
+                    <span style={{ fontWeight: 700, fontSize: 13, color: '#1E3A5F' }}>
+                      {w.country}
+                    </span>
+                    <span style={{ fontSize: 11, color: '#888' }}>{w.region}</span>
+                    <span
+                      style={{
+                        fontSize: 10,
+                        background: '#F0F4F8',
+                        color: '#5A5A55',
+                        padding: '1px 6px',
+                        borderRadius: 3,
+                      }}
+                    >
+                      {w.type}
+                    </span>
+                  </div>
+                  <p style={{ fontSize: 12, color: '#333', margin: '0 0 4px', lineHeight: 1.7 }}>
+                    {w.summary_ja}
+                  </p>
+                  <p style={{ fontSize: 10, color: '#AAA', margin: 0 }}>
+                    🐻 {w.bear_type}　出典：{w.source_name}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <p style={{ fontSize: 11, color: '#888', marginTop: 10, lineHeight: 1.7 }}>
+            ※ WORLD BEAR REPORTは海外報道・公的機関情報をもとに日本語要約しています。最新情報は各情報源をご確認ください。
+          </p>
+        </div>
+
         {/* Disclaimer */}
         <div
           style={{
-            marginTop: 48,
+            marginTop: 32,
             background: '#fff',
             border: '1px solid #DDDDD8',
             borderRadius: 8,
