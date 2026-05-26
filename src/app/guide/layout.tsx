@@ -16,6 +16,9 @@ export default function GuideLayout({ children }: { children: React.ReactNode })
           <Link href="/guide" style={{ fontSize: 13, color: 'rgba(255,255,255,0.75)', textDecoration: 'none' }}>
             対策ガイド
           </Link>
+          <Link href="/map" style={{ fontSize: 13, color: '#5EC97C', fontWeight: 700, textDecoration: 'none' }}>
+            🗺 出没マップ
+          </Link>
           <Link href="/#wholesale" style={{ fontSize: 13, color: 'rgba(255,255,255,0.65)', textDecoration: 'none' }}>
             卸・法人のお客様
           </Link>
