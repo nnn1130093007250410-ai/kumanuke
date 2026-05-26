@@ -127,6 +127,62 @@ const articles = [
     tag: '科学・研究',
     tagColor: '#0C5C3E',
   },
+  {
+    slug: 'bear-learning-behavior',
+    title: 'クマの学習能力と認知行動｜なぜ同じ場所に繰り返し来るのか',
+    description: '空間記憶・報酬学習・習慣化・問題解決行動・条件付け嫌悪。哺乳類研究が明かすクマの認知能力と、学習行動を踏まえた対策設計の考え方を解説します。',
+    tag: '野生動物行動学',
+    tagColor: '#0C5C3E',
+  },
+  {
+    slug: 'abandoned-fruit-trees-bear-damage',
+    title: '放置果樹・放任果樹が熊を呼ぶ｜農村の誘引源管理と対策',
+    description: '収穫されない柿・栗・リンゴが高カロリーの誘引源となりクマを集落へ引き寄せるメカニズムを解説。農林水産省・環境省の管理指針と各地の補助金制度も紹介します。',
+    tag: '農業・農地',
+    tagColor: '#92400E',
+  },
+  {
+    slug: 'bear-home-range',
+    title: 'クマの行動圏・ホームレンジとは｜GPS追跡が明かす移動距離と出没パターン',
+    description: 'GPS追跡データが示すクマのホームレンジは地域・性別により数十〜数百km²超。日光・奥多摩・北アルプス等の国内データと、ホームレンジが対策設計に持つ意味を解説します。',
+    tag: '野生動物行動学',
+    tagColor: '#0C5C3E',
+  },
+  {
+    slug: 'non-lethal-bear-management',
+    title: '非致死型クマ対策の体系｜移送・条件付け嫌悪・忌避・電気柵の科学',
+    description: 'IUCNが推奨する段階的対応方針を軸に、トランスロケーション・aversive conditioning・忌避剤・電気柵を比較解説。駆除に頼らない管理手法の科学的根拠と限界を整理します。',
+    tag: 'Wildlife Management',
+    tagColor: '#1E40AF',
+  },
+  {
+    slug: 'olfactory-repellent-research',
+    title: 'Olfactory Repellent研究の最前線｜嗅覚忌避を科学する国際的アプローチ',
+    description: 'TRPV1受容体・USDA・WSU・東京大学など国内外の研究が示す嗅覚忌避の機序を解説。Primary／Secondary／Conditioned repellentの3分類と化合物特性の比較も紹介します。',
+    tag: '海外研究・論文解説',
+    tagColor: '#0C5C3E',
+  },
+  {
+    slug: 'climate-change-bears',
+    title: '気候変動とクマ出没｜温暖化が熊の行動・生息域・冬眠に与える影響',
+    description: '冬眠期間の短縮・ドングリ豊凶サイクルの変化・生息域の北方シフト。東京農工大研究や北米・北欧の事例から、気候変動がクマと人の接触リスクをどう変えるかを解説します。',
+    tag: '環境・社会',
+    tagColor: '#1E40AF',
+  },
+  {
+    slug: 'electric-fence-bear-prevention',
+    title: '電気柵によるクマ対策｜設置の科学・有効性の研究・補助金制度',
+    description: 'スロベニア90%超削減・国内80%以上削減のデータが示す電気柵の有効性。6,000〜10,000V設定の根拠・設置要件・メンテナンス・農林水産省補助金制度を詳しく解説します。',
+    tag: '対策・予防',
+    tagColor: '#1F5C2E',
+  },
+  {
+    slug: 'bear-scent-marking',
+    title: 'クマの嗅覚コミュニケーション｜匂いによる縄張り・情報伝達の仕組み',
+    description: 'スクラッチマーク・尿マーキング・顔こすりつけなどクマの匂い行動をGC-MS分析の知見から解説。脂肪酸・揮発性アミン・テルペン類の機能と忌避アプローチへの示唆を紹介します。',
+    tag: '野生動物行動学',
+    tagColor: '#0C5C3E',
+  },
 ]
 
 export default function GuidePage() {
