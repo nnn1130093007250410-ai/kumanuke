@@ -167,7 +167,7 @@ export default function Hero() {
           </span>
           <span style={{ fontSize: 'clamp(11px,1vw,13px)', color: 'rgba(255,255,255,0.55)', lineHeight: 1.4 }}>
             📍 北海道・東北・北陸で出没急増中 —{' '}
-            <span style={{ color: '#5EC97C', fontWeight: 700 }}>あなたの地域の状況を確認 →</span>
+            <span style={{ color: '#5EC97C', fontWeight: 700, whiteSpace: 'nowrap' }}>あなたの地域の状況を確認 →</span>
           </span>
         </Link>
       </div>

@@ -141,9 +141,9 @@ export default function HowToChoosePage() {
 
         <div style={{ marginTop: 40, paddingTop: 32, borderTop: '1px solid #EFEFED' }}>
           <p style={{ fontSize: 13, color: '#9A9A95', marginBottom: 16 }}>関連ガイド</p>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-            <Link href="/guide/camping-bear-prevention" style={{ color: '#143D1E', fontWeight: 600, fontSize: 14, textDecoration: 'none' }}>→ キャンプ場・野営地での熊対策</Link>
-            <Link href="/guide/farm-bear-prevention" style={{ color: '#143D1E', fontWeight: 600, fontSize: 14, textDecoration: 'none' }}>→ 農地・畑を熊から守る方法</Link>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 12 }}>
+            <Link href="/guide/camping-bear-prevention" style={{ display: 'block', background: '#F3F7F4', border: '1px solid #D4E5D9', borderRadius: 6, padding: '12px 16px', color: '#143D1E', fontWeight: 600, fontSize: 13, textDecoration: 'none', lineHeight: 1.5 }}>→ キャンプ場・野営地での熊対策</Link>
+            <Link href="/guide/farm-bear-prevention" style={{ display: 'block', background: '#F3F7F4', border: '1px solid #D4E5D9', borderRadius: 6, padding: '12px 16px', color: '#143D1E', fontWeight: 600, fontSize: 13, textDecoration: 'none', lineHeight: 1.5 }}>→ 農地・畑を熊から守る方法</Link>
           </div>
         </div>
       </article>

@@ -168,13 +168,13 @@ export default function BearHomeRangePage() {
 
         <div style={{ borderTop: '1px solid #DDDDD8', paddingTop: 32 }}>
           <p style={{ fontSize: 14, fontWeight: 700, color: '#5A5A55', marginBottom: 16 }}>関連ガイド</p>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 12 }}>
             {[
               { href: '/guide/bear-seasonal-activity', label: 'クマの年間活動パターン｜季節ごとの行動変化と出没リスクカレンダー' },
               { href: '/guide/bear-learning-behavior', label: 'クマの学習能力と認知行動｜なぜ同じ場所に繰り返し来るのか' },
               { href: '/guide/tsuki-no-wa-kuma-vs-higuma', label: 'ツキノワグマとヒグマの違い｜分布・体格・生態・危険性を徹底比較' },
             ].map((r) => (
-              <Link key={r.href} href={r.href} style={{ fontSize: 14, color: '#143D1E', fontWeight: 600, textDecoration: 'none' }}>→ {r.label}</Link>
+              <Link key={r.href} href={r.href} style={{ display: 'block', background: '#F3F7F4', border: '1px solid #D4E5D9', borderRadius: 6, padding: '12px 16px', color: '#143D1E', fontWeight: 600, fontSize: 13, textDecoration: 'none', lineHeight: 1.5 }}>→ {r.label}</Link>
             ))}
           </div>
         </div>

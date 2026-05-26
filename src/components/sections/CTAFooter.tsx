@@ -172,7 +172,7 @@ export function Footer() {
           ))}
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: 24, fontSize: 11, color: 'rgba(255,255,255,0.3)', flexWrap: 'wrap', gap: 8 }}>
-          <div>© 2025 BUBUWORKS合同会社. All rights reserved.</div>
+          <div>© 2026 BUBUWORKS合同会社. All rights reserved.</div>
           <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
             {['国内企画', '品質管理実施', 'OCガス不使用', 'カプサイシン不使用'].map((b) => (
               <span key={b} style={{ border: '1px solid rgba(255,255,255,0.1)', borderRadius: 3, padding: '3px 9px', fontSize: 10, color: 'rgba(255,255,255,0.3)' }}>{b}</span>

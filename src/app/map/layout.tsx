@@ -56,7 +56,7 @@ export default function MapLayout({ children }: { children: React.ReactNode }) {
             href="/"
             style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', textDecoration: 'none' }}
           >
-            製品TOP
+            ← 製品ページへ
           </Link>
         </div>
       </nav>

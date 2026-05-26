@@ -154,13 +154,13 @@ export default function BearScentMarkingPage() {
 
         <div style={{ borderTop: '1px solid #DDDDD8', paddingTop: 32 }}>
           <p style={{ fontSize: 14, fontWeight: 700, color: '#5A5A55', marginBottom: 16 }}>関連ガイド</p>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 12 }}>
             {[
               { href: '/guide/bear-olfactory-science', label: '熊が匂いで近づかない理由｜科学的メカニズムを解説' },
               { href: '/guide/olfactory-repellent-research', label: 'Olfactory Repellent研究の最前線｜嗅覚忌避を科学する国際的アプローチ' },
               { href: '/guide/bear-learning-behavior', label: 'クマの学習能力と認知行動｜なぜ同じ場所に繰り返し来るのか' },
             ].map((r) => (
-              <Link key={r.href} href={r.href} style={{ fontSize: 14, color: '#143D1E', fontWeight: 600, textDecoration: 'none' }}>→ {r.label}</Link>
+              <Link key={r.href} href={r.href} style={{ display: 'block', background: '#F3F7F4', border: '1px solid #D4E5D9', borderRadius: 6, padding: '12px 16px', color: '#143D1E', fontWeight: 600, fontSize: 13, textDecoration: 'none', lineHeight: 1.5 }}>→ {r.label}</Link>
             ))}
           </div>
         </div>

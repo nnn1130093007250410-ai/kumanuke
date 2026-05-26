@@ -199,13 +199,13 @@ export default function NonLethalBearManagementPage() {
 
         <div style={{ borderTop: '1px solid #DDDDD8', paddingTop: 32 }}>
           <p style={{ fontSize: 14, fontWeight: 700, color: '#5A5A55', marginBottom: 16 }}>関連ガイド</p>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 12 }}>
             {[
               { href: '/guide/bear-learning-behavior', label: 'クマの学習能力と認知行動｜なぜ同じ場所に繰り返し来るのか' },
               { href: '/guide/electric-fence-bear-prevention', label: '電気柵によるクマ対策｜設置の科学と実効性の研究' },
               { href: '/guide/international-bear-management', label: '海外のクマ対策研究・管理事例｜北米・ヨーロッパの知見' },
             ].map((r) => (
-              <Link key={r.href} href={r.href} style={{ fontSize: 14, color: '#143D1E', fontWeight: 600, textDecoration: 'none' }}>→ {r.label}</Link>
+              <Link key={r.href} href={r.href} style={{ display: 'block', background: '#F3F7F4', border: '1px solid #D4E5D9', borderRadius: 6, padding: '12px 16px', color: '#143D1E', fontWeight: 600, fontSize: 13, textDecoration: 'none', lineHeight: 1.5 }}>→ {r.label}</Link>
             ))}
           </div>
         </div>
