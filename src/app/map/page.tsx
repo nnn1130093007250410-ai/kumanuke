@@ -17,6 +17,8 @@ import {
   WORLD_IMPORTANCE_COLORS,
 } from '@/lib/bear-world'
 import { PREFECTURES, getSlugByName } from '@/lib/prefectures'
+import { loadBearHistory } from '@/lib/bear-history'
+import HistoryAccordion from './HistoryAccordion'
 
 const MapClient = dynamic(() => import('@/components/map/MapClient'), {
   ssr: false,
@@ -86,6 +88,7 @@ export default function MapPage({
 
   const worldSightings = loadWorldBearData()
   const latestWorld = getLatestWorldReports(worldSightings)
+  const historyData = loadBearHistory()
 
   const updateLog = loadUpdateLog()
   const latest = getLatestSightings(sightings, 30)
@@ -180,7 +183,7 @@ export default function MapPage({
               overflow: 'hidden',
             }}
           >
-            <MapClient sightings={sightings} worldSightings={worldSightings} centerLng={137.0} centerLat={36.5} zoom={5} />
+            <MapClient sightings={sightings} historySightings={historyData} worldSightings={worldSightings} centerLng={137.0} centerLat={36.5} zoom={5} />
           </div>
         </div>
       </div>
@@ -492,6 +495,53 @@ export default function MapPage({
               ))}
             </div>
           </div>
+        </div>
+
+        {/* ── 地域別・過去の出没記録 ── */}
+        <div style={{ marginTop: 56 }}>
+          <div
+            style={{
+              background: '#2D2D28',
+              borderRadius: '10px 10px 0 0',
+              padding: '20px 24px 18px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              flexWrap: 'wrap',
+              gap: 12,
+            }}
+          >
+            <div>
+              <p style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', letterSpacing: '0.15em', margin: '0 0 4px' }}>
+                BEAR INCIDENT ARCHIVE
+              </p>
+              <h2 style={{ fontSize: 20, fontWeight: 700, color: '#fff', margin: 0 }}>
+                🗂 地域別・過去の出没記録
+              </h2>
+            </div>
+            <div style={{ textAlign: 'right' }}>
+              <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', margin: '0 0 2px' }}>
+                {historyData.length}件・2023〜2024年
+              </p>
+              <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)', margin: 0 }}>
+                都道府県ごとにクリックして展開
+              </p>
+            </div>
+          </div>
+          <div
+            style={{
+              border: '1px solid #DDDDD8',
+              borderTop: 'none',
+              borderRadius: '0 0 10px 10px',
+              background: '#F8F8F6',
+              padding: '16px',
+            }}
+          >
+            <HistoryAccordion history={historyData} />
+          </div>
+          <p style={{ fontSize: 11, color: '#888', marginTop: 10, lineHeight: 1.7 }}>
+            ※ アーカイブ情報は報道・自治体発表をもとにしています。マップを拡大（ズームレベル9以上）すると過去情報のピンも表示されます。
+          </p>
         </div>
 
         {/* WORLD BEAR REPORT section */}

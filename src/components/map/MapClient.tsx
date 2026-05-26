@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback, useRef, useEffect } from 'react'
+import { useState, useCallback, useRef, useEffect, useMemo } from 'react'
 import Map, { Marker, Popup, Source, Layer, NavigationControl } from 'react-map-gl/mapbox'
 import type { LayerProps, MapRef } from 'react-map-gl/mapbox'
 import 'mapbox-gl/dist/mapbox-gl.css'
@@ -14,6 +14,7 @@ import {
 
 interface MapClientProps {
   sightings: BearSighting[]
+  historySightings?: BearSighting[]
   worldSightings?: WorldBearReport[]
   centerLng?: number
   centerLat?: number
@@ -51,6 +52,10 @@ const VIEW_MODES = [
 
 type ViewMode = typeof VIEW_MODES[number]['key']
 
+// Zoom thresholds
+const ZOOM_CLUSTER  = 7   // below this: show prefecture cluster bubbles
+const ZOOM_HISTORY  = 9   // above this: also show historical pins
+
 function formatDate(dateStr: string): string {
   const d = new Date(dateStr)
   return `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日`
@@ -58,6 +63,7 @@ function formatDate(dateStr: string): string {
 
 export default function MapClient({
   sightings,
+  historySightings = [],
   worldSightings = [],
   centerLng = 137.0,
   centerLat = 36.5,
@@ -65,12 +71,43 @@ export default function MapClient({
 }: MapClientProps) {
   const [viewMode, setViewMode] = useState<ViewMode>('japan')
   const [selectedId, setSelectedId] = useState<string | null>(null)
+  const [mapZoom, setMapZoom] = useState(zoom)
   const mapRef = useRef<MapRef>(null)
 
   const token = process.env.NEXT_PUBLIC_MAPBOX_TOKEN
 
   const selectedSighting = sightings.find((s) => s.id === selectedId) ?? null
+  const selectedHistory  = historySightings.find((h) => h.id === selectedId) ?? null
   const selectedWorld    = worldSightings.find((w) => w.id === selectedId) ?? null
+
+  // Prefecture cluster bubbles — computed from current sightings
+  const prefClusters = useMemo(() => {
+    if (viewMode !== 'japan') return []
+    const groups: Record<string, {
+      lats: number[]
+      lngs: number[]
+      maxDanger: 1 | 2 | 3
+      count: number
+    }> = {}
+    sightings.forEach((s) => {
+      if (!groups[s.prefecture]) {
+        groups[s.prefecture] = { lats: [], lngs: [], maxDanger: 1, count: 0 }
+      }
+      groups[s.prefecture].lats.push(s.lat)
+      groups[s.prefecture].lngs.push(s.lng)
+      groups[s.prefecture].count++
+      if (s.danger_level > groups[s.prefecture].maxDanger) {
+        groups[s.prefecture].maxDanger = s.danger_level as 1 | 2 | 3
+      }
+    })
+    return Object.entries(groups).map(([pref, g]) => ({
+      prefecture: pref,
+      lat: g.lats.reduce((a, b) => a + b, 0) / g.lats.length,
+      lng: g.lngs.reduce((a, b) => a + b, 0) / g.lngs.length,
+      count: g.count,
+      maxDanger: g.maxDanger,
+    }))
+  }, [sightings, viewMode])
 
   const geojson = {
     type: 'FeatureCollection' as const,
@@ -89,7 +126,15 @@ export default function MapClient({
     []
   )
 
-  // 地図ロード後にすべてのシンボルレイヤーを日本語表示に切り替える
+  // Zoom in on cluster click
+  const handleClusterClick = useCallback(
+    (lat: number, lng: number) => {
+      mapRef.current?.getMap().flyTo({ center: [lng, lat], zoom: 8.5, duration: 700 })
+    },
+    []
+  )
+
+  // Japanese label rendering
   const handleMapLoad = useCallback(() => {
     const map = mapRef.current?.getMap()
     if (!map) return
@@ -98,19 +143,18 @@ export default function MapClient({
     for (const layer of layers) {
       if (layer.type === 'symbol') {
         try {
-          // Mapbox GL expression で name_ja を優先表示
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           map.setLayoutProperty(layer.id, 'text-field', [
             'coalesce', ['get', 'name_ja'], ['get', 'name'],
           ] as any)
         } catch {
-          // text-field を持たないレイヤーはスキップ
+          // skip layers without text-field
         }
       }
     }
   }, [])
 
-  // モード切替時にカメラをアニメーション移動
+  // Camera animation on mode switch
   useEffect(() => {
     const map = mapRef.current?.getMap()
     if (!map) return
@@ -201,6 +245,33 @@ export default function MapClient({
         ))}
       </div>
 
+      {/* Zoom level hint — Japan mode */}
+      {viewMode === 'japan' && (
+        <div
+          style={{
+            position: 'absolute',
+            bottom: 48,
+            left: 12,
+            zIndex: 10,
+            background: 'rgba(0,0,0,0.55)',
+            backdropFilter: 'blur(4px)',
+            borderRadius: 5,
+            padding: '5px 10px',
+            fontSize: 10,
+            color: 'rgba(255,255,255,0.8)',
+            letterSpacing: '0.03em',
+            pointerEvents: 'none',
+          }}
+        >
+          {mapZoom < ZOOM_CLUSTER
+            ? '🔍 拡大すると個別ピンが表示されます'
+            : mapZoom < ZOOM_HISTORY
+            ? `📍 ${sightings.length}件表示中 — さらに拡大すると過去情報も表示`
+            : `📍 最新 ${sightings.length}件 ＋ 過去 ${historySightings.length}件 表示中`
+          }
+        </div>
+      )}
+
       {/* Legend — Japan mode */}
       {viewMode !== 'world' && (
         <div
@@ -235,6 +306,21 @@ export default function MapClient({
               </span>
             </div>
           ))}
+          {mapZoom >= ZOOM_HISTORY && (
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, paddingTop: 4, borderTop: '1px solid #EFEFED', marginTop: 2 }}>
+              <div
+                style={{
+                  width: 8,
+                  height: 8,
+                  borderRadius: '50%',
+                  background: '#9CA3AF',
+                  border: '1.5px solid #fff',
+                  boxShadow: '0 0 0 1px rgba(0,0,0,0.15)',
+                }}
+              />
+              <span style={{ fontSize: 10, color: '#888' }}>過去情報</span>
+            </div>
+          )}
         </div>
       )}
 
@@ -287,6 +373,7 @@ export default function MapClient({
         mapStyle="mapbox://styles/mapbox/outdoors-v12"
         onClick={() => setSelectedId(null)}
         onLoad={handleMapLoad}
+        onMove={(evt) => setMapZoom(evt.viewState.zoom)}
       >
         <NavigationControl position="bottom-right" />
 
@@ -297,33 +384,111 @@ export default function MapClient({
           </Source>
         )}
 
-        {/* Japan pin markers */}
-        {viewMode === 'japan' &&
-          sightings.map((s) => (
-            <Marker
-              key={s.id}
-              latitude={s.lat}
-              longitude={s.lng}
-              anchor="center"
-            >
-              <div
-                onClick={(e) => handleMarkerClick(s.id, e)}
-                title={s.title}
-                style={{
-                  width: s.danger_level === 3 ? 16 : 12,
-                  height: s.danger_level === 3 ? 16 : 12,
-                  borderRadius: '50%',
-                  background: DANGER_COLORS[s.danger_level],
-                  border: '2px solid #fff',
-                  boxShadow: `0 0 0 1px ${DANGER_COLORS[s.danger_level]}88, 0 2px 6px rgba(0,0,0,0.3)`,
-                  cursor: 'pointer',
-                  transition: 'transform 0.15s',
-                }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.transform = 'scale(1.4)' }}
-                onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.transform = 'scale(1)' }}
-              />
-            </Marker>
-          ))}
+        {/* ── Japan view ── */}
+        {viewMode === 'japan' && (
+          <>
+            {/* Low zoom: prefecture cluster bubbles */}
+            {mapZoom < ZOOM_CLUSTER && prefClusters.map((pc) => {
+              const size = Math.min(44, Math.max(28, 20 + pc.count * 2.5))
+              return (
+                <Marker key={pc.prefecture} latitude={pc.lat} longitude={pc.lng} anchor="center">
+                  <div
+                    onClick={() => handleClusterClick(pc.lat, pc.lng)}
+                    title={`${pc.prefecture} ${pc.count}件 — クリックで拡大`}
+                    style={{
+                      width: size,
+                      height: size,
+                      borderRadius: '50%',
+                      background: DANGER_COLORS[pc.maxDanger],
+                      color: '#fff',
+                      fontWeight: 800,
+                      fontSize: pc.count >= 10 ? 11 : 12,
+                      border: '2.5px solid #fff',
+                      boxShadow: `0 0 0 2px ${DANGER_COLORS[pc.maxDanger]}66, 0 3px 10px rgba(0,0,0,0.3)`,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      cursor: 'pointer',
+                      transition: 'transform 0.15s',
+                      userSelect: 'none',
+                    }}
+                    onMouseEnter={(e) => {
+                      (e.currentTarget as HTMLDivElement).style.transform = 'scale(1.15)'
+                    }}
+                    onMouseLeave={(e) => {
+                      (e.currentTarget as HTMLDivElement).style.transform = 'scale(1)'
+                    }}
+                  >
+                    {pc.count}
+                  </div>
+                </Marker>
+              )
+            })}
+
+            {/* High zoom: individual recent pins */}
+            {mapZoom >= ZOOM_CLUSTER && sightings.map((s) => (
+              <Marker
+                key={s.id}
+                latitude={s.lat}
+                longitude={s.lng}
+                anchor="center"
+              >
+                <div
+                  onClick={(e) => handleMarkerClick(s.id, e)}
+                  title={s.title}
+                  style={{
+                    width: s.danger_level === 3 ? 16 : 12,
+                    height: s.danger_level === 3 ? 16 : 12,
+                    borderRadius: '50%',
+                    background: DANGER_COLORS[s.danger_level],
+                    border: '2px solid #fff',
+                    boxShadow: `0 0 0 1px ${DANGER_COLORS[s.danger_level]}88, 0 2px 6px rgba(0,0,0,0.3)`,
+                    cursor: 'pointer',
+                    transition: 'transform 0.15s',
+                  }}
+                  onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.transform = 'scale(1.4)' }}
+                  onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.transform = 'scale(1)' }}
+                />
+              </Marker>
+            ))}
+
+            {/* Very high zoom: historical pins (gray, smaller) */}
+            {mapZoom >= ZOOM_HISTORY && historySightings.map((h) => (
+              <Marker
+                key={h.id}
+                latitude={h.lat}
+                longitude={h.lng}
+                anchor="center"
+              >
+                <div
+                  onClick={(e) => handleMarkerClick(h.id, e)}
+                  title={`[過去] ${h.title}`}
+                  style={{
+                    width: 9,
+                    height: 9,
+                    borderRadius: '50%',
+                    background: '#9CA3AF',
+                    border: '1.5px solid #fff',
+                    boxShadow: '0 1px 4px rgba(0,0,0,0.25)',
+                    cursor: 'pointer',
+                    opacity: 0.85,
+                    transition: 'transform 0.15s, opacity 0.15s',
+                  }}
+                  onMouseEnter={(e) => {
+                    const el = e.currentTarget as HTMLDivElement
+                    el.style.transform = 'scale(1.5)'
+                    el.style.opacity = '1'
+                  }}
+                  onMouseLeave={(e) => {
+                    const el = e.currentTarget as HTMLDivElement
+                    el.style.transform = 'scale(1)'
+                    el.style.opacity = '0.85'
+                  }}
+                />
+              </Marker>
+            ))}
+          </>
+        )}
 
         {/* World Bear Report pin markers */}
         {viewMode === 'world' &&
@@ -362,7 +527,7 @@ export default function MapClient({
             </Marker>
           ))}
 
-        {/* Japan popup */}
+        {/* Japan recent sighting popup */}
         {selectedSighting && (
           <Popup
             latitude={selectedSighting.lat}
@@ -400,6 +565,62 @@ export default function MapClient({
               </p>
               <p style={{ fontSize: 10, color: '#AAA', margin: '6px 0 0' }}>
                 情報源：{selectedSighting.source_name}
+              </p>
+            </div>
+          </Popup>
+        )}
+
+        {/* Japan historical sighting popup */}
+        {selectedHistory && (
+          <Popup
+            latitude={selectedHistory.lat}
+            longitude={selectedHistory.lng}
+            onClose={() => setSelectedId(null)}
+            closeButton
+            closeOnClick={false}
+            maxWidth="280px"
+            anchor="bottom"
+          >
+            <div style={{ fontFamily: 'var(--font-noto-sans, sans-serif)', padding: '2px 0' }}>
+              <div style={{ display: 'flex', gap: 6, marginBottom: 6, alignItems: 'center' }}>
+                <span
+                  style={{
+                    background: '#9CA3AF',
+                    color: '#fff',
+                    fontSize: 9,
+                    fontWeight: 700,
+                    padding: '2px 7px',
+                    borderRadius: 3,
+                    letterSpacing: '0.04em',
+                  }}
+                >
+                  過去情報
+                </span>
+                <span
+                  style={{
+                    background: DANGER_COLORS[selectedHistory.danger_level],
+                    color: '#fff',
+                    fontSize: 9,
+                    fontWeight: 700,
+                    padding: '2px 7px',
+                    borderRadius: 3,
+                  }}
+                >
+                  {DANGER_LABELS[selectedHistory.danger_level]}・{selectedHistory.type}
+                </span>
+              </div>
+              <p style={{ fontWeight: 700, fontSize: 13, margin: '0 0 4px', color: '#1A1A16', lineHeight: 1.4 }}>
+                {selectedHistory.title}
+              </p>
+              <p style={{ fontSize: 11, color: '#888', margin: '0 0 6px' }}>
+                📍 {selectedHistory.prefecture} {selectedHistory.city}
+                　{formatDate(selectedHistory.date)}
+              </p>
+              <p style={{ fontSize: 12, color: '#444', margin: 0, lineHeight: 1.6 }}>
+                {selectedHistory.description}
+              </p>
+              <p style={{ fontSize: 10, color: '#AAA', margin: '6px 0 0' }}>
+                情報源：{selectedHistory.source_name}
               </p>
             </div>
           </Popup>
