@@ -2,6 +2,12 @@ import Link from 'next/link'
 
 const guides = [
   {
+    href: '/guide/bear-spray-accidents',
+    title: '熊スプレーの誤噴射事故と法的リスク',
+    tag: '安全・リスク',
+    tagColor: '#DC2626',
+  },
+  {
     href: '/guide/camping-bear-prevention',
     title: 'キャンプ場・野営地での熊対策',
     tag: 'キャンプ・登山',

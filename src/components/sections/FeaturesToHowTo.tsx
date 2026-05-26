@@ -226,9 +226,36 @@ export function Comparison() {
       <div style={{ maxWidth: 1040, margin: '0 auto' }}>
         <div className="section-label">COMPARISON</div>
         <h2 className="section-title" style={{ fontSize: 'clamp(20px,3vw,30px)', marginBottom: 14 }}>他の野生動物対策との比較</h2>
-        <p style={{ fontSize: 15, color: '#5A5A55', maxWidth: 600, lineHeight: 1.85, marginBottom: 40 }}>
+        <p style={{ fontSize: 15, color: '#5A5A55', maxWidth: 600, lineHeight: 1.85, marginBottom: 24 }}>
           各種対策の特性を参考として整理しています。使用環境・目的に応じてご検討ください。
         </p>
+
+        {/* 事故注意喚起バナー */}
+        <a
+          href="/guide/bear-spray-accidents"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 14,
+            background: '#FEF2F2',
+            border: '1px solid #FECACA',
+            borderLeft: '4px solid #DC2626',
+            borderRadius: 6,
+            padding: '14px 18px',
+            marginBottom: 32,
+            textDecoration: 'none',
+          }}
+        >
+          <span style={{ fontSize: 20, flexShrink: 0 }}>⚠️</span>
+          <div style={{ flex: 1 }}>
+            <span style={{ fontSize: 13, fontWeight: 700, color: '#991B1B', display: 'block' }}>
+              2026年・JR多度津駅で熊スプレー誤噴射 → 8名負傷
+            </span>
+            <span style={{ fontSize: 12, color: '#B91C1C' }}>
+              近年、駅・新幹線・学校での誤噴射事故が相次いでいます。OC不使用のKUMANUKEとの違いを解説 →
+            </span>
+          </div>
+        </a>
         <div style={{ overflowX: 'auto' }}>
           <table className="comparison-table" style={{ width: '100%', fontSize: 13, minWidth: 560 }}>
             <thead>

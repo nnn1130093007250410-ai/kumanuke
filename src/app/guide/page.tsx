@@ -9,6 +9,13 @@ export const metadata: Metadata = {
 
 const articles = [
   {
+    slug: 'bear-spray-accidents',
+    title: '熊スプレーの誤噴射事故と法的リスク｜正しい熊対策の選び方',
+    description: '2026年・JR多度津駅で8名負傷など、熊撃退スプレーの誤噴射事故が相次いでいます。護身用スプレーとエリア散布型の違い、法的リスクと正しい対策を解説します。',
+    tag: '安全・リスク',
+    tagColor: '#DC2626',
+  },
+  {
     slug: 'camping-bear-prevention',
     title: 'キャンプ場・野営地での熊対策完全ガイド',
     description: 'テントサイト周辺への事前散布から食料管理まで、キャンプ中の熊遭遇リスクを下げる実践的な方法を解説します。',
