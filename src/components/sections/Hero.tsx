@@ -1,11 +1,12 @@
 import Image from 'next/image'
+import Link from 'next/link'
 
 const TAGS = ['OCガス不使用', 'カプサイシン不使用', '植物由来成分', 'エリア散布型', '200ml']
 
 export default function Hero() {
   return (
     <section
-      className="mt-14"
+      className="mt-[92px]"
       style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(2,1fr)',
@@ -128,6 +129,47 @@ export default function Hero() {
             製品詳細を見る
           </a>
         </div>
+
+        {/* ④ MAP誘導 ── CTAの下に配置 */}
+        <Link
+          href="/map"
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 8,
+            marginTop: 20,
+            paddingTop: 20,
+            borderTop: '1px solid rgba(255,255,255,0.08)',
+            textDecoration: 'none',
+            maxWidth: 'fit-content',
+          }}
+        >
+          {/* ライブドット */}
+          <span style={{ position: 'relative', width: 8, height: 8, flexShrink: 0 }}>
+            <span
+              style={{
+                position: 'absolute',
+                inset: 0,
+                borderRadius: '50%',
+                background: '#5EC97C',
+                animation: 'ping 1.6s cubic-bezier(0,0,0.2,1) infinite',
+                opacity: 0.6,
+              }}
+            />
+            <span
+              style={{
+                position: 'absolute',
+                inset: 0,
+                borderRadius: '50%',
+                background: '#5EC97C',
+              }}
+            />
+          </span>
+          <span style={{ fontSize: 'clamp(11px,1vw,13px)', color: 'rgba(255,255,255,0.55)', lineHeight: 1.4 }}>
+            📍 北海道・東北・北陸で出没急増中 —{' '}
+            <span style={{ color: '#5EC97C', fontWeight: 700 }}>あなたの地域の状況を確認 →</span>
+          </span>
+        </Link>
       </div>
 
       {/* ===== Right: 使用シーン写真（フルブリード） ===== */}
