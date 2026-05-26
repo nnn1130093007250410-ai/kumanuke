@@ -1,8 +1,8 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useRef } from 'react'
 import Map, { Marker, Popup, Source, Layer, NavigationControl } from 'react-map-gl/mapbox'
-import type { LayerProps } from 'react-map-gl/mapbox'
+import type { LayerProps, MapRef } from 'react-map-gl/mapbox'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import type { BearSighting } from '@/lib/bear-constants'
 import { DANGER_COLORS, DANGER_LABELS } from '@/lib/bear-constants'
@@ -50,6 +50,7 @@ export default function MapClient({
 }: MapClientProps) {
   const [viewMode, setViewMode] = useState<'pins' | 'heat'>('pins')
   const [selectedId, setSelectedId] = useState<string | null>(null)
+  const mapRef = useRef<MapRef>(null)
 
   const token = process.env.NEXT_PUBLIC_MAPBOX_TOKEN
 
@@ -73,16 +74,19 @@ export default function MapClient({
   )
 
   // 地図ロード後にすべてのシンボルレイヤーを日本語表示に切り替える
-  const handleMapLoad = useCallback((event: { target: { getStyle: () => { layers?: { id: string; type: string }[] }; setLayoutProperty: (id: string, prop: string, value: unknown) => void } }) => {
-    const map = event.target
+  const handleMapLoad = useCallback(() => {
+    const map = mapRef.current?.getMap()
+    if (!map) return
     const layers = map.getStyle()?.layers
     if (!layers) return
     for (const layer of layers) {
       if (layer.type === 'symbol') {
         try {
+          // Mapbox GL expression で name_ja を優先表示
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           map.setLayoutProperty(layer.id, 'text-field', [
             'coalesce', ['get', 'name_ja'], ['get', 'name'],
-          ])
+          ] as any)
         } catch {
           // text-field を持たないレイヤーはスキップ
         }
@@ -199,6 +203,7 @@ export default function MapClient({
       </div>
 
       <Map
+        ref={mapRef}
         mapboxAccessToken={token}
         initialViewState={{ longitude: centerLng, latitude: centerLat, zoom }}
         style={{ width: '100%', height: '100%' }}
