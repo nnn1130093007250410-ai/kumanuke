@@ -4,8 +4,8 @@ import { useState, useCallback } from 'react'
 import Map, { Marker, Popup, Source, Layer, NavigationControl } from 'react-map-gl/mapbox'
 import type { LayerProps } from 'react-map-gl/mapbox'
 import 'mapbox-gl/dist/mapbox-gl.css'
-import type { BearSighting } from '@/lib/bear-data'
-import { DANGER_COLORS, DANGER_LABELS } from '@/lib/bear-data'
+import type { BearSighting } from '@/lib/bear-constants'
+import { DANGER_COLORS, DANGER_LABELS } from '@/lib/bear-constants'
 
 interface MapClientProps {
   sightings: BearSighting[]
