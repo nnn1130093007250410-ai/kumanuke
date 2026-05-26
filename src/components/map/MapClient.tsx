@@ -255,7 +255,7 @@ export default function MapClient({
             gap: 6,
           }}
         >
-          {([2, 3] as const).map((level) => (
+          {([1, 2, 3] as const).map((level) => (
             <div key={level} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
               <div
                 style={{
