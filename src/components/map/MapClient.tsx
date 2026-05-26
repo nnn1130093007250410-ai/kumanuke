@@ -14,7 +14,7 @@ import {
 
 interface MapClientProps {
   sightings: BearSighting[]
-  worldSightings: WorldBearReport[]
+  worldSightings?: WorldBearReport[]
   centerLng?: number
   centerLat?: number
   zoom?: number
@@ -58,7 +58,7 @@ function formatDate(dateStr: string): string {
 
 export default function MapClient({
   sightings,
-  worldSightings,
+  worldSightings = [],
   centerLng = 137.0,
   centerLat = 36.5,
   zoom = 5,
