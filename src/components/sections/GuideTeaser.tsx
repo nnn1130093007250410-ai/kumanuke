@@ -100,6 +100,52 @@ export default function GuideTeaser() {
             </Link>
           ))}
         </div>
+
+        {/* Map promotion banner */}
+        <Link
+          href="/map"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            flexWrap: 'wrap',
+            gap: 16,
+            marginTop: 28,
+            background: '#0F2E16',
+            borderRadius: 10,
+            padding: '24px 28px',
+            textDecoration: 'none',
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+            <span style={{ fontSize: 36, lineHeight: 1 }}>🗺</span>
+            <div>
+              <p style={{ fontSize: 11, fontWeight: 700, color: '#5EC97C', letterSpacing: '0.12em', margin: '0 0 4px' }}>
+                KUMANUKE MAP
+              </p>
+              <p style={{ fontSize: 16, fontWeight: 700, color: '#fff', margin: '0 0 4px', lineHeight: 1.4 }}>
+                全国の熊出没・目撃情報をマップで確認
+              </p>
+              <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', margin: 0 }}>
+                都道府県別・危険度別にフィルタリング。ヒートマップ表示対応。
+              </p>
+            </div>
+          </div>
+          <span
+            style={{
+              background: '#5EC97C',
+              color: '#0F2E16',
+              fontWeight: 700,
+              fontSize: 13,
+              padding: '10px 24px',
+              borderRadius: 6,
+              whiteSpace: 'nowrap',
+              flexShrink: 0,
+            }}
+          >
+            マップを見る →
+          </span>
+        </Link>
       </div>
     </section>
   )

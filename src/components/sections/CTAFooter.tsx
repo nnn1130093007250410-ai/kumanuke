@@ -120,6 +120,7 @@ export function Footer() {
       { href: '#faq', label: 'FAQ' },
       { href: '#caution', label: '注意事項' },
       { href: '/guide', label: '対策ガイド' },
+      { href: '/map', label: '🗺 熊出没マップ' },
     ],
     '購入': [
       { href: 'https://search.rakuten.co.jp/search/mall/KUMANUKE/', label: '楽天市場', external: true },

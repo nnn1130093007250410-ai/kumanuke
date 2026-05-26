@@ -7,6 +7,7 @@ const NAV_LINKS = [
   { href: '#scenes',    label: '使用シーン' },
   { href: '#faq',       label: 'FAQ' },
   { href: '/guide',     label: '対策ガイド' },
+  { href: '/map',       label: '🗺 出没マップ', highlight: true },
 ]
 
 export default function Nav() {
@@ -51,13 +52,27 @@ export default function Nav() {
 
         {/* Desktop links */}
         <ul className="hidden md:flex gap-6 list-none m-0 p-0">
-          {NAV_LINKS.map(({ href, label }) => (
-            <li key={href}>
-              <a href={href} className="text-xs font-medium" style={{ color: '#5A5A55', textDecoration: 'none' }}>
-                {label}
-              </a>
-            </li>
-          ))}
+          {NAV_LINKS.map(({ href, label, ...rest }) => {
+            const highlight = 'highlight' in rest ? rest.highlight : false
+            return (
+              <li key={href}>
+                <a
+                  href={href}
+                  className="text-xs font-medium"
+                  style={{
+                    color: highlight ? '#143D1E' : '#5A5A55',
+                    textDecoration: 'none',
+                    fontWeight: highlight ? 700 : undefined,
+                    background: highlight ? '#E8F5EC' : undefined,
+                    padding: highlight ? '4px 10px' : undefined,
+                    borderRadius: highlight ? 4 : undefined,
+                  }}
+                >
+                  {label}
+                </a>
+              </li>
+            )
+          })}
           <li>
             <a
               href="#wholesale"
@@ -140,18 +155,25 @@ export default function Nav() {
         aria-hidden={!open}
       >
         <ul className="list-none m-0 p-0 pb-4">
-          {NAV_LINKS.map(({ href, label }) => (
-            <li key={href} style={{ borderBottom: '1px solid #F2F2F0' }}>
-              <a
-                href={href}
-                onClick={close}
-                className="block px-6 py-4 text-sm font-medium"
-                style={{ color: '#333', textDecoration: 'none' }}
-              >
-                {label}
-              </a>
-            </li>
-          ))}
+          {NAV_LINKS.map(({ href, label, ...rest }) => {
+            const highlight = 'highlight' in rest ? rest.highlight : false
+            return (
+              <li key={href} style={{ borderBottom: '1px solid #F2F2F0' }}>
+                <a
+                  href={href}
+                  onClick={close}
+                  className="block px-6 py-4 text-sm font-medium"
+                  style={{
+                    color: highlight ? '#143D1E' : '#333',
+                    textDecoration: 'none',
+                    fontWeight: highlight ? 700 : undefined,
+                  }}
+                >
+                  {label}
+                </a>
+              </li>
+            )
+          })}
           <li className="px-6 pt-4">
             <a
               href="#wholesale"
