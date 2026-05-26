@@ -52,8 +52,30 @@ function formatDate(dateStr: string): string {
   return `${d.getMonth() + 1}/${d.getDate()}`
 }
 
-export default function MapPage() {
-  const sightings = loadBearData()
+const TYPE_FILTERS = [
+  { key: 'all',  label: 'すべて' },
+  { key: '目撃', label: '🔭 目撃情報' },
+  { key: '被害', label: '⚠️ 出没・被害情報' },
+] as const
+
+type TypeFilter = typeof TYPE_FILTERS[number]['key']
+
+export default function MapPage({
+  searchParams,
+}: {
+  searchParams?: { type?: string }
+}) {
+  const typeFilter: TypeFilter =
+    (searchParams?.type as TypeFilter | undefined) ?? 'all'
+
+  const allSightings = loadBearData()
+  const sightings =
+    typeFilter === '目撃'
+      ? allSightings.filter((s) => s.type === '目撃')
+      : typeFilter === '被害'
+      ? allSightings.filter((s) => ['被害', '人身被害', '住宅侵入'].includes(s.type))
+      : allSightings
+
   const updateLog = loadUpdateLog()
   const latest = getLatestSightings(sightings, 30)
   const monthly = getMonthlyCounts(sightings)
@@ -108,6 +130,29 @@ export default function MapPage() {
                 </span>
               ))}
             </div>
+          </div>
+
+          {/* Type filter */}
+          <div style={{ display: 'flex', gap: 8, marginTop: 16, flexWrap: 'wrap' }}>
+            {TYPE_FILTERS.map((f) => (
+              <Link
+                key={f.key}
+                href={f.key === 'all' ? '/map' : `/map?type=${encodeURIComponent(f.key)}`}
+                style={{
+                  padding: '5px 16px',
+                  borderRadius: 20,
+                  fontSize: 12,
+                  fontWeight: 700,
+                  background: typeFilter === f.key ? '#fff' : 'rgba(255,255,255,0.12)',
+                  color: typeFilter === f.key ? '#0F2E16' : 'rgba(255,255,255,0.65)',
+                  textDecoration: 'none',
+                  border: `1.5px solid ${typeFilter === f.key ? '#fff' : 'rgba(255,255,255,0.25)'}`,
+                  transition: 'all 0.2s',
+                }}
+              >
+                {f.label}
+              </Link>
+            ))}
           </div>
         </div>
       </div>
@@ -195,7 +240,7 @@ export default function MapPage() {
                 alignItems: 'baseline',
               }}
             >
-              最新出没情報
+              {typeFilter === '目撃' ? '最新目撃情報' : typeFilter === '被害' ? '最新出没・被害情報' : '最新出没情報'}
               <span style={{ fontSize: 13, fontWeight: 400, color: '#888' }}>
                 新着順 {sightings.length}件
               </span>

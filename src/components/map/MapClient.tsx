@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from 'react'
 import Map, { Marker, Popup, Source, Layer, NavigationControl } from 'react-map-gl/mapbox'
-import type { LayerProps } from 'react-map-gl/mapbox'
+import type { LayerProps, MapLayerMouseEvent } from 'react-map-gl/mapbox'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import type { BearSighting } from '@/lib/bear-constants'
 import { DANGER_COLORS, DANGER_LABELS } from '@/lib/bear-constants'
@@ -71,6 +71,24 @@ export default function MapClient({
     },
     []
   )
+
+  // 地図ロード後にすべてのシンボルレイヤーを日本語表示に切り替える
+  const handleMapLoad = useCallback((event: { target: { getStyle: () => { layers?: { id: string; type: string }[] }; setLayoutProperty: (id: string, prop: string, value: unknown) => void } }) => {
+    const map = event.target
+    const layers = map.getStyle()?.layers
+    if (!layers) return
+    for (const layer of layers) {
+      if (layer.type === 'symbol') {
+        try {
+          map.setLayoutProperty(layer.id, 'text-field', [
+            'coalesce', ['get', 'name_ja'], ['get', 'name'],
+          ])
+        } catch {
+          // text-field を持たないレイヤーはスキップ
+        }
+      }
+    }
+  }, [])
 
   if (!token) {
     return (
@@ -186,6 +204,7 @@ export default function MapClient({
         style={{ width: '100%', height: '100%' }}
         mapStyle="mapbox://styles/mapbox/outdoors-v12"
         onClick={() => setSelectedId(null)}
+        onLoad={handleMapLoad}
       >
         <NavigationControl position="bottom-right" />
 
