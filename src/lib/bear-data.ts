@@ -15,6 +15,13 @@ export interface UpdateLog {
 }
 
 export function loadBearData(): BearSighting[] {
+  // bear-japan.json（全国ArcGIS一括取得データ）を優先して読み込む
+  const japanPath = path.join(process.cwd(), 'public', 'data', 'bear-japan.json')
+  if (fs.existsSync(japanPath)) {
+    const raw = fs.readFileSync(japanPath, 'utf-8')
+    return JSON.parse(raw) as BearSighting[]
+  }
+  // フォールバック: 旧bear-data.json
   const filePath = path.join(process.cwd(), 'public', 'data', 'bear-data.json')
   const raw = fs.readFileSync(filePath, 'utf-8')
   return JSON.parse(raw) as BearSighting[]
