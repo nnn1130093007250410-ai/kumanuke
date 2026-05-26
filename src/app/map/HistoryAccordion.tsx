@@ -25,9 +25,12 @@ function groupByPrefecture(history: BearSighting[]): Record<string, BearSighting
   return groups
 }
 
+const ENTRIES_PER_PAGE = 12
+
 export default function HistoryAccordion({ history }: Props) {
   const [openPref, setOpenPref] = useState<string | null>(null)
   const [showAll, setShowAll] = useState(false)
+  const [shownCounts, setShownCounts] = useState<Record<string, number>>({})
 
   const grouped = groupByPrefecture(history)
 
@@ -36,7 +39,11 @@ export default function HistoryAccordion({ history }: Props) {
     ([, a], [, b]) => b.length - a.length
   )
 
-  const visiblePrefs = showAll ? sortedPrefs : sortedPrefs.slice(0, 8)
+  const visiblePrefs = showAll ? sortedPrefs : sortedPrefs.slice(0, 10)
+
+  const getShown = (pref: string) => shownCounts[pref] ?? ENTRIES_PER_PAGE
+  const showMore = (pref: string, total: number) =>
+    setShownCounts((prev) => ({ ...prev, [pref]: Math.min((prev[pref] ?? ENTRIES_PER_PAGE) + ENTRIES_PER_PAGE, total) }))
 
   return (
     <div>
@@ -136,13 +143,13 @@ export default function HistoryAccordion({ history }: Props) {
               {/* Entry list */}
               {isOpen && (
                 <div style={{ padding: '8px 0' }}>
-                  {entries.map((entry, i) => (
+                  {entries.slice(0, getShown(pref)).map((entry, i) => (
                     <div
                       key={entry.id}
                       style={{
                         padding: '12px 18px',
                         borderBottom:
-                          i < entries.length - 1 ? '1px solid #F5F5F2' : 'none',
+                          i < getShown(pref) - 1 ? '1px solid #F5F5F2' : 'none',
                         display: 'grid',
                         gridTemplateColumns: 'auto 1fr',
                         gap: '4px 12px',
@@ -229,6 +236,26 @@ export default function HistoryAccordion({ history }: Props) {
                       </div>
                     </div>
                   ))}
+                  {/* Load more entries within this prefecture */}
+                  {getShown(pref) < entries.length && (
+                    <button
+                      onClick={() => showMore(pref, entries.length)}
+                      style={{
+                        margin: '6px 18px 10px',
+                        width: 'calc(100% - 36px)',
+                        padding: '8px',
+                        background: '#F5F5F2',
+                        border: '1px solid #DDDDD8',
+                        borderRadius: 5,
+                        fontSize: 11,
+                        fontWeight: 700,
+                        color: '#5A5A55',
+                        cursor: 'pointer',
+                      }}
+                    >
+                      ▼ さらに表示（残り {entries.length - getShown(pref)}件）
+                    </button>
+                  )}
                 </div>
               )}
             </div>
@@ -236,8 +263,8 @@ export default function HistoryAccordion({ history }: Props) {
         })}
       </div>
 
-      {/* Show more / less toggle */}
-      {sortedPrefs.length > 8 && (
+      {/* Show more / less toggle — prefecture level */}
+      {sortedPrefs.length > 10 && (
         <button
           onClick={() => setShowAll((v) => !v)}
           style={{
@@ -256,7 +283,7 @@ export default function HistoryAccordion({ history }: Props) {
         >
           {showAll
             ? '▲ 表示を折りたたむ'
-            : `▼ 残り ${sortedPrefs.length - 8} 都道府県を表示する`}
+            : `▼ 残り ${sortedPrefs.length - 10} 都道府県を表示する`}
         </button>
       )}
     </div>
