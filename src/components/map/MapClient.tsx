@@ -9,7 +9,7 @@ import { DANGER_COLORS, DANGER_LABELS, WORLD_IMPORTANCE_COLORS, WORLD_IMPORTANCE
 
 // ── Types ─────────────────────────────────────────────────────────────────
 type ViewMode = 'japan' | 'world' | 'heat' | 'all'
-type TimeFilter = '24h' | '7d' | '30d' | '90d' | '1y' | 'all'
+type TimeFilter = '7d' | '30d' | '90d' | '1y' | 'all'
 
 interface MapClientProps {
   sightings: BearSighting[]
@@ -22,7 +22,6 @@ interface MapClientProps {
 
 // ── Constants ─────────────────────────────────────────────────────────────
 const TIME_FILTERS: { key: TimeFilter; label: string }[] = [
-  { key: '24h', label: '24時間' },
   { key: '7d',  label: '7日' },
   { key: '30d', label: '30日' },
   { key: '90d', label: '90日' },
@@ -53,7 +52,6 @@ const COUNTRY_FLAGS: Record<string, string> = {
 function getCutoffDate(filter: TimeFilter): Date {
   const now = new Date()
   switch (filter) {
-    case '24h': return new Date(now.getTime() - 24 * 3600 * 1000)
     case '7d':  return new Date(now.getTime() - 7  * 86400 * 1000)
     case '30d': return new Date(now.getTime() - 30 * 86400 * 1000)
     case '90d': return new Date(now.getTime() - 90 * 86400 * 1000)
@@ -103,30 +101,24 @@ const clusterCountLayer: LayerProps = {
   paint: { 'text-color': '#fff' },
 }
 
-// Japan — individual pins (current = colored, history = gray) via data-driven style
+// Japan — individual pins (danger_level colors for all, including history)
 const unclusteredPointLayer: LayerProps = {
   id: 'unclustered-point',
   type: 'circle',
   filter: ['!', ['has', 'point_count']],
   paint: {
     'circle-color': [
-      'case',
-      ['==', ['get', 'is_history'], 1],
-      '#9CA3AF',
-      ['match', ['get', 'danger_level'], 3, '#EF4444', 2, '#F97316', '#F59E0B'],
+      'match', ['get', 'danger_level'],
+      3, '#EF4444',
+      2, '#F97316',
+      '#F59E0B',
     ],
     'circle-radius': [
-      'case',
-      ['==', ['get', 'is_history'], 1],
-      5,
-      ['match', ['get', 'danger_level'], 3, 9, 6],
+      'match', ['get', 'danger_level'],
+      3, 9,
+      6,
     ],
-    'circle-opacity': [
-      'case',
-      ['==', ['get', 'is_history'], 1],
-      0.7,
-      0.95,
-    ],
+    'circle-opacity': 0.9,
     'circle-stroke-width': 2,
     'circle-stroke-color': '#fff',
   },
@@ -495,16 +487,6 @@ export default function MapClient({
               🕐 {TIME_FILTERS.find(t => t.key === timeFilter)?.label}フィルター中
             </div>
           )}
-          <div style={{
-            borderTop: timeFilter !== 'all' ? 'none' : '1px solid #EFEFED',
-            paddingTop: timeFilter !== 'all' ? 0 : 4,
-            fontSize: 10, color: '#6B7280',
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-              <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#9CA3AF' }} />
-              <span>過去情報</span>
-            </div>
-          </div>
         </div>
       )}
 
@@ -701,12 +683,6 @@ export default function MapClient({
           >
             <div style={{ fontFamily: 'var(--font-noto-sans, sans-serif)', padding: '2px 0' }}>
               <div style={{ display: 'flex', gap: 5, marginBottom: 6, flexWrap: 'wrap' }}>
-                {historyIds.has(selectedJapan.id) && (
-                  <span style={{
-                    background: '#9CA3AF', color: '#fff',
-                    fontSize: 9, fontWeight: 700, padding: '2px 7px', borderRadius: 3,
-                  }}>過去情報</span>
-                )}
                 <span style={{
                   background: DANGER_COLORS[selectedJapan.danger_level], color: '#fff',
                   fontSize: 10, fontWeight: 700, padding: '2px 8px', borderRadius: 3,
