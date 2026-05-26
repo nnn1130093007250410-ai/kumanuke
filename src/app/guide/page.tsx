@@ -9,6 +9,13 @@ export const metadata: Metadata = {
 
 const articles = [
   {
+    slug: 'bear-olfactory-science',
+    title: '熊が匂いで近づかない理由｜嗅覚の仕組みと忌避メカニズムを科学的に解説',
+    description: '熊の嗅覚は犬の7倍・人間の2100倍。WSU・東京大学・化学生態学誌など国内外の研究が示す、匂いによる熊の行動制御メカニズムと植物由来成分が注目される科学的根拠を解説。',
+    tag: '科学・研究',
+    tagColor: '#0C5C3E',
+  },
+  {
     slug: 'bear-spray-accidents',
     title: '熊スプレーの誤噴射事故と法的リスク｜正しい熊対策の選び方',
     description: '2026年・JR多度津駅で8名負傷など、熊撃退スプレーの誤噴射事故が相次いでいます。護身用スプレーとエリア散布型の違い、法的リスクと正しい対策を解説します。',

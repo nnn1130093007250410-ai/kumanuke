@@ -2,6 +2,12 @@ import Link from 'next/link'
 
 const guides = [
   {
+    href: '/guide/bear-olfactory-science',
+    title: '熊が匂いで近づかない理由｜科学的メカニズムを解説',
+    tag: '科学・研究',
+    tagColor: '#0C5C3E',
+  },
+  {
     href: '/guide/bear-spray-accidents',
     title: '熊スプレーの誤噴射事故と法的リスク',
     tag: '安全・リスク',
