@@ -35,7 +35,7 @@ export default function BearIncidentNews2026Page() {
       <article style={{ maxWidth: 760, margin: '0 auto', padding: '48px 24px 80px', fontSize: 15, color: '#333', lineHeight: 1.9 }}>
 
         <p style={{ fontSize: 16, color: '#1A1A16', fontWeight: 500, lineHeight: 1.85, marginBottom: 32, padding: '20px 24px', background: '#FFF8F4', borderLeft: '3px solid #E07A30', borderRadius: 4 }}>
-          2026年春は全国各地でクマ出没の報告が相次いでいます。KUMANUKEのデータ（110,692件収録・2026年5月時点）では、2025年の急増に続き2026年も春先から活発な出没が続いています。単なる「今年もクマが出た」ではなく、この現象の構造的背景を理解することが重要です。
+          2026年春は全国各地でクマ出没の報告が相次いでいます。KUMANUKEのデータ（110,707件収録・2026年5月時点）では、2025年の急増に続き2026年も春先から活発な出没が続いています。単なる「今年もクマが出た」ではなく、この現象の構造的背景を理解することが重要です。
         </p>
 
         <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginTop: 56, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
