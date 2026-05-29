@@ -14,12 +14,13 @@ import json
 import re
 import sys
 from collections import Counter
-from datetime import date
+from datetime import date, datetime
 from pathlib import Path
 
 SCRIPT_DIR = Path(__file__).parent
 PROJECT_ROOT = SCRIPT_DIR.parent
 DATA_FILE = PROJECT_ROOT / "public" / "data" / "bear-japan.json"
+LOG_FILE  = PROJECT_ROOT / "public" / "data" / "update-log.json"
 
 
 def compute_stats(data: list[dict]) -> dict:
@@ -67,6 +68,53 @@ def fmt_k(n: int) -> str:
 
 def current_month() -> int:
     return date.today().month
+
+
+def update_update_log(stats: dict) -> bool:
+    """public/data/update-log.json に今回の実行結果を追記する"""
+    today = date.today().isoformat()
+    current_total = stats['total']
+
+    # 既存ログを読み込む
+    try:
+        with open(LOG_FILE, encoding='utf-8') as f:
+            log: list[dict] = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        log = []
+
+    # 直前エントリの合計から増加件数を算出
+    prev_total = 0
+    for entry in reversed(log):
+        if 'total' in entry:
+            prev_total = entry['total']
+            break
+
+    added = max(0, current_total - prev_total)
+
+    # 当日エントリが既にあれば上書き、なければ追加
+    new_entry = {
+        'date': today,
+        'total': current_total,
+        'added': added,
+        'year': stats['current_year'],
+        'year_count': stats['this_year'],
+        'top_prefecture': stats['top10'][0][0] if stats['top10'] else '',
+        'note': f"自動週次更新: {stats['current_year']}年{stats['this_year']:,}件 / 全{current_total:,}件",
+    }
+
+    if log and log[-1].get('date') == today:
+        # 同日の再実行はエントリを更新
+        log[-1].update(new_entry)
+        action = '更新'
+    else:
+        log.append(new_entry)
+        action = '追記'
+
+    with open(LOG_FILE, 'w', encoding='utf-8') as f:
+        json.dump(log, f, ensure_ascii=False, indent=2)
+
+    print(f"  ✓ update-log.json {action} (追加{added:,}件 / 総計{current_total:,}件)")
+    return added > 0
 
 
 def update_all_stats() -> None:
@@ -210,6 +258,11 @@ def update_all_stats() -> None:
             print("  ✓ bear-incident-news-2026/page.tsx 更新")
         else:
             print("  - bear-incident-news-2026/page.tsx 変更なし")
+
+    # ──────────────────────────────────────────────────────────────────
+    # 4. update-log.json
+    # ──────────────────────────────────────────────────────────────────
+    update_update_log(stats)
 
     # ──────────────────────────────────────────────────────────────────
     # 完了サマリー

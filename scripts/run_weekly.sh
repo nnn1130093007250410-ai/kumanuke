@@ -34,13 +34,22 @@ python3 scripts/collect_kml.py || {
     echo "$LOG_PREFIX ⚠ collect_kml.py でエラーが発生しましたが続行します"
 }
 
-# ── 統計更新 ──────────────────────────────────────────────────────────────────
+# ── 統計更新（update-log.json も含む）────────────────────────────────────────
 echo ""
 echo "$LOG_PREFIX 統計更新 開始..."
 python3 scripts/update_stats.py || {
     echo "$LOG_PREFIX ⚠ update_stats.py でエラーが発生しました"
     exit 1
 }
+
+# ── 環境省文書 新着チェック ───────────────────────────────────────────────────
+echo ""
+echo "$LOG_PREFIX 環境省文書チェック 開始..."
+python3 scripts/check_env_docs.py
+ENV_RC=$?
+if [ "$ENV_RC" -eq "2" ]; then
+    echo "$LOG_PREFIX ⚠ 環境省に新着文書があります！ scripts/env_new_docs.json を確認してください"
+fi
 
 # ── Git コミット & プッシュ ───────────────────────────────────────────────────
 echo ""
@@ -60,14 +69,20 @@ print(len(data))
 
     DATE_STR=$(date '+%Y-%m-%d')
 
-    # 対象ファイルのみ追加
+    # 対象ファイルのみ追加（update-log.json も追加）
     git add public/data/bear-japan.json 2>/dev/null || true
+    git add public/data/update-log.json 2>/dev/null || true
     git add src/app/page.tsx 2>/dev/null || true
     git add "src/app/guide/japan-regional-bear-data/page.tsx" 2>/dev/null || true
-    git add "src/app/guide/bear-incident-news-2026/page.tsx" 2>/dev/null || true
 
-    # candidates.json があれば追加（discover モード用）
-    [ -f scripts/candidates.json ] && git add scripts/candidates.json 2>/dev/null || true
+    # 現年の bear-incident-news ページを動的に追加
+    CURRENT_YEAR=$(date '+%Y')
+    NEWS_PAGE="src/app/guide/bear-incident-news-${CURRENT_YEAR}/page.tsx"
+    [ -f "$NEWS_PAGE" ] && git add "$NEWS_PAGE" 2>/dev/null || true
+
+    # candidates.json / env_known_docs.json があれば追加
+    [ -f scripts/candidates.json ]     && git add scripts/candidates.json 2>/dev/null || true
+    [ -f scripts/env_known_docs.json ] && git add scripts/env_known_docs.json 2>/dev/null || true
 
     git -c user.name="kumanuke-bot" \
         -c user.email="bot@kumanuke.jp" \
@@ -76,6 +91,7 @@ print(len(data))
 - ArcGIS REST API 増分収集
 - Google My Maps KML 増分収集
 - 都道府県別統計・件数を自動更新
+- update-log.json 更新
 
 Co-authored-by: kumanuke-bot <bot@kumanuke.jp>"
 
