@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://kumanuke.bubuworks.co.jp/sitemap.xml
+Sitemap: https://kumanuke.vercel.app/sitemap.xml

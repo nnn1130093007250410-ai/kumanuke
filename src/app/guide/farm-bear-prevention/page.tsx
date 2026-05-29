@@ -34,7 +34,7 @@ export default function FarmBearPreventionPage() {
           熊による農作物被害は全国的に増加しており、特にトウモロコシ・果樹・野菜などの被害が深刻です。電気柵の設置が最も効果的ですが、コストや設置手間の問題から、エリア散布型の忌避剤を補助的に使用するケースが増えています。このガイドでは、農地・畑での実践的な熊対策を解説します。
         </p>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', marginTop: 48, marginBottom: 16, paddingBottom: 10, borderBottom: '2px solid #EFEFED' }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginTop: 56, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           農地で熊が出る原因
         </h2>
         <p>熊が農地に侵入する主な理由は食料の匂いです。特に以下の農作物は熊を強く引き寄せます。</p>
@@ -45,7 +45,7 @@ export default function FarmBearPreventionPage() {
           <li style={{ marginBottom: 8 }}><strong>蜂の巣（養蜂）</strong>：ハチミツを好む熊に特に注意が必要</li>
         </ul>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', marginTop: 48, marginBottom: 16, paddingBottom: 10, borderBottom: '2px solid #EFEFED' }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginTop: 56, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           農地での熊対策：3つのアプローチ
         </h2>
 
@@ -94,7 +94,7 @@ export default function FarmBearPreventionPage() {
           ))}
         </div>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', marginTop: 48, marginBottom: 16, paddingBottom: 10, borderBottom: '2px solid #EFEFED' }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginTop: 56, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           忌避スプレーの効果的な散布箇所
         </h2>
         <p>農地への忌避スプレー散布は、農作物に直接かからないよう注意しながら以下の箇所に行います。</p>
@@ -112,7 +112,7 @@ export default function FarmBearPreventionPage() {
           ))}
         </div>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', marginTop: 48, marginBottom: 16, paddingBottom: 10, borderBottom: '2px solid #EFEFED' }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginTop: 56, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           散布頻度と管理スケジュール
         </h2>
         <p>農地での忌避スプレー管理は、農作物の生育スケジュールと合わせて計画的に行いましょう。</p>
@@ -140,7 +140,7 @@ export default function FarmBearPreventionPage() {
           </table>
         </div>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', marginTop: 48, marginBottom: 16, paddingBottom: 10, borderBottom: '2px solid #EFEFED' }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginTop: 56, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           農業組合・JAでの一括導入について
         </h2>
         <p>KUMANUKEでは、農業組合・JA・農業法人向けの卸販売を行っています。地域全体での一括導入により、コストを抑えながら広範囲の農地を保護することができます。</p>

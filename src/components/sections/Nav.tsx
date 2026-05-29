@@ -14,6 +14,7 @@ const NAV_LINKS = [
   { href: '#scenes', label: '使用シーン' },
   { href: '#faq',    label: 'FAQ' },
   { href: '/guide',  label: '対策ガイド' },
+  { href: '/data',   label: '📊 環境省データ' },
 ]
 
 export default function Nav() {
@@ -263,7 +264,7 @@ export default function Nav() {
             <span style={{ fontSize: 13, opacity: 0.9 }}>→</span>
           </a>
           <p style={{ margin: '8px 2px 0', fontSize: 11, color: '#92400E', lineHeight: 1.5 }}>
-            日本全国82件 + 世界35カ国のクマ出没情報をマップで確認
+            日本全国102,000件超 + 世界35カ国のクマ出没情報をマップで確認
           </p>
         </div>
 

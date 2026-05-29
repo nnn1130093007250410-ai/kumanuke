@@ -40,7 +40,7 @@ export default function BearScentMarkingPage() {
           本稿では、クマが行う様々な匂いコミュニケーション（Scent Marking）の形態とその機能を解説し、これが嗅覚忌避アプローチや対策設計にどのような示唆を持つかを考察します。
         </p>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           1. クマが使う匂いコミュニケーションの種類
         </h2>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 16, marginBottom: 48 }}>
@@ -83,7 +83,7 @@ export default function BearScentMarkingPage() {
           ))}
         </div>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           2. フェロモンと揮発性化合物：匂いに含まれる情報
         </h2>
         <p style={{ fontSize: 16, lineHeight: 1.9, color: '#2A2A26', marginBottom: 16 }}>
@@ -106,7 +106,7 @@ export default function BearScentMarkingPage() {
           これらの化合物の組み合わせパターンは個体ごとに異なる「化学的指紋」を形成するとされており、クマが他個体を識別できる根拠のひとつです。近縁種のパンダ・マレーグマなどでも同様の嗅覚コミュニケーション研究が進んでいます。
         </p>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           3. 繁殖期における匂いコミュニケーションの重要性
         </h2>
         <p style={{ fontSize: 16, lineHeight: 1.9, color: '#2A2A26', marginBottom: 16 }}>
@@ -116,7 +116,7 @@ export default function BearScentMarkingPage() {
           この時期、オスは通常の倍以上の行動圏を移動し、マーキング木に立ち寄りながら情報を収集します。繁殖期の前後に人里近くの「マーキングポイント」（特定の木・電柱・農地脇の構造物など）にクマが繰り返し現れるケースは、こうした嗅覚コミュニケーション行動と関係している場合があります。
         </p>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           4. 嗅覚コミュニケーションと忌避対策への示唆
         </h2>
         <p style={{ fontSize: 16, lineHeight: 1.9, color: '#2A2A26', marginBottom: 16 }}>
@@ -135,7 +135,7 @@ export default function BearScentMarkingPage() {
           ))}
         </div>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           まとめ
         </h2>
         <p style={{ fontSize: 16, lineHeight: 1.9, color: '#2A2A26', marginBottom: 48 }}>
@@ -147,7 +147,7 @@ export default function BearScentMarkingPage() {
           <p style={{ fontSize: 14, lineHeight: 1.8, color: '#2A2A26', marginBottom: 16 }}>
             クマが嗅覚に高度に依存することを踏まえ、植物由来の忌避成分をエリアに散布することでクマの接近抑制を図る予防型対策が注目されています。KUMANUKEはこの考え方に基づき設計されたエリア散布型の忌避スプレーです。
           </p>
-          <Link href="/" style={{ display: 'inline-block', background: '#143D1E', color: '#fff', fontWeight: 700, fontSize: 14, padding: '10px 24px', borderRadius: 4, textDecoration: 'none' }}>
+          <Link href="/products/kumanuke" style={{ display: 'inline-block', background: '#143D1E', color: '#fff', fontWeight: 700, fontSize: 14, padding: '10px 24px', borderRadius: 4, textDecoration: 'none' }}>
             KUMANUKEの詳細を見る →
           </Link>
         </div>

@@ -4,31 +4,27 @@ import { useState, useCallback, useRef, useEffect, useMemo } from 'react'
 import Map, { Popup, Source, Layer, NavigationControl } from 'react-map-gl/mapbox'
 import type { LayerProps, MapRef, MapMouseEvent } from 'react-map-gl/mapbox'
 import 'mapbox-gl/dist/mapbox-gl.css'
-import type { BearSighting, WorldBearReport } from '@/lib/bear-constants'
-import { DANGER_COLORS, DANGER_LABELS, WORLD_IMPORTANCE_COLORS, WORLD_IMPORTANCE_LABELS } from '@/lib/bear-constants'
+import type { BearSighting, WorldBearReport, WorldBearReportV2 } from '@/lib/bear-constants'
+import {
+  DANGER_COLORS, DANGER_LABELS,
+  WORLD_IMPORTANCE_COLORS, WORLD_IMPORTANCE_LABELS,
+  WORLD_EVENT_TYPE_CONFIG, WORLD_COUNTRY_JA,
+} from '@/lib/bear-constants'
 
 // ── Types ─────────────────────────────────────────────────────────────────
 type ViewMode = 'japan' | 'world' | 'heat' | 'all'
-type TimeFilter = '7d' | '30d' | '90d' | '1y' | 'all'
 
 interface MapClientProps {
   sightings: BearSighting[]
   historySightings?: BearSighting[]
-  worldSightings?: WorldBearReport[]
+  worldSightings?: WorldBearReport[]   // legacy (bear-world.json)
+  worldReports?: WorldBearReportV2[]   // V2 (world-bear-report.json)
   centerLng?: number
   centerLat?: number
   zoom?: number
 }
 
 // ── Constants ─────────────────────────────────────────────────────────────
-const TIME_FILTERS: { key: TimeFilter; label: string }[] = [
-  { key: '7d',  label: '7日' },
-  { key: '30d', label: '30日' },
-  { key: '90d', label: '90日' },
-  { key: '1y',  label: '1年' },
-  { key: 'all', label: '全期間' },
-]
-
 const VIEW_MODES: { key: ViewMode; label: string }[] = [
   { key: 'japan', label: '🇯🇵 日本' },
   { key: 'world', label: '🌍 WORLD' },
@@ -37,6 +33,7 @@ const VIEW_MODES: { key: ViewMode; label: string }[] = [
 ]
 
 const COUNTRY_FLAGS: Record<string, string> = {
+  // Japanese
   '日本': '🇯🇵', 'アメリカ': '🇺🇸', 'カナダ': '🇨🇦', 'ルーマニア': '🇷🇴',
   'ロシア': '🇷🇺', 'インド': '🇮🇳', '中国': '🇨🇳', '韓国': '🇰🇷',
   'イタリア': '🇮🇹', 'スウェーデン': '🇸🇪', 'フランス': '🇫🇷', 'スペイン': '🇪🇸',
@@ -47,17 +44,21 @@ const COUNTRY_FLAGS: Record<string, string> = {
   'ネパール': '🇳🇵', 'マレーシア': '🇲🇾', 'インドネシア': '🇮🇩', 'ブータン': '🇧🇹',
   'メキシコ': '🇲🇽', 'コロンビア': '🇨🇴', 'ペルー': '🇵🇪', 'ボリビア': '🇧🇴',
   'アルゼンチン': '🇦🇷',
-}
-
-function getCutoffDate(filter: TimeFilter): Date {
-  const now = new Date()
-  switch (filter) {
-    case '7d':  return new Date(now.getTime() - 7  * 86400 * 1000)
-    case '30d': return new Date(now.getTime() - 30 * 86400 * 1000)
-    case '90d': return new Date(now.getTime() - 90 * 86400 * 1000)
-    case '1y':  return new Date(now.getTime() - 365 * 86400 * 1000)
-    case 'all': return new Date(0)
-  }
+  // English (V2)
+  'Japan': '🇯🇵', 'USA': '🇺🇸', 'Canada': '🇨🇦', 'Romania': '🇷🇴',
+  'Russia': '🇷🇺', 'India': '🇮🇳', 'China': '🇨🇳', 'South Korea': '🇰🇷',
+  'Italy': '🇮🇹', 'Sweden': '🇸🇪', 'France': '🇫🇷', 'Spain': '🇪🇸',
+  'Norway': '🇳🇴', 'Finland': '🇫🇮', 'Switzerland': '🇨🇭', 'Poland': '🇵🇱',
+  'Bulgaria': '🇧🇬', 'Croatia': '🇭🇷', 'Slovenia': '🇸🇮',
+  'Slovakia': '🇸🇰', 'Czech Republic': '🇨🇿', 'Austria': '🇦🇹', 'Greece': '🇬🇷',
+  'Serbia': '🇷🇸', 'Turkey': '🇹🇷', 'Iran': '🇮🇷', 'Pakistan': '🇵🇰',
+  'Nepal': '🇳🇵', 'Malaysia': '🇲🇾', 'Indonesia': '🇮🇩', 'Bhutan': '🇧🇹',
+  'Mexico': '🇲🇽', 'Colombia': '🇨🇴', 'Peru': '🇵🇪', 'Bolivia': '🇧🇴',
+  'Argentina': '🇦🇷', 'Ecuador': '🇪🇨', 'Venezuela': '🇻🇪', 'Greenland': '🇬🇱',
+  'Estonia': '🇪🇪', 'Latvia': '🇱🇻', 'Belarus': '🇧🇾', 'Ukraine': '🇺🇦',
+  'Bosnia': '🇧🇦', 'Kazakhstan': '🇰🇿', 'Mongolia': '🇲🇳', 'Thailand': '🇹🇭',
+  'Vietnam': '🇻🇳', 'Myanmar': '🇲🇲', 'Sri Lanka': '🇱🇰', 'Taiwan': '🇹🇼',
+  'Germany': '🇩🇪', 'United Kingdom': '🇬🇧',
 }
 
 function formatDate(dateStr: string): string {
@@ -183,23 +184,25 @@ const worldPointLayer: LayerProps = {
 }
 
 // Enhanced heatmap (global — Japan + World combined)
+// 半径・強度を小さくし、赤は本当の高密度エリアにのみ表示
 const enhancedHeatmapLayer: LayerProps = {
   id: 'bears-heat',
   type: 'heatmap',
   paint: {
-    'heatmap-weight': ['interpolate', ['linear'], ['get', 'heat_weight'], 0, 0.3, 3, 1.0],
-    'heatmap-intensity': ['interpolate', ['linear'], ['zoom'], 0, 1.0, 9, 3.5],
+    'heatmap-weight': ['interpolate', ['linear'], ['get', 'heat_weight'], 0, 0.1, 3, 0.6],
+    'heatmap-intensity': ['interpolate', ['linear'], ['zoom'], 0, 0.4, 5, 1.0, 9, 2.0],
     'heatmap-color': [
       'interpolate', ['linear'], ['heatmap-density'],
-      0,   'rgba(0,0,0,0)',
-      0.1, 'rgba(94,201,124,0.5)',
-      0.3, 'rgba(245,203,92,0.75)',
-      0.55,'rgba(249,115,22,0.88)',
-      0.8, 'rgba(239,68,68,0.95)',
-      1.0, 'rgba(127,29,29,1)',
+      0,    'rgba(0,0,0,0)',
+      0.1,  'rgba(33,102,172,0.55)',   // 青：極低密度
+      0.3,  'rgba(94,201,124,0.7)',    // 緑：低密度
+      0.5,  'rgba(245,203,92,0.82)',   // 黄：中密度
+      0.7,  'rgba(249,115,22,0.9)',    // 橙：高密度
+      0.88, 'rgba(239,68,68,0.95)',    // 赤：非常に高密度
+      1.0,  'rgba(127,29,29,1)',       // 暗赤：極高密度（真のホットスポット）
     ],
-    'heatmap-radius': ['interpolate', ['linear'], ['zoom'], 0, 20, 5, 38, 9, 60],
-    'heatmap-opacity': 0.82,
+    'heatmap-radius': ['interpolate', ['linear'], ['zoom'], 0, 6, 5, 16, 9, 32],
+    'heatmap-opacity': 0.85,
   },
 }
 
@@ -208,17 +211,31 @@ export default function MapClient({
   sightings,
   historySightings = [],
   worldSightings = [],
+  worldReports = [],
   centerLng = 137.0,
   centerLat = 36.5,
   zoom = 5,
 }: MapClientProps) {
+  // V2 データを優先。なければ legacy にフォールバック
+  const activeWorldReports = worldReports.length > 0 ? worldReports : null
   const [viewMode, setViewMode]       = useState<ViewMode>('japan')
-  const [timeFilter, setTimeFilter]   = useState<TimeFilter>('all')
   const [selectedId, setSelectedId]   = useState<string | null>(null)
   const [mapZoom, setMapZoom]         = useState(zoom)
-  const [showWorldPanel, setShowWorldPanel] = useState(true)
+  const [showWorldPanel, setShowWorldPanel] = useState(false)
+  const [geocodedAddress, setGeocodedAddress] = useState<string | null>(null)
+  const [isMobile, setIsMobile] = useState(false)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const geoCache = useRef<Record<string, string>>({})
   const mapRef = useRef<MapRef>(null)
   const token  = process.env.NEXT_PUBLIC_MAPBOX_TOKEN
+
+  // モバイル判定
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 640)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
 
   // ── Derived data ──────────────────────────────────────────────────────
   const allJapanData = useMemo(
@@ -226,10 +243,7 @@ export default function MapClient({
     [sightings, historySightings],
   )
 
-  const filteredJapanData = useMemo(() => {
-    const cutoff = getCutoffDate(timeFilter)
-    return allJapanData.filter((s) => new Date(s.date) >= cutoff)
-  }, [allJapanData, timeFilter])
+  const filteredJapanData = useMemo(() => allJapanData, [allJapanData])
 
   const historyIds = useMemo(
     () => new Set(historySightings.map((h) => h.id)),
@@ -249,44 +263,73 @@ export default function MapClient({
     })),
   }), [filteredJapanData, historyIds])
 
-  const worldGeoJSON = useMemo(() => ({
-    type: 'FeatureCollection' as const,
-    features: worldSightings.map((w) => ({
-      type: 'Feature' as const,
-      properties: { id: w.id, importance_level: w.importance_level, country: w.country },
-      geometry: { type: 'Point' as const, coordinates: [w.lng, w.lat] },
-    })),
-  }), [worldSightings])
+  const worldGeoJSON = useMemo(() => {
+    if (activeWorldReports) {
+      return {
+        type: 'FeatureCollection' as const,
+        features: activeWorldReports.map((w) => ({
+          type: 'Feature' as const,
+          properties: {
+            id: w.id,
+            importance_level: w.importance_level,
+            country: w.country,
+            event_type: w.event_type,
+          },
+          geometry: { type: 'Point' as const, coordinates: [w.lng, w.lat] },
+        })),
+      }
+    }
+    return {
+      type: 'FeatureCollection' as const,
+      features: worldSightings.map((w) => ({
+        type: 'Feature' as const,
+        properties: { id: w.id, importance_level: w.importance_level, country: w.country },
+        geometry: { type: 'Point' as const, coordinates: [w.lng, w.lat] },
+      })),
+    }
+  }, [activeWorldReports, worldSightings])
 
   // Combined for heatmap (uses `heat_weight` property)
+  // historySightings は除外 — 年フィルター済みの sightings のみ使用してホットスポットを明確化
   const heatGeoJSON = useMemo(() => {
-    const jFeatures = filteredJapanData.map((s) => ({
+    const jFeatures = sightings.map((s) => ({
       type: 'Feature' as const,
       properties: { heat_weight: s.danger_level },
       geometry: { type: 'Point' as const, coordinates: [s.lng, s.lat] },
     }))
-    const wFeatures = worldSightings.map((w) => ({
+    const worldSource = activeWorldReports ?? worldSightings
+    const wFeatures = worldSource.map((w) => ({
       type: 'Feature' as const,
       properties: { heat_weight: w.importance_level },
       geometry: { type: 'Point' as const, coordinates: [w.lng, w.lat] },
     }))
     return { type: 'FeatureCollection' as const, features: [...jFeatures, ...wFeatures] }
-  }, [filteredJapanData, worldSightings])
+  }, [sightings, activeWorldReports, worldSightings])
 
   // Country count table (Japan full count + World country counts)
   const countryCounts = useMemo(() => {
     const counts: Record<string, number> = { '日本': allJapanData.length }
-    worldSightings.forEach((w) => { counts[w.country] = (counts[w.country] || 0) + 1 })
+    const worldSource = activeWorldReports ?? worldSightings
+    worldSource.forEach((w) => {
+      const display = (WORLD_COUNTRY_JA[w.country] ?? w.country)
+      counts[display] = (counts[display] || 0) + 1
+    })
     return Object.entries(counts).sort(([, a], [, b]) => b - a)
-  }, [allJapanData.length, worldSightings])
+  }, [allJapanData.length, activeWorldReports, worldSightings])
+
+  const worldCount = activeWorldReports ? activeWorldReports.length : worldSightings.length
 
   const selectedJapan = useMemo(
     () => filteredJapanData.find((s) => s.id === selectedId) ?? null,
     [filteredJapanData, selectedId],
   )
-  const selectedWorld = useMemo(
-    () => worldSightings.find((w) => w.id === selectedId) ?? null,
-    [worldSightings, selectedId],
+  const selectedWorldV2 = useMemo(
+    () => activeWorldReports?.find((w) => w.id === selectedId) ?? null,
+    [activeWorldReports, selectedId],
+  )
+  const selectedWorldLegacy = useMemo(
+    () => (activeWorldReports ? null : worldSightings.find((w) => w.id === selectedId) ?? null),
+    [activeWorldReports, worldSightings, selectedId],
   )
 
   const showJapanData = viewMode === 'japan' || viewMode === 'all'
@@ -337,6 +380,50 @@ export default function MapClient({
     })
   }, [])
 
+  // ── Reverse geocoding (住所精細化) ──────────────────────────────────────
+  useEffect(() => {
+    if (!selectedJapan || !token) {
+      setGeocodedAddress(null)
+      return
+    }
+    // キャッシュヒット確認（小数点4桁で丸めてキー）
+    const key = `${selectedJapan.lat.toFixed(4)},${selectedJapan.lng.toFixed(4)}`
+    if (key in geoCache.current) {
+      setGeocodedAddress(geoCache.current[key] || null)
+      return
+    }
+    setGeocodedAddress(null)
+    // Mapbox reverse geocoding API
+    const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${selectedJapan.lng},${selectedJapan.lat}.json?access_token=${token}&language=ja&types=neighborhood,locality,place&limit=1`
+    fetch(url)
+      .then((r) => r.json())
+      .then((data) => {
+        const feat = data?.features?.[0]
+        if (!feat) return
+        // contextから「neighborhood」か「locality」を取り出す
+        const ctx: { id: string; text_ja?: string; text?: string }[] = feat.context ?? []
+        const hood = ctx.find((c) => c.id.startsWith('neighborhood'))
+        const local = ctx.find((c) => c.id.startsWith('locality'))
+        const target = hood ?? local
+        const name = target?.text_ja || target?.text
+        // 既知の市名と重複しない場合のみ採用
+        if (name && name !== selectedJapan.city && !selectedJapan.city.includes(name)) {
+          geoCache.current[key] = name
+          setGeocodedAddress(name)
+        } else {
+          // neighborhood がなければ place レベルのテキストを試みる
+          const placeName = feat.text_ja || feat.text || ''
+          if (placeName && placeName !== selectedJapan.city) {
+            geoCache.current[key] = placeName
+            setGeocodedAddress(placeName)
+          } else {
+            geoCache.current[key] = ''
+          }
+        }
+      })
+      .catch(() => setGeocodedAddress(null))
+  }, [selectedJapan, token])
+
   // Camera on mode switch
   useEffect(() => {
     const map = mapRef.current?.getMap()
@@ -355,7 +442,7 @@ export default function MapClient({
   }, [viewMode])
 
   // World panel: fly to clicked item
-  const flyToWorld = useCallback((w: WorldBearReport) => {
+  const flyToWorld = useCallback((w: WorldBearReport | WorldBearReportV2) => {
     setSelectedId(w.id)
     mapRef.current?.getMap().flyTo({ center: [w.lng, w.lat], zoom: 4, duration: 800 })
   }, [])
@@ -390,8 +477,8 @@ export default function MapClient({
         ? '🔍 拡大するとクラスターが展開されます'
         : `📍 日本 ${filteredJapanData.length}件 表示中`
     }
-    if (viewMode === 'world') return `🌍 世界 ${worldSightings.length}件 · ${countryCounts.length - 1}カ国`
-    if (viewMode === 'all') return `📍 日本 ${filteredJapanData.length}件 ＋ 世界 ${worldSightings.length}件`
+    if (viewMode === 'world') return `🌍 世界 ${worldCount}件 · ${countryCounts.length - 1}カ国`
+    if (viewMode === 'all') return `📍 日本 ${filteredJapanData.length}件 ＋ 世界 ${worldCount}件`
     return `🔥 ヒートマップ — ${heatGeoJSON.features.length}件`
   })()
 
@@ -427,37 +514,37 @@ export default function MapClient({
           ))}
         </div>
 
-        {/* Time filter row */}
-        <div style={{
-          display: 'flex', background: '#fff', borderRadius: 6,
-          boxShadow: '0 2px 8px rgba(0,0,0,0.12)', overflow: 'hidden',
-        }}>
-          {TIME_FILTERS.map((tf) => (
-            <button
-              key={tf.key}
-              onClick={() => setTimeFilter(tf.key)}
-              style={{
-                padding: '5px 9px', fontSize: 10, fontWeight: 700,
-                border: 'none', cursor: 'pointer',
-                borderRight: '1px solid #F0F0EE',
-                background: timeFilter === tf.key ? '#143D1E' : '#fff',
-                color: timeFilter === tf.key ? '#fff' : '#9A9A95',
-                transition: 'all 0.15s',
-              }}
-            >{tf.label}</button>
-          ))}
-        </div>
       </div>
 
-      {/* ── Bottom-left: hint text ── */}
+      {/* ── Bottom-left: live count badge ── */}
       <div style={{
         position: 'absolute', bottom: 48, left: 12, zIndex: 20,
-        background: 'rgba(0,0,0,0.55)', backdropFilter: 'blur(4px)',
-        borderRadius: 5, padding: '5px 10px', fontSize: 10,
-        color: 'rgba(255,255,255,0.85)', letterSpacing: '0.03em',
-        pointerEvents: 'none',
+        display: 'flex', flexDirection: 'column', gap: 4, pointerEvents: 'none',
       }}>
-        {hintText}
+        {/* Main count badge */}
+        <div style={{
+          background: 'rgba(15,46,22,0.88)', backdropFilter: 'blur(6px)',
+          borderRadius: 6, padding: '6px 12px',
+          border: '1px solid rgba(94,201,124,0.3)',
+          display: 'flex', alignItems: 'baseline', gap: 5,
+        }}>
+          <span style={{
+            fontSize: 18, fontWeight: 800, color: '#5EC97C',
+            fontFamily: 'var(--font-dm-sans, sans-serif)',
+            letterSpacing: '-0.02em', lineHeight: 1,
+          }}>
+            {(showJapanData ? filteredJapanData.length : 0) + (showWorldData ? worldCount : 0)}
+          </span>
+          <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.6)', fontWeight: 600 }}>件表示中</span>
+        </div>
+        {/* Sub hint */}
+        <div style={{
+          background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(4px)',
+          borderRadius: 4, padding: '3px 8px', fontSize: 10,
+          color: 'rgba(255,255,255,0.7)', letterSpacing: '0.02em',
+        }}>
+          {hintText}
+        </div>
       </div>
 
       {/* ── Top-right: Legend (Japan / Heat mode) ── */}
@@ -479,40 +566,78 @@ export default function MapClient({
               </span>
             </div>
           ))}
-          {timeFilter !== 'all' && (
-            <div style={{
-              borderTop: '1px solid #EFEFED', paddingTop: 6, marginTop: 2,
-              fontSize: 10, color: '#9A9A95', fontWeight: 600,
-            }}>
-              🕐 {TIME_FILTERS.find(t => t.key === timeFilter)?.label}フィルター中
-            </div>
-          )}
         </div>
       )}
 
       {/* ── World panel toggle button ── */}
       {(viewMode === 'world' || viewMode === 'all') && (
-        <button
-          onClick={() => setShowWorldPanel((v) => !v)}
-          style={{
-            position: 'absolute', top: 12, right: showWorldPanel ? 298 : 12, zIndex: 25,
-            background: '#1E3A5F', color: '#fff', border: 'none', cursor: 'pointer',
-            borderRadius: 6, padding: '8px 12px', fontSize: 11, fontWeight: 700,
-            boxShadow: '0 2px 8px rgba(0,0,0,0.25)', transition: 'right 0.3s',
-            display: 'flex', alignItems: 'center', gap: 6,
-          }}
-        >
-          {showWorldPanel ? '✕ 閉じる' : '🌍 ニュース一覧'}
-        </button>
+        isMobile ? (
+          /* スマホ: 下部中央のピルボタン */
+          <button
+            onClick={() => setShowWorldPanel((v) => !v)}
+            style={{
+              position: 'absolute',
+              bottom: showWorldPanel ? 'calc(60% + 8px)' : 52,
+              left: '50%', transform: 'translateX(-50%)',
+              zIndex: 25,
+              background: showWorldPanel ? 'rgba(30,58,95,0.95)' : '#1E3A5F',
+              color: '#fff', border: 'none', cursor: 'pointer',
+              borderRadius: 20, padding: '8px 20px', fontSize: 12, fontWeight: 700,
+              boxShadow: '0 2px 12px rgba(0,0,0,0.35)',
+              display: 'flex', alignItems: 'center', gap: 6,
+              whiteSpace: 'nowrap',
+              transition: 'bottom 0.3s',
+            }}
+          >
+            {showWorldPanel ? '✕ 閉じる' : '🌍 ニュース一覧'}
+          </button>
+        ) : (
+          /* PC: 右上ボタン（現行） */
+          <button
+            onClick={() => setShowWorldPanel((v) => !v)}
+            style={{
+              position: 'absolute', top: 12, right: showWorldPanel ? 298 : 12, zIndex: 25,
+              background: '#1E3A5F', color: '#fff', border: 'none', cursor: 'pointer',
+              borderRadius: 6, padding: '8px 12px', fontSize: 11, fontWeight: 700,
+              boxShadow: '0 2px 8px rgba(0,0,0,0.25)', transition: 'right 0.3s',
+              display: 'flex', alignItems: 'center', gap: 6,
+            }}
+          >
+            {showWorldPanel ? '✕ 閉じる' : '🌍 ニュース一覧'}
+          </button>
+        )
       )}
 
       {/* ── World news side panel ── */}
       {(viewMode === 'world' || viewMode === 'all') && showWorldPanel && (
-        <div style={{
+        <div style={isMobile ? {
+          /* スマホ: ボトムシート（下から60%） */
+          position: 'absolute', bottom: 0, left: 0, right: 0, height: '60%',
+          zIndex: 15, background: 'rgba(10,20,35,0.97)', backdropFilter: 'blur(10px)',
+          display: 'flex', flexDirection: 'column', overflow: 'hidden',
+          borderRadius: '14px 14px 0 0',
+          boxShadow: '0 -4px 24px rgba(0,0,0,0.5)',
+        } : {
+          /* PC: 右サイドパネル（現行） */
           position: 'absolute', top: 0, right: 0, width: 290, height: '100%',
           zIndex: 15, background: 'rgba(10,20,35,0.93)', backdropFilter: 'blur(10px)',
           display: 'flex', flexDirection: 'column', overflow: 'hidden',
         }}>
+          {/* スマホ用ドラッグハンドル */}
+          {isMobile && (
+            <div
+              onClick={() => setShowWorldPanel(false)}
+              style={{
+                display: 'flex', justifyContent: 'center', alignItems: 'center',
+                padding: '10px 0 4px', cursor: 'pointer', flexShrink: 0,
+              }}
+            >
+              <div style={{
+                width: 36, height: 4, borderRadius: 2,
+                background: 'rgba(255,255,255,0.25)',
+              }} />
+            </div>
+          )}
           {/* Panel header */}
           <div style={{
             padding: '14px 16px 10px', borderBottom: '1px solid rgba(255,255,255,0.08)',
@@ -563,56 +688,73 @@ export default function MapClient({
 
           {/* News list (scrollable) */}
           <div style={{ flex: 1, overflowY: 'auto', padding: '4px 0' }}>
-            {worldSightings.map((w) => (
-              <div
-                key={w.id}
-                onClick={() => flyToWorld(w)}
-                style={{
-                  padding: '10px 16px',
-                  borderBottom: '1px solid rgba(255,255,255,0.04)',
-                  cursor: 'pointer',
-                  background: selectedId === w.id ? 'rgba(59,130,246,0.15)' : 'transparent',
-                  transition: 'background 0.15s',
-                }}
-                onMouseEnter={(e) => {
-                  if (selectedId !== w.id)
-                    (e.currentTarget as HTMLDivElement).style.background = 'rgba(255,255,255,0.04)'
-                }}
-                onMouseLeave={(e) => {
-                  if (selectedId !== w.id)
-                    (e.currentTarget as HTMLDivElement).style.background = 'transparent'
-                }}
-              >
-                {/* Meta row */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4, flexWrap: 'wrap' }}>
-                  <span style={{
-                    background: WORLD_IMPORTANCE_COLORS[w.importance_level],
-                    color: '#fff', fontSize: 9, fontWeight: 700,
-                    padding: '1px 6px', borderRadius: 3,
+            {(activeWorldReports
+              ? [...activeWorldReports].sort((a, b) =>
+                  b.importance_level !== a.importance_level
+                    ? b.importance_level - a.importance_level
+                    : b.date.localeCompare(a.date))
+              : worldSightings
+            ).map((w) => {
+              const ev = 'event_type' in w ? WORLD_EVENT_TYPE_CONFIG[w.event_type] : null
+              const displayCountry = WORLD_COUNTRY_JA[w.country] ?? w.country
+              return (
+                <div
+                  key={w.id}
+                  onClick={() => flyToWorld(w)}
+                  style={{
+                    padding: '10px 16px',
+                    borderBottom: '1px solid rgba(255,255,255,0.04)',
+                    cursor: 'pointer',
+                    background: selectedId === w.id ? 'rgba(59,130,246,0.15)' : 'transparent',
+                    transition: 'background 0.15s',
+                  }}
+                  onMouseEnter={(e) => {
+                    if (selectedId !== w.id)
+                      (e.currentTarget as HTMLDivElement).style.background = 'rgba(255,255,255,0.04)'
+                  }}
+                  onMouseLeave={(e) => {
+                    if (selectedId !== w.id)
+                      (e.currentTarget as HTMLDivElement).style.background = 'transparent'
+                  }}
+                >
+                  {/* Meta row */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 5, marginBottom: 4, flexWrap: 'wrap' }}>
+                    {ev && (
+                      <span style={{
+                        background: ev.color, color: '#fff', fontSize: 9, fontWeight: 700,
+                        padding: '1px 6px', borderRadius: 3, whiteSpace: 'nowrap',
+                      }}>
+                        {ev.icon} {ev.label}
+                      </span>
+                    )}
+                    <span style={{
+                      background: WORLD_IMPORTANCE_COLORS[w.importance_level],
+                      color: '#fff', fontSize: 9, fontWeight: 700,
+                      padding: '1px 5px', borderRadius: 3,
+                    }}>
+                      {'❗'.repeat(w.importance_level)}
+                    </span>
+                    <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.6)', fontWeight: 600 }}>
+                      {COUNTRY_FLAGS[w.country] || '🌐'} {displayCountry}
+                    </span>
+                    <span style={{ fontSize: 9, color: 'rgba(255,255,255,0.35)' }}>
+                      {formatDate(w.date)}
+                    </span>
+                  </div>
+                  {/* Summary */}
+                  <p style={{
+                    fontSize: 11, color: 'rgba(255,255,255,0.82)', margin: '0 0 3px',
+                    lineHeight: 1.5, display: '-webkit-box',
+                    WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden',
                   }}>
-                    {WORLD_IMPORTANCE_LABELS[w.importance_level]}
-                  </span>
-                  <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.6)', fontWeight: 600 }}>
-                    {COUNTRY_FLAGS[w.country] || '🌐'} {w.country}
-                  </span>
-                  <span style={{ fontSize: 9, color: 'rgba(255,255,255,0.35)' }}>
-                    {formatDate(w.date)}
-                  </span>
+                    {w.summary_ja}
+                  </p>
+                  <p style={{ fontSize: 9, color: 'rgba(255,255,255,0.35)', margin: 0 }}>
+                    🐻 {w.bear_type}
+                  </p>
                 </div>
-                {/* Summary */}
-                <p style={{
-                  fontSize: 11, color: 'rgba(255,255,255,0.82)', margin: '0 0 3px',
-                  lineHeight: 1.5, display: '-webkit-box',
-                  WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden',
-                }}>
-                  {w.summary_ja}
-                </p>
-                {/* Bear type */}
-                <p style={{ fontSize: 9, color: 'rgba(255,255,255,0.35)', margin: 0 }}>
-                  🐻 {w.bear_type}
-                </p>
-              </div>
-            ))}
+              )
+            })}
           </div>
         </div>
       )}
@@ -671,81 +813,193 @@ export default function MapClient({
         )}
 
         {/* Japan sighting popup */}
-        {selectedJapan && (
-          <Popup
-            latitude={selectedJapan.lat}
-            longitude={selectedJapan.lng}
-            onClose={() => setSelectedId(null)}
-            closeButton
-            closeOnClick={false}
-            maxWidth="290px"
-            anchor="bottom"
-          >
-            <div style={{ fontFamily: 'var(--font-noto-sans, sans-serif)', padding: '2px 0' }}>
-              <div style={{ display: 'flex', gap: 5, marginBottom: 6, flexWrap: 'wrap' }}>
-                <span style={{
-                  background: DANGER_COLORS[selectedJapan.danger_level], color: '#fff',
-                  fontSize: 10, fontWeight: 700, padding: '2px 8px', borderRadius: 3,
-                }}>
-                  {DANGER_LABELS[selectedJapan.danger_level]}・{selectedJapan.type}
-                </span>
-              </div>
-              <p style={{ fontWeight: 700, fontSize: 13, margin: '0 0 4px', color: '#1A1A16', lineHeight: 1.4 }}>
-                {selectedJapan.title}
-              </p>
-              <p style={{ fontSize: 11, color: '#888', margin: '0 0 6px' }}>
-                📍 {selectedJapan.prefecture} {selectedJapan.city}　{formatDate(selectedJapan.date)}
-              </p>
-              <p style={{ fontSize: 12, color: '#444', margin: 0, lineHeight: 1.65 }}>
-                {selectedJapan.description}
-              </p>
-              <p style={{ fontSize: 10, color: '#AAA', margin: '6px 0 0' }}>
-                情報源：{selectedJapan.source_name}
-              </p>
-            </div>
-          </Popup>
-        )}
+        {selectedJapan && (() => {
+          const gmapsUrl = `https://www.google.com/maps?q=${selectedJapan.lat},${selectedJapan.lng}&z=15`
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const raw = selectedJapan as any
+          const sourceName = (raw.source_name || raw.source || '') as string
+          const sourceUrl = selectedJapan.source_url || ''
 
-        {/* World sighting popup */}
-        {selectedWorld && (
+          // 住所の組み立て: 都道府県 → 市区町村 → 逆ジオコーディング結果（より詳細な地名）
+          const locationParts = [
+            selectedJapan.prefecture,
+            selectedJapan.city,
+            geocodedAddress ?? undefined,
+          ].filter(Boolean)
+          const locationText = locationParts.join(' ')
+
+          // タイトル: データにあれば使用、なければ場所＋種別のみ
+          const displayTitle = selectedJapan.title
+            || (selectedJapan.city
+              ? `${selectedJapan.city}でクマ${selectedJapan.type}`
+              : `${selectedJapan.prefecture} クマ${selectedJapan.type}`)
+
+          return (
+            <Popup
+              latitude={selectedJapan.lat}
+              longitude={selectedJapan.lng}
+              onClose={() => setSelectedId(null)}
+              closeButton
+              closeOnClick={false}
+              maxWidth="320px"
+              anchor="bottom"
+            >
+              <div style={{ fontFamily: 'var(--font-noto-sans, sans-serif)', padding: '2px 0 4px' }}>
+
+                {/* ── バッジ行 ── */}
+                <div style={{ display: 'flex', gap: 5, marginBottom: 7, flexWrap: 'wrap', alignItems: 'center' }}>
+                  <span style={{
+                    background: DANGER_COLORS[selectedJapan.danger_level], color: '#fff',
+                    fontSize: 10, fontWeight: 700, padding: '2px 8px', borderRadius: 3,
+                  }}>
+                    {DANGER_LABELS[selectedJapan.danger_level]}・{selectedJapan.type}
+                  </span>
+                  {selectedJapan.bear_type && (
+                    <span style={{
+                      background: '#F0F7F2', color: '#143D1E',
+                      fontSize: 10, fontWeight: 700, padding: '2px 8px', borderRadius: 3,
+                      border: '1px solid #C8E0CF',
+                    }}>
+                      🐻 {selectedJapan.bear_type}
+                    </span>
+                  )}
+                </div>
+
+                {/* ── タイトル ── */}
+                <p style={{ fontWeight: 700, fontSize: 13, margin: '0 0 5px', color: '#1A1A16', lineHeight: 1.4 }}>
+                  {displayTitle}
+                </p>
+
+                {/* ── 場所（逆ジオコード含む）＋日付 ── */}
+                <p style={{ fontSize: 11, color: '#555', margin: '0 0 8px', lineHeight: 1.5 }}>
+                  📍 {locationText}
+                  {geocodedAddress === null && selectedJapan && (
+                    // 取得中はドット表示
+                    <span style={{ color: '#CCC', marginLeft: 4 }}>…</span>
+                  )}
+                  <br />
+                  <span style={{ color: '#999', fontSize: 10 }}>{formatDate(selectedJapan.date)}</span>
+                </p>
+
+                {/* ── 状況説明（データにある場合のみ表示） ── */}
+                {selectedJapan.description ? (
+                  <p style={{
+                    fontSize: 12, color: '#333', margin: '0 0 10px', lineHeight: 1.75,
+                    borderTop: '1px solid #F0F0EE', paddingTop: 8,
+                  }}>
+                    {selectedJapan.description}
+                  </p>
+                ) : (
+                  <div style={{ marginBottom: 8 }} />
+                )}
+
+                {/* ── アクションボタン ── */}
+                <div style={{ display: 'flex', gap: 6 }}>
+                  <a
+                    href={gmapsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: 'inline-flex', alignItems: 'center', gap: 4,
+                      background: '#F0F7F2', border: '1px solid #C8E0CF',
+                      color: '#143D1E', fontSize: 10, fontWeight: 700,
+                      padding: '5px 10px', borderRadius: 4, textDecoration: 'none',
+                      flex: 1, justifyContent: 'center',
+                    }}
+                  >
+                    🗺 地図で確認
+                  </a>
+                </div>
+
+                {/* ── 情報源クレジット ── */}
+                {sourceName && (
+                  <p style={{ fontSize: 9, color: '#CCC', margin: '6px 0 0', textAlign: 'right' }}>
+                    情報源：{sourceName}
+                  </p>
+                )}
+              </div>
+            </Popup>
+          )
+        })()}
+
+        {/* World popup — V2 */}
+        {selectedWorldV2 && (() => {
+          const ev = WORLD_EVENT_TYPE_CONFIG[selectedWorldV2.event_type]
+          const displayCountry = WORLD_COUNTRY_JA[selectedWorldV2.country] ?? selectedWorldV2.country
+          return (
+            <Popup
+              latitude={selectedWorldV2.lat}
+              longitude={selectedWorldV2.lng}
+              onClose={() => setSelectedId(null)}
+              closeButton closeOnClick={false}
+              maxWidth="300px" anchor="bottom"
+            >
+              <div style={{ fontFamily: 'var(--font-noto-sans, sans-serif)', padding: '2px 0' }}>
+                <div style={{ display: 'flex', gap: 5, marginBottom: 7, flexWrap: 'wrap' }}>
+                  <span style={{
+                    background: ev.color, color: '#fff',
+                    fontSize: 10, fontWeight: 700, padding: '2px 8px', borderRadius: 3,
+                  }}>
+                    {ev.icon} {ev.label}
+                  </span>
+                  <span style={{
+                    background: WORLD_IMPORTANCE_COLORS[selectedWorldV2.importance_level],
+                    color: '#fff', fontSize: 10, fontWeight: 700, padding: '2px 8px', borderRadius: 3,
+                  }}>
+                    {WORLD_IMPORTANCE_LABELS[selectedWorldV2.importance_level]}
+                  </span>
+                </div>
+                <p style={{ fontSize: 11, fontWeight: 700, color: '#1E3A5F', margin: '0 0 4px' }}>
+                  {COUNTRY_FLAGS[selectedWorldV2.country] || '🌐'} {displayCountry} · {selectedWorldV2.region}
+                  　{formatDate(selectedWorldV2.date)}
+                </p>
+                {selectedWorldV2.title_en && (
+                  <p style={{ fontSize: 10, color: '#888', margin: '0 0 6px', fontStyle: 'italic', lineHeight: 1.4 }}>
+                    {selectedWorldV2.title_en}
+                  </p>
+                )}
+                <p style={{
+                  fontSize: 12, color: '#333', margin: '0 0 8px', lineHeight: 1.7,
+                  borderTop: '1px solid #F0F0EE', paddingTop: 8,
+                }}>
+                  {selectedWorldV2.summary_ja}
+                </p>
+                <p style={{ fontSize: 10, color: '#888', margin: '0 0 2px' }}>🐻 {selectedWorldV2.bear_type}</p>
+                {selectedWorldV2.source_name && (
+                  <p style={{ fontSize: 10, color: '#AAA', margin: 0 }}>出典：{selectedWorldV2.source_name}</p>
+                )}
+              </div>
+            </Popup>
+          )
+        })()}
+
+        {/* World popup — Legacy */}
+        {selectedWorldLegacy && (
           <Popup
-            latitude={selectedWorld.lat}
-            longitude={selectedWorld.lng}
+            latitude={selectedWorldLegacy.lat}
+            longitude={selectedWorldLegacy.lng}
             onClose={() => setSelectedId(null)}
-            closeButton
-            closeOnClick={false}
-            maxWidth="300px"
-            anchor="bottom"
+            closeButton closeOnClick={false}
+            maxWidth="300px" anchor="bottom"
           >
             <div style={{ fontFamily: 'var(--font-noto-sans, sans-serif)', padding: '2px 0' }}>
               <div style={{ display: 'flex', gap: 6, marginBottom: 8, flexWrap: 'wrap' }}>
                 <span style={{
-                  background: WORLD_IMPORTANCE_COLORS[selectedWorld.importance_level],
+                  background: WORLD_IMPORTANCE_COLORS[selectedWorldLegacy.importance_level],
                   color: '#fff', fontSize: 10, fontWeight: 700, padding: '2px 8px', borderRadius: 3,
                 }}>
-                  🌍 {WORLD_IMPORTANCE_LABELS[selectedWorld.importance_level]}
+                  🌍 {WORLD_IMPORTANCE_LABELS[selectedWorldLegacy.importance_level]}
                 </span>
-                <span style={{ fontSize: 11, color: '#888' }}>{selectedWorld.type}</span>
+                <span style={{ fontSize: 11, color: '#888' }}>{selectedWorldLegacy.type}</span>
               </div>
               <p style={{ fontSize: 11, fontWeight: 700, color: '#1E3A5F', margin: '0 0 4px' }}>
-                {COUNTRY_FLAGS[selectedWorld.country] || '🌐'} {selectedWorld.country} · {selectedWorld.region}
-                　{formatDate(selectedWorld.date)}
+                {COUNTRY_FLAGS[selectedWorldLegacy.country] || '🌐'} {selectedWorldLegacy.country} · {selectedWorldLegacy.region}
+                　{formatDate(selectedWorldLegacy.date)}
               </p>
-              {selectedWorld.title_en && (
-                <p style={{ fontSize: 10, color: '#888', margin: '0 0 6px', fontStyle: 'italic', lineHeight: 1.4 }}>
-                  {selectedWorld.title_en}
-                </p>
-              )}
-              <p style={{
-                fontSize: 12, color: '#333', margin: '0 0 8px', lineHeight: 1.7,
-                borderTop: '1px solid #F0F0EE', paddingTop: 8,
-              }}>
-                {selectedWorld.summary_ja}
+              <p style={{ fontSize: 12, color: '#333', margin: '0 0 8px', lineHeight: 1.7, borderTop: '1px solid #F0F0EE', paddingTop: 8 }}>
+                {selectedWorldLegacy.summary_ja}
               </p>
-              <p style={{ fontSize: 10, color: '#888', margin: '0 0 2px' }}>🐻 {selectedWorld.bear_type}</p>
-              {selectedWorld.source_name && (
-                <p style={{ fontSize: 10, color: '#AAA', margin: 0 }}>出典：{selectedWorld.source_name}</p>
-              )}
+              <p style={{ fontSize: 10, color: '#AAA', margin: 0 }}>出典：{selectedWorldLegacy.source_name}</p>
             </div>
           </Popup>
         )}

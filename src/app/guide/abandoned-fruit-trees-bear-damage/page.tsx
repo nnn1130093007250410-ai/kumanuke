@@ -40,7 +40,7 @@ export default function AbandonedFruitTreesBearDamagePage() {
           本稿では、放任果樹がなぜクマの誘引源になるのか、農村部の社会的背景との関係、そして個人・自治体レベルでの対策と補助制度を解説します。
         </p>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           1. 「放任果樹」とは何か
         </h2>
         <p style={{ fontSize: 16, lineHeight: 1.9, color: '#2A2A26', marginBottom: 16 }}>
@@ -67,7 +67,7 @@ export default function AbandonedFruitTreesBearDamagePage() {
           ))}
         </div>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           2. なぜ農村部で放任果樹が増えるのか
         </h2>
         <p style={{ fontSize: 16, lineHeight: 1.9, color: '#2A2A26', marginBottom: 16 }}>
@@ -83,7 +83,7 @@ export default function AbandonedFruitTreesBearDamagePage() {
           </p>
         </div>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           3. 匂いによる長距離誘引：クマはどこから察知するか
         </h2>
         <p style={{ fontSize: 16, lineHeight: 1.9, color: '#2A2A26', marginBottom: 16 }}>
@@ -93,7 +93,7 @@ export default function AbandonedFruitTreesBearDamagePage() {
           特に問題となるのが<strong>腐敗・発酵した果実</strong>です。落果して時間が経過した果実は発酵が進み、アルコールや強烈な甘臭が発生します。この匂いはさらに遠距離までクマを引き寄せる可能性があり、「落果したらすぐに回収する」ことが重要な理由のひとつです。
         </p>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20, marginTop: 48 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, marginTop: 56, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           4. 自治体の補助制度：放任果樹の伐採・除去を支援
         </h2>
         <p style={{ fontSize: 16, lineHeight: 1.9, color: '#2A2A26', marginBottom: 16 }}>
@@ -115,7 +115,7 @@ export default function AbandonedFruitTreesBearDamagePage() {
           お住まいの自治体に同様の補助制度があるかどうかは、市区町村の農林担当課や鳥獣被害対策担当窓口に問い合わせることで確認できます。
         </p>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           5. 個人・地域でできる具体的な対策
         </h2>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 14, marginBottom: 48 }}>
@@ -136,7 +136,7 @@ export default function AbandonedFruitTreesBearDamagePage() {
           ))}
         </div>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           6. 地域全体での取り組みが鍵
         </h2>
         <p style={{ fontSize: 16, lineHeight: 1.9, color: '#2A2A26', marginBottom: 16 }}>
@@ -146,12 +146,12 @@ export default function AbandonedFruitTreesBearDamagePage() {
           農業集落・自治会・市区町村の農林担当課と連携し、集落単位での調査・管理計画を作ることが、持続的な対策の基盤となります。近年は農業被害対策と絡めて、地域ぐるみの放任果樹マッピング・管理計画策定を支援する事業を展開する自治体も増えてきています。
         </p>
 
-        <div style={{ background: '#F0F7F2', border: '1px solid #C8E0CF', borderRadius: 8, padding: '28px 28px', marginBottom: 40, marginTop: 32 }}>
+        <div style={{ background: '#F0F7F2', border: '2px solid #5EC97C', borderRadius: 12, padding: '28px 28px', marginBottom: 40, marginTop: 40 }}>
           <p style={{ fontSize: 15, fontWeight: 700, color: '#143D1E', marginBottom: 8 }}>果樹・農地周辺の忌避対策として</p>
           <p style={{ fontSize: 14, lineHeight: 1.8, color: '#2A2A26', marginBottom: 16 }}>
             果樹の管理と並行して、収穫期前から果樹周辺にエリア散布型の忌避スプレーを使用することで、クマの接近を抑制する対策を組み合わせることができます。KUMANUKEは植物由来成分を用いた事前散布型の製品です。
           </p>
-          <Link href="/" style={{ display: 'inline-block', background: '#143D1E', color: '#fff', fontWeight: 700, fontSize: 14, padding: '10px 24px', borderRadius: 4, textDecoration: 'none' }}>
+          <Link href="/products/kumanuke" style={{ display: 'inline-block', background: '#143D1E', color: '#fff', fontWeight: 700, fontSize: 14, padding: '10px 24px', borderRadius: 4, textDecoration: 'none' }}>
             KUMANUKEの詳細を見る →
           </Link>
         </div>

@@ -115,7 +115,7 @@ export default function InternationalBearManagementPage() {
         </p>
 
         {/* 事例紹介 */}
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 24 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           主要な海外事例・研究
         </h2>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
@@ -141,7 +141,7 @@ export default function InternationalBearManagementPage() {
         </div>
 
         {/* Section 日本への示唆 */}
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20, marginTop: 48 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, marginTop: 56, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           日本への示唆：共通する「成功要因」
         </h2>
         <p style={{ fontSize: 16, lineHeight: 1.9, color: '#2A2A26', marginBottom: 16 }}>
@@ -174,7 +174,7 @@ export default function InternationalBearManagementPage() {
         </div>
 
         {/* 忌避研究 */}
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           嗅覚忌避研究：国際的な研究動向
         </h2>
         <p style={{ fontSize: 16, lineHeight: 1.9, color: '#2A2A26', marginBottom: 16 }}>
@@ -203,7 +203,7 @@ export default function InternationalBearManagementPage() {
         </div>
 
         {/* まとめ */}
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           まとめ：科学・政策・地域の三位一体
         </h2>
         <p style={{ fontSize: 16, lineHeight: 1.9, color: '#2A2A26', marginBottom: 16 }}>
@@ -214,12 +214,12 @@ export default function InternationalBearManagementPage() {
         </p>
 
         {/* KUMANUKE CTA */}
-        <div style={{ background: '#F0F7F2', border: '1px solid #C8E0CF', borderRadius: 8, padding: '28px 28px', marginBottom: 40, marginTop: 32 }}>
+        <div style={{ background: '#F0F7F2', border: '2px solid #5EC97C', borderRadius: 12, padding: '28px 28px', marginBottom: 40, marginTop: 40 }}>
           <p style={{ fontSize: 15, fontWeight: 700, color: '#143D1E', marginBottom: 8 }}>日本の状況に合わせた予防型対策として</p>
           <p style={{ fontSize: 14, lineHeight: 1.8, color: '#2A2A26', marginBottom: 16 }}>
             海外の事例でも「誘引物管理」と「物理的・嗅覚的忌避対策の組み合わせ」が基本とされています。KUMANUKEは植物由来成分を活用したエリア散布型忌避スプレーで、農地・自治体・アウトドア施設など幅広いシーンへの活用を想定しています。
           </p>
-          <Link href="/" style={{ display: 'inline-block', background: '#143D1E', color: '#fff', fontWeight: 700, fontSize: 14, padding: '10px 24px', borderRadius: 4, textDecoration: 'none' }}>
+          <Link href="/products/kumanuke" style={{ display: 'inline-block', background: '#143D1E', color: '#fff', fontWeight: 700, fontSize: 14, padding: '10px 24px', borderRadius: 4, textDecoration: 'none' }}>
             KUMANUKEの詳細を見る →
           </Link>
         </div>

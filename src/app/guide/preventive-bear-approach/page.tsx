@@ -47,7 +47,7 @@ export default function PreventiveBearApproachPage() {
         </p>
 
         {/* Section 1 2種類の対策 */}
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           1. 「護身型」と「予防型」：2種類の対策の違い
         </h2>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 32 }}>
@@ -90,7 +90,7 @@ export default function PreventiveBearApproachPage() {
         </p>
 
         {/* Section 2 誘引物管理 */}
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           2. 最も重要な予防策：誘引物の徹底管理
         </h2>
         <p style={{ fontSize: 16, lineHeight: 1.9, color: '#2A2A26', marginBottom: 16 }}>
@@ -114,7 +114,7 @@ export default function PreventiveBearApproachPage() {
         </div>
 
         {/* Section 3 電気柵 */}
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           3. 物理的バリア：電気柵の効果と設置のポイント
         </h2>
         <p style={{ fontSize: 16, lineHeight: 1.9, color: '#2A2A26', marginBottom: 16 }}>
@@ -139,7 +139,7 @@ export default function PreventiveBearApproachPage() {
         </p>
 
         {/* Section 4 忌避剤 */}
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           4. 嗅覚忌避アプローチ：エリア散布型スプレーの役割
         </h2>
         <p style={{ fontSize: 16, lineHeight: 1.9, color: '#2A2A26', marginBottom: 16 }}>
@@ -177,7 +177,7 @@ export default function PreventiveBearApproachPage() {
         </div>
 
         {/* Section 5 緩衝帯 */}
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           5. 環境整備：緩衝帯・視認性の確保
         </h2>
         <p style={{ fontSize: 16, lineHeight: 1.9, color: '#2A2A26', marginBottom: 16 }}>
@@ -195,7 +195,7 @@ export default function PreventiveBearApproachPage() {
         </ul>
 
         {/* まとめ */}
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           まとめ：予防型対策を基盤にした多層的アプローチ
         </h2>
         <p style={{ fontSize: 16, lineHeight: 1.9, color: '#2A2A26', marginBottom: 16 }}>
@@ -211,7 +211,7 @@ export default function PreventiveBearApproachPage() {
           <p style={{ fontSize: 14, lineHeight: 1.8, color: '#2A2A26', marginBottom: 16 }}>
             KUMANUKEは植物由来成分を活用したエリア散布型の忌避スプレーです。農地・ゴミ置き場・キャンプサイトなどへの事前散布による接近抑制を目的とした「予防型」の製品として設計されています。護身用スプレーとの違いを理解した上での活用をお勧めします。
           </p>
-          <Link href="/" style={{ display: 'inline-block', background: '#143D1E', color: '#fff', fontWeight: 700, fontSize: 14, padding: '10px 24px', borderRadius: 4, textDecoration: 'none' }}>
+          <Link href="/products/kumanuke" style={{ display: 'inline-block', background: '#143D1E', color: '#fff', fontWeight: 700, fontSize: 14, padding: '10px 24px', borderRadius: 4, textDecoration: 'none' }}>
             KUMANUKEの詳細を見る →
           </Link>
         </div>

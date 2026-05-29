@@ -44,7 +44,7 @@ export default function TsukinowaKumaVsHigumaPage() {
         </p>
 
         {/* 比較表 */}
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           1. 基本比較：一目でわかる2種の違い
         </h2>
         <div style={{ overflowX: 'auto', marginBottom: 48 }}>
@@ -80,7 +80,7 @@ export default function TsukinowaKumaVsHigumaPage() {
         </div>
 
         {/* Section 2 分布 */}
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           2. 分布域と生息環境
         </h2>
         <p style={{ fontSize: 16, lineHeight: 1.9, color: '#2A2A26', marginBottom: 16 }}>
@@ -94,7 +94,7 @@ export default function TsukinowaKumaVsHigumaPage() {
         </p>
 
         {/* Section 3 食性 */}
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20, marginTop: 48 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, marginTop: 56, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           3. 食性の違いが行動に与える影響
         </h2>
         <p style={{ fontSize: 16, lineHeight: 1.9, color: '#2A2A26', marginBottom: 16 }}>
@@ -123,7 +123,7 @@ export default function TsukinowaKumaVsHigumaPage() {
         </p>
 
         {/* Section 4 危険性 */}
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           4. 危険性と攻撃パターン
         </h2>
         <p style={{ fontSize: 16, lineHeight: 1.9, color: '#2A2A26', marginBottom: 16 }}>
@@ -167,7 +167,7 @@ export default function TsukinowaKumaVsHigumaPage() {
         </p>
 
         {/* Section 5 対策の違い */}
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           5. 地域別の対策の違い
         </h2>
         <p style={{ fontSize: 16, lineHeight: 1.9, color: '#2A2A26', marginBottom: 16 }}>
@@ -208,7 +208,7 @@ export default function TsukinowaKumaVsHigumaPage() {
           <p style={{ fontSize: 14, lineHeight: 1.8, color: '#2A2A26', marginBottom: 16 }}>
             ツキノワグマ・ヒグマどちらの生息地でも、農地・ゴミ置き場・キャンプサイト周辺などへの事前散布による接近抑制対策が活用されています。KUMANUKEは植物由来成分を用いたエリア散布型の製品です。
           </p>
-          <Link href="/" style={{ display: 'inline-block', background: '#143D1E', color: '#fff', fontWeight: 700, fontSize: 14, padding: '10px 24px', borderRadius: 4, textDecoration: 'none' }}>
+          <Link href="/products/kumanuke" style={{ display: 'inline-block', background: '#143D1E', color: '#fff', fontWeight: 700, fontSize: 14, padding: '10px 24px', borderRadius: 4, textDecoration: 'none' }}>
             KUMANUKEの詳細を見る →
           </Link>
         </div>

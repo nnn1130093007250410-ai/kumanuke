@@ -1,273 +1,396 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- ── TOP / ポータル ── -->
   <url>
-    <loc>https://kumanuke.bubuworks.co.jp/</loc>
-    <lastmod>2025-05-25</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://kumanuke.vercel.app/</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
+
+  <!-- ── MAP ── -->
   <url>
-    <loc>https://kumanuke.bubuworks.co.jp/guide</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://kumanuke.vercel.app/map</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://kumanuke.vercel.app/map/hokkaido</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kumanuke.vercel.app/map/akita</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kumanuke.vercel.app/map/iwate</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kumanuke.vercel.app/map/aomori</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kumanuke.vercel.app/map/yamagata</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kumanuke.vercel.app/map/miyagi</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kumanuke.vercel.app/map/fukushima</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kumanuke.vercel.app/map/niigata</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kumanuke.vercel.app/map/nagano</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kumanuke.vercel.app/map/gifu</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://kumanuke.vercel.app/map/toyama</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://kumanuke.vercel.app/map/ishikawa</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://kumanuke.vercel.app/map/tottori</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://kumanuke.vercel.app/map/shimane</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://kumanuke.vercel.app/map/kyoto</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://kumanuke.vercel.app/map/hyogo</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- ── 対策ガイド一覧 ── -->
+  <url>
+    <loc>https://kumanuke.vercel.app/guide</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- ── ガイド記事 (LAB) ── -->
+  <url>
+    <loc>https://kumanuke.vercel.app/guide/bear-olfactory-science</loc>
+    <lastmod>2026-05-27</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kumanuke.vercel.app/guide/smells-bears-dislike</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kumanuke.vercel.app/guide/bear-bell-effectiveness</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kumanuke.vercel.app/guide/why-bears-come-to-towns</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kumanuke.vercel.app/guide/bear-seasonal-activity</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kumanuke.vercel.app/guide/tsuki-no-wa-kuma-vs-higuma</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kumanuke.vercel.app/guide/satoyama-bear-human-coexistence</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kumanuke.vercel.app/guide/bear-learning-behavior</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kumanuke.vercel.app/guide/bear-home-range</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kumanuke.vercel.app/guide/olfactory-repellent-research</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kumanuke.vercel.app/guide/bear-scent-marking</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kumanuke.vercel.app/guide/bear-hibernation</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kumanuke.vercel.app/guide/bear-diet-ecology</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kumanuke.vercel.app/guide/bear-reproduction-cubs</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- ── ガイド記事 (GUIDE) ── -->
+  <url>
+    <loc>https://kumanuke.vercel.app/guide/bear-spray-accidents</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kumanuke.vercel.app/guide/bear-spray-transportation-rules</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kumanuke.vercel.app/guide/camping-bear-prevention</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://kumanuke.vercel.app/guide/hiking-bear-prevention</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://kumanuke.vercel.app/guide/farm-bear-prevention</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://kumanuke.vercel.app/guide/garbage-bear-prevention</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://kumanuke.vercel.app/guide/how-to-choose-bear-repellent</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://kumanuke.vercel.app/guide/preventive-bear-approach</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kumanuke.vercel.app/guide/abandoned-fruit-trees-bear-damage</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://kumanuke.vercel.app/guide/electric-fence-bear-prevention</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kumanuke.vercel.app/guide/sansai-bear-safety</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- ── ガイド記事 (WORLD) ── -->
+  <url>
+    <loc>https://kumanuke.vercel.app/guide/international-bear-management</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kumanuke.vercel.app/guide/non-lethal-bear-management</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kumanuke.vercel.app/guide/climate-change-bears</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kumanuke.vercel.app/guide/canada-bear-smart</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kumanuke.vercel.app/guide/north-america-bear-spray</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- ── ガイド記事 (DATA / NEWS) ── -->
+  <url>
+    <loc>https://kumanuke.vercel.app/guide/japan-bear-damage-statistics</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://kumanuke.vercel.app/guide/japan-regional-bear-data</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kumanuke.vercel.app/guide/bear-incident-news-2026</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- ── WORLD BEAR REPORT ── -->
+  <url>
+    <loc>https://kumanuke.vercel.app/world</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://kumanuke.bubuworks.co.jp/guide/bear-olfactory-science</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://kumanuke.vercel.app/world/usa</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://kumanuke.bubuworks.co.jp/guide/smells-bears-dislike</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://kumanuke.vercel.app/world/canada</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://kumanuke.bubuworks.co.jp/guide/bear-spray-accidents</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://kumanuke.vercel.app/world/finland</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://kumanuke.bubuworks.co.jp/guide/bear-spray-transportation-rules</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://kumanuke.vercel.app/world/sweden</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://kumanuke.bubuworks.co.jp/guide/bear-bell-effectiveness</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://kumanuke.bubuworks.co.jp/guide/camping-bear-prevention</loc>
-    <lastmod>2025-05-25</lastmod>
+    <loc>https://kumanuke.vercel.app/world/norway</loc>
+    <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://kumanuke.bubuworks.co.jp/guide/hiking-bear-prevention</loc>
-    <lastmod>2025-05-25</lastmod>
+    <loc>https://kumanuke.vercel.app/world/russia</loc>
+    <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://kumanuke.bubuworks.co.jp/guide/farm-bear-prevention</loc>
-    <lastmod>2025-05-25</lastmod>
+    <loc>https://kumanuke.vercel.app/world/romania</loc>
+    <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+
+  <!-- ── 製品ページ ── -->
   <url>
-    <loc>https://kumanuke.bubuworks.co.jp/guide/garbage-bear-prevention</loc>
-    <lastmod>2025-05-25</lastmod>
+    <loc>https://kumanuke.vercel.app/products/kumanuke</loc>
+    <lastmod>2026-05-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+
+  <!-- ── その他 ── -->
   <url>
-    <loc>https://kumanuke.bubuworks.co.jp/guide/how-to-choose-bear-repellent</loc>
-    <lastmod>2025-05-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://kumanuke.bubuworks.co.jp/guide/preventive-bear-approach</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://kumanuke.bubuworks.co.jp/guide/why-bears-come-to-towns</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://kumanuke.bubuworks.co.jp/guide/bear-seasonal-activity</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://kumanuke.bubuworks.co.jp/guide/tsuki-no-wa-kuma-vs-higuma</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://kumanuke.bubuworks.co.jp/guide/japan-bear-damage-statistics</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://kumanuke.bubuworks.co.jp/guide/satoyama-bear-human-coexistence</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://kumanuke.bubuworks.co.jp/guide/international-bear-management</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://kumanuke.bubuworks.co.jp/guide/bear-learning-behavior</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://kumanuke.bubuworks.co.jp/guide/abandoned-fruit-trees-bear-damage</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://kumanuke.bubuworks.co.jp/guide/bear-home-range</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://kumanuke.bubuworks.co.jp/guide/non-lethal-bear-management</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://kumanuke.bubuworks.co.jp/guide/olfactory-repellent-research</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://kumanuke.bubuworks.co.jp/guide/climate-change-bears</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://kumanuke.bubuworks.co.jp/guide/electric-fence-bear-prevention</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://kumanuke.bubuworks.co.jp/guide/bear-scent-marking</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://kumanuke.bubuworks.co.jp/map</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://kumanuke.bubuworks.co.jp/map/hokkaido</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://kumanuke.bubuworks.co.jp/map/akita</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://kumanuke.bubuworks.co.jp/map/iwate</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://kumanuke.bubuworks.co.jp/map/fukushima</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://kumanuke.bubuworks.co.jp/map/nagano</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://kumanuke.bubuworks.co.jp/map/gifu</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://kumanuke.bubuworks.co.jp/map/yamagata</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://kumanuke.bubuworks.co.jp/map/aomori</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://kumanuke.bubuworks.co.jp/map/hyogo</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://kumanuke.bubuworks.co.jp/map/miyagi</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://kumanuke.bubuworks.co.jp/map/ishikawa</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://kumanuke.bubuworks.co.jp/map/toyama</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://kumanuke.bubuworks.co.jp/map/niigata</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://kumanuke.bubuworks.co.jp/map/tottori</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://kumanuke.bubuworks.co.jp/map/shimane</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://kumanuke.bubuworks.co.jp/map/kyoto</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://kumanuke.bubuworks.co.jp/privacy</loc>
+    <loc>https://kumanuke.vercel.app/privacy</loc>
     <lastmod>2025-05-25</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
+
 </urlset>

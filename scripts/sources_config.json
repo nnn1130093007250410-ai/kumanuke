@@ -1,0 +1,233 @@
+{
+  "_comment": "自動収集ソース設定。arcgis=ArcGIS REST API、kml=Google My Maps KML",
+  "arcgis": [
+    {
+      "id_prefix": "miyagi-arcgis",
+      "prefecture": "宮城県",
+      "source_name": "宮城県クマ目撃情報マップ（ArcGIS）",
+      "service_url": "https://services7.arcgis.com/sNECdWtl22Z2VPMm/arcgis/rest/services/survey123_29f9f2013da44b7881772493332376d7_results/FeatureServer/0",
+      "layer_id": 0,
+      "bear_type": "ツキノワグマ",
+      "source_url": "https://services7.arcgis.com/sNECdWtl22Z2VPMm/arcgis/rest/services/survey123_29f9f2013da44b7881772493332376d7_results/FeatureServer",
+      "date_fields": ["NENGAPPI", "DATE_", "date", "DATE", "jikoku", "発生日"],
+      "city_fields": ["SHIKUCHOSON", "city", "市町村", "shikuchoson", "地名"],
+      "desc_fields": ["NAIYOU", "naiyou", "内容", "description", "BIKOU", "備考"]
+    },
+    {
+      "id_prefix": "toyama-arcgis",
+      "prefecture": "富山県",
+      "source_name": "富山県ツキノワグマ出没情報（ArcGIS）",
+      "service_url": "https://services7.arcgis.com/pUdPpUsq83Kw8pWi/arcgis/rest/services/survey123_3f07f1f9864d43368d48b5f373d6cd68_results/FeatureServer/0",
+      "layer_id": 0,
+      "bear_type": "ツキノワグマ",
+      "source_url": "https://services7.arcgis.com/pUdPpUsq83Kw8pWi/arcgis/rest/services/survey123_3f07f1f9864d43368d48b5f373d6cd68_results/FeatureServer",
+      "date_fields": ["DATE_", "date", "DATE", "nengappi", "発生日時", "発生日"],
+      "city_fields": ["SHIKUCHO", "city", "市町村", "地名", "場所"],
+      "desc_fields": ["NAIYOU", "内容", "description", "bikou", "備考"]
+    },
+    {
+      "id_prefix": "gunma-arcgis",
+      "prefecture": "群馬県",
+      "source_name": "群馬県クマ出没マップ（ArcGIS）",
+      "service_url": "https://services7.arcgis.com/DkC6f6v0YUQX0rke/arcgis/rest/services/survey123_a77f33a9b9f649cfada5c7983c67874b_results/FeatureServer/0",
+      "layer_id": 0,
+      "bear_type": "ツキノワグマ",
+      "source_url": "https://services7.arcgis.com/DkC6f6v0YUQX0rke/arcgis/rest/services/survey123_a77f33a9b9f649cfada5c7983c67874b_results/FeatureServer",
+      "date_fields": ["NENGAPPI", "DATE", "date", "発生日時", "time"],
+      "city_fields": ["SOCHI", "city", "市町村", "地名", "shikuchoson"],
+      "desc_fields": ["NAIYOU", "内容", "description", "bikou"]
+    },
+    {
+      "id_prefix": "yamagata-gis",
+      "prefecture": "山形県",
+      "source_name": "山形県有害鳥獣GIS（ArcGIS）",
+      "service_url": "https://services1.arcgis.com/l2AxbKqkn4xraKMd/arcgis/rest/services/有害鳥獣GIS_WFL1/FeatureServer/0",
+      "layer_id": 0,
+      "bear_type": "ツキノワグマ",
+      "source_url": "https://services1.arcgis.com/l2AxbKqkn4xraKMd/arcgis/rest/services/有害鳥獣GIS_WFL1/FeatureServer",
+      "date_fields": ["発見日時", "DATE", "date", "nengappi", "発見日", "jikoku"],
+      "city_fields": ["市町村名", "city", "市町村", "地名", "shikuchoson"],
+      "desc_fields": ["内容", "description", "bikou", "naiyou", "状況"]
+    },
+    {
+      "id_prefix": "saitama",
+      "prefecture": "埼玉県",
+      "source_name": "埼玉県クマ出没マップ（ArcGIS）",
+      "service_url": "https://services9.arcgis.com/n65w8AXGaYPTqFYI/arcgis/rest/services/survey123_3123e5ed452d4e89845e4ba6129c1e2d_results/FeatureServer/0",
+      "layer_id": 0,
+      "bear_type": "ツキノワグマ",
+      "source_url": "https://services9.arcgis.com/n65w8AXGaYPTqFYI/arcgis/rest/services/survey123_3123e5ed452d4e89845e4ba6129c1e2d_results/FeatureServer",
+      "date_fields": ["DATE", "date", "nengappi", "発生日時", "発生日"],
+      "city_fields": ["SHIKUCHO", "city", "市町村", "地名"],
+      "desc_fields": ["NAIYOU", "内容", "description", "bikou"]
+    },
+    {
+      "id_prefix": "nagano-cj",
+      "prefecture": "長野県",
+      "source_name": "長野県鳥獣目撃情報",
+      "service_url": "https://services1.arcgis.com/4GMefrLcjv8z16wh/arcgis/rest/services/choujyumokugeki_publicview/FeatureServer/0",
+      "layer_id": 0,
+      "bear_type": "ツキノワグマ",
+      "type_filter": "クマ",
+      "source_url": "https://services1.arcgis.com/4GMefrLcjv8z16wh/arcgis/rest/services/choujyumokugeki_publicview/FeatureServer",
+      "date_fields": ["mokuge_date", "DATE", "date", "発生日時", "報告日"],
+      "city_fields": ["address", "city", "市町村", "地名", "shikuchoson"],
+      "desc_fields": ["notes", "内容", "description", "bikou", "naiyou"],
+      "type_fields": ["animal_type", "species", "種類", "動物種"]
+    },
+    {
+      "id_prefix": "ishikari-arcgis",
+      "prefecture": "北海道",
+      "source_name": "石狩市ヒグマ出没情報（ArcGIS）",
+      "service_url": "https://services7.arcgis.com/9WKv3OOuUkGgAibZ/arcgis/rest/services/石狩市ヒグマ出没情報/FeatureServer/0",
+      "layer_id": 0,
+      "bear_type": "ヒグマ",
+      "source_url": "https://services7.arcgis.com/9WKv3OOuUkGgAibZ/arcgis/rest/services/石狩市ヒグマ出没情報/FeatureServer",
+      "date_fields": ["date", "DATE", "発生日時", "発生日", "nengappi"],
+      "city_fields": ["address", "city", "市町村", "地名", "場所"],
+      "desc_fields": ["description", "内容", "bikou", "naiyou", "状況"]
+    },
+    {
+      "id_prefix": "miyagi-sight",
+      "prefecture": "宮城県",
+      "source_name": "宮城県クマ目撃情報（ArcGIS）",
+      "service_url": "https://services7.arcgis.com/sNECdWtl22Z2VPMm/arcgis/rest/services/survey123_29f9f2013da44b7881772493332376d7_results/FeatureServer/0",
+      "layer_id": 0,
+      "bear_type": "ツキノワグマ",
+      "source_url": "https://services7.arcgis.com/sNECdWtl22Z2VPMm/",
+      "date_fields": ["NENGAPPI", "DATE_", "date", "DATE", "jikoku"],
+      "city_fields": ["SHIKUCHOSON", "city", "市町村"],
+      "desc_fields": ["NAIYOU", "naiyou", "内容", "description"],
+      "_skip": true,
+      "_note": "miyagi-arcgisと重複するためスキップ"
+    }
+  ],
+  "kml": [
+    {
+      "id_prefix": "kml-青森",
+      "prefecture": "青森県",
+      "source_name": "青森県クマ出没KMLマップ",
+      "mid": "13Nbo8EFxhx50lQsl4SptQctrnNU",
+      "bear_type": "ツキノワグマ"
+    },
+    {
+      "id_prefix": "kml-宮城",
+      "prefecture": "宮城県",
+      "source_name": "宮城県クマ目撃マップ（KML）",
+      "mid": "1aZCXqs7vrAPEBhE4HkT3CwmlMdunP2Y",
+      "bear_type": "ツキノワグマ"
+    },
+    {
+      "id_prefix": "kml-山形",
+      "prefecture": "山形県",
+      "source_name": "山形県クマ目撃マップ（KML）",
+      "mid": "1N9E9rixBQwxB4TKQ2XsP32GLOi6w6qQ",
+      "bear_type": "ツキノワグマ"
+    },
+    {
+      "id_prefix": "kanagasaki-kml",
+      "prefecture": "岩手県",
+      "source_name": "金ヶ崎町熊出没情報マップ",
+      "mid": "1yrbsOBtjPX7oFWfy3l_ni9nqspsVxCxB",
+      "bear_type": "ツキノワグマ"
+    },
+    {
+      "id_prefix": "kml-島根",
+      "prefecture": "島根県",
+      "source_name": "島根県クマ出没マップ（KML）",
+      "mid": "1g5S_PUzzPjzY5UFp8IBBamT0vOhOGvg",
+      "bear_type": "ツキノワグマ"
+    },
+    {
+      "id_prefix": "kml-石川",
+      "prefecture": "石川県",
+      "source_name": "石川県クマ出没KMLマップ",
+      "mid": "1yzG7cN9fx5lPUMyE_Xp5k7r_EXjSz_0",
+      "bear_type": "ツキノワグマ"
+    },
+    {
+      "id_prefix": "murakami-kuma-kml",
+      "prefecture": "新潟県",
+      "source_name": "村上市クマ等出没マップ",
+      "mid": "1oS_ML_qFbRW1LG_0OJ7N1rClzcHTst16",
+      "bear_type": "ツキノワグマ"
+    },
+    {
+      "id_prefix": "tottori-kuma-kml",
+      "prefecture": "鳥取県",
+      "source_name": "鳥取県クマ出没情報",
+      "mid": "1ikVL2MuH74FeIB16Z2DpX-CzHS0",
+      "bear_type": "ツキノワグマ"
+    },
+    {
+      "id_prefix": "okayama-kuma-kml",
+      "prefecture": "岡山県",
+      "source_name": "岡山県ツキノワグマ出没情報",
+      "mid": "1y64vgpv0Yc6srgFeVC5ZkJf37kNuuKI",
+      "bear_type": "ツキノワグマ"
+    },
+    {
+      "id_prefix": "nara-kuma",
+      "prefecture": "奈良県",
+      "source_name": "奈良県クマ出没情報（nara-bear.com）",
+      "mid": "1egfFVdqiDIPCMWMjBxKe5_3WsYb9Po0",
+      "bear_type": "ツキノワグマ"
+    },
+    {
+      "id_prefix": "tochigi-nasushiobara-kml",
+      "prefecture": "栃木県",
+      "source_name": "那須塩原市クマ出没被害情報マップ",
+      "mid": "14OOPut8X1uq7mtmWk_C0NDDCG2ZHv7k",
+      "bear_type": "ツキノワグマ"
+    },
+    {
+      "id_prefix": "tochigi-nasu-kml",
+      "prefecture": "栃木県",
+      "source_name": "那須町クマ目撃情報",
+      "mid": "1OLGJ5id84s6k1m-sh2GU7seMZ_ODEBM",
+      "bear_type": "ツキノワグマ"
+    },
+    {
+      "id_prefix": "sendai-kuma-kml",
+      "prefecture": "宮城県",
+      "source_name": "仙台市クマ出没マップ",
+      "mid": "1_CVerCU6I57GFdSZeUvP_wS__h4",
+      "bear_type": "ツキノワグマ"
+    },
+    {
+      "id_prefix": "kml-滋賀",
+      "prefecture": "滋賀県",
+      "source_name": "滋賀県クマ出没マップ（KML）",
+      "mid": "1rE5HcSdJnm2gX3iT1FMt0aCVuQ9ArDs",
+      "bear_type": "ツキノワグマ"
+    },
+    {
+      "id_prefix": "kml-奈良",
+      "prefecture": "奈良県",
+      "source_name": "奈良県クマ出没マップ（KML）",
+      "mid": "1ij-CG5R6Kc1fFnd_eFvI3gbeWOQvvFs",
+      "bear_type": "ツキノワグマ"
+    },
+    {
+      "id_prefix": "shizuoka-r8-kml",
+      "prefecture": "静岡県",
+      "source_name": "静岡県ツキノワグマ出没マップ",
+      "mid": "1o_iXJ5z-tA9bTd8k2DMFPLO9BS4LRDI",
+      "bear_type": "ツキノワグマ"
+    },
+    {
+      "id_prefix": "kml-栃木",
+      "prefecture": "栃木県",
+      "source_name": "栃木県クマ出没マップ（KML）",
+      "mid": "10qIEI8EW5IVAY82zXyoF8DbWto0aUyc",
+      "bear_type": "ツキノワグマ"
+    },
+    {
+      "id_prefix": "ishikawa-r8-kml",
+      "prefecture": "石川県",
+      "source_name": "石川県ツキノワグマ出没情報（R8）",
+      "mid": "17x-ZQxVWesZ3iJdObP0BXeS_R7e0vxw",
+      "bear_type": "ツキノワグマ"
+    }
+  ]
+}

@@ -47,7 +47,7 @@ export default function SmellsBearsDislikePage() {
         </p>
 
         {/* Section 1 嗅覚解剖 */}
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           1. クマの嗅覚：なぜ匂いによるアプローチが有効か
         </h2>
         <p style={{ fontSize: 16, lineHeight: 1.9, color: '#2A2A26', marginBottom: 16 }}>
@@ -64,7 +64,7 @@ export default function SmellsBearsDislikePage() {
         </div>
 
         {/* Section 2 カプサイシン */}
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20, marginTop: 48 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, marginTop: 56, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           2. カプサイシン：最もよく研究された忌避成分
         </h2>
         <p style={{ fontSize: 16, lineHeight: 1.9, color: '#2A2A26', marginBottom: 16 }}>
@@ -83,7 +83,7 @@ export default function SmellsBearsDislikePage() {
         </div>
 
         {/* Section 3 木酢液 */}
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           3. 木酢液：煙臭・刺激臭による忌避効果
         </h2>
         <p style={{ fontSize: 16, lineHeight: 1.9, color: '#2A2A26', marginBottom: 16 }}>
@@ -94,7 +94,7 @@ export default function SmellsBearsDislikePage() {
         </p>
 
         {/* Section 4 精油・植物成分 */}
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20, marginTop: 48 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, marginTop: 56, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           4. 精油・植物由来成分：研究が進む嗅覚忌避物質
         </h2>
         <p style={{ fontSize: 16, lineHeight: 1.9, color: '#2A2A26', marginBottom: 16 }}>
@@ -129,7 +129,7 @@ export default function SmellsBearsDislikePage() {
         <p style={{ fontSize: 13, color: '#888', marginBottom: 48 }}>※ 上記の成分はいずれも動物行動研究の対象であり、実用的忌避効果については研究継続中のものを含みます。</p>
 
         {/* Section 5 効果の条件 */}
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           5. 忌避効果に影響する条件
         </h2>
         <p style={{ fontSize: 16, lineHeight: 1.9, color: '#2A2A26', marginBottom: 16 }}>
@@ -151,7 +151,7 @@ export default function SmellsBearsDislikePage() {
         </div>
 
         {/* Section 6 まとめ */}
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           6. まとめ：嗅覚忌避は「接近抑制」のアプローチ
         </h2>
         <p style={{ fontSize: 16, lineHeight: 1.9, color: '#2A2A26', marginBottom: 16 }}>
@@ -162,12 +162,12 @@ export default function SmellsBearsDislikePage() {
         </p>
 
         {/* KUMANUKE CTA */}
-        <div style={{ background: '#F0F7F2', border: '1px solid #C8E0CF', borderRadius: 8, padding: '28px 28px', marginBottom: 40, marginTop: 32 }}>
+        <div style={{ background: '#F0F7F2', border: '2px solid #5EC97C', borderRadius: 12, padding: '28px 28px', marginBottom: 40, marginTop: 40 }}>
           <p style={{ fontSize: 15, fontWeight: 700, color: '#143D1E', marginBottom: 8 }}>植物由来成分を活用した忌避アプローチ</p>
           <p style={{ fontSize: 14, lineHeight: 1.8, color: '#2A2A26', marginBottom: 16 }}>
             KUMANUKEは植物由来の忌避成分を配合したエリア散布型のスプレーです。農地・ゴミ置き場・キャンプサイトなど、クマの接近が懸念される場所への事前散布を想定しています。護身用スプレーとは異なり、広いエリアへの散布で接近抑制効果を期待する「予防型」の忌避アプローチ製品です。
           </p>
-          <Link href="/" style={{ display: 'inline-block', background: '#143D1E', color: '#fff', fontWeight: 700, fontSize: 14, padding: '10px 24px', borderRadius: 4, textDecoration: 'none' }}>
+          <Link href="/products/kumanuke" style={{ display: 'inline-block', background: '#143D1E', color: '#fff', fontWeight: 700, fontSize: 14, padding: '10px 24px', borderRadius: 4, textDecoration: 'none' }}>
             KUMANUKEの詳細を見る →
           </Link>
         </div>

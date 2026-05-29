@@ -40,7 +40,7 @@ export default function BearLearningBehaviorPage() {
           本稿では、野生動物行動学の視点からクマの認知能力を解説し、なぜクマが繰り返し人里へ来るのか、そしてその学習メカニズムを理解することが対策設計にどう役立つかを考察します。
         </p>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           1. クマの脳：高い大脳比率が示す認知能力
         </h2>
         <p style={{ fontSize: 16, lineHeight: 1.9, color: '#2A2A26', marginBottom: 16 }}>
@@ -56,7 +56,7 @@ export default function BearLearningBehaviorPage() {
           </p>
         </div>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           2. 空間記憶：クマはどれほど「場所」を覚えるか
         </h2>
         <p style={{ fontSize: 16, lineHeight: 1.9, color: '#2A2A26', marginBottom: 16 }}>
@@ -69,7 +69,7 @@ export default function BearLearningBehaviorPage() {
           この空間記憶の能力は、冬眠前の秋の過食期（Hyperphagia）に特に重要な役割を果たします。限られた時間の中で最大量の食料を摂取するため、クマは過去の経験に基づいて食料が豊富な場所を効率よく巡る「採食ルート」を形成すると考えられています。
         </p>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           3. 報酬学習：「ここに来れば食料がある」という強化
         </h2>
         <p style={{ fontSize: 16, lineHeight: 1.9, color: '#2A2A26', marginBottom: 16 }}>
@@ -94,7 +94,7 @@ export default function BearLearningBehaviorPage() {
           ))}
         </div>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           4. 慣れ（Habituation）：対策が効かなくなるメカニズム
         </h2>
         <p style={{ fontSize: 16, lineHeight: 1.9, color: '#2A2A26', marginBottom: 16 }}>
@@ -110,7 +110,7 @@ export default function BearLearningBehaviorPage() {
           </p>
         </div>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20, marginTop: 48 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, marginTop: 56, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           5. 問題解決行動：クマが障壁を乗り越えるとき
         </h2>
         <p style={{ fontSize: 16, lineHeight: 1.9, color: '#2A2A26', marginBottom: 16 }}>
@@ -120,7 +120,7 @@ export default function BearLearningBehaviorPage() {
           これは「道具的条件づけ（operant conditioning）」の文脈で理解されており、問題（障壁）を解決する行動が報酬（食料）によって強化されるプロセスです。北米のグリズリーや黒クマでは、キャンプ用のフードキャニスターやベアボックスを開ける方法を学習した個体の事例も記録されています。
         </p>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20, marginTop: 48 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, marginTop: 56, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           6. 学習の逆利用：条件付け嫌悪（Aversive Conditioning）
         </h2>
         <p style={{ fontSize: 16, lineHeight: 1.9, color: '#2A2A26', marginBottom: 16 }}>
@@ -133,7 +133,7 @@ export default function BearLearningBehaviorPage() {
           ただし、条件付け嫌悪の効果は個体差・実施タイミング・強度によって大きく変わります。すでに強く習慣化した個体（人里での採食経験が豊富な個体）への効果は限定的であるとする研究報告もあり、早期介入が重要とされています。
         </p>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20, marginTop: 48 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, marginTop: 56, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           7. 対策設計への示唆：「クマの学習を先回りする」発想
         </h2>
         <div style={{ overflowX: 'auto', marginBottom: 48 }}>
@@ -161,7 +161,7 @@ export default function BearLearningBehaviorPage() {
           </table>
         </div>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           まとめ
         </h2>
         <p style={{ fontSize: 16, lineHeight: 1.9, color: '#2A2A26', marginBottom: 16 }}>
@@ -176,7 +176,7 @@ export default function BearLearningBehaviorPage() {
           <p style={{ fontSize: 14, lineHeight: 1.8, color: '#2A2A26', marginBottom: 16 }}>
             近年では、クマの高感度な嗅覚に働きかける忌避成分を事前に散布することで、「この場所は不快」という初期印象を与えることを目的とした予防型対策が注目されています。KUMANUKEは植物由来成分を配合したエリア散布型の忌避スプレーです。
           </p>
-          <Link href="/" style={{ display: 'inline-block', background: '#143D1E', color: '#fff', fontWeight: 700, fontSize: 14, padding: '10px 24px', borderRadius: 4, textDecoration: 'none' }}>
+          <Link href="/products/kumanuke" style={{ display: 'inline-block', background: '#143D1E', color: '#fff', fontWeight: 700, fontSize: 14, padding: '10px 24px', borderRadius: 4, textDecoration: 'none' }}>
             KUMANUKEの詳細を見る →
           </Link>
         </div>

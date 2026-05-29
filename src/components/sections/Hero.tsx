@@ -63,6 +63,26 @@ export default function Hero() {
           KUMANUKE
         </p>
 
+        {/* スマホ用 商品ボトル画像（見出し直下に大きく表示） */}
+        <div
+          className="md:hidden"
+          style={{ display: 'flex', justifyContent: 'center', margin: '20px 0 24px' }}
+        >
+          <Image
+            src="/product-overview.jpg"
+            alt="KUMANUKE ベアリペレントエリアスプレー 商品本体"
+            width={180}
+            height={360}
+            style={{
+              width: 'auto',
+              height: 'clamp(260px, 48vw, 340px)',
+              objectFit: 'contain',
+              filter: 'drop-shadow(0 12px 32px rgba(0,0,0,0.55))',
+            }}
+            priority
+          />
+        </div>
+
         <p
           style={{
             color: 'rgba(255,255,255,0.6)',
@@ -114,7 +134,7 @@ export default function Hero() {
             卸・法人向けお問い合わせ
           </a>
           <a
-            href="#about"
+            href="/products/kumanuke"
             style={{
               background: 'transparent',
               color: 'rgba(255,255,255,0.7)',

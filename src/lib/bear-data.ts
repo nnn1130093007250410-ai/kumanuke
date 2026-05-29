@@ -17,14 +17,15 @@ export interface UpdateLog {
 export function loadBearData(): BearSighting[] {
   // bear-japan.json（全国ArcGIS一括取得データ）を優先して読み込む
   const japanPath = path.join(process.cwd(), 'public', 'data', 'bear-japan.json')
-  if (fs.existsSync(japanPath)) {
-    const raw = fs.readFileSync(japanPath, 'utf-8')
-    return JSON.parse(raw) as BearSighting[]
-  }
-  // フォールバック: 旧bear-data.json
-  const filePath = path.join(process.cwd(), 'public', 'data', 'bear-data.json')
-  const raw = fs.readFileSync(filePath, 'utf-8')
-  return JSON.parse(raw) as BearSighting[]
+  const raw = fs.existsSync(japanPath)
+    ? fs.readFileSync(japanPath, 'utf-8')
+    : fs.readFileSync(path.join(process.cwd(), 'public', 'data', 'bear-data.json'), 'utf-8')
+
+  const all = JSON.parse(raw) as BearSighting[]
+
+  // 未来日付のレコード（データ入力ミス）を除外する
+  const today = new Date().toISOString().slice(0, 10) // "YYYY-MM-DD"
+  return all.filter((s) => s.date <= today)
 }
 
 export function loadUpdateLog(): UpdateLog[] {
@@ -39,6 +40,21 @@ export function getSightingsByPrefecture(sightings: BearSighting[], prefecture: 
 
 export function getLatestSightings(sightings: BearSighting[], limit = 20): BearSighting[] {
   return [...sightings].sort((a, b) => b.date.localeCompare(a.date)).slice(0, limit)
+}
+
+/** 都道府県ごとに最新1件ずつ取得（トップページ用：地域の多様性を確保） */
+export function getLatestByPrefecture(sightings: BearSighting[], limit = 8): BearSighting[] {
+  const sorted = [...sightings].sort((a, b) => b.date.localeCompare(a.date))
+  const seen = new Set<string>()
+  const result: BearSighting[] = []
+  for (const s of sorted) {
+    if (!seen.has(s.prefecture)) {
+      seen.add(s.prefecture)
+      result.push(s)
+      if (result.length >= limit) break
+    }
+  }
+  return result
 }
 
 export function getMonthlyCounts(sightings: BearSighting[]): { month: string; label: string; count: number }[] {

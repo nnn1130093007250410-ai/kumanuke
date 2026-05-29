@@ -34,7 +34,7 @@ export default function GarbageBearPreventionPage() {
           住宅地や観光地でのゴミ置き場は、熊にとって「安定した食料供給場所」になりやすい危険な場所です。一度ゴミ置き場に来た熊は繰り返し訪れるようになるため、早期の対策が重要です。このガイドでは、自治体・マンション管理組合・観光施設向けの実践的な熊対策を解説します。
         </p>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', marginTop: 48, marginBottom: 16, paddingBottom: 10, borderBottom: '2px solid #EFEFED' }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginTop: 56, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           ゴミ置き場に熊が来る理由
         </h2>
         <p>熊は嗅覚が非常に優れており、数キロ先の匂いを嗅ぎ分けます。ゴミ置き場の生ゴミ・食品残渣の匂いは熊を強く引きつけます。</p>
@@ -45,7 +45,7 @@ export default function GarbageBearPreventionPage() {
           <li style={{ marginBottom: 8 }}>一度来た熊は「ここに食料がある」と学習し、繰り返し来訪する</li>
         </ul>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', marginTop: 48, marginBottom: 16, paddingBottom: 10, borderBottom: '2px solid #EFEFED' }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginTop: 56, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           ゴミ置き場の熊対策：基本方針
         </h2>
 
@@ -64,7 +64,7 @@ export default function GarbageBearPreventionPage() {
           ))}
         </div>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', marginTop: 48, marginBottom: 16, paddingBottom: 10, borderBottom: '2px solid #EFEFED' }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginTop: 56, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           施設・用途別の対策ポイント
         </h2>
 
@@ -98,7 +98,7 @@ export default function GarbageBearPreventionPage() {
           ))}
         </div>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', marginTop: 48, marginBottom: 16, paddingBottom: 10, borderBottom: '2px solid #EFEFED' }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginTop: 56, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           自治体・団体での一括導入
         </h2>
         <p>KUMANUKEでは、自治体・廃棄物処理事業者・観光施設向けの卸販売を行っています。広範囲にわたるゴミ置き場管理や、地域全体での熊対策として一括導入いただいている事例があります。</p>

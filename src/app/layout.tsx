@@ -22,41 +22,41 @@ const dmSans = DM_Sans({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://kumanuke.bubuworks.co.jp'),
+  metadataBase: new URL('https://kumanuke.vercel.app'),
   title: {
-    default: 'KUMANUKE | 植物由来 エリア散布型 野生動物対策スプレー',
+    default: 'KUMANUKE | 熊・野生動物情報ポータル',
     template: '%s | KUMANUKE',
   },
   description:
-    'KUMANUKEは植物由来成分を使用したエリア散布型の野生動物対策スプレーです。熊との遭遇予防を目的とした事前散布型対策として、キャンプ・登山・農業・ゴミ置き場管理等に。OCガス・カプサイシン不使用。',
+    '日本最大級の熊・野生動物情報インフラ。全国102,000件超の出没データをマップ・ランキング・統計で可視化。対策ガイド25本・世界の熊情報も網羅。熊よけスプレーKUMANUKEも販売。',
   keywords: [
-    '熊よけスプレー', '熊対策', '熊忌避剤', '野生動物対策',
-    'キャンプ 熊対策', '畑 熊対策', 'ゴミ置き場 熊対策',
-    '登山 熊対策', 'エリア散布', '植物由来', '熊遭遇予防',
+    '熊出没マップ', 'クマ出没情報', '熊情報ポータル', '野生動物情報',
+    '全国熊出没', '熊対策ガイド', '熊よけスプレー', '熊被害統計',
+    '熊対策', '野生動物対策', 'キャンプ 熊対策', '登山 熊対策',
   ],
   authors: [{ name: 'BUBUWORKS合同会社' }],
   creator: 'BUBUWORKS合同会社',
   openGraph: {
     type: 'website',
     locale: 'ja_JP',
-    url: 'https://kumanuke.bubuworks.co.jp',
+    url: 'https://kumanuke.vercel.app',
     siteName: 'KUMANUKE',
-    title: 'KUMANUKE | 植物由来 エリア散布型 野生動物対策スプレー',
+    title: 'KUMANUKE | 熊・野生動物情報ポータル',
     description:
-      '植物由来成分のエリア散布型野生動物対策。熊との遭遇予防を目的とした事前散布型対策スプレー。OCガス・カプサイシン不使用。',
+      '日本最大級の熊・野生動物情報インフラ。全国102,000件超の出没データをマップ・ランキング・統計で可視化。',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'KUMANUKE | 植物由来 エリア散布型 野生動物対策スプレー',
-    description: '植物由来成分のエリア散布型野生動物対策スプレー。熊との遭遇予防に。',
+    title: 'KUMANUKE | 熊・野生動物情報ポータル',
+    description: '全国102,000件超の熊出没データをマップ・統計で可視化。対策ガイド25本・世界情報も。',
   },
   robots: {
     index: true,
     follow: true,
     googleBot: { index: true, follow: true, 'max-image-preview': 'large' },
   },
-  alternates: { canonical: 'https://kumanuke.bubuworks.co.jp' },
-  verification: { google: '59t4CPVWs5pqhP2kXA31OTvt18MMUrvsXVCm0UuoH78' },
+  alternates: { canonical: 'https://kumanuke.vercel.app' },
+  verification: { google: ['59t4CPVWs5pqhP2kXA31OTvt18MMUrvsXVCm0UuoH78', 'gxUV_ke8-IuvsLbvhKFbtZOBI6l0wX3QJ7XBXV-DAwU'] },
 }
 
 const jsonLd = {
@@ -77,14 +77,14 @@ const jsonLd = {
     },
     {
       '@type': 'WebSite',
-      url: 'https://kumanuke.bubuworks.co.jp',
+      url: 'https://kumanuke.vercel.app',
       name: 'KUMANUKE',
-      description: '植物由来 エリア散布型 野生動物対策スプレー',
+      description: '熊・野生動物情報ポータル — 全国出没データ・対策ガイド・世界情報を集約',
     },
     {
       '@type': 'Organization',
       name: 'BUBUWORKS合同会社',
-      url: 'https://kumanuke.bubuworks.co.jp',
+      url: 'https://kumanuke.vercel.app',
       email: 'kumanuke@bubuworks.co.jp',
       address: {
         '@type': 'PostalAddress',

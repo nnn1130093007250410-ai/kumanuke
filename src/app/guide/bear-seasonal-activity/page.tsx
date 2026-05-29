@@ -110,7 +110,7 @@ export default function BearSeasonalActivityPage() {
         </p>
 
         {/* リスクカレンダー */}
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           年間リスクカレンダー
         </h2>
         <div style={{ display: 'flex', gap: 4, marginBottom: 8 }}>
@@ -141,7 +141,7 @@ export default function BearSeasonalActivityPage() {
         </div>
 
         {/* 季節別解説 */}
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 24 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           季節別・行動パターンと対策のポイント
         </h2>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
@@ -172,7 +172,7 @@ export default function BearSeasonalActivityPage() {
         </div>
 
         {/* Section 過食期の深掘り */}
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20, marginTop: 48 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, marginTop: 56, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           秋の「過食期（Hyperphagia）」を深く理解する
         </h2>
         <p style={{ fontSize: 16, lineHeight: 1.9, color: '#2A2A26', marginBottom: 16 }}>
@@ -197,7 +197,7 @@ export default function BearSeasonalActivityPage() {
         </p>
 
         {/* 対策まとめ */}
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           季節別の対策重点ポイント
         </h2>
         <div style={{ overflowX: 'auto', marginBottom: 48 }}>
@@ -231,7 +231,7 @@ export default function BearSeasonalActivityPage() {
           <p style={{ fontSize: 14, lineHeight: 1.8, color: '#2A2A26', marginBottom: 16 }}>
             出没リスクが最も高まる9〜11月の前に、農地・果樹園・ゴミ置き場周辺にエリア散布型忌避スプレーを施しておくことで、クマの接近抑制が期待できます。KUMANUKEは植物由来成分を配合した事前散布型の製品です。
           </p>
-          <Link href="/" style={{ display: 'inline-block', background: '#143D1E', color: '#fff', fontWeight: 700, fontSize: 14, padding: '10px 24px', borderRadius: 4, textDecoration: 'none' }}>
+          <Link href="/products/kumanuke" style={{ display: 'inline-block', background: '#143D1E', color: '#fff', fontWeight: 700, fontSize: 14, padding: '10px 24px', borderRadius: 4, textDecoration: 'none' }}>
             KUMANUKEの詳細を見る →
           </Link>
         </div>

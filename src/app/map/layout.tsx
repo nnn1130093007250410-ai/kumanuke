@@ -46,6 +46,9 @@ export default function MapLayout({ children }: { children: React.ReactNode }) {
           </Link>
         </div>
         <div style={{ display: 'flex', gap: 20, alignItems: 'center' }}>
+          <Link href="/world" style={{ fontSize: 12, color: '#60A5FA', fontWeight: 700, textDecoration: 'none' }}>
+            🌍 WORLD
+          </Link>
           <Link
             href="/guide"
             style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', textDecoration: 'none' }}
@@ -56,7 +59,7 @@ export default function MapLayout({ children }: { children: React.ReactNode }) {
             href="/"
             style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', textDecoration: 'none' }}
           >
-            ← 製品ページへ
+            ← TOP
           </Link>
         </div>
       </nav>
@@ -83,7 +86,8 @@ export default function MapLayout({ children }: { children: React.ReactNode }) {
           本マップは熊・野生動物対策の情報提供を目的としています。
         </p>
         <div style={{ marginTop: 16, display: 'flex', gap: 24, justifyContent: 'center', flexWrap: 'wrap' }}>
-          <Link href="/" style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', textDecoration: 'none' }}>KUMANUKE TOP</Link>
+          <Link href="/" style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', textDecoration: 'none' }}>TOP</Link>
+          <Link href="/products/kumanuke" style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', textDecoration: 'none' }}>製品</Link>
           <Link href="/guide" style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', textDecoration: 'none' }}>対策ガイド</Link>
           <Link href="/privacy" style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', textDecoration: 'none' }}>プライバシーポリシー</Link>
         </div>

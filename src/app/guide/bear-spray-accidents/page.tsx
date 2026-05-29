@@ -72,7 +72,7 @@ export default function BearSprayAccidentsPage() {
           2026年5月、香川県のJR多度津駅で熊撃退スプレーが誤噴射し、8名が負傷する事故が発生しました。同様の誤噴射事故は新幹線・小学校・旅館など密閉空間でも相次いでおり、「熊から身を守るための道具」が「人を傷つける原因」になるケースが増えています。本記事では、近年の事故事例と法的リスク、そして目的に合った熊対策の選び方を解説します。
         </p>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', marginTop: 48, marginBottom: 20, paddingBottom: 10, borderBottom: '2px solid #EFEFED' }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginTop: 56, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           近年の熊スプレー誤噴射・事故事例
         </h2>
 
@@ -97,7 +97,7 @@ export default function BearSprayAccidentsPage() {
           ※各事例は報道・公開情報をもとに当社が整理したものです。
         </p>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', marginTop: 48, marginBottom: 16, paddingBottom: 10, borderBottom: '2px solid #EFEFED' }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginTop: 56, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           なぜ誤噴射事故が起きるのか
         </h2>
         <p>熊撃退スプレー（OC・カプサイシン系）は、野生動物との遭遇時に至近距離で噴射するために設計された高圧エアロゾル製品です。その強い噴射力ゆえに、以下のような状況で誤噴射が発生しています。</p>
@@ -116,7 +116,7 @@ export default function BearSprayAccidentsPage() {
           ))}
         </div>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', marginTop: 48, marginBottom: 16, paddingBottom: 10, borderBottom: '2px solid #EFEFED' }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginTop: 56, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           法的リスク：みだりな携帯・人への使用は違法になる可能性
         </h2>
         <div style={{ background: '#FEF9E7', border: '1px solid #FDE68A', borderRadius: 8, padding: '20px 20px' }}>
@@ -135,7 +135,7 @@ export default function BearSprayAccidentsPage() {
           </div>
         </div>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', marginTop: 48, marginBottom: 16, paddingBottom: 10, borderBottom: '2px solid #EFEFED' }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginTop: 56, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           「護身用スプレー」と「エリア散布型」の違い
         </h2>
         <p>熊対策のスプレーには、目的と使い方が根本的に異なる2種類があります。誤った製品を選ぶと、必要な場面で役に立たないだけでなく、事故のリスクも生じます。</p>
@@ -168,7 +168,7 @@ export default function BearSprayAccidentsPage() {
           </table>
         </div>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', marginTop: 48, marginBottom: 16, paddingBottom: 10, borderBottom: '2px solid #EFEFED' }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginTop: 56, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           正しい熊対策の考え方
         </h2>
         <p>熊対策は「遭遇してから対処する」よりも「遭遇しない環境をつくる」ことが基本です。</p>
@@ -192,7 +192,7 @@ export default function BearSprayAccidentsPage() {
           <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: 14, lineHeight: 1.85, marginBottom: 20 }}>
             KUMANUKEはOCガス・カプサイシン不使用の植物由来成分を用いたエリア散布型スプレーです。護身用ではなく「事前に場所を守る」製品のため、誤噴射による対人事故のリスクがありません。テントサイト・農地・ゴミ置き場などの外周散布にお使いください。
           </p>
-          <Link href="/" style={{ display: 'inline-block', background: '#E07A30', color: '#fff', fontWeight: 700, fontSize: 14, padding: '12px 24px', borderRadius: 4, textDecoration: 'none' }}>
+          <Link href="/products/kumanuke" style={{ display: 'inline-block', background: '#E07A30', color: '#fff', fontWeight: 700, fontSize: 14, padding: '12px 24px', borderRadius: 4, textDecoration: 'none' }}>
             製品詳細を見る
           </Link>
         </div>

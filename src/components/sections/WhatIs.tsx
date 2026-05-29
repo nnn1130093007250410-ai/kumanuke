@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 const points = [
   { title: '植物由来成分を使用', text: '天然植物由来の香気成分を配合。OCガス・カプサイシンを使用しない処方で、環境への配慮を意識した設計です。' },
   { title: 'エリア散布型のアプローチ', text: '人がいない場所・時間帯でも、事前に散布することでエリアの対策が可能。農地・ゴミ置き場・倉庫周辺などに。' },
@@ -21,12 +23,27 @@ export default function WhatIs() {
         <div className="fade-up grid gap-14" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px,1fr))', alignItems: 'start' }}>
           {/* Product card */}
           <div
-            style={{ background: '#EFF5F0', border: '2px solid #C8DFC9', borderRadius: 8, padding: '36px 28px', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}
+            style={{ background: '#EFF5F0', border: '2px solid #C8DFC9', borderRadius: 8, padding: '28px 28px 32px', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}
           >
             <div style={{ background: '#143D1E', color: '#fff', fontFamily: 'var(--font-en)', fontSize: 26, fontWeight: 700, letterSpacing: '0.1em', padding: '10px 28px', borderRadius: 4, marginBottom: 14 }}>
               KUMA<span style={{ color: '#E07A30' }}>NUKE</span>
             </div>
-            <p style={{ fontSize: 12, color: '#5A5A55', marginBottom: 18 }}>エリア散布型 野生動物対策スプレー ／ 200ml</p>
+            <p style={{ fontSize: 12, color: '#5A5A55', marginBottom: 20 }}>エリア散布型 野生動物対策スプレー ／ 200ml</p>
+            {/* 商品ボトル画像 */}
+            <div style={{ margin: '0 0 20px', lineHeight: 0 }}>
+              <Image
+                src="/product-overview.jpg"
+                alt="KUMANUKE ベアリペレントエリアスプレー 商品本体"
+                width={150}
+                height={300}
+                style={{
+                  width: 'auto',
+                  height: 220,
+                  objectFit: 'contain',
+                  filter: 'drop-shadow(0 8px 20px rgba(0,0,0,0.18))',
+                }}
+              />
+            </div>
             <div style={{ background: '#fff', border: '1px solid #DDDDD8', borderRadius: 6, padding: '16px 24px', width: '100%' }}>
               <div style={{ fontSize: 11, color: '#9A9A95' }}>現在販売価格（税込）</div>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: 4, justifyContent: 'center', margin: '4px 0' }}>

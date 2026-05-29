@@ -66,3 +66,79 @@ export const WORLD_IMPORTANCE_COLORS: Record<number, string> = {
   2: '#3B82F6',
   3: '#7C3AED',
 }
+
+// ── WORLD BEAR REPORT V2 (新スキーマ) ─────────────────────────────
+export type WorldEventType =
+  | 'sighting'
+  | 'attack'
+  | 'policy'
+  | 'warning'
+  | 'park_closure'
+  | 'research'
+  | 'spray_incident'
+  | 'coexistence'
+  | 'wildlife_management'
+
+export interface WorldBearReportV2 {
+  id: string
+  country: string           // English (e.g. "USA", "Canada")
+  region: string            // English
+  city: string
+  date: string              // YYYY-MM-DD
+  event_type: WorldEventType
+  importance_level: 1 | 2 | 3
+  bear_type: string         // English (e.g. "Grizzly", "Black bear")
+  title_en: string
+  summary_ja: string        // Japanese summary
+  source_name: string
+  source_url: string
+  lat: number
+  lng: number
+  created_at: string        // ISO 8601
+}
+
+export const WORLD_EVENT_TYPE_CONFIG: Record<WorldEventType, { label: string; icon: string; color: string }> = {
+  sighting:            { label: '目撃・出没',   icon: '🐻', color: '#5A7A5A' },
+  attack:              { label: '人身被害',     icon: '⚠️', color: '#DC2626' },
+  policy:              { label: '政策・管理',   icon: '🌍', color: '#1D4ED8' },
+  warning:             { label: '行政警告',     icon: '🚨', color: '#EA580C' },
+  park_closure:        { label: '公園閉鎖',     icon: '🚫', color: '#7C3AED' },
+  research:            { label: '調査・研究',   icon: '🔬', color: '#0891B2' },
+  spray_incident:      { label: 'スプレー事故', icon: '💨', color: '#B45309' },
+  coexistence:         { label: '人獣共存',     icon: '🤝', color: '#16A34A' },
+  wildlife_management: { label: '個体数管理',   icon: '📊', color: '#6B7280' },
+}
+
+// Country slug → English name mapping (for /world/[country] routing)
+export const WORLD_COUNTRY_SLUGS: Record<string, string> = {
+  usa: 'USA',
+  canada: 'Canada',
+  finland: 'Finland',
+  sweden: 'Sweden',
+  norway: 'Norway',
+  russia: 'Russia',
+  romania: 'Romania',
+  italy: 'Italy',
+  spain: 'Spain',
+  france: 'France',
+  india: 'India',
+  malaysia: 'Malaysia',
+}
+
+// English country name → Japanese display name
+export const WORLD_COUNTRY_JA: Record<string, string> = {
+  USA: 'アメリカ', Canada: 'カナダ', Finland: 'フィンランド', Sweden: 'スウェーデン',
+  Norway: 'ノルウェー', Russia: 'ロシア', Romania: 'ルーマニア', Italy: 'イタリア',
+  Spain: 'スペイン', France: 'フランス', India: 'インド', Malaysia: 'マレーシア',
+  Indonesia: 'インドネシア', Croatia: 'クロアチア', Slovakia: 'スロバキア',
+  Poland: 'ポーランド', Slovenia: 'スロベニア', Bosnia: 'ボスニア',
+  Bulgaria: 'ブルガリア', Greece: 'ギリシャ', Ukraine: 'ウクライナ',
+  Belarus: 'ベラルーシ', Estonia: 'エストニア', Latvia: 'ラトビア',
+  China: '中国', 'South Korea': '韓国', Nepal: 'ネパール',
+  Pakistan: 'パキスタン', Kazakhstan: 'カザフスタン', Mongolia: 'モンゴル',
+  Iran: 'イラン', Turkey: 'トルコ', Thailand: 'タイ', Vietnam: 'ベトナム',
+  Myanmar: 'ミャンマー', 'Sri Lanka': 'スリランカ', Taiwan: '台湾',
+  Mexico: 'メキシコ', Peru: 'ペルー', Ecuador: 'エクアドル',
+  Colombia: 'コロンビア', Venezuela: 'ベネズエラ', Bolivia: 'ボリビア',
+  Greenland: 'グリーンランド', Japan: '日本',
+}

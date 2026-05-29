@@ -83,7 +83,7 @@ export default function JapanBearDamageStatisticsPage() {
         </p>
 
         {/* Section 1 推移 */}
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           1. 近年の被害推移：記録更新が続く10年
         </h2>
         <div style={{ overflowX: 'auto', marginBottom: 24 }}>
@@ -98,11 +98,11 @@ export default function JapanBearDamageStatisticsPage() {
             </thead>
             <tbody>
               {[
-                { year: '2020年度', injured: 158, dead: 4, note: '' },
-                { year: '2021年度', injured: 109, dead: 4, note: '' },
-                { year: '2022年度', injured: 123, dead: 6, note: '' },
-                { year: '2023年度', injured: 212, dead: 6, note: '当時の過去最多（更新）' },
-                { year: '2024年度', injured: 198, dead: 7, note: '' },
+                { year: '2020年度', injured: 86, dead: 4, note: '' },
+                { year: '2021年度', injured: 97, dead: 4, note: '' },
+                { year: '2022年度', injured: 109, dead: 6, note: '' },
+                { year: '2023年度', injured: 219, dead: 6, note: '当時の過去最多（更新）' },
+                { year: '2024年度', injured: 163, dead: 7, note: '' },
                 { year: '2025年度', injured: 238, dead: 13, note: '過去最多更新（環境省速報）', highlight: true },
               ].map((r, i) => (
                 <tr key={i}>
@@ -118,7 +118,7 @@ export default function JapanBearDamageStatisticsPage() {
         <p style={{ fontSize: 13, color: '#888', marginBottom: 48 }}>※ 2020〜2024年度のデータは環境省公表資料をもとに整理。2025年度は環境省速報値（2026年4月公表）。</p>
 
         {/* Section 2 月別 */}
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           2. 月別被害分布：10月が突出、秋の3ヶ月が全体の67%
         </h2>
         <p style={{ fontSize: 16, lineHeight: 1.9, color: '#2A2A26', marginBottom: 24 }}>
@@ -147,7 +147,7 @@ export default function JapanBearDamageStatisticsPage() {
         </div>
 
         {/* Section 3 地域別 */}
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           3. 地域別被害：東北6県が全体の6割超
         </h2>
         <p style={{ fontSize: 16, lineHeight: 1.9, color: '#2A2A26', marginBottom: 24 }}>
@@ -175,7 +175,7 @@ export default function JapanBearDamageStatisticsPage() {
         </div>
 
         {/* Section 4 被害の状況 */}
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           4. 被害の状況：山菜採り・農作業中が多数
         </h2>
         <p style={{ fontSize: 16, lineHeight: 1.9, color: '#2A2A26', marginBottom: 16 }}>
@@ -197,7 +197,7 @@ export default function JapanBearDamageStatisticsPage() {
         </div>
 
         {/* Section 5 出没件数 */}
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           5. 出没件数5万件超が意味すること
         </h2>
         <p style={{ fontSize: 16, lineHeight: 1.9, color: '#2A2A26', marginBottom: 16 }}>
@@ -208,7 +208,7 @@ export default function JapanBearDamageStatisticsPage() {
         </p>
 
         {/* Section 6 対策の方向性 */}
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20, marginTop: 48 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, marginTop: 56, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           6. 統計から読み取る「いつ・どこで・どんな状況で」気をつけるか
         </h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 16, marginBottom: 32 }}>
@@ -232,7 +232,7 @@ export default function JapanBearDamageStatisticsPage() {
           <p style={{ fontSize: 14, lineHeight: 1.8, color: '#2A2A26', marginBottom: 16 }}>
             統計が示すとおり、秋の農作業・山菜採りの時期は特にリスクが高まります。農地や山林への立入前に、エリア散布型の忌避スプレーを活用することで、クマの接近抑制が期待できます。KUMANUKEは植物由来成分を配合した、エリア散布を想定した製品です。
           </p>
-          <Link href="/" style={{ display: 'inline-block', background: '#143D1E', color: '#fff', fontWeight: 700, fontSize: 14, padding: '10px 24px', borderRadius: 4, textDecoration: 'none' }}>
+          <Link href="/products/kumanuke" style={{ display: 'inline-block', background: '#143D1E', color: '#fff', fontWeight: 700, fontSize: 14, padding: '10px 24px', borderRadius: 4, textDecoration: 'none' }}>
             KUMANUKEの詳細を見る →
           </Link>
         </div>

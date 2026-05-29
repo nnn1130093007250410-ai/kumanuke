@@ -34,7 +34,7 @@ export default function HikingBearPreventionPage() {
           日本では毎年、登山中の熊との接触事故が報告されています。特にツキノワグマは低山域から高山帯まで広く生息しており、登山者が注意を払うべき野生動物です。このガイドでは、入山前・行動中・野営時のそれぞれの段階でできる熊対策を解説します。
         </p>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', marginTop: 48, marginBottom: 16, paddingBottom: 10, borderBottom: '2px solid #EFEFED' }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginTop: 56, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           登山中の熊リスクが高い状況
         </h2>
         <p>以下の条件が重なる場合は特に注意が必要です。事前に情報収集し、対策を十分に行った上で入山してください。</p>
@@ -52,7 +52,7 @@ export default function HikingBearPreventionPage() {
           ))}
         </div>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', marginTop: 48, marginBottom: 16, paddingBottom: 10, borderBottom: '2px solid #EFEFED' }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginTop: 56, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           入山前の準備
         </h2>
         <ul style={{ paddingLeft: 24 }}>
@@ -63,7 +63,7 @@ export default function HikingBearPreventionPage() {
           <li style={{ marginBottom: 10 }}><strong>登山計画書を提出する</strong>：万が一の事故に備え、警察・山岳会への届出を忘れずに</li>
         </ul>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', marginTop: 48, marginBottom: 16, paddingBottom: 10, borderBottom: '2px solid #EFEFED' }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginTop: 56, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           野営・テント泊での熊対策
         </h2>
         <p>テント泊・バックカントリーでの野営は熊との遭遇リスクが特に高まります。キャンプ場と違い、周囲に管理者がいないため、自己責任での対策が不可欠です。</p>
@@ -85,7 +85,7 @@ export default function HikingBearPreventionPage() {
           ))}
         </div>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', marginTop: 48, marginBottom: 16, paddingBottom: 10, borderBottom: '2px solid #EFEFED' }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginTop: 56, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           熊に遭遇した場合の対処法
         </h2>
         <div style={{ background: '#FEF3F2', border: '1px solid #FECACA', borderRadius: 8, padding: '20px 20px' }}>
@@ -107,7 +107,7 @@ export default function HikingBearPreventionPage() {
           <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: 14, lineHeight: 1.85, marginBottom: 20 }}>
             植物由来成分を使用したエリア散布型の野生動物対策スプレー。野営地・テントサイトの外周散布に。OCガス・カプサイシン不使用。
           </p>
-          <Link href="/" style={{ display: 'inline-block', background: '#E07A30', color: '#fff', fontWeight: 700, fontSize: 14, padding: '12px 24px', borderRadius: 4, textDecoration: 'none' }}>
+          <Link href="/products/kumanuke" style={{ display: 'inline-block', background: '#E07A30', color: '#fff', fontWeight: 700, fontSize: 14, padding: '12px 24px', borderRadius: 4, textDecoration: 'none' }}>
             製品詳細を見る
           </Link>
         </div>

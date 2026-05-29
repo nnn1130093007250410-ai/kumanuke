@@ -34,7 +34,7 @@ export default function CampingBearPreventionPage() {
           近年、登山・キャンプ中の熊との遭遇事故が増加しています。「熊鈴を鳴らす」「食料をしっかり管理する」といった基本的な対策に加えて、テントサイト周辺にあらかじめ忌避剤を散布しておく「エリア散布」という方法が注目されています。このガイドでは、キャンプ・野営地での熊対策を体系的に解説します。
         </p>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', marginTop: 48, marginBottom: 16, paddingBottom: 10, borderBottom: '2px solid #EFEFED' }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginTop: 56, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           なぜキャンプ場で熊が出るのか
         </h2>
         <p>熊はもともと山林の奥に生息していますが、食料を求めて人間の生活圏に近づくケースが増えています。特にキャンプ場では、食料の匂いや調理の煙が広範囲に漂い、熊を引き寄せる原因となります。</p>
@@ -45,7 +45,7 @@ export default function CampingBearPreventionPage() {
           <li style={{ marginBottom: 8 }}>ドングリ・山菜など熊の餌が豊富なエリアでのキャンプ</li>
         </ul>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', marginTop: 48, marginBottom: 16, paddingBottom: 10, borderBottom: '2px solid #EFEFED' }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginTop: 56, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           キャンプ場での熊対策：基本の5つ
         </h2>
 
@@ -67,7 +67,7 @@ export default function CampingBearPreventionPage() {
           ))}
         </div>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', marginTop: 48, marginBottom: 16, paddingBottom: 10, borderBottom: '2px solid #EFEFED' }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginTop: 56, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           エリア散布型スプレーの使い方
         </h2>
         <p>KUMANUKEは護身用の「熊撃退スプレー」ではなく、テントサイト・野営地の外周に事前散布することで熊の侵入を抑制する「エリア散布型」の忌避スプレーです。</p>
@@ -81,7 +81,7 @@ export default function CampingBearPreventionPage() {
           </ul>
         </div>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', marginTop: 48, marginBottom: 16, paddingBottom: 10, borderBottom: '2px solid #EFEFED' }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginTop: 56, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           散布のタイミングと目安
         </h2>
         <p>効果的な散布のタイミングと頻度は以下の通りです。</p>
@@ -111,7 +111,7 @@ export default function CampingBearPreventionPage() {
           </table>
         </div>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', marginTop: 48, marginBottom: 16, paddingBottom: 10, borderBottom: '2px solid #EFEFED' }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginTop: 56, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           熊遭遇時の対処法
         </h2>
         <p>万が一、熊と遭遇してしまった場合の基本的な対処法です。KUMANUKEはあくまで事前対策用であり、以下の行動指針も必ず確認しておきましょう。</p>
@@ -127,7 +127,7 @@ export default function CampingBearPreventionPage() {
           <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: 14, lineHeight: 1.85, marginBottom: 20 }}>
             KUMANUKEは植物由来成分を使用したエリア散布型の野生動物対策スプレーです。OCガス・カプサイシン不使用で、テントサイト・農地外周・ゴミ置き場など幅広い場所での使用に対応しています。
           </p>
-          <Link href="/" style={{ display: 'inline-block', background: '#E07A30', color: '#fff', fontWeight: 700, fontSize: 14, padding: '12px 24px', borderRadius: 4, textDecoration: 'none' }}>
+          <Link href="/products/kumanuke" style={{ display: 'inline-block', background: '#E07A30', color: '#fff', fontWeight: 700, fontSize: 14, padding: '12px 24px', borderRadius: 4, textDecoration: 'none' }}>
             製品詳細を見る
           </Link>
         </div>

@@ -35,7 +35,7 @@ export default function BearOlfactorySciencePage() {
         </p>
 
         {/* 1 */}
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', marginTop: 48, marginBottom: 16, paddingBottom: 10, borderBottom: '2px solid #EFEFED' }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginTop: 56, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           熊の嗅覚は地球上最強クラス
         </h2>
         <p>熊（特にクマ科全般）の嗅覚能力は、科学的に測定された中でも地球上最強クラスの動物の一つです。その驚異的な能力を数字で見てみましょう。</p>
@@ -63,7 +63,7 @@ export default function BearOlfactorySciencePage() {
         </p>
 
         {/* 2 */}
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', marginTop: 48, marginBottom: 16, paddingBottom: 10, borderBottom: '2px solid #EFEFED' }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginTop: 56, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           匂いが熊の行動を制御するメカニズム
         </h2>
         <p>熊が特定の匂いを嗅いだとき、どのような神経・行動反応が起きるのかを見てみましょう。</p>
@@ -99,7 +99,7 @@ export default function BearOlfactorySciencePage() {
         </div>
 
         {/* 3 */}
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', marginTop: 48, marginBottom: 16, paddingBottom: 10, borderBottom: '2px solid #EFEFED' }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginTop: 56, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           国内外の研究事例
         </h2>
 
@@ -116,7 +116,7 @@ export default function BearOlfactorySciencePage() {
         <p>ScienceDaily（2011年）に掲載された研究では、肉食動物の尿に含まれる特定の揮発性化合物が、ネズミ類に本能的な回避・恐怖行動を引き起こすことが確認されました。この反応は学習によるものではなく<strong>本能的（先天的）な嗅覚回避反応</strong>であることが示されており、熊を含む哺乳類全般に類似のメカニズムが存在する可能性が指摘されています。</p>
 
         {/* 4 */}
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', marginTop: 48, marginBottom: 16, paddingBottom: 10, borderBottom: '2px solid #EFEFED' }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginTop: 56, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           植物由来成分が注目される科学的な理由
         </h2>
         <p>なぜ近年、OC（カプサイシン）のような強刺激成分ではなく、植物由来の揮発成分が研究・製品開発の注目を集めているのでしょうか。</p>
@@ -137,7 +137,7 @@ export default function BearOlfactorySciencePage() {
         </div>
 
         {/* 5 */}
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', marginTop: 48, marginBottom: 16, paddingBottom: 10, borderBottom: '2px solid #EFEFED' }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginTop: 56, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           匂いによる対策の限界と正しい使い方
         </h2>
         <div style={{ background: '#FEF9E7', border: '1px solid #FDE68A', borderRadius: 8, padding: '20px 20px' }}>
@@ -154,7 +154,7 @@ export default function BearOlfactorySciencePage() {
         </p>
 
         {/* まとめ */}
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', marginTop: 48, marginBottom: 16, paddingBottom: 10, borderBottom: '2px solid #EFEFED' }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginTop: 56, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           まとめ
         </h2>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -177,7 +177,7 @@ export default function BearOlfactorySciencePage() {
           <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: 14, lineHeight: 1.85, marginBottom: 20 }}>
             KUMANUKEは植物由来の香気成分を主体としたエリア散布型の野生動物対策スプレーです。科学的な知見をもとに開発されていますが、すべての状況・個体において同等の効果を保証するものではありません。OCガス・カプサイシン不使用。
           </p>
-          <Link href="/" style={{ display: 'inline-block', background: '#E07A30', color: '#fff', fontWeight: 700, fontSize: 14, padding: '12px 24px', borderRadius: 4, textDecoration: 'none' }}>
+          <Link href="/products/kumanuke" style={{ display: 'inline-block', background: '#E07A30', color: '#fff', fontWeight: 700, fontSize: 14, padding: '12px 24px', borderRadius: 4, textDecoration: 'none' }}>
             製品詳細を見る
           </Link>
         </div>

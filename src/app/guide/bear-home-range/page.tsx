@@ -40,7 +40,7 @@ export default function BearHomeRangePage() {
           GPS首輪によるテレメトリー調査の普及により、ツキノワグマのホームレンジの実態が詳しくわかってきました。本稿では、国内外の調査データをもとに、クマの移動範囲・オスとメスの違い・季節変化・地域差を解説し、対策への応用について考察します。
         </p>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           1. ホームレンジとは何か
         </h2>
         <p style={{ fontSize: 16, lineHeight: 1.9, color: '#2A2A26', marginBottom: 16 }}>
@@ -50,7 +50,7 @@ export default function BearHomeRangePage() {
           クマのホームレンジ研究は、VHFラジオテレメトリー法（電波発信器）から始まり、現在ではGPS首輪を用いた高精度追跡が主流になっています。近年の機器では1日96回（15分間隔）の位置データ取得も可能となり、個体の詳細な移動パターンが明らかになってきています。
         </p>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           2. ツキノワグマのホームレンジ：国内調査データ
         </h2>
         <p style={{ fontSize: 16, lineHeight: 1.9, color: '#2A2A26', marginBottom: 20 }}>
@@ -88,7 +88,7 @@ export default function BearHomeRangePage() {
           データから明らかなのは、<strong>オスのホームレンジはメスより概ね2〜5倍広い</strong>こと、そして地域の地形・食料環境によって同一種でも大きな差があることです。食料が豊富で広大な森林地帯ではより広い範囲を使い、食料が乏しい環境では食料を求めてさらに移動距離が拡大する傾向があります。
         </p>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           3. オスとメスの違い：なぜオスのホームレンジが広いか
         </h2>
         <p style={{ fontSize: 16, lineHeight: 1.9, color: '#2A2A26', marginBottom: 16 }}>
@@ -98,7 +98,7 @@ export default function BearHomeRangePage() {
           メスは子育て中（春〜夏）に子グマを抱えた状態では行動圏が縮小します。安全な育児場所・子グマが登れる大木・外敵から身を隠せる地形など、子育てに適した環境を中心に比較的狭い範囲を利用する傾向があります。逆に、授乳期を終えた秋の過食期には行動圏が拡大する事例も報告されています。
         </p>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           4. 季節による行動圏の変化
         </h2>
         <div style={{ overflowX: 'auto', marginBottom: 48 }}>
@@ -128,7 +128,7 @@ export default function BearHomeRangePage() {
           </table>
         </div>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           5. ヒグマのホームレンジ：ツキノワグマとの比較
         </h2>
         <p style={{ fontSize: 16, lineHeight: 1.9, color: '#2A2A26', marginBottom: 16 }}>
@@ -138,7 +138,7 @@ export default function BearHomeRangePage() {
           ヒグマのホームレンジが広いということは、知床や大雪山系など広大な自然環境が必要なことを示すと同時に、農業地帯と生息地が隣接する道東・道北地域では日常的に農地との境界が問題になることを意味します。
         </p>
 
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#143D1E', borderLeft: '4px solid #143D1E', paddingLeft: 14, marginBottom: 20 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#143D1E', borderLeft: '5px solid #5EC97C', paddingLeft: 16, paddingTop: 12, paddingBottom: 12, marginBottom: 28, background: '#F0F7F2', borderRadius: '0 8px 8px 0' }}>
           6. ホームレンジの知識を対策に活かす
         </h2>
         <p style={{ fontSize: 16, lineHeight: 1.9, color: '#2A2A26', marginBottom: 16 }}>
@@ -161,7 +161,7 @@ export default function BearHomeRangePage() {
           <p style={{ fontSize: 14, lineHeight: 1.8, color: '#2A2A26', marginBottom: 16 }}>
             クマが広い範囲を移動することを考えると、特定の農地・ゴミ置き場・キャンプサイトなど「来てほしくない場所」への事前の予防的対策が重要です。KUMANUKEは植物由来成分を用いたエリア散布型の忌避スプレーで、行動範囲が広いクマに対して、特定エリアへの接近を抑制する目的での使用を想定しています。
           </p>
-          <Link href="/" style={{ display: 'inline-block', background: '#143D1E', color: '#fff', fontWeight: 700, fontSize: 14, padding: '10px 24px', borderRadius: 4, textDecoration: 'none' }}>
+          <Link href="/products/kumanuke" style={{ display: 'inline-block', background: '#143D1E', color: '#fff', fontWeight: 700, fontSize: 14, padding: '10px 24px', borderRadius: 4, textDecoration: 'none' }}>
             KUMANUKEの詳細を見る →
           </Link>
         </div>
