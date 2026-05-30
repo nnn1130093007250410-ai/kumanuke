@@ -9,6 +9,14 @@
     <priority>1.0</priority>
   </url>
 
+  <!-- ── 最新出没情報 ── -->
+  <url>
+    <loc>https://kumanuke.bubuworks.co.jp/recent</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.90</priority>
+  </url>
+
   <!-- ── MAP ── -->
   <url>
     <loc>https://kumanuke.bubuworks.co.jp/map</loc>
