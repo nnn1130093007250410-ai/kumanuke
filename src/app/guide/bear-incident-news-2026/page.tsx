@@ -4,11 +4,11 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: '2026年春のクマ出没動向｜急増地域と背景要因の解説 | KUMANUKE',
   description: '2026年春（3〜5月）のクマ出没動向を分析。冬眠明けの行動変化、急増が見られる地域と背景要因、今後の見通しを生態学的視点から解説。単なるニュース転載ではない編集記事。',
-  alternates: { canonical: 'https://kumanuke.vercel.app/guide/bear-incident-news-2026' },
+  alternates: { canonical: 'https://kumanuke.bubuworks.co.jp/guide/bear-incident-news-2026' },
   openGraph: {
     title: '2026年春のクマ出没動向｜急増地域と背景要因の解説',
     description: '2026年春クマ出没の地域傾向・背景要因・今後の見通しを生態学的視点で解説。',
-    url: 'https://kumanuke.vercel.app/guide/bear-incident-news-2026',
+    url: 'https://kumanuke.bubuworks.co.jp/guide/bear-incident-news-2026',
   },
 }
 

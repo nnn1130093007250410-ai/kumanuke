@@ -20,7 +20,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'KUMANUKE スプレー | 植物由来 エリア散布型 野生動物対策',
   description: 'KUMANUKEは植物由来成分を使用したエリア散布型の野生動物対策スプレーです。熊との遭遇予防を目的とした事前散布型対策として、キャンプ・登山・農業・ゴミ置き場管理等に。OCガス・カプサイシン不使用。',
-  alternates: { canonical: 'https://kumanuke.vercel.app/products/kumanuke' },
+  alternates: { canonical: 'https://kumanuke.bubuworks.co.jp/products/kumanuke' },
 }
 
 export default function ProductPage() {

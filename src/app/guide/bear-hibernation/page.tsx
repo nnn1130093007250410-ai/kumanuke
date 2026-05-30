@@ -4,11 +4,11 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'クマの冬眠メカニズム｜生理学・脂肪代謝・目覚めの危険性を解説 | KUMANUKE',
   description: 'クマの冬眠は「本当の冬眠」ではない。心拍数・体温・脂肪代謝の変化、目覚め直後の危険性、近年の冬眠短縮と気候変動との関係を最新研究をもとに解説します。',
-  alternates: { canonical: 'https://kumanuke.vercel.app/guide/bear-hibernation' },
+  alternates: { canonical: 'https://kumanuke.bubuworks.co.jp/guide/bear-hibernation' },
   openGraph: {
     title: 'クマの冬眠メカニズム｜生理学・脂肪代謝・目覚めの危険性',
     description: 'クマの冬眠は「本当の冬眠」ではない。脂肪代謝・心拍変化・目覚め後の危険期を研究データで解説。',
-    url: 'https://kumanuke.vercel.app/guide/bear-hibernation',
+    url: 'https://kumanuke.bubuworks.co.jp/guide/bear-hibernation',
   },
 }
 

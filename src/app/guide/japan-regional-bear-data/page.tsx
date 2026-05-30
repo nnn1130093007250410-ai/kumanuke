@@ -4,11 +4,11 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: '都道府県別クマ出没傾向分析｜110,000件のデータが語ること | KUMANUKE',
   description: 'KUMANUKEが独自収集した110,000件超の出没データから見えてくる地域別傾向を解説。なぜ秋田・新潟が多いのか、急増地域の背景、北海道と本州の違いを多角的に分析。',
-  alternates: { canonical: 'https://kumanuke.vercel.app/guide/japan-regional-bear-data' },
+  alternates: { canonical: 'https://kumanuke.bubuworks.co.jp/guide/japan-regional-bear-data' },
   openGraph: {
     title: '都道府県別クマ出没傾向分析｜110,000件のデータが語ること',
     description: '独自収集110,000件超のデータで読み解く地域別傾向。秋田・新潟トップの背景・急増地域・北海道vs本州の違い。',
-    url: 'https://kumanuke.vercel.app/guide/japan-regional-bear-data',
+    url: 'https://kumanuke.bubuworks.co.jp/guide/japan-regional-bear-data',
   },
 }
 

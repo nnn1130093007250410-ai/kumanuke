@@ -85,7 +85,7 @@ export async function generateMetadata({
   return {
     title: `${nameJa}の熊情報 | WORLD BEAR REPORT — KUMANUKE`,
     description: `${nameJa}の熊出没・人身被害・保護政策・研究の最新情報を日本語で整理。`,
-    alternates: { canonical: `https://kumanuke.vercel.app/world/${params.country}` },
+    alternates: { canonical: `https://kumanuke.bubuworks.co.jp/world/${params.country}` },
   }
 }
 

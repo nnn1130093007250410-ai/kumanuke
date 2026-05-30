@@ -4,11 +4,11 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'クマの繁殖と母子行動｜なぜ母グマは最も危険なのか | KUMANUKE',
   description: 'クマの繁殖期・遅延着床・子グマの成長と行動変化。人身事故統計が示す「母グマとの遭遇リスク」を生態・行動学の観点から解説。繁殖シーズン中の安全行動も紹介。',
-  alternates: { canonical: 'https://kumanuke.vercel.app/guide/bear-reproduction-cubs' },
+  alternates: { canonical: 'https://kumanuke.bubuworks.co.jp/guide/bear-reproduction-cubs' },
   openGraph: {
     title: 'クマの繁殖と母子行動｜なぜ母グマは最も危険なのか',
     description: '遅延着床・子グマの成長・母親防衛行動の統計。人身被害の多くは母子グマとの遭遇から。研究データで解説。',
-    url: 'https://kumanuke.vercel.app/guide/bear-reproduction-cubs',
+    url: 'https://kumanuke.bubuworks.co.jp/guide/bear-reproduction-cubs',
   },
 }
 

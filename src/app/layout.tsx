@@ -22,13 +22,13 @@ const dmSans = DM_Sans({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://kumanuke.vercel.app'),
+  metadataBase: new URL('https://kumanuke.bubuworks.co.jp'),
   title: {
     default: 'KUMANUKE | 熊・野生動物情報ポータル',
     template: '%s | KUMANUKE',
   },
   description:
-    '日本最大級の熊・野生動物情報インフラ。全国102,000件超の出没データをマップ・ランキング・統計で可視化。対策ガイド25本・世界の熊情報も網羅。熊よけスプレーKUMANUKEも販売。',
+    '日本最大級の熊・野生動物情報インフラ。全国110,000件超の出没データをマップ・ランキング・統計で可視化。対策ガイド35本・世界の熊情報も網羅。熊よけスプレーKUMANUKEも販売。',
   keywords: [
     '熊出没マップ', 'クマ出没情報', '熊情報ポータル', '野生動物情報',
     '全国熊出没', '熊対策ガイド', '熊よけスプレー', '熊被害統計',
@@ -39,23 +39,23 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'ja_JP',
-    url: 'https://kumanuke.vercel.app',
+    url: 'https://kumanuke.bubuworks.co.jp',
     siteName: 'KUMANUKE',
     title: 'KUMANUKE | 熊・野生動物情報ポータル',
     description:
-      '日本最大級の熊・野生動物情報インフラ。全国102,000件超の出没データをマップ・ランキング・統計で可視化。',
+      '日本最大級の熊・野生動物情報インフラ。全国110,000件超の出没データをマップ・ランキング・統計で可視化。',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'KUMANUKE | 熊・野生動物情報ポータル',
-    description: '全国102,000件超の熊出没データをマップ・統計で可視化。対策ガイド25本・世界情報も。',
+    description: '全国110,000件超の熊出没データをマップ・統計で可視化。対策ガイド25本・世界情報も。',
   },
   robots: {
     index: true,
     follow: true,
     googleBot: { index: true, follow: true, 'max-image-preview': 'large' },
   },
-  alternates: { canonical: 'https://kumanuke.vercel.app' },
+  alternates: { canonical: 'https://kumanuke.bubuworks.co.jp' },
   verification: { google: ['59t4CPVWs5pqhP2kXA31OTvt18MMUrvsXVCm0UuoH78', 'gxUV_ke8-IuvsLbvhKFbtZOBI6l0wX3QJ7XBXV-DAwU'] },
 }
 
@@ -77,14 +77,39 @@ const jsonLd = {
     },
     {
       '@type': 'WebSite',
-      url: 'https://kumanuke.vercel.app',
+      url: 'https://kumanuke.bubuworks.co.jp',
       name: 'KUMANUKE',
       description: '熊・野生動物情報ポータル — 全国出没データ・対策ガイド・世界情報を集約',
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: { '@type': 'EntryPoint', urlTemplate: 'https://kumanuke.bubuworks.co.jp/map/{prefecture}' },
+        'query-input': 'required name=prefecture',
+      },
+    },
+    {
+      '@type': 'Dataset',
+      '@id': 'https://kumanuke.bubuworks.co.jp/map#dataset',
+      name: '日本全国クマ出没データベース',
+      description: 'ArcGIS REST API・自治体オープンデータから収集した日本全国のクマ（ツキノワグマ・ヒグマ）出没情報。目撃・人身被害・捕獲を含む110,000件超のデータを毎週自動更新。',
+      url: 'https://kumanuke.bubuworks.co.jp/map',
+      creator: { '@type': 'Organization', name: 'BUBUWORKS合同会社', url: 'https://kumanuke.bubuworks.co.jp' },
+      keywords: ['クマ出没', 'ヒグマ', 'ツキノワグマ', '野生動物', '出没情報', '人身被害', '熊対策'],
+      license: 'https://kumanuke.bubuworks.co.jp/privacy',
+      temporalCoverage: '2000/..',
+      spatialCoverage: {
+        '@type': 'Place',
+        name: '日本',
+        geo: { '@type': 'GeoShape', box: '24 122 46 154' },
+      },
+      measurementTechnique: '自治体公開ArcGISデータ・Google My Maps KMLデータの自動収集',
+      variableMeasured: 'クマ目撃・人身被害・捕獲件数',
+      isAccessibleForFree: true,
+      inLanguage: 'ja',
     },
     {
       '@type': 'Organization',
       name: 'BUBUWORKS合同会社',
-      url: 'https://kumanuke.vercel.app',
+      url: 'https://kumanuke.bubuworks.co.jp',
       email: 'kumanuke@bubuworks.co.jp',
       address: {
         '@type': 'PostalAddress',

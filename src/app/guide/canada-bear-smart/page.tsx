@@ -4,11 +4,11 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'カナダBear Smartプログラム｜人と熊の共存政策モデルを解説 | KUMANUKE',
   description: 'カナダBC州のBear Smartプログラムはなぜ機能するのか。コミュニティ認証制度・ゴミ管理条例・山岳リゾートの共存モデル・日本への示唆を具体的データとともに解説。',
-  alternates: { canonical: 'https://kumanuke.vercel.app/guide/canada-bear-smart' },
+  alternates: { canonical: 'https://kumanuke.bubuworks.co.jp/guide/canada-bear-smart' },
   openGraph: {
     title: 'カナダBear Smartプログラム｜人と熊の共存政策モデル',
     description: 'BC州Bear Smart認証・ウィスラーの事例・日本との比較。共存を実現した政策の具体的な中身を解説。',
-    url: 'https://kumanuke.vercel.app/guide/canada-bear-smart',
+    url: 'https://kumanuke.bubuworks.co.jp/guide/canada-bear-smart',
   },
 }
 

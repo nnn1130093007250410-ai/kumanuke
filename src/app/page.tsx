@@ -17,12 +17,12 @@ export const metadata: Metadata = {
     '熊出没マップ', 'クマ出没情報', '熊情報ポータル', '野生動物情報',
     '全国熊出没', '熊対策ガイド', '熊よけスプレー', '熊被害統計',
   ],
-  alternates: { canonical: 'https://kumanuke.vercel.app' },
+  alternates: { canonical: 'https://kumanuke.bubuworks.co.jp' },
   openGraph: {
     type: 'website',
     title: 'KUMANUKE | 熊・野生動物情報ポータル',
     description: '日本最大級の熊・野生動物情報インフラ。全国110,000件超の出没データをリアルタイムに近い形でマップ表示。',
-    url: 'https://kumanuke.vercel.app',
+    url: 'https://kumanuke.bubuworks.co.jp',
   },
 }
 

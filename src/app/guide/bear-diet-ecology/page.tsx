@@ -4,11 +4,11 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'クマの食性と採食生態｜季節別食料戦略と出没リスクの関係 | KUMANUKE',
   description: 'クマは何を食べているのか。春の草本類から秋のドングリまで、月別の主要食料と採食行動を解説。ドングリ凶作との出没増加の関係、人間由来の食料が引き起こす依存行動も詳述。',
-  alternates: { canonical: 'https://kumanuke.vercel.app/guide/bear-diet-ecology' },
+  alternates: { canonical: 'https://kumanuke.bubuworks.co.jp/guide/bear-diet-ecology' },
   openGraph: {
     title: 'クマの食性と採食生態｜季節別食料戦略と出没リスクの関係',
     description: '月別食料カレンダー・ドングリ凶作と出没増加の関係・人間由来食料への依存メカニズムを研究データで解説。',
-    url: 'https://kumanuke.vercel.app/guide/bear-diet-ecology',
+    url: 'https://kumanuke.bubuworks.co.jp/guide/bear-diet-ecology',
   },
 }
 

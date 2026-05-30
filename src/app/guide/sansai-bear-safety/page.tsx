@@ -4,11 +4,11 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: '山菜採り・野山作業中の熊対策｜春の最危険期を安全に | KUMANUKE',
   description: '山菜採りはクマ事故の最多場面のひとつ。冬眠明けクマとの行動圏重複・沢音による熊鈴の無効化・身を隠す植生。統計・チェックリスト・遭遇時行動まで完全ガイド。',
-  alternates: { canonical: 'https://kumanuke.vercel.app/guide/sansai-bear-safety' },
+  alternates: { canonical: 'https://kumanuke.bubuworks.co.jp/guide/sansai-bear-safety' },
   openGraph: {
     title: '山菜採り・野山作業中の熊対策｜春の最危険期を安全に',
     description: '山菜採り中のクマ事故統計・危険環境の特徴・入山前チェックリスト・遭遇時行動を完全解説。',
-    url: 'https://kumanuke.vercel.app/guide/sansai-bear-safety',
+    url: 'https://kumanuke.bubuworks.co.jp/guide/sansai-bear-safety',
   },
 }
 

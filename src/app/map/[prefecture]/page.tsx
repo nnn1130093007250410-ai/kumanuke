@@ -44,6 +44,41 @@ const REGIONAL_GUIDES: Record<string, { href: string; label: string }[]> = {
   ],
 }
 
+// ── 都道府県統計ヘルパー ─────────────────────────────────────────────────────
+function getPrefStats(allSightings: ReturnType<typeof loadBearData>, prefName: string) {
+  const pref = allSightings.filter((s) => s.prefecture === prefName)
+  const total = pref.length
+
+  // 全国順位
+  const counts: Record<string, number> = {}
+  for (const s of allSightings) if (s.prefecture) counts[s.prefecture] = (counts[s.prefecture] ?? 0) + 1
+  const rank = Object.values(counts).filter((c) => c > total).length + 1
+
+  // 上位3市区町村
+  const cityMap: Record<string, number> = {}
+  for (const s of pref) if (s.city) cityMap[s.city] = (cityMap[s.city] ?? 0) + 1
+  const topCities = Object.entries(cityMap).sort((a, b) => b[1] - a[1]).slice(0, 3)
+
+  // ピーク月（1〜12）
+  const mMap: Record<number, number> = {}
+  for (const s of pref) {
+    const m = parseInt(s.date?.slice(5, 7))
+    if (!isNaN(m) && m >= 1 && m <= 12) mMap[m] = (mMap[m] ?? 0) + 1
+  }
+  const peakEntry = Object.entries(mMap).sort((a, b) => +b[1] - +a[1])[0]
+  const peakMonth = peakEntry ? +peakEntry[0] : null
+
+  // 年別件数（直近3年）
+  const cy = new Date().getFullYear()
+  const yearCounts: Record<number, number> = {}
+  for (const s of pref) {
+    const y = parseInt(s.date?.slice(0, 4))
+    if (y >= cy - 2) yearCounts[y] = (yearCounts[y] ?? 0) + 1
+  }
+
+  return { total, rank, topCities, peakMonth, yearCounts }
+}
+
 export async function generateStaticParams() {
   const sightings = loadBearData()
   const prefSet = new Set(sightings.map((s) => s.prefecture))
@@ -60,13 +95,16 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const info = getPrefectureBySlug(params.prefecture)
   if (!info) return {}
+  const stats = getPrefStats(loadBearData(), info.name)
+  const topCity = stats.topCities[0]?.[0] ?? ''
+  const totalStr = stats.total.toLocaleString('ja-JP')
   return {
-    title: `${info.name}の熊出没情報マップ｜KUMANUKE MAP`,
-    description: `${info.name}の最新クマ出没情報。目撃・被害・人身事故など危険度別にマップ表示。${info.name}で確認されたクマ（${info.bearType}）の出没データ一覧。`,
+    title: `${info.name}のクマ出没情報 ${totalStr}件・全国${stats.rank}位｜KUMANUKE`,
+    description: `${info.name}のクマ出没情報${totalStr}件（全国${stats.rank}位）。${topCity ? `${topCity}での出没が最多。` : ''}目撃・人身被害・捕獲など危険度別にマップ表示。${info.bearType}の出没データを毎週自動更新。`,
     alternates: { canonical: `https://kumanuke.bubuworks.co.jp/map/${params.prefecture}` },
     openGraph: {
-      title: `${info.name}の熊出没情報マップ`,
-      description: `${info.name}のクマ出没情報を地図で確認。${info.bearType}の目撃・被害情報を一覧で提供。`,
+      title: `${info.name}のクマ出没情報 ${totalStr}件・全国${stats.rank}位`,
+      description: `${info.name}のクマ出没${totalStr}件を地図で確認。${info.bearType}の目撃・被害・捕獲情報を毎週更新。`,
       url: `https://kumanuke.bubuworks.co.jp/map/${params.prefecture}`,
     },
   }
@@ -94,6 +132,7 @@ export default function PrefecturePage({ params }: { params: { prefecture: strin
   const level1Count = prefSightings.filter((s) => s.danger_level === 1).length
 
   const relatedGuides = REGIONAL_GUIDES[params.prefecture] ?? REGIONAL_GUIDES.default
+  const prefStats = getPrefStats(allSightings, info.name)
 
   return (
     <main style={{ background: '#F5F7F5', minHeight: '80vh' }}>
@@ -413,6 +452,63 @@ export default function PrefecturePage({ params }: { params: { prefecture: strin
             </Link>
           </div>
         </div>
+
+        {/* SEO テキストセクション（検索エンジン向けの自然言語コンテンツ） */}
+        <section
+          style={{
+            marginTop: 48,
+            background: '#fff',
+            border: '1px solid #DDDDD8',
+            borderRadius: 10,
+            padding: '28px 32px',
+          }}
+        >
+          <h2 style={{ fontSize: 18, fontWeight: 700, color: '#143D1E', marginBottom: 16 }}>
+            {info.name}のクマ出没状況について
+          </h2>
+          <p style={{ fontSize: 14, color: '#333', lineHeight: 1.9, marginBottom: 16 }}>
+            {info.name}では、KUMANUKEデータベースに
+            <strong>{prefStats.total.toLocaleString('ja-JP')}件</strong>
+            のクマ出没情報が登録されており、都道府県別では全国
+            <strong>{prefStats.rank}位</strong>です（{new Date().getFullYear()}年{new Date().getMonth() + 1}月時点）。
+            {prefStats.topCities.length > 0 && (
+              <>
+                市区町村別では
+                {prefStats.topCities.map(([city, count], i) => (
+                  <span key={city}>
+                    {i > 0 && '、'}
+                    <strong>{city}</strong>（{count.toLocaleString('ja-JP')}件）
+                  </span>
+                ))}
+                の順で出没が多く記録されています。
+              </>
+            )}
+          </p>
+          {prefStats.peakMonth && (
+            <p style={{ fontSize: 14, color: '#333', lineHeight: 1.9, marginBottom: 16 }}>
+              月別では<strong>{prefStats.peakMonth}月</strong>が年間で最も出没件数が多くなっています。
+              {prefStats.peakMonth >= 9 && prefStats.peakMonth <= 11
+                ? 'クマの冬眠前の過食期（9〜11月）は特に活動が活発化し、人里への出没リスクが高まります。山林や農地付近への立ち入りには十分な注意が必要です。'
+                : prefStats.peakMonth >= 4 && prefStats.peakMonth <= 6
+                ? '冬眠明けの春（4〜6月）は食料を求めて行動範囲が広がる時期です。登山・山菜採りの際は特に注意してください。'
+                : '農作業や山での活動の際は、クマよけ鈴や撃退スプレーを携帯することをおすすめします。'}
+            </p>
+          )}
+          {Object.keys(prefStats.yearCounts).length > 0 && (
+            <p style={{ fontSize: 14, color: '#333', lineHeight: 1.9 }}>
+              直近の年別件数：
+              {Object.entries(prefStats.yearCounts)
+                .sort((a, b) => +a[0] - +b[0])
+                .map(([year, count], i) => (
+                  <span key={year}>
+                    {i > 0 && '／'}
+                    {year}年 <strong>{count.toLocaleString('ja-JP')}件</strong>
+                  </span>
+                ))}。
+              最新の出没情報は上記マップおよびリストでご確認ください。
+            </p>
+          )}
+        </section>
 
         {/* Disclaimer */}
         <div

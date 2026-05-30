@@ -5,11 +5,11 @@ export const metadata: Metadata = {
   title: '環境省クマ被害データ＆発表まとめ | KUMANUKE',
   description:
     '環境省が公表するクマによる人身被害件数・出没情報・捕獲数の統計データ、対策パッケージ・ロードマップ、最新お知らせを分かりやすく整理したページ。',
-  alternates: { canonical: 'https://kumanuke.vercel.app/data' },
+  alternates: { canonical: 'https://kumanuke.bubuworks.co.jp/data' },
   openGraph: {
     title: '環境省クマ被害データ＆発表まとめ | KUMANUKE',
     description: '環境省公式データをもとにクマ被害の推移・対策・最新情報を整理。',
-    url: 'https://kumanuke.vercel.app/data',
+    url: 'https://kumanuke.bubuworks.co.jp/data',
   },
 }
 

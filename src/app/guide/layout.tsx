@@ -5,9 +5,31 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 }
 
+// ガイド共通 JSON-LD（Article スキーマ）
+const guideJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'KUMANUKE 熊対策ガイド',
+  description: '登山・キャンプ・農業・ゴミ管理など状況別のクマ対策を科学的根拠に基づいて解説するガイド集。35本以上の記事を掲載。',
+  url: 'https://kumanuke.bubuworks.co.jp/guide',
+  publisher: {
+    '@type': 'Organization',
+    name: 'BUBUWORKS合同会社',
+    url: 'https://kumanuke.bubuworks.co.jp',
+    logo: { '@type': 'ImageObject', url: 'https://kumanuke.bubuworks.co.jp/opengraph-image' },
+  },
+  inLanguage: 'ja',
+  isAccessibleForFree: true,
+  about: { '@type': 'Thing', name: 'クマ対策・野生動物対策' },
+}
+
 export default function GuideLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(guideJsonLd) }}
+      />
       {/* 読み進めプログレスバー（視覚的アクセント） */}
       <div style={{ height: 3, background: 'linear-gradient(to right, #5EC97C, #143D1E, #E07A30)', position: 'sticky', top: 0, zIndex: 200 }} />
 
@@ -45,7 +67,7 @@ export default function GuideLayout({ children }: { children: React.ReactNode })
                 全国熊出没マップで今の状況を確認
               </p>
               <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.45)', lineHeight: 1.6 }}>
-                102,000件超の出没データ＋世界35カ国のクマ情報をマップ表示
+                110,000件超の出没データ＋世界35カ国のクマ情報をマップ表示
               </p>
             </div>
           </div>

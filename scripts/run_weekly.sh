@@ -42,6 +42,13 @@ python3 scripts/update_stats.py || {
     exit 1
 }
 
+# ── X（Twitter）自動投稿 ─────────────────────────────────────────────────────
+echo ""
+echo "$LOG_PREFIX X 自動投稿..."
+python3 scripts/post_to_x.py || {
+    echo "$LOG_PREFIX ⚠ post_to_x.py でエラー（認証情報未設定の可能性）"
+}
+
 # ── 環境省文書 新着チェック ───────────────────────────────────────────────────
 echo ""
 echo "$LOG_PREFIX 環境省文書チェック 開始..."

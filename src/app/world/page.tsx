@@ -59,11 +59,11 @@ export const metadata: Metadata = {
   title: 'WORLD BEAR REPORT | 世界の熊情報メディア — KUMANUKE',
   description: '世界の熊出没・人身事故・政策・研究・人獣共存を日本語で整理。アメリカ・カナダ・フィンランド・スウェーデンほか世界各国の熊情報を編集・比較。',
   keywords: ['世界 熊 出没', '海外 熊事故', 'カナダ 熊', 'アメリカ ベアスプレー', '世界の熊対策', '人獣共存 海外'],
-  alternates: { canonical: 'https://kumanuke.vercel.app/world' },
+  alternates: { canonical: 'https://kumanuke.bubuworks.co.jp/world' },
   openGraph: {
     title: 'WORLD BEAR REPORT | 世界の熊情報メディア',
     description: '世界50カ国超の熊出没・政策・研究を日本語で整理するメディア。',
-    url: 'https://kumanuke.vercel.app/world',
+    url: 'https://kumanuke.bubuworks.co.jp/world',
   },
 }
 

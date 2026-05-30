@@ -4,11 +4,11 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: '北米のベアスプレー文化｜義務化・研究・効果の科学 | KUMANUKE',
   description: '北米でベアスプレーはなぜ文化として定着したのか。トム・スミス博士の97.9%有効率研究・国立公園での義務化経緯・銃との効果比較・日本との規制の違いを詳解。',
-  alternates: { canonical: 'https://kumanuke.vercel.app/guide/north-america-bear-spray' },
+  alternates: { canonical: 'https://kumanuke.bubuworks.co.jp/guide/north-america-bear-spray' },
   openGraph: {
     title: '北米のベアスプレー文化｜義務化・研究・効果の科学',
     description: '97.9%有効率の研究・グレイシャー国立公園の義務化・銃との比較。北米ベアスプレー文化の全体像。',
-    url: 'https://kumanuke.vercel.app/guide/north-america-bear-spray',
+    url: 'https://kumanuke.bubuworks.co.jp/guide/north-america-bear-spray',
   },
 }
 
