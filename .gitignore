@@ -29,6 +29,10 @@ yarn-error.log*
 # vercel
 .vercel
 
+# X API 認証情報（絶対にコミットしない）
+scripts/x_credentials.json
+scripts/x_posted.json
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

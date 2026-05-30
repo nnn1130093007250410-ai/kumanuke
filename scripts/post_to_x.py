@@ -496,11 +496,11 @@ def main():
     data          = load_data()
     posted_count  = 0
 
-    # ── ① 人身被害速報（毎回チェック・最大2件）──────────────────────────────
+    # ── ① 人身被害速報（毎日チェック・最大3件）──────────────────────────────
     print("\n[速報チェック]")
     new_injuries = get_new_injury_records(since_days=8)
     injury_posted = 0
-    for rec in new_injuries[:2]:
+    for rec in new_injuries[:3]:
         rid = rec.get('id', '')
         if rid and not already_posted(rid):
             try:
