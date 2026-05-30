@@ -433,7 +433,7 @@ export default function MapClient({
     } else if (viewMode === 'all') {
       map.flyTo({ center: [80, 25], zoom: 1.5, duration: 1200 })
     } else if (viewMode === 'heat') {
-      map.flyTo({ center: [20, 30], zoom: 1.8, duration: 1200 })
+      map.flyTo({ center: [centerLng, centerLat], zoom: 5, duration: 1200 })
     } else {
       map.flyTo({ center: [centerLng, centerLat], zoom, duration: 1000 })
     }
