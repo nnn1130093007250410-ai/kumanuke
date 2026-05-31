@@ -89,12 +89,21 @@ export interface WorldBearReportV2 {
   importance_level: 1 | 2 | 3
   bear_type: string         // English (e.g. "Grizzly", "Black bear")
   title_en: string
-  summary_ja: string        // Japanese summary
+  summary_ja: string        // Japanese summary (1–2 sentences)
   source_name: string
   source_url: string
   lat: number
   lng: number
   created_at: string        // ISO 8601
+  // ── V2.1 enriched fields (optional) ───────────────────────────
+  detail_ja?: string        // 詳細解説 300–500文字
+  lessons_ja?: string       // 教訓・対策ポイント
+  official_response_ja?: string  // 当局・機関の対応・措置
+  casualties?: {
+    killed?: number
+    injured?: number
+  }
+  bear_population?: string  // 地域の推定個体数（例: "約1,700頭（2024年推定）"）
 }
 
 export const WORLD_EVENT_TYPE_CONFIG: Record<WorldEventType, { label: string; icon: string; color: string }> = {

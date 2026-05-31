@@ -223,6 +223,7 @@ export default async function WorldPage() {
                     padding: '14px 16px',
                     borderRadius: '0 6px 6px 0',
                   }}>
+                    {/* Header */}
                     <div style={{ display: 'flex', gap: 6, marginBottom: 6, flexWrap: 'wrap', alignItems: 'center' }}>
                       <span style={{
                         background: ev.color, color: '#fff',
@@ -239,6 +240,16 @@ export default async function WorldPage() {
                       }}>
                         {WORLD_IMPORTANCE_LABELS[r.importance_level]}
                       </span>
+                      {/* Casualties badge */}
+                      {r.casualties && (r.casualties.killed ?? 0) > 0 && (
+                        <span style={{
+                          background: '#7F1D1D', color: '#FCA5A5',
+                          fontSize: 9, fontWeight: 700,
+                          padding: '1px 7px', borderRadius: 3,
+                        }}>
+                          死亡 {r.casualties.killed}
+                        </span>
+                      )}
                       <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.5)' }}>
                         🌐 {displayCountry} · {r.region}
                       </span>
@@ -246,9 +257,20 @@ export default async function WorldPage() {
                         {formatDateShort(r.date)}
                       </span>
                     </div>
-                    <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.85)', margin: '0 0 4px', lineHeight: 1.6 }}>
+                    {/* Summary */}
+                    <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.85)', margin: '0 0 6px', lineHeight: 1.7 }}>
                       {r.summary_ja}
                     </p>
+                    {/* Lessons snippet */}
+                    {r.lessons_ja && (
+                      <p style={{
+                        fontSize: 11, color: '#34D399',
+                        margin: '0 0 6px', lineHeight: 1.65,
+                        paddingLeft: 8, borderLeft: '2px solid rgba(16,185,129,0.3)',
+                      }}>
+                        📌 {r.lessons_ja.length > 80 ? r.lessons_ja.slice(0, 80) + '…' : r.lessons_ja}
+                      </p>
+                    )}
                     <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)', margin: 0 }}>
                       🐻 {r.bear_type} · {r.source_name}
                     </p>

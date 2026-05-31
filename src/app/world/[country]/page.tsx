@@ -237,15 +237,16 @@ export default function CountryPage({ params }: { params: { country: string } })
                   {reports.length}件
                 </span>
               </h2>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                 {reports.map((r) => (
                   <div key={r.id} style={{
                     background: 'rgba(255,255,255,0.03)',
                     borderLeft: `3px solid ${cfg.color}`,
-                    padding: '14px 18px',
+                    padding: '16px 18px',
                     borderRadius: '0 6px 6px 0',
                   }}>
-                    <div style={{ display: 'flex', gap: 6, marginBottom: 6, flexWrap: 'wrap', alignItems: 'center' }}>
+                    {/* ── Header row ── */}
+                    <div style={{ display: 'flex', gap: 6, marginBottom: 8, flexWrap: 'wrap', alignItems: 'center' }}>
                       <span style={{
                         background: WORLD_IMPORTANCE_COLORS[r.importance_level],
                         color: '#fff', fontSize: 9, fontWeight: 700,
@@ -253,6 +254,29 @@ export default function CountryPage({ params }: { params: { country: string } })
                       }}>
                         {WORLD_IMPORTANCE_LABELS[r.importance_level]}
                       </span>
+                      {/* Casualties badge */}
+                      {r.casualties && (
+                        <>
+                          {(r.casualties.killed ?? 0) > 0 && (
+                            <span style={{
+                              background: '#7F1D1D', color: '#FCA5A5',
+                              fontSize: 9, fontWeight: 700,
+                              padding: '1px 7px', borderRadius: 3,
+                            }}>
+                              死亡 {r.casualties.killed}
+                            </span>
+                          )}
+                          {(r.casualties.injured ?? 0) > 0 && (
+                            <span style={{
+                              background: '#7C2D12', color: '#FED7AA',
+                              fontSize: 9, fontWeight: 700,
+                              padding: '1px 7px', borderRadius: 3,
+                            }}>
+                              負傷 {r.casualties.injured}
+                            </span>
+                          )}
+                        </>
+                      )}
                       <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.4)' }}>
                         {r.region} · {r.city}
                       </span>
@@ -260,17 +284,78 @@ export default function CountryPage({ params }: { params: { country: string } })
                         {formatDate(r.date)}
                       </span>
                     </div>
-                    <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.85)', margin: '0 0 6px', lineHeight: 1.7 }}>
+
+                    {/* ── Summary ── */}
+                    <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.85)', margin: '0 0 10px', lineHeight: 1.75, fontWeight: 500 }}>
                       {r.summary_ja}
                     </p>
-                    <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
+
+                    {/* ── Detail ── */}
+                    {r.detail_ja && (
+                      <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.65)', margin: '0 0 10px', lineHeight: 1.85, borderLeft: '2px solid rgba(255,255,255,0.1)', paddingLeft: 10 }}>
+                        {r.detail_ja}
+                      </p>
+                    )}
+
+                    {/* ── Lessons ── */}
+                    {r.lessons_ja && (
+                      <div style={{
+                        background: 'rgba(16,185,129,0.08)',
+                        border: '1px solid rgba(16,185,129,0.2)',
+                        borderRadius: 5,
+                        padding: '8px 12px',
+                        marginBottom: 8,
+                      }}>
+                        <p style={{ fontSize: 11, color: '#34D399', fontWeight: 700, margin: '0 0 3px', letterSpacing: '0.03em' }}>
+                          📌 教訓・対策ポイント
+                        </p>
+                        <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.65)', margin: 0, lineHeight: 1.7 }}>
+                          {r.lessons_ja}
+                        </p>
+                      </div>
+                    )}
+
+                    {/* ── Official response ── */}
+                    {r.official_response_ja && (
+                      <div style={{
+                        background: 'rgba(59,130,246,0.07)',
+                        border: '1px solid rgba(59,130,246,0.18)',
+                        borderRadius: 5,
+                        padding: '8px 12px',
+                        marginBottom: 8,
+                      }}>
+                        <p style={{ fontSize: 11, color: '#93C5FD', fontWeight: 700, margin: '0 0 3px', letterSpacing: '0.03em' }}>
+                          🏛 当局・機関の対応
+                        </p>
+                        <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.65)', margin: 0, lineHeight: 1.7 }}>
+                          {r.official_response_ja}
+                        </p>
+                      </div>
+                    )}
+
+                    {/* ── Bear population ── */}
+                    {r.bear_population && (
+                      <div style={{ marginBottom: 8 }}>
+                        <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.35)', margin: 0 }}>
+                          📊 個体数推定：<span style={{ color: 'rgba(255,255,255,0.55)' }}>{r.bear_population}</span>
+                        </p>
+                      </div>
+                    )}
+
+                    {/* ── Footer ── */}
+                    <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap', marginTop: 4, paddingTop: 8, borderTop: '1px solid rgba(255,255,255,0.05)' }}>
                       <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)' }}>
                         🐻 {r.bear_type}
                       </span>
                       {r.source_name && (
-                        <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.25)' }}>
-                          出典：{r.source_name}
-                        </span>
+                        <a
+                          href={r.source_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{ fontSize: 10, color: 'rgba(96,165,250,0.6)', textDecoration: 'none' }}
+                        >
+                          出典：{r.source_name} →
+                        </a>
                       )}
                       {r.title_en && (
                         <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.2)', fontStyle: 'italic' }}>
