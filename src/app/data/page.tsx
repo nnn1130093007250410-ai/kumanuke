@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { loadUpdateLog } from '@/lib/bear-data'
 
 export const metadata: Metadata = {
   title: '環境省クマ被害データ＆発表まとめ | KUMANUKE',
@@ -23,8 +24,15 @@ export const metadata: Metadata = {
 //  ・POLICY_DOCS    → 対策文書を追加
 // ═══════════════════════════════════════════════════════════
 
-const LAST_UPDATED = '令和8年5月25日'
+// 環境省データの手動更新日（PDFに合わせて手動で変更）
+const GOV_LAST_UPDATED = '令和8年5月25日'
 const SOURCE_URL = 'https://www.env.go.jp/nature/choju/effort/effort12/effort12.html'
+
+// ISOの日付文字列を "2026年5月29日" 形式に変換
+function isoToJa(iso: string): string {
+  const [y, m, d] = iso.split('-').map(Number)
+  return `${y}年${m}月${d}日`
+}
 
 // ── 最新速報値ドキュメント ─────────────────────────────────────
 const LATEST_DOCS = [
@@ -260,7 +268,13 @@ const REFERENCE_DOCS = [
 // ── helpers ────────────────────────────────────────────────────
 const MAX_COUNT = Math.max(...ANNUAL_INJURY.map((d) => d.count ?? 0))
 
-export default function MoeDataPage() {
+export default async function MoeDataPage() {
+  // KUMANUKEデータベースの最終更新日を動的取得
+  const updateLog = loadUpdateLog()
+  const dbLastUpdated = updateLog.length > 0
+    ? isoToJa(updateLog[updateLog.length - 1].date)
+    : null
+
   return (
     <main style={{ background: '#F4F6F9', minHeight: '100vh' }}>
 
@@ -310,15 +324,27 @@ export default function MoeDataPage() {
           </p>
 
           {/* Meta row */}
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, alignItems: 'center' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, alignItems: 'center' }}>
+            {/* 環境省データ更新日（手動） */}
             <div style={{
               background: 'rgba(125,211,252,0.12)',
               border: '1px solid rgba(125,211,252,0.25)',
               borderRadius: 6, padding: '6px 14px',
               fontSize: 12, color: '#7DD3FC', fontWeight: 600,
             }}>
-              最終更新：{LAST_UPDATED}
+              環境省データ：{GOV_LAST_UPDATED}
             </div>
+            {/* KUMANUKEデータベース更新日（自動） */}
+            {dbLastUpdated && (
+              <div style={{
+                background: 'rgba(52,211,153,0.1)',
+                border: '1px solid rgba(52,211,153,0.25)',
+                borderRadius: 6, padding: '6px 14px',
+                fontSize: 12, color: '#34D399', fontWeight: 600,
+              }}>
+                DBデータ：{dbLastUpdated}
+              </div>
+            )}
             <a
               href={SOURCE_URL}
               target="_blank" rel="noopener noreferrer"
