@@ -919,7 +919,7 @@ def post_thread(tweets, creds):
         reply_to = tweet_id
         results.append(result)
         if i < len(tweets) - 1:
-            time.sleep(3)   # レート制限対策
+            time.sleep(60)  # 投稿間隔：最低1分
     return results
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -1203,7 +1203,7 @@ def main():
                 mark_posted(rid)
                 injury_posted += 1
                 posted_count  += 1
-                time.sleep(5)
+                time.sleep(60)  # 投稿間隔：最低1分
             except Exception as e:
                 print(f"  ⚠ 速報投稿エラー: {e}")
     if injury_posted == 0:
@@ -1227,7 +1227,7 @@ def main():
             print(f"    tweet_id: {results[0].get('data',{}).get('id')}")
             mark_posted(seasonal_key)
             posted_count += 1
-            time.sleep(5)
+            time.sleep(60)  # 投稿間隔：最低1分
         except Exception as e:
             print(f"  ⚠ シーズン告知エラー: {e}")
 

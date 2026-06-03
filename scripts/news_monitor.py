@@ -357,7 +357,7 @@ def main():
         log(f"RSS取得: {query}")
         articles = fetch_rss(query)
         log(f"  取得件数: {len(articles)}件")
-        time.sleep(1)
+        time.sleep(3)
 
         for art in articles:
             headline    = art['headline']
@@ -389,7 +389,7 @@ def main():
                     log(f"  詳細取得成功（{len(detail)}字）")
                 else:
                     log(f"  詳細取得失敗（フォールバック使用）")
-            time.sleep(1)
+            time.sleep(3)
 
             # ハッシュタグ
             pref_tag = extract_prefecture_tag(headline + (detail or ''))
@@ -405,7 +405,7 @@ def main():
                 log(f"     URL: https://x.com/i/web/status/{tid}")
                 mark_posted(aid)
                 posted += 1
-                time.sleep(10)   # 連続投稿の間隔
+                time.sleep(60)   # 投稿間隔：最低1分
             except Exception as e:
                 log(f"  ❌ 投稿エラー: {e}")
 
