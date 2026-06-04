@@ -231,67 +231,67 @@ export default function PrefecturePage({ params }: { params: { prefecture: strin
               {info.name}の出没情報一覧
             </h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-              {latest.map((s) => (
-                <div
-                  key={s.id}
-                  style={{
-                    background: '#fff',
-                    border: '1px solid #DDDDD8',
-                    borderLeft: `4px solid ${DANGER_COLORS[s.danger_level]}`,
-                    borderRadius: 6,
-                    padding: '14px 16px',
-                  }}
-                >
-                  <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 6 }}>
-                    <span
-                      style={{
-                        background: DANGER_COLORS[s.danger_level],
-                        color: '#fff',
-                        fontSize: 10,
-                        fontWeight: 700,
-                        padding: '2px 8px',
-                        borderRadius: 3,
-                      }}
-                    >
-                      {DANGER_LABELS[s.danger_level]}
-                    </span>
-                    <span style={{ fontSize: 11, color: '#888' }}>{formatDate(s.date)}</span>
-                    <span
-                      style={{
-                        fontSize: 10,
-                        background: '#F0F7F2',
-                        color: '#5A5A55',
-                        padding: '1px 6px',
-                        borderRadius: 3,
-                      }}
-                    >
-                      {s.type}
-                    </span>
-                  </div>
-                  <p
+              {latest.map((s) => {
+                const isHigh = s.danger_level === 3
+                const isMid  = s.danger_level === 2
+                return (
+                  <div
+                    key={s.id}
                     style={{
-                      fontWeight: 700,
-                      fontSize: 14,
-                      color: '#1A1A16',
-                      margin: '0 0 6px',
-                      lineHeight: 1.4,
+                      background: isHigh ? '#FFF5F5' : isMid ? '#FFFBF0' : '#fff',
+                      border: `1px solid ${isHigh ? '#FECACA' : isMid ? '#FDE68A' : '#DDDDD8'}`,
+                      borderLeft: `5px solid ${DANGER_COLORS[s.danger_level]}`,
+                      borderRadius: 8,
+                      padding: '14px 16px',
                     }}
                   >
-                    {s.title}
-                  </p>
-                  <p style={{ fontSize: 12, color: '#5A5A55', margin: '0 0 6px', lineHeight: 1.65 }}>
-                    📍 {s.city}　{s.bear_type}
-                  </p>
-                  <p style={{ fontSize: 13, color: '#333', margin: 0, lineHeight: 1.7 }}>
-                    {s.description}
-                  </p>
-                  {s.source_name && (
-                    <p style={{ fontSize: 11, color: '#AAA', margin: '6px 0 0' }}>
-                      情報源：{s.source_name}
+                    {/* Header row */}
+                    <div style={{ display: 'flex', gap: 7, alignItems: 'center', marginBottom: 8, flexWrap: 'wrap' }}>
+                      <span style={{
+                        background: DANGER_COLORS[s.danger_level],
+                        color: '#fff', fontSize: 11, fontWeight: 700,
+                        padding: '3px 10px', borderRadius: 4,
+                      }}>
+                        {DANGER_LABELS[s.danger_level]}
+                      </span>
+                      <span style={{ fontSize: 12, color: '#555', fontWeight: 600 }}>
+                        {formatDate(s.date)}{s.time ? ` ${s.time}` : ''}
+                      </span>
+                      <span style={{
+                        fontSize: 10, background: '#F0F7F2', color: '#2D6A3F',
+                        padding: '2px 7px', borderRadius: 3, fontWeight: 600,
+                      }}>
+                        {s.type}
+                      </span>
+                      <span style={{ fontSize: 10, color: '#888' }}>🐻 {s.bear_type}</span>
+                    </div>
+                    {/* Title */}
+                    <p style={{ fontWeight: 700, fontSize: 15, color: '#0F2E16', margin: '0 0 5px', lineHeight: 1.4 }}>
+                      {s.title}
                     </p>
-                  )}
-                </div>
-              ))}
+                    {/* Location */}
+                    <p style={{ fontSize: 12, color: '#5A5A55', margin: '0 0 8px' }}>
+                      📍 {s.city !== s.prefecture ? s.city : s.prefecture}
+                    </p>
+                    {/* Description */}
+                    {s.description && (
+                      <p style={{
+                        fontSize: 13, color: '#333', margin: '0 0 8px', lineHeight: 1.75,
+                        padding: '8px 10px', background: 'rgba(0,0,0,0.03)',
+                        borderRadius: 5, borderLeft: '3px solid #C8DDD0',
+                      }}>
+                        {s.description}
+                      </p>
+                    )}
+                    {/* Source */}
+                    {s.source_name && (
+                      <p style={{ fontSize: 10, color: '#AAA', margin: 0 }}>
+                        出典：{s.source_name}
+                      </p>
+                    )}
+                  </div>
+                )
+              })}
             </div>
           </div>
 
@@ -369,15 +369,16 @@ export default function PrefecturePage({ params }: { params: { prefecture: strin
               </h3>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                 {[
-                  { label: '登録件数（直近）', value: `${prefSightings.length}件` },
+                  { label: '登録件数（全期間）', value: `${prefSightings.length.toLocaleString()}件` },
+                  { label: '全国順位', value: `${prefStats.rank}位` },
                   { label: '確認種', value: info.bearType },
                   {
-                    label: '高警戒（level 3）',
+                    label: '高警戒',
                     value: `${level3Count}件`,
                     color: level3Count > 0 ? '#EF4444' : '#888',
                   },
                   {
-                    label: '警戒（level 2）',
+                    label: '警戒',
                     value: `${level2Count}件`,
                     color: level2Count > 0 ? '#F97316' : '#888',
                   },
@@ -401,6 +402,76 @@ export default function PrefecturePage({ params }: { params: { prefecture: strin
                 ))}
               </div>
             </div>
+
+            {/* Year-over-year comparison */}
+            {Object.keys(prefStats.yearCounts).length > 0 && (() => {
+              const years = Object.entries(prefStats.yearCounts).sort((a,b) => +a[0] - +b[0])
+              const maxYearCount = Math.max(...years.map(([,c]) => c), 1)
+              return (
+                <div style={{ background:'#fff', border:'1px solid #DDDDD8', borderRadius:8, padding:'18px' }}>
+                  <h3 style={{ fontSize:13, fontWeight:700, color:'#143D1E', marginBottom:14 }}>年別件数（直近3年）</h3>
+                  <div style={{ display:'flex', flexDirection:'column', gap:8 }}>
+                    {years.map(([year, count]) => (
+                      <div key={year}>
+                        <div style={{ display:'flex', justifyContent:'space-between', fontSize:11, marginBottom:3 }}>
+                          <span style={{ color:'#555', fontWeight:600 }}>{year}年</span>
+                          <span style={{ color:'#143D1E', fontWeight:700 }}>{count.toLocaleString()}件</span>
+                        </div>
+                        <div style={{ background:'#F0F7F2', borderRadius:4, height:10, overflow:'hidden' }}>
+                          <div style={{
+                            height:'100%',
+                            width:`${Math.max(4, (count / maxYearCount) * 100)}%`,
+                            background:'#143D1E',
+                            borderRadius:4,
+                            transition:'width 0.3s',
+                          }} />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )
+            })()}
+
+            {/* Incident type breakdown */}
+            {(() => {
+              const types = [
+                { key:'人身被害', label:'🔴 人身被害', color:'#EF4444' },
+                { key:'目撃',     label:'🟡 目撃',     color:'#F59E0B' },
+                { key:'農作物被害', label:'🟢 農作物被害', color:'#22C55E' },
+                { key:'捕獲',     label:'🔵 捕獲',     color:'#3B82F6' },
+                { key:'住宅侵入', label:'🟠 住宅侵入', color:'#F97316' },
+              ]
+              const typeCounts = types.map(t => ({
+                ...t,
+                count: prefSightings.filter(s => s.type === t.key).length,
+              })).filter(t => t.count > 0)
+              if (typeCounts.length === 0) return null
+              const maxTypeCount = Math.max(...typeCounts.map(t => t.count), 1)
+              return (
+                <div style={{ background:'#fff', border:'1px solid #DDDDD8', borderRadius:8, padding:'18px' }}>
+                  <h3 style={{ fontSize:13, fontWeight:700, color:'#143D1E', marginBottom:14 }}>事例タイプ別内訳</h3>
+                  <div style={{ display:'flex', flexDirection:'column', gap:8 }}>
+                    {typeCounts.map(t => (
+                      <div key={t.key}>
+                        <div style={{ display:'flex', justifyContent:'space-between', fontSize:11, marginBottom:3 }}>
+                          <span style={{ color:'#555' }}>{t.label}</span>
+                          <span style={{ color:t.color, fontWeight:700 }}>{t.count.toLocaleString()}件</span>
+                        </div>
+                        <div style={{ background:'#F5F5F5', borderRadius:4, height:8, overflow:'hidden' }}>
+                          <div style={{
+                            height:'100%',
+                            width:`${Math.max(4, (t.count / maxTypeCount) * 100)}%`,
+                            background:t.color,
+                            borderRadius:4,
+                          }} />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )
+            })()}
 
             {/* Related guides */}
             <div

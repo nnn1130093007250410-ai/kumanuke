@@ -40,7 +40,10 @@ def parse_date_any(val) -> str | None:
     if isinstance(val, (int, float)) and val > 1_000_000_000_000:
         try:
             dt = datetime.fromtimestamp(val / 1000, tz=timezone.utc)
-            return dt.strftime('%Y-%m-%d')
+            # JST (+9h) に変換
+            from datetime import timedelta
+            dt_jst = dt + timedelta(hours=9)
+            return dt_jst.strftime('%Y-%m-%d')
         except Exception:
             return None
     if not isinstance(val, str):
@@ -63,6 +66,31 @@ def parse_date_any(val) -> str | None:
         y = 2018 + int(m.group(1))
         mo, d = int(m.group(2)), int(m.group(3))
         return f'{y:04d}-{mo:02d}-{d:02d}'
+    return None
+
+
+def parse_time_any(val) -> str | None:
+    """エポックミリ秒などから HH:MM（JST）を抽出する"""
+    if val is None:
+        return None
+    if isinstance(val, (int, float)) and val > 1_000_000_000_000:
+        try:
+            from datetime import timedelta
+            dt = datetime.fromtimestamp(val / 1000, tz=timezone.utc)
+            dt_jst = dt + timedelta(hours=9)
+            hhmm = dt_jst.strftime('%H:%M')
+            # 00:00 は時刻情報なしと判断しない
+            return hhmm if hhmm != '00:00' else None
+        except Exception:
+            return None
+    # "HH:MM" 形式の文字列
+    if isinstance(val, str):
+        import re
+        m = re.search(r'(\d{1,2}):(\d{2})', val)
+        if m:
+            h, mn = int(m.group(1)), int(m.group(2))
+            if 0 <= h <= 23 and 0 <= mn <= 59:
+                return f'{h:02d}:{mn:02d}'
     return None
 
 
@@ -167,8 +195,9 @@ def feature_to_record(
     if oid is None:
         return None
 
-    # 日付
+    # 日付・時刻
     date_val = attrs.get(date_field) if date_field else None
+    time_str = parse_time_any(date_val)   # 時刻（HH:MM）
     date_str = parse_date_any(date_val)
     if not date_str:
         # 他のフィールドから試みる
@@ -213,7 +242,7 @@ def feature_to_record(
 
     title = f"{pref} {city}でクマ{'出没' if incident_type == '目撃' else incident_type}" if city else f"{pref}でクマ出没"
 
-    return {
+    record: dict = {
         'id': f"{id_prefix}-{int(oid):05d}",
         'date': date_str,
         'prefecture': pref,
@@ -228,6 +257,9 @@ def feature_to_record(
         'lat': round(lat, 7),
         'lng': round(lng, 7),
     }
+    if time_str:
+        record['time'] = time_str
+    return record
 
 
 # ── メイン処理 ───────────────────────────────────────────────────────────────

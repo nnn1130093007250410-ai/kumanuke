@@ -4,6 +4,7 @@
 export interface BearSighting {
   id: string
   date: string
+  time?: string        // HH:MM JST（ArcGISエポック秒から抽出）
   prefecture: string
   city: string
   type: string

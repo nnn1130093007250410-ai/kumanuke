@@ -325,87 +325,63 @@ export default async function MapPage({
               </span>
             </h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-              {latest.map((s) => (
-                <div
-                  key={s.id}
-                  style={{
-                    background: '#fff',
-                    border: '1px solid #DDDDD8',
-                    borderLeft: `4px solid ${DANGER_COLORS[s.danger_level]}`,
-                    borderRadius: 6,
-                    padding: '14px 16px',
-                    display: 'grid',
-                    gridTemplateColumns: 'auto 1fr',
-                    gap: '4px 14px',
-                    alignItems: 'start',
-                  }}
-                >
+              {latest.map((s) => {
+                const isHigh = s.danger_level === 3
+                const isMid  = s.danger_level === 2
+                return (
                   <div
+                    key={s.id}
                     style={{
-                      gridRow: '1 / 3',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                      gap: 4,
-                      minWidth: 40,
+                      background: isHigh ? '#FFF5F5' : isMid ? '#FFFBF0' : '#fff',
+                      border: `1px solid ${isHigh ? '#FECACA' : isMid ? '#FDE68A' : '#DDDDD8'}`,
+                      borderLeft: `5px solid ${DANGER_COLORS[s.danger_level]}`,
+                      borderRadius: 8,
+                      padding: '14px 16px',
                     }}
                   >
-                    <span
-                      style={{
-                        background: DANGER_COLORS[s.danger_level],
-                        color: '#fff',
-                        fontSize: 9,
-                        fontWeight: 700,
-                        padding: '2px 6px',
-                        borderRadius: 3,
-                        letterSpacing: '0.05em',
-                        textAlign: 'center',
-                        whiteSpace: 'nowrap',
-                      }}
-                    >
-                      {DANGER_LABELS[s.danger_level]}
-                    </span>
-                    <span style={{ fontSize: 10, color: '#AAA', textAlign: 'center' }}>
-                      {formatDate(s.date)}
-                    </span>
-                  </div>
-                  <p
-                    style={{
-                      fontWeight: 700,
-                      fontSize: 14,
-                      color: '#1A1A16',
-                      margin: 0,
-                      lineHeight: 1.4,
-                    }}
-                  >
-                    {s.title}
-                  </p>
-                  <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
+                    {/* Header */}
+                    <div style={{ display:'flex', gap:7, alignItems:'center', marginBottom:7, flexWrap:'wrap' }}>
+                      <span style={{
+                        background: DANGER_COLORS[s.danger_level], color:'#fff',
+                        fontSize:11, fontWeight:700, padding:'3px 10px', borderRadius:4,
+                      }}>
+                        {DANGER_LABELS[s.danger_level]}
+                      </span>
+                      <span style={{ fontSize:12, color:'#555', fontWeight:600 }}>
+                        {formatDate(s.date)}{s.time ? ` ${s.time}` : ''}
+                      </span>
+                      <span style={{
+                        fontSize:10, background:'#F0F7F2', color:'#2D6A3F',
+                        padding:'2px 7px', borderRadius:3, fontWeight:600,
+                      }}>
+                        {s.type}
+                      </span>
+                      <span style={{ fontSize:10, color:'#888' }}>🐻 {s.bear_type}</span>
+                    </div>
+                    {/* Title */}
+                    <p style={{ fontWeight:700, fontSize:14, color:'#0F2E16', margin:'0 0 4px', lineHeight:1.4 }}>
+                      {s.title}
+                    </p>
+                    {/* Location link */}
                     <Link
                       href={`/map/${getSlugByName(s.prefecture) ?? ''}`}
-                      style={{
-                        fontSize: 11,
-                        color: '#143D1E',
-                        fontWeight: 600,
-                        textDecoration: 'none',
-                      }}
+                      style={{ fontSize:12, color:'#143D1E', fontWeight:600, textDecoration:'none', display:'block', marginBottom:6 }}
                     >
-                      📍 {s.prefecture} {s.city}
+                      📍 {s.city !== s.prefecture ? `${s.prefecture} ${s.city}` : s.prefecture}
                     </Link>
-                    <span
-                      style={{
-                        fontSize: 10,
-                        background: '#F0F7F2',
-                        color: '#5A5A55',
-                        padding: '1px 6px',
-                        borderRadius: 3,
-                      }}
-                    >
-                      {s.type}・{s.bear_type}
-                    </span>
+                    {/* Description */}
+                    {s.description && (
+                      <p style={{
+                        fontSize:12, color:'#444', margin:0, lineHeight:1.75,
+                        padding:'7px 10px', background:'rgba(0,0,0,0.03)',
+                        borderRadius:5, borderLeft:'3px solid #C8DDD0',
+                      }}>
+                        {s.description}
+                      </p>
+                    )}
                   </div>
-                </div>
-              ))}
+                )
+              })}
             </div>
           </div>
 

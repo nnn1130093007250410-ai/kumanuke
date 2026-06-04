@@ -41,6 +41,13 @@ python3 scripts/geocode_cities.py || {
     echo "$LOG_PREFIX ⚠ geocode_cities.py でエラーが発生しましたが続行します"
 }
 
+# ── 説明文補完（description が空のエントリに自然な日本語説明を生成）────────────
+echo ""
+echo "$LOG_PREFIX 説明文補完 開始..."
+python3 scripts/enrich_descriptions.py || {
+    echo "$LOG_PREFIX ⚠ enrich_descriptions.py でエラーが発生しましたが続行します"
+}
+
 # ── 統計更新（update-log.json も含む）────────────────────────────────────────
 echo ""
 echo "$LOG_PREFIX 統計更新 開始..."
