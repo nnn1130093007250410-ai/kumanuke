@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.kumanuke.news-monitor-world</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>/Library/Frameworks/Python.framework/Versions/3.13/bin/python3</string>
+    <string>/Users/sakumashinrou/kumanuke/scripts/news_monitor_world.py</string>
+  </array>
+
+  <key>WorkingDirectory</key>
+  <string>/Users/sakumashinrou/kumanuke</string>
+
+  <!-- 毎日 07:30 / 13:30 / 19:30 に実行（日本版 06/09/12/15/18/21 とずらす） -->
+  <key>StartCalendarInterval</key>
+  <array>
+    <dict><key>Hour</key><integer>7</integer><key>Minute</key><integer>30</integer></dict>
+    <dict><key>Hour</key><integer>13</integer><key>Minute</key><integer>30</integer></dict>
+    <dict><key>Hour</key><integer>19</integer><key>Minute</key><integer>30</integer></dict>
+  </array>
+
+  <key>StandardOutPath</key>
+  <string>/Users/sakumashinrou/Library/Logs/kumanuke-news-world.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/sakumashinrou/Library/Logs/kumanuke-news-world.log</string>
+
+  <key>RunAtLoad</key>
+  <false/>
+
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PATH</key>
+    <string>/Library/Frameworks/Python.framework/Versions/3.13/bin:/usr/local/bin:/usr/bin:/bin</string>
+    <key>HOME</key>
+    <string>/Users/sakumashinrou</string>
+    <key>PYTHONIOENCODING</key>
+    <string>utf-8</string>
+  </dict>
+</dict>
+</plist>
