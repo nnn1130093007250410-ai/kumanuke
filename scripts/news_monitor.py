@@ -400,49 +400,44 @@ def build_news_thread(
     pref_tag: str,
     is_followup: bool = False,
 ) -> list[str]:
-    """ニュース速報の3ツイートスレッドを構築する"""
+    """ニュース速報の2ツイートスレッドを構築する"""
 
-    # ツイート1: 見出し + 出典・時刻
     label    = "🔄【続報】" if is_followup else "🐻⚠️【速報】"
     src_line = f"出典：{source_name}（{pub_time}）" if pub_time else f"出典：{source_name}"
+    pref_part = f" {pref_tag}".rstrip() if pref_tag else ""
+
+    # ── ツイート1：見出し + 出典・時刻 ──
     t1 = (
         f"{label}\n\n"
         f"{headline}\n\n"
         f"{src_line}↓"
     )
 
-    # ツイート2: 詳細（取得できた場合）or フォールバック
+    # ── ツイート2：詳細 + 注意喚起 + ハッシュタグ ──
     if detail and len(detail.strip()) > 20:
-        t2 = f"【詳細】\n\n{detail.strip()}"
+        detail_part = detail.strip()
     else:
-        t2 = (
-            f"【詳細】\n\n"
-            f"{headline}\n\n"
-            f"詳細は{source_name}の報道をご確認ください。"
-        )
+        detail_part = f"詳細は{source_name}の報道をご確認ください。"
 
-    # ツイート3: 注意喚起（外出自粛・遭遇しないための行動）
-    pref_part = f"\n\n#クマ被害 {pref_tag}".strip() if pref_tag else "\n\n#クマ被害"
-    t3 = (
-        "【周辺の方へ・注意喚起】\n\n"
-        "クマはまだ周辺に潜伏している可能性があります。\n\n"
-        "🚫 不要な外出は控えてください\n"
-        "🚫 該当エリアには近づかないでください\n"
-        "🚫 ペットの屋外放置もお控えください\n\n"
-        "最新情報は地元行政・警察の発表をご確認ください。"
-        f"{pref_part}"
+    t2 = (
+        f"{detail_part}\n\n"
+        "🚫 周辺の方は不要な外出を控えてください\n"
+        "🚫 該当エリアに近づかないでください\n\n"
+        f"最新情報は地元行政・警察の発表をご確認ください。\n"
+        f"#クマ被害{pref_part}"
     )
 
     # 加重チェック・調整
-    tweets = [t1, t2, t3]
+    tweets = [t1, t2]
     for i, t in enumerate(tweets):
         w = tw_weight(t)
         if w > 280:
             log(f"  ⚠ ツイート{i+1}が加重オーバー ({w}): 自動トリム")
-            # 超過分の文字を後ろから削除（概算）
-            excess = (w - 275) // 2
-            if i == 1 and detail:
-                tweets[i] = t2[:len(t2) - excess] + '…'
+            if i == 1:
+                # 詳細部分を短くトリム
+                excess = (w - 275) // 2
+                trimmed = detail_part[:max(20, len(detail_part) - excess)] + '…'
+                tweets[i] = t2.replace(detail_part, trimmed)
 
     return tweets
 
