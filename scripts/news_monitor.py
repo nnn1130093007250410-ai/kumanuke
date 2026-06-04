@@ -233,6 +233,19 @@ def mark_incident_posted(key: str):
     with open(POSTED_FILE, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
+# ── 続報判定 ────────────────────────────────────────────────────────────────
+
+# これらのキーワードを含む記事は同一インシデントでも続報として投稿する
+FOLLOWUP_KEYWORDS = [
+    '捕獲', '射殺', '死亡', '重体', '重篤', '退院',
+    '逃走中', '逃走', '発見', '続報', 'その後', '新たに',
+    '再び', '緊急銃猟', '行方', '搬送先', '手術',
+]
+
+def is_followup(headline: str) -> bool:
+    """続報・新展開キーワードを含む記事かどうか判定"""
+    return any(kw in headline for kw in FOLLOWUP_KEYWORDS)
+
 # ── フィルタリング ──────────────────────────────────────────────────────────
 
 def is_bear_incident(headline: str) -> bool:
@@ -343,13 +356,15 @@ def build_news_thread(
     source_name: str,
     pub_time: str,
     pref_tag: str,
+    is_followup: bool = False,
 ) -> list[str]:
     """ニュース速報の3ツイートスレッドを構築する"""
 
     # ツイート1: 見出し + 出典・時刻
+    label    = "🔄【続報】" if is_followup else "🐻⚠️【速報】"
     src_line = f"出典：{source_name}（{pub_time}）" if pub_time else f"出典：{source_name}"
     t1 = (
-        f"🐻⚠️【速報】\n\n"
+        f"{label}\n\n"
         f"{headline}\n\n"
         f"{src_line}↓"
     )
@@ -435,15 +450,19 @@ def main():
                 log(f"  スキップ（記事投稿済み）: {headline[:40]}")
                 continue
 
-            # ④ 同一インシデントの重複チェック
-            #    同日・同都道府県の記事は1件のみ投稿（異なる出典の同一事件を防ぐ）
+            # ④ 同一インシデントの重複チェック（続報は除外）
             inc_key = incident_key(headline)
             if inc_key and already_posted_incident(inc_key):
-                log(f"  スキップ（同一事件投稿済み [{inc_key}]）: {headline[:40]}")
-                continue
+                if is_followup(headline):
+                    log(f"  続報として投稿: {headline[:40]}")
+                    # 続報はインシデントキーを再登録しない（次の続報も通す）
+                else:
+                    log(f"  スキップ（重複 [{inc_key}]）: {headline[:40]}")
+                    continue
 
             seen_ids.add(aid)
-            log(f"  ✓ 新着速報: {headline[:60]}")
+            is_update = inc_key and already_posted_incident(inc_key)
+            log(f"  ✓ {'【続報】' if is_update else '新着速報'}: {headline[:60]}")
 
             # 記事詳細をスクレイピング
             detail   = None
@@ -459,8 +478,11 @@ def main():
             # ハッシュタグ
             pref_tag = extract_prefecture_tag(headline + (detail or ''))
 
-            # スレッド構築
-            tweets = build_news_thread(headline, detail, source_name, pub_time, pref_tag)
+            # スレッド構築（続報の場合はラベルを切り替え）
+            tweets = build_news_thread(
+                headline, detail, source_name, pub_time, pref_tag,
+                is_followup=is_update,
+            )
 
             # 投稿
             try:
