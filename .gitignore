@@ -37,3 +37,5 @@ scripts/x_posted.json
 *.tsbuildinfo
 next-env.d.ts
 __pycache__/
+scripts/news_monitor*.log
+scripts/news_monitor_std*.log
