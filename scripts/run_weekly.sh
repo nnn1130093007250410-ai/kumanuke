@@ -10,7 +10,7 @@ export PATH="/Library/Frameworks/Python.framework/Versions/3.13/bin:/usr/local/b
 export PYTHONIOENCODING=utf-8
 export HOME="/Users/sakumashinrou"
 
-PROJECT_DIR="/Users/sakumashinrou/Downloads/kumanuke 4"
+PROJECT_DIR="/Users/sakumashinrou/kumanuke"
 LOG_PREFIX="[$(date '+%Y-%m-%d %H:%M:%S JST')]"
 
 echo ""
@@ -60,7 +60,7 @@ echo ""
 echo "$LOG_PREFIX 変更確認..."
 
 # git ステータス確認
-CHANGED=$(git status --porcelain 2>/dev/null | grep -v "^??" | wc -l | tr -d ' ')
+CHANGED=$(git status --porcelain 2>/dev/null | grep -v "^??" | wc -l | tr -d ' ' || echo "0")
 
 if [ "$CHANGED" -gt "0" ]; then
     # 件数取得
