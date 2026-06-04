@@ -66,6 +66,7 @@ const jsonLd = {
     {
       '@type': 'Product',
       name: 'KUMANUKE 野生動物対策スプレー',
+      image: 'https://kumanuke.bubuworks.co.jp/product-overview.jpg',
       description:
         '植物由来成分を使用したエリア散布型の野生動物対策スプレー。熊との遭遇予防を目的とした事前散布型対策。OCガス・カプサイシン不使用。',
       brand: { '@type': 'Brand', name: 'KUMANUKE' },
@@ -74,6 +75,11 @@ const jsonLd = {
         price: '3980',
         priceCurrency: 'JPY',
         availability: 'https://schema.org/InStock',
+        seller: {
+          '@type': 'Organization',
+          name: 'BUBUWORKS合同会社',
+          url: 'https://kumanuke.bubuworks.co.jp',
+        },
       },
     },
     {
