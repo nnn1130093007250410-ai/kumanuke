@@ -39,6 +39,9 @@ from post_to_x import load_credentials, post_thread, tw_weight
 
 JST = timezone(timedelta(hours=9))
 
+# 公開からこの時間以上経過した記事は速報しない
+MAX_AGE_HOURS = 6
+
 # ── 検索クエリ（Google News RSS） ───────────────────────────────────────────
 SEARCH_QUERIES = [
     'クマ 人身被害',
@@ -164,10 +167,12 @@ def fetch_rss(query: str) -> list[dict]:
 
         # 公開日時をパース
         pub_time = ''
+        pub_dt   = None
         if pub_el is not None and pub_el.text:
             try:
                 dt = datetime.strptime(pub_el.text.strip(), '%a, %d %b %Y %H:%M:%S %Z')
-                dt_jst = dt.replace(tzinfo=timezone.utc).astimezone(JST)
+                pub_dt   = dt.replace(tzinfo=timezone.utc)
+                dt_jst   = pub_dt.astimezone(JST)
                 pub_time = dt_jst.strftime('%m/%d %H:%M')
             except Exception:
                 pub_time = ''
@@ -177,9 +182,56 @@ def fetch_rss(query: str) -> list[dict]:
             'source_name': source_name,
             'link':        link,
             'pub_time':    pub_time,
+            'pub_dt':      pub_dt,   # 時間フィルター用
         })
 
     return items
+
+# ── 時間フィルター ──────────────────────────────────────────────────────────
+
+def is_recent_article(pub_dt, max_hours: int = MAX_AGE_HOURS) -> bool:
+    """記事がmax_hours時間以内に公開されたか確認。日時不明な記事は通す"""
+    if pub_dt is None:
+        return True
+    now = datetime.now(timezone.utc)
+    age_hours = (now - pub_dt).total_seconds() / 3600
+    return age_hours <= max_hours
+
+# ── 同一インシデント重複検知 ────────────────────────────────────────────────
+
+def incident_key(headline: str) -> str | None:
+    """
+    見出しから「本日 × 都道府県」のインシデントキーを生成。
+    同日・同都道府県の記事を同一事件とみなして重複投稿を防ぐ。
+    都道府県が特定できない場合は None を返す。
+    """
+    from datetime import date as _date
+    today = _date.today().isoformat()
+    for pref in PREFECTURES:
+        if pref in headline:
+            return f"incident_{today}_{pref}"
+    return None
+
+def already_posted_incident(key: str) -> bool:
+    """同一インシデントがすでに投稿済みか確認"""
+    if not POSTED_FILE.exists():
+        return False
+    with open(POSTED_FILE, encoding='utf-8') as f:
+        return key in json.load(f).get('incidents', [])
+
+def mark_incident_posted(key: str):
+    """インシデントを投稿済みとして記録（直近1,000件を保持）"""
+    data = {'ids': [], 'incidents': []}
+    if POSTED_FILE.exists():
+        with open(POSTED_FILE, encoding='utf-8') as f:
+            data = json.load(f)
+    if 'incidents' not in data:
+        data['incidents'] = []
+    if key not in data['incidents']:
+        data['incidents'].append(key)
+        data['incidents'] = data['incidents'][-1000:]
+    with open(POSTED_FILE, 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
 
 # ── フィルタリング ──────────────────────────────────────────────────────────
 
@@ -364,17 +416,30 @@ def main():
             source_name = art['source_name']
             link        = art['link']
             pub_time    = art['pub_time']
+            pub_dt      = art.get('pub_dt')
 
-            # フィルタリング
+            # ① クマ人身被害・重要記事かどうか
             if not is_bear_incident(headline):
                 continue
 
-            # 重複チェック（今回の実行内 + 過去の投稿）
+            # ② 古いニュースを除外（MAX_AGE_HOURS 時間以内のみ）
+            if not is_recent_article(pub_dt):
+                log(f"  スキップ（古いニュース {pub_time}）: {headline[:40]}")
+                continue
+
+            # ③ 記事単位の重複チェック（同じ記事が複数クエリでヒット）
             aid = _article_id(headline, source_name)
             if aid in seen_ids:
                 continue
             if already_posted(aid):
-                log(f"  スキップ（投稿済み）: {headline[:40]}")
+                log(f"  スキップ（記事投稿済み）: {headline[:40]}")
+                continue
+
+            # ④ 同一インシデントの重複チェック
+            #    同日・同都道府県の記事は1件のみ投稿（異なる出典の同一事件を防ぐ）
+            inc_key = incident_key(headline)
+            if inc_key and already_posted_incident(inc_key):
+                log(f"  スキップ（同一事件投稿済み [{inc_key}]）: {headline[:40]}")
                 continue
 
             seen_ids.add(aid)
@@ -404,6 +469,8 @@ def main():
                 log(f"  ✅ 投稿完了 ({len(tweets)}ツイート) tweet_id={tid}")
                 log(f"     URL: https://x.com/i/web/status/{tid}")
                 mark_posted(aid)
+                if inc_key:
+                    mark_incident_posted(inc_key)  # 同一事件の重複投稿を防止
                 posted += 1
                 time.sleep(60)   # 投稿間隔：最低1分
             except Exception as e:
