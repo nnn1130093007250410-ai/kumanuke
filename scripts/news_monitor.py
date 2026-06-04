@@ -39,8 +39,7 @@ from post_to_x import load_credentials, post_thread, tw_weight
 
 JST = timezone(timedelta(hours=9))
 
-# 公開からこの時間以上経過した記事は速報しない
-MAX_AGE_HOURS = 6
+# 当日（JST）に公開された記事のみ速報する
 
 # ── 検索クエリ（Google News RSS） ───────────────────────────────────────────
 SEARCH_QUERIES = [
@@ -189,13 +188,13 @@ def fetch_rss(query: str) -> list[dict]:
 
 # ── 時間フィルター ──────────────────────────────────────────────────────────
 
-def is_recent_article(pub_dt, max_hours: int = MAX_AGE_HOURS) -> bool:
-    """記事がmax_hours時間以内に公開されたか確認。日時不明な記事は通す"""
+def is_recent_article(pub_dt) -> bool:
+    """記事が今日（JST）に公開されたか確認。日時不明な記事は通す"""
     if pub_dt is None:
         return True
-    now = datetime.now(timezone.utc)
-    age_hours = (now - pub_dt).total_seconds() / 3600
-    return age_hours <= max_hours
+    today_jst = datetime.now(JST).date()
+    pub_date_jst = pub_dt.astimezone(JST).date()
+    return pub_date_jst == today_jst
 
 # ── 同一インシデント重複検知 ────────────────────────────────────────────────
 
