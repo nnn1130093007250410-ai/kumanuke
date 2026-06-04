@@ -34,6 +34,13 @@ python3 scripts/collect_kml.py || {
     echo "$LOG_PREFIX ⚠ collect_kml.py でエラーが発生しましたが続行します"
 }
 
+# ── 逆ジオコーディング（city==prefecture のエントリに市町村名を付与）────────────
+echo ""
+echo "$LOG_PREFIX 市町村名付与 開始..."
+python3 scripts/geocode_cities.py || {
+    echo "$LOG_PREFIX ⚠ geocode_cities.py でエラーが発生しましたが続行します"
+}
+
 # ── 統計更新（update-log.json も含む）────────────────────────────────────────
 echo ""
 echo "$LOG_PREFIX 統計更新 開始..."
