@@ -67,6 +67,73 @@ const COUNTRY_META: Record<string, {
       { href: '/guide/electric-fence-bear-prevention', label: '電気柵によるクマ対策' },
     ],
   },
+  Norway: {
+    flag: '🇳🇴',
+    nameJa: 'ノルウェー',
+    bears: ['Brown bear（ヒグマ）'],
+    overviewJa: 'ノルウェーのヒグマ個体数は2020年のDNA調査で150頭（メス65・オス85）が個体識別されています。政府機関Rovdataが毎年、糞・毛サンプルを用いた非侵襲的DNA調査を実施しており、個体レベルの精密なモニタリングは世界のモデルとなっています。1990年代の最低水準から緩やかな回復が続いており、科学的根拠に基づく狩猟クオータ（年間30〜50頭）が設定されています。',
+    relatedGuides: [
+      { href: '/guide/international-bear-management', label: '海外の熊対策研究・管理事例' },
+      { href: '/guide/non-lethal-bear-management', label: '非致死型クマ対策の体系' },
+    ],
+  },
+  Slovenia: {
+    flag: '🇸🇮',
+    nameJa: 'スロベニア',
+    bears: ['Brown bear（ヒグマ）'],
+    overviewJa: 'スロベニアは北部ディナル山脈を中心にヒグマが生息しており、2023年のDNA調査で737頭が推定されました（2025年4月公表）。EU LIFE DINALP BEARプロジェクト（2014〜2019年）の主幹国として、道路・鉄道によるクマ交通死を25%削減した先進的な取り組みで知られます。後継プロジェクトLIFE DinPin Bear（2026〜、9か国）でも中心的な役割を担っています。',
+    relatedGuides: [
+      { href: '/guide/international-bear-management', label: '海外の熊対策研究・管理事例' },
+      { href: '/guide/electric-fence-bear-prevention', label: '電気柵によるクマ対策' },
+    ],
+  },
+  Croatia: {
+    flag: '🇭🇷',
+    nameJa: 'クロアチア',
+    bears: ['Brown bear（ヒグマ）'],
+    overviewJa: 'クロアチアのヒグマはディナル山脈のゴルスキ・コタル地方とリカ地方に生息します。2023年秋に個体数調査が実施されましたが、DNA分析費用の資金不足により結果の公表が2025〜2026年まで遅延しています。EU LIFE DINALP BEARプロジェクトに参加国として名を連ね、後継プロジェクトLIFE DinPin Bearでも参加予定です。EU保護指令と国内狩猟管理の両立を巡る政策的な議論が続いています。',
+    relatedGuides: [
+      { href: '/guide/international-bear-management', label: '海外の熊対策研究・管理事例' },
+    ],
+  },
+  Malaysia: {
+    flag: '🇲🇾',
+    nameJa: 'マレーシア',
+    bears: ['Sun bear（マレーグマ / サンベア）'],
+    overviewJa: 'マレーシア・ボルネオはIUCN危急種（Vulnerable）に指定されたマレーグマ（サンベア、Helarctos malayanus）の主要生息地です。サバ州サンダカンに拠点を置くBSBCC（ボルネオ・サンベア保全センター）が世界唯一のサンベア専門保全機関として41頭を救護・保護しています。主な脅威は熱帯雨林の消失・違法狩猟・ペット目的の幼獣密猟であり、過去30年で30%以上の個体数減少が推定されています。',
+    relatedGuides: [
+      { href: '/guide/international-bear-management', label: '海外の熊対策研究・管理事例' },
+    ],
+  },
+  Pakistan: {
+    flag: '🇵🇰',
+    nameJa: 'パキスタン',
+    bears: ['Himalayan brown bear（ヒマラヤヒグマ）'],
+    overviewJa: 'パキスタン北部のギルギット=バルティスタン州には、ヒグマの亜種であるヒマラヤヒグマ（Ursus arctos isabellinus）が生息します。2022年の政府公式調査でデオサイ国立公園（約4,000km²）に66頭（95%CI: 58〜77頭）が確認されており、パキスタン北部全体では約150〜200頭が推定されています。密猟・家畜捕食による報復殺害・生息地の放牧圧が課題となっています。',
+    relatedGuides: [
+      { href: '/guide/international-bear-management', label: '海外の熊対策研究・管理事例' },
+    ],
+  },
+  'South Korea': {
+    flag: '🇰🇷',
+    nameJa: '韓国',
+    bears: ['Asiatic black bear（ツキノワグマ）'],
+    overviewJa: '韓国では1990年代に野生絶滅したツキノワグマの復元プログラムが2004年から智異山（ジリサン）国立公園で実施されています。ロシア沿海州から6頭を放獣して開始し、2024年には個体数が約80頭に到達。第4世代の自然繁殖も確認されており、長期的な野生復帰成功事例として国際的に評価されています。',
+    relatedGuides: [
+      { href: '/guide/international-bear-management', label: '海外の熊対策研究・管理事例' },
+      { href: '/guide/satoyama-bear-human-coexistence', label: '里山における熊との共存' },
+    ],
+  },
+  India: {
+    flag: '🇮🇳',
+    nameJa: 'インド',
+    bears: ['Sloth bear（ナマケグマ）'],
+    overviewJa: 'インドにはナマケグマ（Melursus ursinus）をはじめ複数のクマ種が生息します。ナマケグマはインドで最も人身被害件数が多い熊種で、年間数百人が負傷しています。ScienceDirect・PLOS ONE掲載の査読済み研究によって、オリッサ州・マディヤ・プラデーシュ州での攻撃パターン・被害者属性・予防策が詳細に分析されています。コミュニティベースの早期警告システムが効果を上げています。',
+    relatedGuides: [
+      { href: '/guide/international-bear-management', label: '海外の熊対策研究・管理事例' },
+      { href: '/guide/non-lethal-bear-management', label: '非致死型クマ対策の体系' },
+    ],
+  },
 }
 
 export async function generateStaticParams() {

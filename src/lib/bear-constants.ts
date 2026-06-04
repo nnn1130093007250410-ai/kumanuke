@@ -128,11 +128,19 @@ export const WORLD_COUNTRY_SLUGS: Record<string, string> = {
   norway: 'Norway',
   russia: 'Russia',
   romania: 'Romania',
+  slovakia: 'Slovakia',
+  slovenia: 'Slovenia',
+  croatia: 'Croatia',
   italy: 'Italy',
   spain: 'Spain',
   france: 'France',
   india: 'India',
   malaysia: 'Malaysia',
+  pakistan: 'Pakistan',
+  'south-korea': 'South Korea',
+  china: 'China',
+  peru: 'Peru',
+  ecuador: 'Ecuador',
 }
 
 // English country name → Japanese display name
