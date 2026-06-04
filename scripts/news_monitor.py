@@ -233,6 +233,49 @@ def mark_incident_posted(key: str):
     with open(POSTED_FILE, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
+# ── 追跡・特集記事の検知（古い事件の記事を速報から除外） ──────────────────────
+
+# これらを含む記事は「古い事件の追跡・特集記事」として除外する
+STALE_INDICATORS = [
+    # 経過時間の言及
+    'から半年', 'から1ヶ月', 'から2ヶ月', 'から3ヶ月', 'から約',
+    'ヶ月が経', '年が経', 'ヶ月後の', '年後の', '半年たった', '半年経った',
+    # 事後の報告・分析
+    '報告書', '再発防止策', '再発防止計画', '検証報告',
+    # 特集・コラム記事
+    '記者ノート', 'ルポ',
+]
+
+# 見出しに出てくる月（XX年MM月）の対応
+_MONTH_RE = re.compile(r'(\d{2})年(\d{1,2})月')
+
+
+def is_stale_article(headline: str) -> bool:
+    """
+    古い事件の追跡・特集記事かどうかを判定する。
+    ① STALE_INDICATORS キーワードを含む
+    ② 見出しに2ヶ月以上前の「XX年MM月」表記がある
+    どちらかに該当すれば True（速報として除外）
+    """
+    # ① 明示的な追跡記事キーワード
+    if any(kw in headline for kw in STALE_INDICATORS):
+        return True
+
+    # ② 見出しに "26年2月" などの古い年月が含まれているか
+    from datetime import date as _date
+    today = _date.today()
+    for m in _MONTH_RE.finditer(headline):
+        year_2d = int(m.group(1))   # e.g. 26
+        month   = int(m.group(2))   # e.g. 2
+        # 4桁年に変換（2000年代を前提）
+        year_4d = 2000 + year_2d
+        # 今日からの経過月数
+        months_ago = (today.year - year_4d) * 12 + (today.month - month)
+        if months_ago >= 1:
+            return True
+
+    return False
+
 # ── 続報判定 ────────────────────────────────────────────────────────────────
 
 # これらのキーワードを含む記事は同一インシデントでも続報として投稿する
@@ -440,6 +483,11 @@ def main():
             # ② 古いニュースを除外（MAX_AGE_HOURS 時間以内のみ）
             if not is_recent_article(pub_dt):
                 log(f"  スキップ（古いニュース {pub_time}）: {headline[:40]}")
+                continue
+
+            # ②-b 古い事件の追跡・特集記事を除外
+            if is_stale_article(headline):
+                log(f"  スキップ（追跡・特集記事）: {headline[:40]}")
                 continue
 
             # ③ 記事単位の重複チェック（同じ記事が複数クエリでヒット）
