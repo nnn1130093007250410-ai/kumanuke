@@ -278,6 +278,7 @@ def is_stale_article(headline: str) -> bool:
 # ── 続報判定 ────────────────────────────────────────────────────────────────
 
 # これらのキーワードを含む記事は同一インシデントでも続報として投稿する
+# キーワードは「種別」として扱い、同種の続報は1事件1回のみ投稿
 FOLLOWUP_KEYWORDS = [
     '捕獲', '射殺', '死亡', '重体', '重篤', '退院',
     '逃走中', '逃走', '発見', '続報', 'その後', '新たに',
@@ -287,6 +288,19 @@ FOLLOWUP_KEYWORDS = [
 def is_followup(headline: str) -> bool:
     """続報・新展開キーワードを含む記事かどうか判定"""
     return any(kw in headline for kw in FOLLOWUP_KEYWORDS)
+
+def followup_type_key(headline: str, inc_key: str) -> str:
+    """
+    続報の種別ごとの一意キー。
+    同じ事件の同種続報（例：複数社が「捕獲成功」を報道）を1回に絞るために使用。
+    """
+    # 最初にマッチした最重要キーワードで種別を決定
+    PRIORITY_KEYWORDS = ['死亡', '射殺', '捕獲', '重体', '重篤', '退院',
+                         '逃走中', '逃走', '発見', '緊急銃猟', '手術']
+    for kw in PRIORITY_KEYWORDS:
+        if kw in headline:
+            return f"{inc_key}_fu_{kw}"
+    return f"{inc_key}_fu_general"
 
 # ── フィルタリング ──────────────────────────────────────────────────────────
 
@@ -492,18 +506,25 @@ def main():
                 log(f"  スキップ（記事投稿済み）: {headline[:40]}")
                 continue
 
-            # ④ 同一インシデントの重複チェック（続報は除外）
+            # ④ 同一インシデントの重複チェック
             inc_key = incident_key(headline)
+            is_update = False   # 続報フラグ
+
             if inc_key and already_posted_incident(inc_key):
                 if is_followup(headline):
-                    log(f"  続報として投稿: {headline[:40]}")
-                    # 続報はインシデントキーを再登録しない（次の続報も通す）
+                    # 続報の種別ごとにも重複チェック
+                    # 例：「捕獲」続報は同一事件で1回のみ投稿
+                    fu_key = followup_type_key(headline, inc_key)
+                    if already_posted_incident(fu_key):
+                        log(f"  スキップ（同種続報済み [{fu_key.split('_fu_')[-1]}]）: {headline[:40]}")
+                        continue
+                    log(f"  続報として投稿（{fu_key.split('_fu_')[-1]}）: {headline[:40]}")
+                    is_update = True
                 else:
                     log(f"  スキップ（重複 [{inc_key}]）: {headline[:40]}")
                     continue
 
             seen_ids.add(aid)
-            is_update = inc_key and already_posted_incident(inc_key)
             log(f"  ✓ {'【続報】' if is_update else '新着速報'}: {headline[:60]}")
 
             # 記事詳細をスクレイピング
@@ -534,7 +555,10 @@ def main():
                 log(f"     URL: https://x.com/i/web/status/{tid}")
                 mark_posted(aid)
                 if inc_key:
-                    mark_incident_posted(inc_key)  # 同一事件の重複投稿を防止
+                    mark_incident_posted(inc_key)   # 初報：事件キーを記録
+                    if is_update:
+                        # 続報：種別キーも記録（同種続報の重複を防止）
+                        mark_incident_posted(followup_type_key(headline, inc_key))
                 posted += 1
                 time.sleep(60)   # 投稿間隔：最低1分
             except Exception as e:
