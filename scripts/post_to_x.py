@@ -39,8 +39,10 @@ LOG_FILE     = PROJECT_ROOT / "public" / "data" / "update-log.json"
 CRED_FILE    = SCRIPT_DIR / "x_credentials.json"
 POSTED_FILE  = SCRIPT_DIR / "x_posted.json"
 
-SITE_URL = 'https://tinyurl.com/22xplgns'
-MAP_URL  = 'https://tinyurl.com/23w2n4xj'
+SITE_URL  = 'https://tinyurl.com/25xf55d8'   # → kumanuke.bubuworks.co.jp/
+MAP_URL   = 'https://tinyurl.com/23w2n4xj'   # → kumanuke.bubuworks.co.jp/map
+WORLD_URL = 'https://tinyurl.com/239sosf8'   # → kumanuke.bubuworks.co.jp/world
+GUIDE_URL = 'https://tinyurl.com/27pbahcy'   # → kumanuke.bubuworks.co.jp/guide
 
 # ═══════════════════════════════════════════════════════════════════════════
 #  文字数ユーティリティ
