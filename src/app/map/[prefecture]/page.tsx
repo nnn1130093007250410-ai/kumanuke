@@ -531,7 +531,7 @@ export default function PrefecturePage({ params }: { params: { prefecture: strin
             background: '#fff',
             border: '1px solid #DDDDD8',
             borderRadius: 10,
-            padding: '28px 32px',
+            padding: 'clamp(16px, 4vw, 28px) clamp(16px, 4vw, 32px)',
           }}
         >
           <h2 style={{ fontSize: 18, fontWeight: 700, color: '#143D1E', marginBottom: 16 }}>
@@ -597,6 +597,14 @@ export default function PrefecturePage({ params }: { params: { prefecture: strin
           </p>
         </div>
       </div>
+    <style>{`
+        @media (max-width: 760px) {
+          #pref-stats-grid { grid-template-columns: 1fr !important; }
+        }
+        @media (max-width: 480px) {
+          #pref-stats-grid .right-panel { display: none; }
+        }
+      `}</style>
     </main>
   )
 }

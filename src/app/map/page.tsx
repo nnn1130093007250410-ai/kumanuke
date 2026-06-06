@@ -294,6 +294,10 @@ export default async function MapPage({
           @media (max-width: 760px) {
             #map-stats-grid { grid-template-columns: 1fr !important; }
           }
+          @media (max-width: 540px) {
+            .year-filters { flex-wrap: wrap !important; gap: 6px !important; }
+            .type-filters { flex-wrap: wrap !important; }
+          }
         `}</style>
         <div
           id="map-stats-grid"

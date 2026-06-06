@@ -44,7 +44,7 @@ export default function GuidePage() {
             <span style={{ fontSize: 11, fontWeight: 800, color: '#EF4444', letterSpacing: '0.15em' }}>🔥 注目特集</span>
             <span style={{ fontSize: 11, color: '#9A9A95' }}>データで見るクマの実態</span>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 12 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(220px, 100%), 1fr))', gap: 12 }}>
             {[
               {
                 href: '/guide/bear-october-danger',

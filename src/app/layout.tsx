@@ -168,7 +168,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body>
+      <body style={{ overflowX: 'hidden', maxWidth: '100vw' }}>
         {children}
         {/* Google Analytics GA4 */}
         <Script

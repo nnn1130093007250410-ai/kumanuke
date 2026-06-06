@@ -80,7 +80,7 @@ export default function BearRapidIncreasePage() {
                       display: 'flex',
                       alignItems: 'center',
                       paddingLeft: 10,
-                      minWidth: 80,
+                      
                     }}>
                       <span style={{ fontSize: 12, color: '#fff', fontWeight: 700 }}>
                         {d.count.toLocaleString()}件
@@ -205,7 +205,7 @@ export default function BearRapidIncreasePage() {
         {/* 次に読む */}
         <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 40 }}>
           <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', letterSpacing: '0.1em', marginBottom: 16 }}>次に読む</p>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 10 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(180px, 100%), 1fr))', gap: 10 }}>
             {[
               { href: '/guide/bear-october-danger', label: '最も危険な月は10月', sub: '年間出没23%・人身被害26%が集中' },
               { href: '/guide/bear-prefecture-ranking', label: '都道府県ランキング', sub: '全国TOP20とその背景' },

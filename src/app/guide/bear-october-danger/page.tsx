@@ -63,7 +63,7 @@ export default function BearOctoberDangerPage() {
 
         {/* 3つの数字 */}
         <div id="stats" />
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12, marginBottom: 56 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(130px, 100%), 1fr))', gap: 12, marginBottom: 56 }}>
           {[
             { num: '25,854', unit: '件', label: '10月の出没件数', color: '#EF4444' },
             { num: '23%',    unit: '',   label: '年間に占める割合', color: '#F97316' },

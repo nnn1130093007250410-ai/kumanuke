@@ -56,7 +56,7 @@ export default async function BearPrefectureRankingPage() {
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '40px 20px 80px' }}>
 
         {/* TOP3 ハイライト */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 10, marginBottom: 48 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(110px, 100%), 1fr))', gap: 10, marginBottom: 48 }}>
           {top20.slice(0, 3).map((p, i) => {
             const medals = ['🥇', '🥈', '🥉']
             const colors = ['#F59E0B', '#9CA3AF', '#B45309']

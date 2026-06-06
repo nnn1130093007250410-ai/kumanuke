@@ -413,7 +413,7 @@ export default async function WorldPage() {
             🗺 国別レポート詳細
           </h2>
           <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)', marginBottom: 24 }}>Phase 1カバー国 — 詳細レポートページあり</p>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 20 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(240px, 100%), 1fr))', gap: 20 }}>
             {PHASE1_COUNTRIES.map((c) => {
               const countryReports = allReports.filter((r) => r.country === c.country)
               const latestDate = countryReports[0]?.date ?? '–'
@@ -524,7 +524,7 @@ export default async function WorldPage() {
               background: 'rgba(255,255,255,0.03)',
               padding: '20px',
             }}>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 16 }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(240px, 100%), 1fr))', gap: 16 }}>
                 {worldYouTubeNews.map((item) => {
                   const thumb =
                     item.snippet.thumbnails.medium?.url ??
@@ -642,6 +642,11 @@ export default async function WorldPage() {
           </div>
         </div>
       </div>
+    <style>{`
+        @media (max-width: 760px) {
+          #world-main-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
     </main>
   )
 }

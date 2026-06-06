@@ -42,15 +42,12 @@ export default function WorldLayout({ children }: { children: React.ReactNode })
               🌍 WORLD
             </Link>
           </div>
-          <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
-            <Link href="/map" style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', textDecoration: 'none' }}>
+          <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
+            <Link href="/map" style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', textDecoration: 'none', padding: '4px 8px' }}>
               🗺 MAP
             </Link>
-            <Link href="/data" style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', textDecoration: 'none', whiteSpace: 'nowrap' }}>
-              📊 環境省データ
-            </Link>
-            <Link href="/guide" style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', textDecoration: 'none' }}>
-              対策ガイド
+            <Link href="/guide" style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', textDecoration: 'none', padding: '4px 8px' }}>
+              📖 ガイド
             </Link>
           </div>
         </div>
