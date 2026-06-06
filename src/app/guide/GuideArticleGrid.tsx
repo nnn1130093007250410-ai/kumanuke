@@ -5,6 +5,11 @@ import { useState } from 'react'
 
 type Category = 'LAB' | 'GUIDE' | 'DATA' | 'WORLD' | 'NEWS'
 
+// カテゴリ別の目安読了時間（分）
+const READING_MINUTES: Record<Category, number> = {
+  LAB: 10, GUIDE: 7, DATA: 5, WORLD: 8, NEWS: 4,
+}
+
 const articles: {
   slug: string
   title: string
@@ -454,7 +459,7 @@ export default function GuideArticleGrid() {
                 transition: 'box-shadow 0.2s, transform 0.15s',
               }}
             >
-              {/* Category + tag badges */}
+              {/* Category + tag badges + reading time */}
               <div style={{ display: 'flex', gap: 6, marginBottom: 12, flexWrap: 'wrap', alignItems: 'center' }}>
                 <span
                   style={{
@@ -484,6 +489,9 @@ export default function GuideArticleGrid() {
                   }}
                 >
                   {a.tag}
+                </span>
+                <span style={{ fontSize: 10, color: '#AAA', marginLeft: 'auto' }}>
+                  ⏱ 約{READING_MINUTES[a.category]}分
                 </span>
               </div>
               <h2

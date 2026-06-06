@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import TableOfContents from '@/components/ui/TableOfContents'
 
 export const metadata: Metadata = {
   title: 'クマが最も危険な月は10月｜年間出没の23%が集中 | KUMANUKE',
@@ -52,7 +53,16 @@ export default function BearOctoberDangerPage() {
 
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '48px 24px 80px' }}>
 
+        {/* 目次 */}
+        <TableOfContents accentColor="#EF4444" items={[
+          { id: 'stats',    title: '3つの衝撃数字' },
+          { id: 'chart',    title: '月別 出没件数グラフ' },
+          { id: 'why',      title: 'なぜ10月が突出するのか' },
+          { id: 'checklist', title: '外出前チェックリスト' },
+        ]} />
+
         {/* 3つの数字 */}
+        <div id="stats" />
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12, marginBottom: 56 }}>
           {[
             { num: '25,854', unit: '件', label: '10月の出没件数', color: '#EF4444' },
@@ -75,7 +85,7 @@ export default function BearOctoberDangerPage() {
         </div>
 
         {/* 月別バーチャート */}
-        <section style={{ marginBottom: 56 }}>
+        <section id="chart" style={{ marginBottom: 56 }}>
           <h2 style={{ fontSize: 18, fontWeight: 700, color: '#fff', marginBottom: 4 }}>
             月別 出没件数
           </h2>
@@ -120,7 +130,7 @@ export default function BearOctoberDangerPage() {
         </section>
 
         {/* なぜ10月？ */}
-        <section style={{ marginBottom: 56 }}>
+        <section id="why" style={{ marginBottom: 56 }}>
           <h2 style={{ fontSize: 20, fontWeight: 700, color: '#fff', marginBottom: 28 }}>
             なぜ10月が突出するのか
           </h2>
@@ -160,7 +170,7 @@ export default function BearOctoberDangerPage() {
         </section>
 
         {/* 秋に外出する人へのチェックリスト */}
-        <section style={{
+        <section id="checklist" style={{
           background: 'rgba(239,68,68,0.08)',
           border: '1px solid rgba(239,68,68,0.2)',
           borderRadius: 16,

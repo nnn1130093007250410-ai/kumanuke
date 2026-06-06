@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import TableOfContents from '@/components/ui/TableOfContents'
 
 export const metadata: Metadata = {
   title: '6年で6倍。クマが急増した3つの理由 | KUMANUKE',
@@ -46,8 +47,15 @@ export default function BearRapidIncreasePage() {
 
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '48px 24px 80px' }}>
 
+        {/* 目次 */}
+        <TableOfContents accentColor="#818CF8" items={[
+          { id: 'chart',   title: '出没件数の推移グラフ' },
+          { id: 'reasons', title: '3つの理由' },
+          { id: 'future',  title: 'これからどうなるのか' },
+        ]} />
+
         {/* 年別チャート */}
-        <section style={{ marginBottom: 56 }}>
+        <section id="chart" style={{ marginBottom: 56 }}>
           <h2 style={{ fontSize: 18, fontWeight: 700, color: '#fff', marginBottom: 24 }}>
             出没件数の推移（全国）
           </h2>
@@ -92,7 +100,7 @@ export default function BearRapidIncreasePage() {
         </section>
 
         {/* 3つの理由 */}
-        <section style={{ marginBottom: 56 }}>
+        <section id="reasons" style={{ marginBottom: 56 }}>
           <h2 style={{ fontSize: 20, fontWeight: 700, color: '#fff', marginBottom: 32 }}>
             なぜ急増したのか？3つの理由
           </h2>
@@ -147,7 +155,7 @@ export default function BearRapidIncreasePage() {
         </section>
 
         {/* これからどうなるか */}
-        <section style={{
+        <section id="future" style={{
           background: 'rgba(239,68,68,0.08)',
           border: '1px solid rgba(239,68,68,0.25)',
           borderRadius: 16,
