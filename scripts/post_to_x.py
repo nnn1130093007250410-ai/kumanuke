@@ -912,18 +912,26 @@ def post_tweet(text, creds, reply_to_id=None):
 
 
 def post_thread(tweets, creds):
-    """ツイートのリストをスレッドとして順番に投稿する"""
+    """後方互換のためリスト形式を受け取るが、最初の1ツイートのみ投稿する（単発モード）"""
     assert_weights(tweets)
-    reply_to = None
-    results  = []
-    for i, text in enumerate(tweets):
-        result   = post_tweet(text, creds, reply_to_id=reply_to)
-        tweet_id = result.get('data', {}).get('id')
-        reply_to = tweet_id
-        results.append(result)
-        if i < len(tweets) - 1:
-            time.sleep(60)  # 投稿間隔：最低1分
-    return results
+    result = post_tweet(tweets[0], creds)
+    return [result]
+
+
+def single_tweet(entry: dict) -> str:
+    """tweets リストの2本構成から単発ツイートを生成する。
+    tweet[0] の「↓ …」行を除去し、tweet[1] のハッシュタグを末尾に付与する。"""
+    import re as _re
+    tweets = entry.get('tweets', [])
+    if not tweets:
+        return entry.get('tweet', '')
+    t1 = tweets[0]
+    t2 = tweets[1] if len(tweets) > 1 else ''
+    t1_clean = _re.sub(r'\n\n↓[^\n]*$', '', t1).rstrip()
+    hashtags  = _re.findall(r'#\S+', t2)
+    if hashtags:
+        return f"{t1_clean}\n\n{' '.join(hashtags)}"
+    return t1_clean
 
 # ═══════════════════════════════════════════════════════════════════════════
 #  データ取得ヘルパー
@@ -978,13 +986,11 @@ def mark_posted(key):
 # ═══════════════════════════════════════════════════════════════════════════
 
 def build_injury_alert_thread(record):
-    """人身被害速報スレッド（3ツイート構成）"""
+    """人身被害速報（単発ツイート）"""
     pref     = record.get('prefecture', '')
     city     = record.get('city', '')
     dt       = record.get('date', '')
-    title    = (record.get('title') or '')[:50]
-    desc     = (record.get('description') or '')
-    bear     = (record.get('bear_type') or 'クマ')
+    title    = (record.get('title') or '')[:40]
     pref_tag = pref.replace('県','').replace('道','').replace('府','').replace('都','')
 
     try:
@@ -993,40 +999,14 @@ def build_injury_alert_thread(record):
     except Exception:
         dt_fmt = dt
 
-    # ツイート1：見出し＋最重要情報
-    t1 = (
+    tweet = (
         f"⚠️【速報】{pref} クマによる人身被害\n\n"
-        f"{dt_fmt}、{city}で発生。\n"
-        f"{title}\n\n"
-        f"詳細↓"
-    )
-
-    # ツイート2：詳細情報
-    t2_lines = [f"【詳細】{pref} {city}・{dt_fmt}"]
-    if desc:
-        # descが長い場合は100字以内に収める
-        short_desc = desc[:100] + ('…' if len(desc) > 100 else '')
-        t2_lines += ["", short_desc]
-    t2_lines += [
-        "",
-        f"🐻 {bear}",
-        "",
-        "最新の出没情報はプロフ欄のリンクから確認できます",
-    ]
-    t2 = '\n'.join(t2_lines)
-
-    # ツイート3：対策
-    t3 = (
-        "【クマに遭遇した場合の対処法】\n\n"
-        "✅ 静かにゆっくり後退する\n"
-        "✅ 背中を向けて走らない\n"
-        "✅ 目を合わせたまま大きく見せる\n"
-        "✅ クマスプレーがあれば使用\n"
-        "✅ 子グマを見たら即座に離れる\n\n"
+        f"■ {dt_fmt}・{city}\n"
+        f"■ {title}\n\n"
+        f"最新情報はプロフ欄のリンクから\n\n"
         f"#クマ被害 #{pref_tag}"
     )
-
-    return [t1, t2, t3]
+    return [tweet]
 
 
 def build_weekly_summary_thread(log_entry, data):
@@ -1068,25 +1048,25 @@ def build_weekly_summary_thread(log_entry, data):
 
 
 def build_educational_thread():
-    """教育・豆知識スレッド（水曜・2ツイート）"""
+    """教育・豆知識（水曜・単発）"""
     week_num = date.today().isocalendar()[1]
-    return BEAR_FACTS[week_num % len(BEAR_FACTS)]['tweets']
+    return [single_tweet(BEAR_FACTS[week_num % len(BEAR_FACTS)])]
 
 
 def build_comparison_thread():
-    """比較系スレッド（火曜・2ツイート）"""
+    """比較系（火曜・単発）"""
     week_num = date.today().isocalendar()[1]
-    return BEAR_COMPARISONS[week_num % len(BEAR_COMPARISONS)]['tweets']
+    return [single_tweet(BEAR_COMPARISONS[week_num % len(BEAR_COMPARISONS)])]
 
 
 def build_educational_thread_thu():
-    """豆知識その2スレッド（木曜・2ツイート）"""
+    """豆知識その2（木曜・単発）"""
     week_num = date.today().isocalendar()[1]
-    return BEAR_FACTS_2[week_num % len(BEAR_FACTS_2)]['tweets']
+    return [single_tweet(BEAR_FACTS_2[week_num % len(BEAR_FACTS_2)])]
 
 
 def build_prefecture_focus_thread(data):
-    """都道府県フォーカス（金曜・2ツイート）"""
+    """都道府県フォーカス（金曜・単発）"""
     top = get_top_prefectures(data, n=5, since_days=7)
     if not top:
         return None
@@ -1104,72 +1084,49 @@ def build_prefecture_focus_thread(data):
     top_cities = sorted(city_counts.items(), key=lambda x: x[1], reverse=True)[:3]
     pref_tag   = top_pref.replace('県','').replace('道','').replace('府','').replace('都','')
 
-    # ツイート1：見出し＋今週データ
-    t1_lines = [
+    lines = [
         f"📍 今週の注目エリア：{top_pref}",
         "",
-        f"今週の出没件数：{top_cnt}件（全国1位）",
+        f"今週：{top_cnt}件（全国1位）",
         f"{cy}年累計：{cy_cnt:,}件",
         "",
-        "詳細↓",
     ]
-    t1 = '\n'.join(t1_lines)
-
-    # ツイート2：市区町村詳細＋注意喚起
-    t2_lines = [f"【{top_pref}・{cy}年 出没上位市区町村】", ""]
-    for city, cnt in top_cities:
-        t2_lines.append(f"・{city}：{cnt}件")
-    t2_lines += [
-        "",
-        f"{top_pref}にお住まいの方は",
-        "外出時に十分ご注意ください⚠️",
+    if top_cities:
+        lines.append("出没が多い市区町村：")
+        for city, cnt in top_cities:
+            lines.append(f"・{city}：{cnt}件")
+        lines.append("")
+    lines += [
+        f"{top_pref}の方は外出時にご注意を⚠️",
         "",
         f"#クマ出没 #{pref_tag}",
     ]
-    t2 = '\n'.join(t2_lines)
-
-    return [t1, t2]
+    return ['\n'.join(lines)]
 
 
 def build_seasonal_thread(season):
-    """シーズン開始告知（3/1 春・9/1 秋・2ツイート）"""
+    """シーズン開始告知（3/1 春・9/1 秋・単発）"""
     if season == 'autumn':
-        t1 = (
+        tweet = (
             "🍂 クマ出没シーズンが始まります\n\n"
-            "9〜11月は年間出没の約47%が集中する\n"
+            "9〜11月は年間出没の約47%が集中。\n"
             "最も危険な時期です。\n\n"
-            "山菜・キャンプ・登山の前に\n"
-            "必ず地域の出没情報を確認してください⚠️\n\n"
-            "詳細↓"
-        )
-        t2 = (
-            "【KUMANUKEで確認できること】\n\n"
             "✅ 全国出没マップ（11万件超）\n"
-            "✅ 都道府県別件数ランキング\n"
-            "✅ 週次トレンドレポート\n"
-            "✅ 対策ガイド35本以上\n\n"
+            "✅ 都道府県別ランキング・対策ガイド\n\n"
             f"👉 {SITE_URL}\n\n"
             "#クマ出没 #クマ対策"
         )
     else:
-        t1 = (
+        tweet = (
             "🌱 クマが冬眠から目覚める季節です\n\n"
-            "3〜5月は冬眠明けで空腹なクマが\n"
-            "活発に食料を探します。\n\n"
-            "山菜採りの時期と重なるため\n"
-            "この時期は特に注意が必要です⚠️\n\n"
-            "詳細↓"
-        )
-        t2 = (
-            "【春のクマ対策ポイント】\n\n"
-            "✅ 山菜採りは複数人で行く\n"
-            "✅ クマ鈴・クマスプレーを携帯\n"
-            "✅ 早朝・夕方は特に注意\n"
-            "✅ 地域の出没情報を事前確認\n\n"
+            "3〜5月は空腹で気性の荒いクマが活発化。\n"
+            "山菜採りの時期と完全に重なります⚠️\n\n"
+            "✅ 複数人で行く\n"
+            "✅ クマ鈴・スプレーを携帯\n\n"
             f"最新情報: {SITE_URL}\n\n"
             "#クマ出没 #山菜採り"
         )
-    return [t1, t2]
+    return [tweet]
 
 # ═══════════════════════════════════════════════════════════════════════════
 #  メイン処理

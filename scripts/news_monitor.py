@@ -414,46 +414,33 @@ def build_news_thread(
     pref_tag: str,
     is_followup: bool = False,
 ) -> list[str]:
-    """ニュース速報の2ツイートスレッドを構築する"""
+    """ニュース速報（単発ツイート）"""
 
-    label    = "🔄【続報】" if is_followup else "🐻⚠️【速報】"
-    src_line = f"出典：{source_name}（{pub_time}）" if pub_time else f"出典：{source_name}"
+    label     = "🔄【続報】" if is_followup else "🐻⚠️【速報】"
+    src_line  = f"出典：{source_name}（{pub_time}）" if pub_time else f"出典：{source_name}"
     pref_part = f" {pref_tag}".rstrip() if pref_tag else ""
 
-    # ── ツイート1：見出し + 出典・時刻 ──
-    t1 = (
+    tweet = (
         f"{label}\n\n"
         f"{headline}\n\n"
-        f"{src_line}↓"
-    )
-
-    # ── ツイート2：詳細 + 注意喚起 + ハッシュタグ ──
-    if detail and len(detail.strip()) > 20:
-        detail_part = detail.strip()
-    else:
-        detail_part = f"詳細は{source_name}の報道をご確認ください。"
-
-    t2 = (
-        f"{detail_part}\n\n"
-        "🚫 周辺の方は不要な外出を控えてください\n"
-        "🚫 該当エリアに近づかないでください\n\n"
-        f"最新情報は地元行政・警察の発表をご確認ください。\n"
+        f"{src_line}\n\n"
         f"#クマ被害{pref_part}"
     )
 
-    # 加重チェック・調整
-    tweets = [t1, t2]
-    for i, t in enumerate(tweets):
-        w = tw_weight(t)
-        if w > 280:
-            log(f"  ⚠ ツイート{i+1}が加重オーバー ({w}): 自動トリム")
-            if i == 1:
-                # 詳細部分を短くトリム
-                excess = (w - 275) // 2
-                trimmed = detail_part[:max(20, len(detail_part) - excess)] + '…'
-                tweets[i] = t2.replace(detail_part, trimmed)
+    # 加重チェック・必要に応じてトリム
+    w = tw_weight(tweet)
+    if w > 280:
+        excess = (w - 275) // 2
+        short_headline = headline[:max(20, len(headline) - excess)] + '…'
+        tweet = (
+            f"{label}\n\n"
+            f"{short_headline}\n\n"
+            f"{src_line}\n\n"
+            f"#クマ被害{pref_part}"
+        )
+        log(f"  ⚠ 見出しをトリム")
 
-    return tweets
+    return [tweet]
 
 # ── メイン処理 ─────────────────────────────────────────────────────────────
 
