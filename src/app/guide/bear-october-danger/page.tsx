@@ -191,8 +191,8 @@ export default function BearOctoberDangerPage() {
         </section>
 
         {/* CTA */}
-        <div style={{ textAlign: 'center' }}>
-          <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.4)', marginBottom: 16 }}>
+        <div style={{ textAlign: 'center', marginBottom: 56 }}>
+          <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.35)', marginBottom: 14 }}>
             あなたの地域の最新クマ出没状況
           </p>
           <Link href="/map" style={{
@@ -207,6 +207,31 @@ export default function BearOctoberDangerPage() {
           }}>
             🗺 今すぐ出没マップを確認 →
           </Link>
+        </div>
+
+        {/* 次に読む */}
+        <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 40 }}>
+          <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', letterSpacing: '0.1em', marginBottom: 16 }}>次に読む</p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 10 }}>
+            {[
+              { href: '/guide/bear-rapid-increase', label: '6年で6.3倍に増えた理由', sub: '急増の構造を3つの理由で解説' },
+              { href: '/guide/bear-prefecture-ranking', label: '都道府県ランキング', sub: '秋田1位・京都3位の実態' },
+              { href: '/guide/bear-seasonal-activity', label: 'クマの年間活動パターン', sub: '季節ごとのリスクカレンダー' },
+            ].map((link) => (
+              <Link key={link.href} href={link.href} style={{
+                textDecoration: 'none',
+                background: 'rgba(255,255,255,0.04)',
+                border: '1px solid rgba(255,255,255,0.08)',
+                borderRadius: 10,
+                padding: '16px 16px',
+                display: 'block',
+              }}>
+                <p style={{ fontSize: 13, fontWeight: 700, color: '#fff', margin: '0 0 4px' }}>{link.label}</p>
+                <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', margin: '0 0 10px' }}>{link.sub}</p>
+                <span style={{ fontSize: 11, color: '#EF4444', fontWeight: 700 }}>読む →</span>
+              </Link>
+            ))}
+          </div>
         </div>
 
       </div>

@@ -36,7 +36,74 @@ export default function GuidePage() {
         </div>
       </div>
 
-      <div style={{ maxWidth: 860, margin: '0 auto', padding: '48px 24px 80px' }}>
+      <div style={{ maxWidth: 860, margin: '0 auto', padding: '40px 24px 80px' }}>
+
+        {/* ── 注目特集 ── */}
+        <div style={{ marginBottom: 48 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
+            <span style={{ fontSize: 11, fontWeight: 800, color: '#EF4444', letterSpacing: '0.15em' }}>🔥 注目特集</span>
+            <span style={{ fontSize: 11, color: '#9A9A95' }}>データで見るクマの実態</span>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 12 }}>
+            {[
+              {
+                href: '/guide/bear-october-danger',
+                bg: 'linear-gradient(135deg, #7F1D1D 0%, #1A0A0A 100%)',
+                accent: '#EF4444',
+                stat: '23%',
+                statLabel: '年間出没が10月に集中',
+                title: '最も危険な月は10月',
+                sub: 'クマ出没・人身被害データ',
+              },
+              {
+                href: '/guide/bear-rapid-increase',
+                bg: 'linear-gradient(135deg, #1E1B4B 0%, #0A0F1E 100%)',
+                accent: '#818CF8',
+                stat: '6.3×',
+                statLabel: '6年間での増加倍率',
+                title: 'なぜ急増したのか',
+                sub: '2020→2025年の変化',
+              },
+              {
+                href: '/guide/bear-prefecture-ranking',
+                bg: 'linear-gradient(135deg, #0F2E16 0%, #0A1628 100%)',
+                accent: '#5EC97C',
+                stat: '1位',
+                statLabel: '秋田県が断トツ全国1位',
+                title: '都道府県ランキング',
+                sub: '全国TOP20の実態',
+              },
+            ].map((card) => (
+              <Link key={card.href} href={card.href} style={{ textDecoration: 'none' }}>
+                <div style={{
+                  background: card.bg,
+                  borderRadius: 12,
+                  padding: '24px 20px',
+                  color: '#fff',
+                  border: `1px solid ${card.accent}33`,
+                  transition: 'transform 0.15s',
+                }}>
+                  <div style={{
+                    fontSize: 'clamp(32px,6vw,44px)',
+                    fontWeight: 900,
+                    color: card.accent,
+                    fontFamily: 'var(--font-dm-sans)',
+                    lineHeight: 1,
+                    marginBottom: 4,
+                  }}>{card.stat}</div>
+                  <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', marginBottom: 12 }}>{card.statLabel}</div>
+                  <div style={{ fontSize: 15, fontWeight: 700, color: '#fff', marginBottom: 4 }}>{card.title}</div>
+                  <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)' }}>{card.sub}</div>
+                  <div style={{
+                    marginTop: 16, fontSize: 11, fontWeight: 700,
+                    color: card.accent, letterSpacing: '0.05em',
+                  }}>読む →</div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+
         <GuideArticleGrid />
 
         <div style={{ marginTop: 48, background: '#143D1E', borderRadius: 8, padding: '32px 28px', textAlign: 'center' }}>

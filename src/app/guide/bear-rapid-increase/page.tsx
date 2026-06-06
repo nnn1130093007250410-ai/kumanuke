@@ -166,7 +166,7 @@ export default function BearRapidIncreasePage() {
         </section>
 
         {/* CTAs */}
-        <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', justifyContent: 'center' }}>
+        <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', justifyContent: 'center', marginBottom: 56 }}>
           <Link href="/map" style={{
             display: 'inline-block',
             background: '#818CF8',
@@ -192,6 +192,31 @@ export default function BearRapidIncreasePage() {
           }}>
             ⚠️ 最も危険な月を見る
           </Link>
+        </div>
+
+        {/* 次に読む */}
+        <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 40 }}>
+          <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', letterSpacing: '0.1em', marginBottom: 16 }}>次に読む</p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 10 }}>
+            {[
+              { href: '/guide/bear-october-danger', label: '最も危険な月は10月', sub: '年間出没23%・人身被害26%が集中' },
+              { href: '/guide/bear-prefecture-ranking', label: '都道府県ランキング', sub: '全国TOP20とその背景' },
+              { href: '/guide/why-bears-come-to-towns', label: 'クマはなぜ人里に来るのか', sub: '里山変化・食料不足・学習行動' },
+            ].map((link) => (
+              <Link key={link.href} href={link.href} style={{
+                textDecoration: 'none',
+                background: 'rgba(255,255,255,0.04)',
+                border: '1px solid rgba(255,255,255,0.08)',
+                borderRadius: 10,
+                padding: '16px 16px',
+                display: 'block',
+              }}>
+                <p style={{ fontSize: 13, fontWeight: 700, color: '#fff', margin: '0 0 4px' }}>{link.label}</p>
+                <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', margin: '0 0 10px' }}>{link.sub}</p>
+                <span style={{ fontSize: 11, color: '#818CF8', fontWeight: 700 }}>読む →</span>
+              </Link>
+            ))}
+          </div>
         </div>
 
       </div>

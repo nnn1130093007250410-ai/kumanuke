@@ -158,7 +158,7 @@ export default async function BearPrefectureRankingPage() {
         </section>
 
         {/* CTA */}
-        <div style={{ textAlign: 'center' }}>
+        <div style={{ textAlign: 'center', marginBottom: 56 }}>
           <Link href="/map" style={{
             display: 'inline-block',
             background: '#5EC97C',
@@ -171,6 +171,31 @@ export default async function BearPrefectureRankingPage() {
           }}>
             🗺 あなたの地域のデータを見る →
           </Link>
+        </div>
+
+        {/* 次に読む */}
+        <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 40 }}>
+          <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', letterSpacing: '0.1em', marginBottom: 16 }}>次に読む</p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 10 }}>
+            {[
+              { href: '/guide/bear-october-danger', label: '最も危険な月は10月', sub: '年間出没の23%が集中する理由' },
+              { href: '/guide/bear-rapid-increase', label: '6年で6.3倍に増えた理由', sub: '急増の3つの構造的原因' },
+              { href: '/guide/japan-regional-bear-data', label: '都道府県別傾向分析（詳細版）', sub: '地域ごとの詳細な出没傾向' },
+            ].map((link) => (
+              <Link key={link.href} href={link.href} style={{
+                textDecoration: 'none',
+                background: 'rgba(255,255,255,0.04)',
+                border: '1px solid rgba(255,255,255,0.08)',
+                borderRadius: 10,
+                padding: '16px 16px',
+                display: 'block',
+              }}>
+                <p style={{ fontSize: 13, fontWeight: 700, color: '#fff', margin: '0 0 4px' }}>{link.label}</p>
+                <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', margin: '0 0 10px' }}>{link.sub}</p>
+                <span style={{ fontSize: 11, color: '#5EC97C', fontWeight: 700 }}>読む →</span>
+              </Link>
+            ))}
+          </div>
         </div>
 
       </div>

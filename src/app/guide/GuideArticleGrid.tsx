@@ -278,6 +278,31 @@ const articles: {
     tagColor: '#E07A30',
     category: 'NEWS',
   },
+  // ── 特集コンテンツ（ビジュアル・インパクト重視）────────────────────────
+  {
+    slug: 'bear-october-danger',
+    title: '📊 クマが最も危険な月は10月｜年間23%が集中・人身被害も26%',
+    description: '10月にクマ出没の23%・人身被害の26%が集中。KUMANUKEの11万件超のデータが示す事実を視覚的に解説。秋のアウトドア・農作業前に必読です。',
+    tag: '🔥 特集',
+    tagColor: '#EF4444',
+    category: 'DATA',
+  },
+  {
+    slug: 'bear-rapid-increase',
+    title: '📊 6年で6倍。クマが急増した3つの理由',
+    description: '2020年6,667件→2025年42,031件。個体数回復・耕作放棄地・人を怖がらないクマ——急増の構造を3つの理由でシンプルに解説します。',
+    tag: '🔥 特集',
+    tagColor: '#EF4444',
+    category: 'DATA',
+  },
+  {
+    slug: 'bear-prefecture-ranking',
+    title: '📊 クマ出没 都道府県ランキング｜秋田1位・意外な3位は京都府',
+    description: '11万件超のデータによる全国ランキングTOP20。秋田断トツ1位の理由・意外にも3位の京都府——あなたの地域は何位？各県の特徴も解説します。',
+    tag: '🔥 特集',
+    tagColor: '#EF4444',
+    category: 'DATA',
+  },
 ]
 
 const CATEGORIES: { key: Category | 'all'; label: string; color: string; desc: string }[] = [
