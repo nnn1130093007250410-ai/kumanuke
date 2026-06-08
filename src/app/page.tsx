@@ -162,6 +162,14 @@ export default async function PortalTop() {
   const worldReports = loadWorldBearReports()
   const worldReportCount = worldReports.length
 
+  // GBIFグローバル出現記録件数（JSONから動的に）
+  const { readFileSync, existsSync } = await import('fs')
+  const gbifPath = join(process.cwd(), 'public', 'data', 'bear-gbif.json')
+  const gbifCount = existsSync(gbifPath)
+    ? (JSON.parse(readFileSync(gbifPath, 'utf-8')) as unknown[]).length
+    : 0
+  const globalTotalCount = totalCount + gbifCount  // 国内 + 海外
+
   return (
     <>
       {/* ───── Portal Nav ───── */}
@@ -292,7 +300,7 @@ export default async function PortalTop() {
               marginBottom: 36,
             }}
           >
-            全国{totalCount.toLocaleString()}件の出没データ、{guideCount}本の対策ガイド、世界{worldReportCount}件の熊情報を集約。
+            国内{totalCount.toLocaleString()}件＋海外{gbifCount.toLocaleString()}件＝累計{globalTotalCount.toLocaleString()}件の熊データ、{guideCount}本の対策ガイドを集約。
             山・農地・住宅地のリスクを正しく把握し、適切な対策を。
           </p>
 
@@ -306,7 +314,7 @@ export default async function PortalTop() {
             }}
           >
             {[
-              { value: `${totalCount.toLocaleString()}件`, label: '全国出没記録' },
+              { value: `${globalTotalCount.toLocaleString()}件`, label: '累計出没記録' },
               { value: `${prefectureCount}都道府県`, label: 'カバーエリア' },
               { value: `${guideCount}本`, label: '対策ガイド' },
               { value: '世界35カ国+', label: 'WORLD REPORT' },
@@ -416,7 +424,7 @@ export default async function PortalTop() {
         </div>
         <span style={{ color: 'rgba(255,255,255,0.2)', fontSize: 12 }}>|</span>
         <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)' }}>
-          データ総件数: <strong style={{ color: '#5EC97C' }}>{totalCount.toLocaleString()}件</strong>
+          データ総件数: <strong style={{ color: '#5EC97C' }}>{globalTotalCount.toLocaleString()}件</strong><span style={{ fontSize: 10, color: 'rgba(255,255,255,0.4)', marginLeft: 6 }}>（国内{totalCount.toLocaleString()}＋海外{gbifCount.toLocaleString()}）</span>
         </span>
         <span style={{ color: 'rgba(255,255,255,0.2)', fontSize: 12 }}>|</span>
         <Link href="/map" style={{ fontSize: 12, color: '#5EC97C', fontWeight: 700, textDecoration: 'none' }}>
