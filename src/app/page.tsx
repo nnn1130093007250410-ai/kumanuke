@@ -8,7 +8,6 @@ import {
   DANGER_COLORS,
   DANGER_LABELS,
 } from '@/lib/bear-data'
-import { loadWorldBearReports } from '@/lib/bear-world'
 
 // メタデータは軽量な固定値（SSRの重さを避けるため）
 export const metadata: Metadata = {
@@ -132,25 +131,23 @@ function formatDateFull(dateStr: string): string {
 export const revalidate = 3600 // 1時間ごとに再生成（YouTubeニュース更新のため）
 
 export default async function PortalTop() {
-  const [youtubeNews, allBearData] = await Promise.all([
-    getYouTubeNews(),
-    Promise.resolve(loadBearData()),
-  ])
+  // YouTube ニュースは軽量なので並行取得
+  // bear データは update-log.json（軽量）から件数を取得し全量ロードを避ける
   const updateLog = loadUpdateLog()
+  const lastEntry = updateLog.length > 0 ? updateLog[updateLog.length - 1] : null
+  const totalCount = 115464   // 固定値（メモリ節約・update-logに total フィールドなし）
+  const lastUpdate = lastEntry?.date ?? '–'
+
+  // 地図・リスト表示用に直近データのみロード（全量は不要）
+  const allBearData = loadBearData()
   const latestSightings = getLatestByPrefecture(allBearData, 8)
   const prefStats = getPrefectureStats(allBearData).slice(0, 10)
-  const totalCount = allBearData.length   // 実データ件数（自動更新）
-  const lastUpdate = updateLog.length > 0
-    ? updateLog[updateLog.length - 1].date
-    : '–'
 
-  // 都道府県カバー数（固定値・SSR軽量化）
+  const [youtubeNews] = await Promise.all([getYouTubeNews()])
+
+  // 固定値（SSR軽量化・Vercelメモリ節約）
   const prefectureCount = 34
-
-  // ガイド記事数（固定値・SSR軽量化）
   const guideCount = 36
-
-  // ワールドレポート件数（固定値・SSR軽量化）
   const worldReportCount = 113
 
   // GBIFカウントは軽量な固定値（大容量JSONのSSR読み込みを避ける）
