@@ -446,7 +446,7 @@ export default function MapClient({
     const map = mapRef.current?.getMap()
     if (!map) return
     if (viewMode === 'world') {
-      map.flyTo({ center: [20, 30], zoom: 1.8, duration: 1200 })
+      map.flyTo({ center: [-20, 30], zoom: 1.5, duration: 1200 })
     } else if (viewMode === 'all') {
       map.flyTo({ center: [80, 25], zoom: 1.5, duration: 1200 })
     } else if (viewMode === 'heat') {
@@ -494,8 +494,8 @@ export default function MapClient({
         ? '🔍 拡大するとクラスターが展開されます'
         : `📍 日本 ${filteredJapanData.length}件 表示中`
     }
-    if (viewMode === 'world') return `🌍 世界 ${worldCount}件 · ${countryCounts.length - 1}カ国`
-    if (viewMode === 'all') return `📍 日本 ${filteredJapanData.length}件 ＋ 世界 ${worldCount}件`
+    if (viewMode === 'world') return `🌍 世界 ${worldCount}件 ＋ 🔵GBIF ${gbifSightings.length.toLocaleString()}件 · ${countryCounts.length - 1}カ国`
+    if (viewMode === 'all') return `📍 日本 ${filteredJapanData.length}件 ＋ 世界 ${worldCount}件 ＋ 🔵GBIF ${gbifSightings.length.toLocaleString()}件`
     return `🔥 ヒートマップ — ${heatGeoJSON.features.length}件`
   })()
 
@@ -836,19 +836,26 @@ export default function MapClient({
             type="geojson"
             data={gbifGeoJSON}
             cluster
-            clusterRadius={30}
-            clusterMaxZoom={4}
+            clusterRadius={40}
+            clusterMaxZoom={5}
           >
+            {/* クラスター円（大きめ・明るい青） */}
             <Layer
               id="gbif-cluster"
               type="circle"
               source="gbif-data"
               filter={['has', 'point_count']}
               paint={{
-                'circle-color': 'rgba(96,165,250,0.6)',
-                'circle-radius': ['step', ['get', 'point_count'], 8, 10, 12, 50, 16],
-                'circle-stroke-width': 1,
-                'circle-stroke-color': 'rgba(96,165,250,0.9)',
+                'circle-color': [
+                  'step', ['get', 'point_count'],
+                  '#3B82F6',   // 1〜9件: 青
+                  10, '#1D4ED8', // 10〜: 濃い青
+                  100, '#1E40AF', // 100〜: さらに濃い青
+                ],
+                'circle-radius': ['step', ['get', 'point_count'], 14, 10, 20, 100, 28],
+                'circle-stroke-width': 2,
+                'circle-stroke-color': '#93C5FD',
+                'circle-opacity': 0.9,
               }}
             />
             <Layer
@@ -858,21 +865,23 @@ export default function MapClient({
               filter={['has', 'point_count']}
               layout={{
                 'text-field': '{point_count_abbreviated}',
-                'text-size': 10,
+                'text-size': 11,
                 'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
               }}
               paint={{ 'text-color': '#fff' }}
             />
+            {/* 単体の点 */}
             <Layer
               id="gbif-point"
               type="circle"
               source="gbif-data"
               filter={['!', ['has', 'point_count']]}
               paint={{
-                'circle-color': 'rgba(96,165,250,0.5)',
-                'circle-radius': 4,
-                'circle-stroke-width': 1,
-                'circle-stroke-color': 'rgba(147,197,253,0.8)',
+                'circle-color': '#60A5FA',
+                'circle-radius': 5,
+                'circle-stroke-width': 1.5,
+                'circle-stroke-color': '#BFDBFE',
+                'circle-opacity': 0.85,
               }}
             />
           </Source>
