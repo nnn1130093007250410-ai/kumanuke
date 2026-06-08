@@ -25,13 +25,18 @@ export interface GbifSighting {
   bear_type_ja: string     // Japanese
   country_code: string     // ISO 2-letter
   country_ja: string       // Japanese country name
-  region: string
+  region: string           // state/province
+  municipality?: string    // county/municipality level
+  locality?: string        // verbatim location text (e.g. "Rosewood Ave, Asheville")
   date: string             // YYYY-MM-DD
   lat: number
   lng: number
   basis: string            // HUMAN_OBSERVATION etc.
+  remarks?: string         // observer's notes
+  dataset?: string         // source dataset name
   source_name: string
   source_url: string
+  photo_url?: string       // photo URL if available
 }
 
 export const DANGER_LABELS: Record<number, string> = {

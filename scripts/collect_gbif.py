@@ -114,16 +114,36 @@ def fetch_occurrences(taxon_key: int, limit_per_species: int = 30000) -> list[di
                 continue
 
             country_code = r.get('countryCode', '') or r.get('country', '')
+
+            # GADM から市区町村レベルの地名を取得
+            gadm = r.get('gadm') or {}
+            level2 = (gadm.get('level2') or {}).get('name', '') or ''
+            level3 = (gadm.get('level3') or {}).get('name', '') or ''
+            municipality = level3 or level2
+
+            # 写真URL（最初のStillImage）
+            media = r.get('media') or []
+            photo_url = ''
+            for m in media:
+                if isinstance(m, dict) and m.get('type') == 'StillImage' and m.get('references'):
+                    photo_url = m['references']
+                    break
+
             records.append({
-                'gbif_key':     r.get('key'),
+                'gbif_key':    r.get('key'),
                 'country_code': country_code,
-                'country_ja':   COUNTRY_JA.get(country_code, country_code),
-                'region':       r.get('stateProvince', '') or '',
-                'date':         (r.get('eventDate') or '')[:10],
-                'lat':          round(float(lat), 6),
-                'lng':          round(float(lng), 6),
-                'basis':        basis,
-                'dataset':      r.get('datasetName', '') or r.get('collectionCode', '') or '',
+                'country_ja':  COUNTRY_JA.get(country_code, country_code),
+                'region':      r.get('stateProvince', '') or '',
+                'municipality': municipality,
+                'locality':    (r.get('verbatimLocality', '') or '').strip(),
+                'date':        (r.get('eventDate') or '')[:10],
+                'lat':         round(float(lat), 6),
+                'lng':         round(float(lng), 6),
+                'basis':       basis,
+                'remarks':     (r.get('occurrenceRemarks', '') or '').strip(),
+                'dataset':     r.get('datasetName', '') or r.get('institutionCode', '') or '',
+                'obs_url':     r.get('references', '') or r.get('occurrenceID', '') or '',
+                'photo_url':   photo_url,
             })
 
         print(f"    offset={offset}: {len(results)}件取得 / 累計{len(records)}件")
@@ -166,53 +186,56 @@ def main():
             if key:
                 seen_keys.add(key)
 
-            # 最終レコード形式に変換
+            # 最終レコード形式に変換（リッチフィールド追加）
             all_records.append({
-                'id':          f"gbif-{key or len(all_records)}",
-                'bear_type':   bear_type,
+                'id':           f"gbif-{key or len(all_records)}",
+                'bear_type':    bear_type,
                 'bear_type_ja': bear_type_ja,
                 'country_code': r['country_code'],
-                'country_ja':  r['country_ja'],
-                'region':      r['region'],
-                'date':        r['date'] or '2000-01-01',
-                'lat':         r['lat'],
-                'lng':         r['lng'],
-                'basis':       r['basis'],
-                'source_name': 'GBIF',
-                'source_url':  f"https://www.gbif.org/occurrence/{key}" if key else 'https://www.gbif.org',
+                'country_ja':   r['country_ja'],
+                'region':       r['region'],
+                'municipality': r.get('municipality', ''),
+                'locality':     r.get('locality', ''),
+                'date':         r['date'] or '2000-01-01',
+                'lat':          r['lat'],
+                'lng':          r['lng'],
+                'basis':        r['basis'],
+                'remarks':      r.get('remarks', ''),
+                'dataset':      r.get('dataset', ''),
+                'source_name':  r.get('dataset', '') or 'GBIF',
+                'source_url':   r.get('obs_url', '') or f"https://www.gbif.org/occurrence/{key}" if key else 'https://www.gbif.org',
+                'photo_url':    r.get('photo_url', ''),
             })
             added += 1
 
         print(f'  → {added:,}件追加 / 総計{len(all_records):,}件\n')
 
-    print(f'書き込み中... {len(all_records):,}件')
-    with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
-        json.dump(all_records, f, ensure_ascii=False)
+        # 種ごとに中間保存＆push（長時間実行でも途中結果をデプロイ）
+        if added > 0:
+            with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
+                json.dump(all_records, f, ensure_ascii=False)
+            _push(all_records, bear_type_ja)
 
-    print(f'✅ 完了: {OUTPUT_FILE}')
-    print(f'   総件数: {len(all_records):,}件')
+    print(f'✅ 完了: {len(all_records):,}件')
 
-    # git commit & push（自動デプロイ）
+
+def _push(records: list[dict], label: str = ''):
+    """中間保存後にgit push（種ごとに呼ばれる）"""
     import subprocess, datetime
     today = datetime.date.today().isoformat()
     try:
-        subprocess.run(
-            ['git', '-C', str(PROJECT_ROOT), 'add', str(OUTPUT_FILE)],
-            check=True, capture_output=True
-        )
+        subprocess.run(['git', '-C', str(PROJECT_ROOT), 'add', str(OUTPUT_FILE)],
+                       check=True, capture_output=True)
+        msg = f'🌍 GBIF取得: {len(records):,}件 {label} ({today})'
         subprocess.run(
             ['git', '-C', str(PROJECT_ROOT),
              '-c', 'user.name=kumanuke-bot',
              '-c', 'user.email=bot@kumanuke.jp',
-             'commit', '-m',
-             f'🌍 GBIF自動取得: 世界クマ出現記録 {len(all_records):,}件 ({today})'],
-            check=True, capture_output=True
-        )
-        subprocess.run(
-            ['git', '-C', str(PROJECT_ROOT), 'push', 'origin', 'main'],
-            check=True, capture_output=True
-        )
-        print(f'✅ git push 完了')
+             'commit', '-m', msg],
+            check=True, capture_output=True)
+        subprocess.run(['git', '-C', str(PROJECT_ROOT), 'push', 'origin', 'main'],
+                       check=True, capture_output=True)
+        print(f'  ✅ push完了: {msg[:50]}')
     except subprocess.CalledProcessError as e:
         print(f'⚠ git push スキップ（変更なし or エラー）: {e}')
 

@@ -1082,17 +1082,33 @@ export default function MapClient({
           const dateStr = selectedGbif.date && selectedGbif.date !== '2000-01-01'
             ? selectedGbif.date.replace(/-/g, '/')
             : '日付不明'
+
+          // 場所テキスト：locality > municipality > region の優先順
+          const locationDetail = selectedGbif.locality || selectedGbif.municipality || ''
+
           return (
             <Popup
               latitude={selectedGbif.lat}
               longitude={selectedGbif.lng}
               onClose={() => setSelectedId(null)}
               closeButton closeOnClick={false}
-              maxWidth="280px" anchor="bottom"
+              maxWidth="300px" anchor="bottom"
             >
               <div style={{ fontFamily: 'var(--font-noto-sans, sans-serif)', padding: '4px 0' }}>
+                {/* 写真（あれば） */}
+                {selectedGbif.photo_url && (
+                  <div style={{ marginBottom: 8, borderRadius: 6, overflow: 'hidden', maxHeight: 120 }}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={selectedGbif.photo_url}
+                      alt={selectedGbif.bear_type_ja}
+                      style={{ width: '100%', objectFit: 'cover', maxHeight: 120 }}
+                      onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none' }}
+                    />
+                  </div>
+                )}
                 {/* ヘッダー */}
-                <div style={{ display: 'flex', gap: 6, marginBottom: 8, alignItems: 'center' }}>
+                <div style={{ display: 'flex', gap: 6, marginBottom: 8, alignItems: 'center', flexWrap: 'wrap' }}>
                   <span style={{
                     background: '#1D4ED8', color: '#fff',
                     fontSize: 10, fontWeight: 700,
@@ -1100,37 +1116,45 @@ export default function MapClient({
                   }}>
                     🌍 GBIF記録
                   </span>
-                  <span style={{ fontSize: 11, color: '#555' }}>
+                  <span style={{ fontSize: 11, color: '#555', fontWeight: 600 }}>
                     🐻 {selectedGbif.bear_type_ja}
                   </span>
                 </div>
-                {/* 場所 */}
-                <p style={{ fontSize: 13, fontWeight: 700, color: '#1E3A5F', margin: '0 0 4px' }}>
+                {/* 場所（詳細 → 大まかの順） */}
+                <p style={{ fontSize: 13, fontWeight: 700, color: '#1E3A5F', margin: '0 0 2px' }}>
                   {flag} {selectedGbif.country_ja}
                   {selectedGbif.region ? ` · ${selectedGbif.region}` : ''}
                 </p>
-                {/* 日付 */}
-                <p style={{ fontSize: 11, color: '#888', margin: '0 0 8px' }}>
-                  📅 {dateStr}
-                </p>
-                {/* 記録種別 */}
-                <div style={{
-                  background: '#EFF6FF',
-                  border: '1px solid #BFDBFE',
-                  borderRadius: 5, padding: '6px 10px',
-                  marginBottom: 8,
-                }}>
-                  <p style={{ fontSize: 11, color: '#1E40AF', margin: 0 }}>
-                    📋 {basisLabel}
+                {locationDetail && (
+                  <p style={{ fontSize: 11, color: '#555', margin: '0 0 6px' }}>
+                    📍 {locationDetail}
                   </p>
-                </div>
-                {/* 出典リンク */}
+                )}
+                {/* 日付 */}
+                <p style={{ fontSize: 11, color: '#888', margin: '0 0 6px' }}>📅 {dateStr}</p>
+                {/* 観察者のコメント（あれば） */}
+                {selectedGbif.remarks && (
+                  <div style={{
+                    background: '#F0FDF4', border: '1px solid #BBF7D0',
+                    borderRadius: 5, padding: '6px 10px', marginBottom: 8,
+                  }}>
+                    <p style={{ fontSize: 11, color: '#166534', margin: 0, lineHeight: 1.5 }}>
+                      💬 {selectedGbif.remarks}
+                    </p>
+                  </div>
+                )}
+                {/* 記録種別 */}
+                <p style={{ fontSize: 10, color: '#6B7280', margin: '0 0 6px' }}>
+                  📋 {basisLabel}
+                  {selectedGbif.dataset ? ` · ${selectedGbif.dataset}` : ''}
+                </p>
+                {/* リンク */}
                 <a
-                  href={selectedGbif.source_url}
+                  href={selectedGbif.source_url || `https://www.gbif.org/occurrence/${selectedGbif.id.replace('gbif-', '')}`}
                   target="_blank" rel="noopener noreferrer"
                   style={{ fontSize: 11, color: '#2563EB', textDecoration: 'none' }}
                 >
-                  GBIF詳細ページを見る →
+                  元の観察記録を見る →
                 </a>
               </div>
             </Popup>
