@@ -4,7 +4,7 @@ import { useState, useCallback, useRef, useEffect, useMemo } from 'react'
 import Map, { Popup, Source, Layer, NavigationControl } from 'react-map-gl/mapbox'
 import type { LayerProps, MapRef, MapMouseEvent } from 'react-map-gl/mapbox'
 import 'mapbox-gl/dist/mapbox-gl.css'
-import type { BearSighting, WorldBearReport, WorldBearReportV2 } from '@/lib/bear-constants'
+import type { BearSighting, WorldBearReport, WorldBearReportV2, GbifSighting } from '@/lib/bear-constants'
 import {
   DANGER_COLORS, DANGER_LABELS,
   WORLD_IMPORTANCE_COLORS, WORLD_IMPORTANCE_LABELS,
@@ -19,6 +19,7 @@ interface MapClientProps {
   historySightings?: BearSighting[]
   worldSightings?: WorldBearReport[]   // legacy (bear-world.json)
   worldReports?: WorldBearReportV2[]   // V2 (world-bear-report.json)
+  gbifSightings?: GbifSighting[]       // GBIF global occurrence records
   centerLng?: number
   centerLat?: number
   zoom?: number
@@ -212,6 +213,7 @@ export default function MapClient({
   historySightings = [],
   worldSightings = [],
   worldReports = [],
+  gbifSightings = [],
   centerLng = 137.0,
   centerLat = 36.5,
   zoom = 5,
@@ -305,6 +307,21 @@ export default function MapClient({
     }))
     return { type: 'FeatureCollection' as const, features: [...jFeatures, ...wFeatures] }
   }, [sightings, activeWorldReports, worldSightings])
+
+  // GBIF グローバル出現記録 GeoJSON（world/allモードで表示）
+  const gbifGeoJSON = useMemo(() => ({
+    type: 'FeatureCollection' as const,
+    features: gbifSightings.map((g) => ({
+      type: 'Feature' as const,
+      properties: {
+        id:           g.id,
+        bear_type_ja: g.bear_type_ja,
+        country_ja:   g.country_ja,
+        date:         g.date,
+      },
+      geometry: { type: 'Point' as const, coordinates: [g.lng, g.lat] },
+    })),
+  }), [gbifSightings])
 
   // Country count table (Japan full count + World country counts)
   const countryCounts = useMemo(() => {
@@ -809,6 +826,55 @@ export default function MapClient({
             <Layer {...worldClusterLayer} />
             <Layer {...worldClusterCountLayer} />
             <Layer {...worldPointLayer} />
+          </Source>
+        )}
+
+        {/* GBIF グローバル出現記録（world/allモードで表示） */}
+        {(viewMode === 'world' || viewMode === 'all') && gbifSightings.length > 0 && (
+          <Source
+            id="gbif-data"
+            type="geojson"
+            data={gbifGeoJSON}
+            cluster
+            clusterRadius={30}
+            clusterMaxZoom={4}
+          >
+            <Layer
+              id="gbif-cluster"
+              type="circle"
+              source="gbif-data"
+              filter={['has', 'point_count']}
+              paint={{
+                'circle-color': 'rgba(96,165,250,0.6)',
+                'circle-radius': ['step', ['get', 'point_count'], 8, 10, 12, 50, 16],
+                'circle-stroke-width': 1,
+                'circle-stroke-color': 'rgba(96,165,250,0.9)',
+              }}
+            />
+            <Layer
+              id="gbif-cluster-count"
+              type="symbol"
+              source="gbif-data"
+              filter={['has', 'point_count']}
+              layout={{
+                'text-field': '{point_count_abbreviated}',
+                'text-size': 10,
+                'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+              }}
+              paint={{ 'text-color': '#fff' }}
+            />
+            <Layer
+              id="gbif-point"
+              type="circle"
+              source="gbif-data"
+              filter={['!', ['has', 'point_count']]}
+              paint={{
+                'circle-color': 'rgba(96,165,250,0.5)',
+                'circle-radius': 4,
+                'circle-stroke-width': 1,
+                'circle-stroke-color': 'rgba(147,197,253,0.8)',
+              }}
+            />
           </Source>
         )}
 

@@ -18,6 +18,22 @@ export interface BearSighting {
   lng: number
 }
 
+// ── GBIF グローバル出現記録 ────────────────────────────────────────
+export interface GbifSighting {
+  id: string
+  bear_type: string        // English
+  bear_type_ja: string     // Japanese
+  country_code: string     // ISO 2-letter
+  country_ja: string       // Japanese country name
+  region: string
+  date: string             // YYYY-MM-DD
+  lat: number
+  lng: number
+  basis: string            // HUMAN_OBSERVATION etc.
+  source_name: string
+  source_url: string
+}
+
 export const DANGER_LABELS: Record<number, string> = {
   1: '注意',
   2: '警戒',
