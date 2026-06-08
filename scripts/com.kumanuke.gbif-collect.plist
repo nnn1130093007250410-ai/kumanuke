@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.kumanuke.gbif-collect</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>/Library/Frameworks/Python.framework/Versions/3.13/bin/python3</string>
+    <string>/Users/sakumashinrou/kumanuke/scripts/collect_gbif.py</string>
+  </array>
+
+  <key>WorkingDirectory</key>
+  <string>/Users/sakumashinrou/kumanuke</string>
+
+  <!-- 1日3回: 06:00 / 12:00 / 20:00 に取得 -->
+  <key>StartCalendarInterval</key>
+  <array>
+    <dict><key>Hour</key><integer>6</integer><key>Minute</key><integer>0</integer></dict>
+    <dict><key>Hour</key><integer>12</integer><key>Minute</key><integer>0</integer></dict>
+    <dict><key>Hour</key><integer>20</integer><key>Minute</key><integer>0</integer></dict>
+  </array>
+
+  <key>StandardOutPath</key>
+  <string>/Users/sakumashinrou/Library/Logs/kumanuke-gbif.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/sakumashinrou/Library/Logs/kumanuke-gbif.log</string>
+
+  <key>RunAtLoad</key>
+  <false/>
+
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PATH</key>
+    <string>/Library/Frameworks/Python.framework/Versions/3.13/bin:/usr/local/bin:/usr/bin:/bin</string>
+    <key>HOME</key>
+    <string>/Users/sakumashinrou</string>
+    <key>PYTHONIOENCODING</key>
+    <string>utf-8</string>
+  </dict>
+</dict>
+</plist>
