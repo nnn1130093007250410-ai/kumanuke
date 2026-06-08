@@ -8,11 +8,20 @@ import {
   DANGER_COLORS,
   DANGER_LABELS,
 } from '@/lib/bear-data'
+import { loadWorldBearReports } from '@/lib/bear-world'
+
+// メタデータはビルド時の実データ件数から動的に生成
+import { loadBearData as _loadForMeta } from '@/lib/bear-data'
+function _getMetaCount() {
+  try { return _loadForMeta().length } catch { return 115000 }
+}
+const _metaCount = _getMetaCount()
+const _metaCountStr = `${Math.floor(_metaCount / 1000)}万${Math.floor(_metaCount % 1000 / 100) * 100}`
 
 export const metadata: Metadata = {
-  title: 'KUMANUKE | 熊・野生動物情報ポータル — 全国115,000件+のデータ',
+  title: `KUMANUKE | 熊・野生動物情報ポータル — 全国${_metaCount.toLocaleString('ja-JP')}件+のデータ`,
   description:
-    '日本最大級の熊・野生動物情報インフラ。全国115,000件超の出没データをマップ・ランキング・統計で可視化。対策ガイド25本・世界情報も網羅。',
+    `日本最大級の熊・野生動物情報インフラ。全国${_metaCount.toLocaleString('ja-JP')}件超の出没データをマップ・ランキング・統計で可視化。対策ガイド・世界情報も網羅。`,
   keywords: [
     '熊出没マップ', 'クマ出没情報', '熊情報ポータル', '野生動物情報',
     '全国熊出没', '熊対策ガイド', '熊よけスプレー', '熊被害統計',
@@ -133,12 +142,25 @@ export default async function PortalTop() {
   const updateLog = loadUpdateLog()
   const latestSightings = getLatestByPrefecture(allBearData, 8)
   const prefStats = getPrefectureStats(allBearData).slice(0, 10)
-  const totalCount = allBearData.length
-  const prefectureCount = prefStats.length
+  const totalCount = allBearData.length   // 実データ件数（自動更新）
   const lastUpdate = updateLog.length > 0
     ? updateLog[updateLog.length - 1].date
-    : '2026-05-27'
-  const totalAdded = updateLog.reduce((s, l) => s + l.added, 0)
+    : '–'
+
+  // 都道府県カバー数（データから動的に算出）
+  const prefSet = new Set(allBearData.map(s => s.prefecture).filter(Boolean))
+  const prefectureCount = prefSet.size
+
+  // ガイド記事数（ファイルシステムから動的にカウント）
+  const { readdirSync, statSync } = await import('fs')
+  const { join } = await import('path')
+  const guideDir = join(process.cwd(), 'src', 'app', 'guide')
+  const guideCount = readdirSync(guideDir)
+    .filter(name => statSync(join(guideDir, name)).isDirectory()).length
+
+  // ワールドレポート件数（JSONから動的に）
+  const worldReports = loadWorldBearReports()
+  const worldReportCount = worldReports.length
 
   return (
     <>
@@ -270,7 +292,7 @@ export default async function PortalTop() {
               marginBottom: 36,
             }}
           >
-            全国{totalCount.toLocaleString()}件の出没データ、25本の対策ガイド、世界の熊情報を集約。
+            全国{totalCount.toLocaleString()}件の出没データ、{guideCount}本の対策ガイド、世界{worldReportCount}件の熊情報を集約。
             山・農地・住宅地のリスクを正しく把握し、適切な対策を。
           </p>
 
@@ -286,7 +308,7 @@ export default async function PortalTop() {
             {[
               { value: `${totalCount.toLocaleString()}件`, label: '全国出没記録' },
               { value: `${prefectureCount}都道府県`, label: 'カバーエリア' },
-              { value: '25本', label: '対策ガイド' },
+              { value: `${guideCount}本`, label: '対策ガイド' },
               { value: '世界35カ国+', label: 'WORLD REPORT' },
             ].map((stat) => (
               <div
@@ -394,7 +416,7 @@ export default async function PortalTop() {
         </div>
         <span style={{ color: 'rgba(255,255,255,0.2)', fontSize: 12 }}>|</span>
         <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)' }}>
-          累計取得件数: <strong style={{ color: '#5EC97C' }}>{totalAdded.toLocaleString()}件</strong>
+          データ総件数: <strong style={{ color: '#5EC97C' }}>{totalCount.toLocaleString()}件</strong>
         </span>
         <span style={{ color: 'rgba(255,255,255,0.2)', fontSize: 12 }}>|</span>
         <Link href="/map" style={{ fontSize: 12, color: '#5EC97C', fontWeight: 700, textDecoration: 'none' }}>
@@ -787,7 +809,7 @@ export default async function PortalTop() {
                 flexShrink: 0,
               }}
             >
-              全25本を見る →
+              全{guideCount}本を見る →
             </Link>
           </div>
 
