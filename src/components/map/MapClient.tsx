@@ -358,6 +358,10 @@ export default function MapClient({
     () => (activeWorldReports ? null : worldSightings.find((w) => w.id === selectedId) ?? null),
     [activeWorldReports, worldSightings, selectedId],
   )
+  const selectedGbif = useMemo(
+    () => gbifSightings.find((g) => g.id === selectedId) ?? null,
+    [gbifSightings, selectedId],
+  )
 
   const showJapanData = viewMode === 'japan' || viewMode === 'all'
   const showWorldData = viewMode === 'world' || viewMode === 'all'
@@ -367,6 +371,7 @@ export default function MapClient({
     const ids: string[] = []
     if (showJapanData) ids.push('clusters', 'unclustered-point')
     if (showWorldData) ids.push('world-clusters', 'world-point')
+    if (showWorldData && gbifSightings.length > 0) ids.push('gbif-cluster', 'gbif-point')
     return ids
   }, [showJapanData, showWorldData])
 
@@ -377,19 +382,21 @@ export default function MapClient({
     const f = features[0]
     const layerId = f.layer?.id
 
-    if (layerId === 'clusters' || layerId === 'world-clusters') {
+    if (layerId === 'clusters' || layerId === 'world-clusters' || layerId === 'gbif-cluster') {
       const map = mapRef.current?.getMap()
       if (!map || !f.geometry) return
       const coords = (f.geometry as GeoJSON.Point).coordinates as [number, number]
       const clusterId = f.properties?.cluster_id
-      const sourceId  = layerId === 'clusters' ? 'japan-data' : 'world-data'
+      const sourceId  = layerId === 'clusters' ? 'japan-data'
+                      : layerId === 'gbif-cluster' ? 'gbif-data'
+                      : 'world-data'
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const src = map.getSource(sourceId) as any
       if (!src?.getClusterExpansionZoom) return
       src.getClusterExpansionZoom(clusterId)
         .then((z: number) => { map.flyTo({ center: coords, zoom: z + 0.3, duration: 600 }) })
         .catch(() => {})
-    } else if (layerId === 'unclustered-point' || layerId === 'world-point') {
+    } else if (layerId === 'unclustered-point' || layerId === 'world-point' || layerId === 'gbif-point') {
       setSelectedId(f.properties?.id ?? null)
     }
   }, [])
@@ -1059,6 +1066,75 @@ export default function MapClient({
         })()}
 
         {/* World popup — Legacy */}
+        {/* GBIF 出現記録ポップアップ（GBIFデータの実フィールドのみ表示） */}
+        {selectedGbif && (() => {
+          const BASIS_LABELS: Record<string, string> = {
+            HUMAN_OBSERVATION:   '人による目撃・観察',
+            MACHINE_OBSERVATION: '機器による観測',
+            OBSERVATION:         '観察記録',
+            PRESERVED_SPECIMEN:  '標本記録',
+            MATERIAL_SAMPLE:     'サンプル記録',
+          }
+          const basisLabel = BASIS_LABELS[selectedGbif.basis] ?? selectedGbif.basis
+          const flag = COUNTRY_FLAGS[selectedGbif.country_ja] ?? '🌐'
+          const dateStr = selectedGbif.date && selectedGbif.date !== '2000-01-01'
+            ? selectedGbif.date.replace(/-/g, '/')
+            : '日付不明'
+          return (
+            <Popup
+              latitude={selectedGbif.lat}
+              longitude={selectedGbif.lng}
+              onClose={() => setSelectedId(null)}
+              closeButton closeOnClick={false}
+              maxWidth="280px" anchor="bottom"
+            >
+              <div style={{ fontFamily: 'var(--font-noto-sans, sans-serif)', padding: '4px 0' }}>
+                {/* ヘッダー */}
+                <div style={{ display: 'flex', gap: 6, marginBottom: 8, alignItems: 'center' }}>
+                  <span style={{
+                    background: '#1D4ED8', color: '#fff',
+                    fontSize: 10, fontWeight: 700,
+                    padding: '2px 8px', borderRadius: 3,
+                  }}>
+                    🌍 GBIF記録
+                  </span>
+                  <span style={{ fontSize: 11, color: '#555' }}>
+                    🐻 {selectedGbif.bear_type_ja}
+                  </span>
+                </div>
+                {/* 場所 */}
+                <p style={{ fontSize: 13, fontWeight: 700, color: '#1E3A5F', margin: '0 0 4px' }}>
+                  {flag} {selectedGbif.country_ja}
+                  {selectedGbif.region ? ` · ${selectedGbif.region}` : ''}
+                </p>
+                {/* 日付 */}
+                <p style={{ fontSize: 11, color: '#888', margin: '0 0 8px' }}>
+                  📅 {dateStr}
+                </p>
+                {/* 記録種別 */}
+                <div style={{
+                  background: '#EFF6FF',
+                  border: '1px solid #BFDBFE',
+                  borderRadius: 5, padding: '6px 10px',
+                  marginBottom: 8,
+                }}>
+                  <p style={{ fontSize: 11, color: '#1E40AF', margin: 0 }}>
+                    📋 {basisLabel}
+                  </p>
+                </div>
+                {/* 出典リンク */}
+                <a
+                  href={selectedGbif.source_url}
+                  target="_blank" rel="noopener noreferrer"
+                  style={{ fontSize: 11, color: '#2563EB', textDecoration: 'none' }}
+                >
+                  GBIF詳細ページを見る →
+                </a>
+              </div>
+            </Popup>
+          )
+        })()}
+
         {selectedWorldLegacy && (
           <Popup
             latitude={selectedWorldLegacy.lat}
