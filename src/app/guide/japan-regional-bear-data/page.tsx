@@ -34,7 +34,7 @@ export default function JapanRegionalBearDataPage() {
         <div style={{ background: '#EFF6FF', border: '1px solid #93C5FD', borderRadius: 8, padding: '16px 20px', marginBottom: 32, fontSize: 13, color: '#1E3A5F' }}>
           <p style={{ fontWeight: 700, marginBottom: 6, fontSize: 14 }}>📊 本記事のデータについて</p>
           <p style={{ margin: 0, lineHeight: 1.7 }}>
-            本記事はKUMANUKEが全国の自治体オープンデータ・ArcGIS公開データ・報道情報等から独自に収集・統合した<strong>110,754件（2026年6月時点）</strong>の出没記録を分析したものです。自治体ごとに収集体制が異なるため、件数は「実際の出没数」ではなく「報告・捕捉された件数」を反映しています。過小報告の可能性を念頭に置いてください。
+            本記事はKUMANUKEが全国の自治体オープンデータ・ArcGIS公開データ・報道情報等から独自に収集・統合した<strong>110,760件（2026年6月時点）</strong>の出没記録を分析したものです。自治体ごとに収集体制が異なるため、件数は「実際の出没数」ではなく「報告・捕捉された件数」を反映しています。過小報告の可能性を念頭に置いてください。
             <br /><Link href="/map" style={{ color: '#1E3A5F', fontWeight: 700 }}>→ 全データをマップで確認する</Link>
           </p>
         </div>
@@ -55,7 +55,7 @@ export default function JapanRegionalBearDataPage() {
             { rank: 5, pref: '福井県', count: '9,429', highlight: false, note: '福井クマ情報サイト全期間（2004〜2026）' },
             { rank: 6, pref: '青森県', count: '7,758', highlight: false, note: 'Google Maps KML全期間' },
             { rank: 7, pref: '岐阜県', count: '6,931', highlight: false, note: 'ArcGIS全年（2018〜2026）' },
-            { rank: 8, pref: '富山県', count: '4,527', highlight: false, note: 'ArcGIS全市町村' },
+            { rank: 8, pref: '富山県', count: '4,529', highlight: false, note: 'ArcGIS全市町村' },
             { rank: 9, pref: '山形県', count: '4,195', highlight: false, note: 'Google Maps KML' },
             { rank: 10, pref: '福島県', count: '3,549', highlight: false, note: '県警察Excel + ArcGIS' },
           ].map((item) => (
