@@ -88,14 +88,18 @@ async function getYouTubeNews(): Promise<YouTubeItem[]> {
   if (!apiKey) return []
   try {
     const oneWeekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString()
-    // 「日本」を追加してより日本関連に絞る。多めに取得してフィルタ後に6件揃える
     const q = encodeURIComponent('クマ 出没 ニュース 日本')
     const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${q}&type=video&publishedAfter=${oneWeekAgo}&maxResults=12&order=date&relevanceLanguage=ja&regionCode=JP&key=${apiKey}`
-    const res = await fetch(url, { next: { revalidate: 3600 } })
+    // タイムアウト5秒でフェッチ（Googlebotのライブテスト対策）
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), 5000)
+    const res = await fetch(url, {
+      next: { revalidate: 3600 },
+      signal: controller.signal,
+    }).finally(() => clearTimeout(timeoutId))
     if (!res.ok) return []
     const data = await res.json()
     const items = (data.items ?? []) as YouTubeItem[]
-    // タイトル・チャンネル名にハングルが含まれるものを除外し、最大6件返す
     return items
       .filter((item) => {
         const title = item.snippet.title ?? ''
@@ -140,20 +144,14 @@ export default async function PortalTop() {
     ? updateLog[updateLog.length - 1].date
     : '–'
 
-  // 都道府県カバー数（データから動的に算出）
-  const prefSet = new Set(allBearData.map(s => s.prefecture).filter(Boolean))
-  const prefectureCount = prefSet.size
+  // 都道府県カバー数（固定値・SSR軽量化）
+  const prefectureCount = 34
 
-  // ガイド記事数（ファイルシステムから動的にカウント）
-  const { readdirSync, statSync } = await import('fs')
-  const { join } = await import('path')
-  const guideDir = join(process.cwd(), 'src', 'app', 'guide')
-  const guideCount = readdirSync(guideDir)
-    .filter(name => statSync(join(guideDir, name)).isDirectory()).length
+  // ガイド記事数（固定値・SSR軽量化）
+  const guideCount = 36
 
-  // ワールドレポート件数（JSONから動的に）
-  const worldReports = loadWorldBearReports()
-  const worldReportCount = worldReports.length
+  // ワールドレポート件数（固定値・SSR軽量化）
+  const worldReportCount = 113
 
   // GBIFカウントは軽量な固定値（大容量JSONのSSR読み込みを避ける）
   const gbifCount = 19316   // launchdで自動取得中・毎日増加
