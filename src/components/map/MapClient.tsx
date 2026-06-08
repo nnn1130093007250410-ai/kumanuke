@@ -19,7 +19,6 @@ interface MapClientProps {
   historySightings?: BearSighting[]
   worldSightings?: WorldBearReport[]   // legacy (bear-world.json)
   worldReports?: WorldBearReportV2[]   // V2 (world-bear-report.json)
-  gbifSightings?: GbifSighting[]       // GBIF global occurrence records
   centerLng?: number
   centerLat?: number
   zoom?: number
@@ -213,11 +212,12 @@ export default function MapClient({
   historySightings = [],
   worldSightings = [],
   worldReports = [],
-  gbifSightings = [],
   centerLng = 137.0,
   centerLat = 36.5,
   zoom = 5,
 }: MapClientProps) {
+  // GBIFデータをクライアント側でフェッチ（RSCシリアライズ問題を回避）
+  const [gbifSightings, setGbifSightings] = useState<GbifSighting[]>([])
   // V2 データを優先。なければ legacy にフォールバック
   const activeWorldReports = worldReports.length > 0 ? worldReports : null
   const [viewMode, setViewMode]       = useState<ViewMode>('japan')
@@ -238,6 +238,16 @@ export default function MapClient({
     window.addEventListener('resize', check)
     return () => window.removeEventListener('resize', check)
   }, [])
+
+  // GBIFデータのフェッチ（WORLDモードに入った時点でロード）
+  useEffect(() => {
+    if (viewMode !== 'world' && viewMode !== 'all') return
+    if (gbifSightings.length > 0) return  // 既にロード済み
+    fetch('/data/bear-gbif.json')
+      .then(r => r.ok ? r.json() : [])
+      .then((d: GbifSighting[]) => setGbifSightings(d))
+      .catch(() => {/* 取得失敗時は空のまま */})
+  }, [viewMode, gbifSightings.length])
 
   // ── Derived data ──────────────────────────────────────────────────────
   const allJapanData = useMemo(

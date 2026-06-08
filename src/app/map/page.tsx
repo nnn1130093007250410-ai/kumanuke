@@ -112,13 +112,7 @@ export default async function MapPage({
   const worldReports = loadWorldBearReports()
   const historyData = loadBearHistory()
 
-  // GBIFグローバル出現記録
-  const { readFileSync, existsSync } = await import('fs')
-  const { join } = await import('path')
-  const gbifPath = join(process.cwd(), 'public', 'data', 'bear-gbif.json')
-  const gbifSightings = existsSync(gbifPath)
-    ? JSON.parse(readFileSync(gbifPath, 'utf-8'))
-    : []
+  // GBIFデータはMapClient側でクライアントフェッチするため不要
 
   const updateLog = loadUpdateLog()
   const latest = getLatestSightings(sightings, 30)
@@ -250,7 +244,7 @@ export default async function MapPage({
               overflow: 'hidden',
             }}
           >
-            <MapClient sightings={sightings} historySightings={historyData} worldSightings={worldSightings} worldReports={worldReports} gbifSightings={gbifSightings} centerLng={137.0} centerLat={36.5} zoom={5} />
+            <MapClient sightings={sightings} historySightings={historyData} worldSightings={worldSightings} worldReports={worldReports} centerLng={137.0} centerLat={36.5} zoom={5} />
           </div>
         </div>
       </div>
