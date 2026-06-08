@@ -9,9 +9,29 @@
       "layer_id": 0,
       "bear_type": "ツキノワグマ",
       "source_url": "https://services7.arcgis.com/sNECdWtl22Z2VPMm/arcgis/rest/services/survey123_29f9f2013da44b7881772493332376d7_results/FeatureServer",
-      "date_fields": ["NENGAPPI", "DATE_", "date", "DATE", "jikoku", "発生日"],
-      "city_fields": ["SHIKUCHOSON", "city", "市町村", "shikuchoson", "地名"],
-      "desc_fields": ["NAIYOU", "naiyou", "内容", "description", "BIKOU", "備考"]
+      "date_fields": [
+        "NENGAPPI",
+        "DATE_",
+        "date",
+        "DATE",
+        "jikoku",
+        "発生日"
+      ],
+      "city_fields": [
+        "SHIKUCHOSON",
+        "city",
+        "市町村",
+        "shikuchoson",
+        "地名"
+      ],
+      "desc_fields": [
+        "NAIYOU",
+        "naiyou",
+        "内容",
+        "description",
+        "BIKOU",
+        "備考"
+      ]
     },
     {
       "id_prefix": "toyama-arcgis",
@@ -21,9 +41,28 @@
       "layer_id": 0,
       "bear_type": "ツキノワグマ",
       "source_url": "https://services7.arcgis.com/pUdPpUsq83Kw8pWi/arcgis/rest/services/survey123_3f07f1f9864d43368d48b5f373d6cd68_results/FeatureServer",
-      "date_fields": ["DATE_", "date", "DATE", "nengappi", "発生日時", "発生日"],
-      "city_fields": ["SHIKUCHO", "city", "市町村", "地名", "場所"],
-      "desc_fields": ["NAIYOU", "内容", "description", "bikou", "備考"]
+      "date_fields": [
+        "DATE_",
+        "date",
+        "DATE",
+        "nengappi",
+        "発生日時",
+        "発生日"
+      ],
+      "city_fields": [
+        "SHIKUCHO",
+        "city",
+        "市町村",
+        "地名",
+        "場所"
+      ],
+      "desc_fields": [
+        "NAIYOU",
+        "内容",
+        "description",
+        "bikou",
+        "備考"
+      ]
     },
     {
       "id_prefix": "gunma-arcgis",
@@ -33,9 +72,26 @@
       "layer_id": 0,
       "bear_type": "ツキノワグマ",
       "source_url": "https://services7.arcgis.com/DkC6f6v0YUQX0rke/arcgis/rest/services/survey123_a77f33a9b9f649cfada5c7983c67874b_results/FeatureServer",
-      "date_fields": ["NENGAPPI", "DATE", "date", "発生日時", "time"],
-      "city_fields": ["SOCHI", "city", "市町村", "地名", "shikuchoson"],
-      "desc_fields": ["NAIYOU", "内容", "description", "bikou"]
+      "date_fields": [
+        "NENGAPPI",
+        "DATE",
+        "date",
+        "発生日時",
+        "time"
+      ],
+      "city_fields": [
+        "SOCHI",
+        "city",
+        "市町村",
+        "地名",
+        "shikuchoson"
+      ],
+      "desc_fields": [
+        "NAIYOU",
+        "内容",
+        "description",
+        "bikou"
+      ]
     },
     {
       "id_prefix": "yamagata-gis",
@@ -45,9 +101,28 @@
       "layer_id": 0,
       "bear_type": "ツキノワグマ",
       "source_url": "https://services1.arcgis.com/l2AxbKqkn4xraKMd/arcgis/rest/services/有害鳥獣GIS_WFL1/FeatureServer",
-      "date_fields": ["発見日時", "DATE", "date", "nengappi", "発見日", "jikoku"],
-      "city_fields": ["市町村名", "city", "市町村", "地名", "shikuchoson"],
-      "desc_fields": ["内容", "description", "bikou", "naiyou", "状況"]
+      "date_fields": [
+        "発見日時",
+        "DATE",
+        "date",
+        "nengappi",
+        "発見日",
+        "jikoku"
+      ],
+      "city_fields": [
+        "市町村名",
+        "city",
+        "市町村",
+        "地名",
+        "shikuchoson"
+      ],
+      "desc_fields": [
+        "内容",
+        "description",
+        "bikou",
+        "naiyou",
+        "状況"
+      ]
     },
     {
       "id_prefix": "saitama",
@@ -57,9 +132,25 @@
       "layer_id": 0,
       "bear_type": "ツキノワグマ",
       "source_url": "https://services9.arcgis.com/n65w8AXGaYPTqFYI/arcgis/rest/services/survey123_3123e5ed452d4e89845e4ba6129c1e2d_results/FeatureServer",
-      "date_fields": ["DATE", "date", "nengappi", "発生日時", "発生日"],
-      "city_fields": ["SHIKUCHO", "city", "市町村", "地名"],
-      "desc_fields": ["NAIYOU", "内容", "description", "bikou"]
+      "date_fields": [
+        "DATE",
+        "date",
+        "nengappi",
+        "発生日時",
+        "発生日"
+      ],
+      "city_fields": [
+        "SHIKUCHO",
+        "city",
+        "市町村",
+        "地名"
+      ],
+      "desc_fields": [
+        "NAIYOU",
+        "内容",
+        "description",
+        "bikou"
+      ]
     },
     {
       "id_prefix": "nagano-cj",
@@ -70,10 +161,33 @@
       "bear_type": "ツキノワグマ",
       "type_filter": "クマ",
       "source_url": "https://services1.arcgis.com/4GMefrLcjv8z16wh/arcgis/rest/services/choujyumokugeki_publicview/FeatureServer",
-      "date_fields": ["mokuge_date", "DATE", "date", "発生日時", "報告日"],
-      "city_fields": ["address", "city", "市町村", "地名", "shikuchoson"],
-      "desc_fields": ["notes", "内容", "description", "bikou", "naiyou"],
-      "type_fields": ["animal_type", "species", "種類", "動物種"]
+      "date_fields": [
+        "mokuge_date",
+        "DATE",
+        "date",
+        "発生日時",
+        "報告日"
+      ],
+      "city_fields": [
+        "address",
+        "city",
+        "市町村",
+        "地名",
+        "shikuchoson"
+      ],
+      "desc_fields": [
+        "notes",
+        "内容",
+        "description",
+        "bikou",
+        "naiyou"
+      ],
+      "type_fields": [
+        "animal_type",
+        "species",
+        "種類",
+        "動物種"
+      ]
     },
     {
       "id_prefix": "ishikari-arcgis",
@@ -83,9 +197,27 @@
       "layer_id": 0,
       "bear_type": "ヒグマ",
       "source_url": "https://services7.arcgis.com/9WKv3OOuUkGgAibZ/arcgis/rest/services/石狩市ヒグマ出没情報/FeatureServer",
-      "date_fields": ["date", "DATE", "発生日時", "発生日", "nengappi"],
-      "city_fields": ["address", "city", "市町村", "地名", "場所"],
-      "desc_fields": ["description", "内容", "bikou", "naiyou", "状況"]
+      "date_fields": [
+        "date",
+        "DATE",
+        "発生日時",
+        "発生日",
+        "nengappi"
+      ],
+      "city_fields": [
+        "address",
+        "city",
+        "市町村",
+        "地名",
+        "場所"
+      ],
+      "desc_fields": [
+        "description",
+        "内容",
+        "bikou",
+        "naiyou",
+        "状況"
+      ]
     },
     {
       "id_prefix": "miyagi-sight",
@@ -95,11 +227,48 @@
       "layer_id": 0,
       "bear_type": "ツキノワグマ",
       "source_url": "https://services7.arcgis.com/sNECdWtl22Z2VPMm/",
-      "date_fields": ["NENGAPPI", "DATE_", "date", "DATE", "jikoku"],
-      "city_fields": ["SHIKUCHOSON", "city", "市町村"],
-      "desc_fields": ["NAIYOU", "naiyou", "内容", "description"],
+      "date_fields": [
+        "NENGAPPI",
+        "DATE_",
+        "date",
+        "DATE",
+        "jikoku"
+      ],
+      "city_fields": [
+        "SHIKUCHOSON",
+        "city",
+        "市町村"
+      ],
+      "desc_fields": [
+        "NAIYOU",
+        "naiyou",
+        "内容",
+        "description"
+      ],
       "_skip": true,
       "_note": "miyagi-arcgisと重複するためスキップ"
+    },
+    {
+      "id_prefix": "nara-arcgis",
+      "prefecture": "奈良県",
+      "source_name": "奈良県ツキノワグマ目撃情報（ArcGIS Survey123）",
+      "service_url": "https://pub-gis.nsa.pref.nara.jp/server/rest/services/Hosted/survey123_492ede82f5ae450ea7171fb986f04bd0_results/FeatureServer/0",
+      "layer_id": 0,
+      "bear_type": "ツキノワグマ",
+      "source_url": "https://pub-gis.nsa.pref.nara.jp/portal/apps/dashboards/0a8186f4d3194816b64ffe9abc65eff0",
+      "date_fields": [
+        "field_9",
+        "created_date"
+      ],
+      "city_fields": [
+        "field_6",
+        "field_7"
+      ],
+      "desc_fields": [
+        "field_4",
+        "field_8",
+        "field_11"
+      ]
     }
   ],
   "kml": [
@@ -227,6 +396,20 @@
       "prefecture": "石川県",
       "source_name": "石川県ツキノワグマ出没情報（R8）",
       "mid": "17x-ZQxVWesZ3iJdObP0BXeS_R7e0vxw",
+      "bear_type": "ツキノワグマ"
+    },
+    {
+      "id_prefix": "kml-shizuoka-r7",
+      "prefecture": "静岡県",
+      "source_name": "静岡県ツキノワグマ目撃情報R7（KML）",
+      "mid": "1hwFI-xmiB1uYeEpfNetfP15CS9uxo08",
+      "bear_type": "ツキノワグマ"
+    },
+    {
+      "id_prefix": "kml-nara-r8",
+      "prefecture": "奈良県",
+      "source_name": "奈良市・木津川市・山辺村クマ目撃R8（KML）",
+      "mid": "12y4Hw9PphxOJ0AbuPrQbHhQSDeIe1P4",
       "bear_type": "ツキノワグマ"
     }
   ]

@@ -2,12 +2,12 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: '都道府県別クマ出没傾向分析｜110,000件のデータが語ること | KUMANUKE',
-  description: 'KUMANUKEが独自収集した110,000件超の出没データから見えてくる地域別傾向を解説。なぜ秋田・新潟が多いのか、急増地域の背景、北海道と本州の違いを多角的に分析。',
+  title: '都道府県別クマ出没傾向分析｜115,000件のデータが語ること | KUMANUKE',
+  description: 'KUMANUKEが独自収集した115,000件超の出没データから見えてくる地域別傾向を解説。なぜ秋田・新潟が多いのか、急増地域の背景、北海道と本州の違いを多角的に分析。',
   alternates: { canonical: 'https://kumanuke.bubuworks.co.jp/guide/japan-regional-bear-data' },
   openGraph: {
-    title: '都道府県別クマ出没傾向分析｜110,000件のデータが語ること',
-    description: '独自収集110,000件超のデータで読み解く地域別傾向。秋田・新潟トップの背景・急増地域・北海道vs本州の違い。',
+    title: '都道府県別クマ出没傾向分析｜115,000件のデータが語ること',
+    description: '独自収集115,000件超のデータで読み解く地域別傾向。秋田・新潟トップの背景・急増地域・北海道vs本州の違い。',
     url: 'https://kumanuke.bubuworks.co.jp/guide/japan-regional-bear-data',
   },
 }
@@ -23,7 +23,7 @@ export default function JapanRegionalBearDataPage() {
             <span style={{ background: '#1E40AF', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 10px', borderRadius: 3, opacity: 0.85, border: '1px solid rgba(255,255,255,0.25)' }}>地域分析</span>
           </div>
           <h1 style={{ fontSize: 'clamp(20px,3.5vw,32px)', fontWeight: 700, color: '#fff', lineHeight: 1.4 }}>
-            都道府県別クマ出没傾向分析｜<br />110,000件のデータが語ること
+            都道府県別クマ出没傾向分析｜<br />115,000件のデータが語ること
           </h1>
           <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.6)', marginTop: 16 }}>更新日：2026年5月 / データ出典：KUMANUKE独自収集</p>
         </div>
@@ -34,7 +34,7 @@ export default function JapanRegionalBearDataPage() {
         <div style={{ background: '#EFF6FF', border: '1px solid #93C5FD', borderRadius: 8, padding: '16px 20px', marginBottom: 32, fontSize: 13, color: '#1E3A5F' }}>
           <p style={{ fontWeight: 700, marginBottom: 6, fontSize: 14 }}>📊 本記事のデータについて</p>
           <p style={{ margin: 0, lineHeight: 1.7 }}>
-            本記事はKUMANUKEが全国の自治体オープンデータ・ArcGIS公開データ・報道情報等から独自に収集・統合した<strong>110,760件（2026年6月時点）</strong>の出没記録を分析したものです。自治体ごとに収集体制が異なるため、件数は「実際の出没数」ではなく「報告・捕捉された件数」を反映しています。過小報告の可能性を念頭に置いてください。
+            本記事はKUMANUKEが全国の自治体オープンデータ・ArcGIS公開データ・報道情報等から独自に収集・統合した<strong>115,464件（2026年6月時点）</strong>の出没記録を分析したものです。自治体ごとに収集体制が異なるため、件数は「実際の出没数」ではなく「報告・捕捉された件数」を反映しています。過小報告の可能性を念頭に置いてください。
             <br /><Link href="/map" style={{ color: '#1E3A5F', fontWeight: 700 }}>→ 全データをマップで確認する</Link>
           </p>
         </div>
@@ -49,14 +49,14 @@ export default function JapanRegionalBearDataPage() {
         <div style={{ marginTop: 16, border: '1px solid #DBEAFE', borderRadius: 8, overflow: 'hidden' }}>
           {[
             { rank: 1, pref: '秋田県', count: '21,483', highlight: true, note: 'クマダス・警察ArcGIS・報道データ統合' },
-            { rank: 2, pref: '新潟県', count: '17,133', highlight: false, note: 'ArcGIS全市町村・Survey123・CKAN統合' },
-            { rank: 3, pref: '京都府', count: '9,958', highlight: false, note: '上智大学予測マップ含む' },
-            { rank: 4, pref: '宮城県', count: '9,446', highlight: false, note: 'Google Maps KML + ArcGIS' },
+            { rank: 2, pref: '新潟県', count: '17,274', highlight: false, note: 'ArcGIS全市町村・Survey123・CKAN統合' },
+            { rank: 4, pref: '京都府', count: '9,958', highlight: false, note: '上智大学予測マップ含む' },
+            { rank: 3, pref: '宮城県', count: '11,964', highlight: false, note: 'Google Maps KML + ArcGIS' },
             { rank: 5, pref: '福井県', count: '9,429', highlight: false, note: '福井クマ情報サイト全期間（2004〜2026）' },
-            { rank: 6, pref: '青森県', count: '7,758', highlight: false, note: 'Google Maps KML全期間' },
+            { rank: 6, pref: '青森県', count: '8,806', highlight: false, note: 'Google Maps KML全期間' },
             { rank: 7, pref: '岐阜県', count: '6,931', highlight: false, note: 'ArcGIS全年（2018〜2026）' },
-            { rank: 8, pref: '富山県', count: '4,529', highlight: false, note: 'ArcGIS全市町村' },
-            { rank: 9, pref: '山形県', count: '4,195', highlight: false, note: 'Google Maps KML' },
+            { rank: 8, pref: '富山県', count: '4,530', highlight: false, note: 'ArcGIS全市町村' },
+            { rank: 9, pref: '山形県', count: '4,212', highlight: false, note: 'Google Maps KML' },
             { rank: 10, pref: '福島県', count: '3,549', highlight: false, note: '県警察Excel + ArcGIS' },
           ].map((item) => (
             <div key={item.rank} style={{
