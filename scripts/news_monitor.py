@@ -420,11 +420,13 @@ def build_news_thread(
     src_line  = f"出典：{source_name}（{pub_time}）" if pub_time else f"出典：{source_name}"
     pref_part = f" {pref_tag}".rstrip() if pref_tag else ""
 
+    # クマ・熊・出没を本文に含めて検索ヒット率を上げる
     tweet = (
         f"{label}\n\n"
         f"{headline}\n\n"
-        f"{src_line}\n\n"
-        f"#クマ被害{pref_part}"
+        f"{src_line}\n"
+        f"クマ（熊）出没・最新情報\n\n"
+        f"#クマ出没 #熊出没 #クマ被害{pref_part}"
     )
 
     # 加重チェック・必要に応じてトリム
