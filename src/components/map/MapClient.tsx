@@ -1016,7 +1016,9 @@ export default function MapClient({
 
         {/* World popup — V2 */}
         {selectedWorldV2 && (() => {
+          // event_typeが未定義の場合のフォールバック
           const ev = WORLD_EVENT_TYPE_CONFIG[selectedWorldV2.event_type]
+            ?? { label: selectedWorldV2.event_type, icon: '📋', color: '#6B7280' }
           const displayCountry = WORLD_COUNTRY_JA[selectedWorldV2.country] ?? selectedWorldV2.country
           return (
             <Popup

@@ -95,6 +95,8 @@ export type WorldEventType =
   | 'spray_incident'
   | 'coexistence'
   | 'wildlife_management'
+  | 'population'      // 個体数調査・統計
+  | 'conservation'    // 保護活動・保全
 
 export interface WorldBearReportV2 {
   id: string
@@ -133,6 +135,8 @@ export const WORLD_EVENT_TYPE_CONFIG: Record<WorldEventType, { label: string; ic
   spray_incident:      { label: 'スプレー事故', icon: '💨', color: '#B45309' },
   coexistence:         { label: '人獣共存',     icon: '🤝', color: '#16A34A' },
   wildlife_management: { label: '個体数管理',   icon: '📊', color: '#6B7280' },
+  population:          { label: '個体数調査',   icon: '📈', color: '#0D9488' },
+  conservation:        { label: '保護・保全',   icon: '🌿', color: '#15803D' },
 }
 
 // Country slug → English name mapping (for /world/[country] routing)
