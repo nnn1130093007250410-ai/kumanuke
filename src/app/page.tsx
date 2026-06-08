@@ -10,18 +10,11 @@ import {
 } from '@/lib/bear-data'
 import { loadWorldBearReports } from '@/lib/bear-world'
 
-// メタデータはビルド時の実データ件数から動的に生成
-import { loadBearData as _loadForMeta } from '@/lib/bear-data'
-function _getMetaCount() {
-  try { return _loadForMeta().length } catch { return 115000 }
-}
-const _metaCount = _getMetaCount()
-const _metaCountStr = `${Math.floor(_metaCount / 1000)}万${Math.floor(_metaCount % 1000 / 100) * 100}`
-
+// メタデータは軽量な固定値（SSRの重さを避けるため）
 export const metadata: Metadata = {
-  title: `KUMANUKE | 熊・野生動物情報ポータル — 全国${_metaCount.toLocaleString('ja-JP')}件+のデータ`,
+  title: 'KUMANUKE | 熊・野生動物情報ポータル — 全国11万件+のデータ',
   description:
-    `日本最大級の熊・野生動物情報インフラ。全国${_metaCount.toLocaleString('ja-JP')}件超の出没データをマップ・ランキング・統計で可視化。対策ガイド・世界情報も網羅。`,
+    '日本最大級の熊・野生動物情報インフラ。全国110,000件超の出没データをマップ・ランキング・統計で可視化。対策ガイド・世界情報も網羅。',
   keywords: [
     '熊出没マップ', 'クマ出没情報', '熊情報ポータル', '野生動物情報',
     '全国熊出没', '熊対策ガイド', '熊よけスプレー', '熊被害統計',
@@ -162,13 +155,9 @@ export default async function PortalTop() {
   const worldReports = loadWorldBearReports()
   const worldReportCount = worldReports.length
 
-  // GBIFグローバル出現記録件数（JSONから動的に）
-  const { readFileSync, existsSync } = await import('fs')
-  const gbifPath = join(process.cwd(), 'public', 'data', 'bear-gbif.json')
-  const gbifCount = existsSync(gbifPath)
-    ? (JSON.parse(readFileSync(gbifPath, 'utf-8')) as unknown[]).length
-    : 0
-  const globalTotalCount = totalCount + gbifCount  // 国内 + 海外
+  // GBIFカウントは軽量な固定値（大容量JSONのSSR読み込みを避ける）
+  const gbifCount = 19316   // launchdで自動取得中・毎日増加
+  const globalTotalCount = totalCount + gbifCount
 
   return (
     <>
