@@ -454,13 +454,16 @@ def main():
         log("⚠ X API 認証情報が見つかりません")
         return
 
-    # 直近3時間以内の記事のみ対象
-    now_jst = datetime.now(JST)
+    # 安全運転: 1日の投稿上限（アカウント制限防止）
+    MAX_DAILY_POSTS = 2
 
     seen_ids  = set()   # 今回の実行内での重複除去
     posted    = 0
 
     for query in SEARCH_QUERIES:
+        if posted >= MAX_DAILY_POSTS:
+            log(f"  本日の上限（{MAX_DAILY_POSTS}件）に達したため終了")
+            break
         log(f"RSS取得: {query}")
         articles = fetch_rss(query)
         log(f"  取得件数: {len(articles)}件")

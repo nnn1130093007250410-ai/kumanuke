@@ -15,15 +15,11 @@
   <key>WorkingDirectory</key>
   <string>/Users/sakumashinrou/kumanuke</string>
 
-  <!-- 毎日 06:00 / 09:00 / 12:00 / 15:00 / 18:00 / 21:00 に実行 -->
+  <!-- 安全運転: 1日2回のみ（朝8:00・夜20:00）/ 最大2件/日に制限 -->
   <key>StartCalendarInterval</key>
   <array>
-    <dict><key>Hour</key><integer>6</integer><key>Minute</key><integer>0</integer></dict>
-    <dict><key>Hour</key><integer>9</integer><key>Minute</key><integer>0</integer></dict>
-    <dict><key>Hour</key><integer>12</integer><key>Minute</key><integer>0</integer></dict>
-    <dict><key>Hour</key><integer>15</integer><key>Minute</key><integer>0</integer></dict>
-    <dict><key>Hour</key><integer>18</integer><key>Minute</key><integer>0</integer></dict>
-    <dict><key>Hour</key><integer>21</integer><key>Minute</key><integer>0</integer></dict>
+    <dict><key>Hour</key><integer>8</integer><key>Minute</key><integer>0</integer></dict>
+    <dict><key>Hour</key><integer>20</integer><key>Minute</key><integer>0</integer></dict>
   </array>
 
   <key>StandardOutPath</key>
@@ -32,8 +28,17 @@
   <key>StandardErrorPath</key>
   <string>/Users/sakumashinrou/kumanuke/scripts/news_monitor_stderr.log</string>
 
-  <!-- Mac がスリープ中に実行時刻を過ぎた場合、起動後に実行 -->
   <key>RunAtLoad</key>
   <false/>
+
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PATH</key>
+    <string>/Library/Frameworks/Python.framework/Versions/3.13/bin:/usr/local/bin:/usr/bin:/bin</string>
+    <key>HOME</key>
+    <string>/Users/sakumashinrou</string>
+    <key>PYTHONIOENCODING</key>
+    <string>utf-8</string>
+  </dict>
 </dict>
 </plist>
