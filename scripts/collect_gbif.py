@@ -214,17 +214,42 @@ def main():
         if added > 0:
             with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
                 json.dump(all_records, f, ensure_ascii=False)
-            _push(all_records, bear_type_ja)
+            _update_site_counts(PROJECT_ROOT)
+        _push(all_records, bear_type_ja)
 
     print(f'✅ 完了: {len(all_records):,}件')
 
+
+
+def _update_site_counts(project_root):
+    """site-counts.json を更新して軽量なカウントファイルを維持する"""
+    import os
+    counts_path = project_root / 'public' / 'data' / 'site-counts.json'
+    try:
+        japan_path = project_root / 'public' / 'data' / 'bear-japan.json'
+        gbif_path  = project_root / 'public' / 'data' / 'bear-gbif.json'
+        world_path = project_root / 'public' / 'data' / 'world-bear-report.json'
+
+        def count_file(p):
+            if not p.exists(): return 0
+            with open(p, encoding='utf-8') as f:
+                return len(json.load(f))
+
+        japan = count_file(japan_path)
+        gbif  = count_file(gbif_path)
+        world = count_file(world_path)
+        with open(counts_path, 'w', encoding='utf-8') as f:
+            json.dump({"japan": japan, "gbif": gbif, "world": world, "total": japan+gbif+world}, f)
+        print(f'  📊 site-counts.json 更新: 合計{japan+gbif+world:,}件')
+    except Exception as e:
+        print(f'  ⚠ counts更新スキップ: {e}')
 
 def _push(records: list[dict], label: str = ''):
     """中間保存後にgit push（種ごとに呼ばれる）"""
     import subprocess, datetime
     today = datetime.date.today().isoformat()
     try:
-        subprocess.run(['git', '-C', str(PROJECT_ROOT), 'add', str(OUTPUT_FILE)],
+        subprocess.run(['git', '-C', str(PROJECT_ROOT), 'add', str(OUTPUT_FILE), 'public/data/site-counts.json'],
                        check=True, capture_output=True)
         msg = f'🌍 GBIF取得: {len(records):,}件 {label} ({today})'
         subprocess.run(

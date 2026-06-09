@@ -135,8 +135,21 @@ export default async function PortalTop() {
   // bear データは update-log.json（軽量）から件数を取得し全量ロードを避ける
   const updateLog = loadUpdateLog()
   const lastEntry = updateLog.length > 0 ? updateLog[updateLog.length - 1] : null
-  const totalCount = 115464   // 固定値（メモリ節約・update-logに total フィールドなし）
   const lastUpdate = lastEntry?.date ?? '–'
+
+  // site-counts.json（軽量・GBIFが更新されるたびに自動更新）からカウント取得
+  let totalCount = 115464
+  let gbifCount  = 19316
+  let worldReportCount = 113
+  try {
+    const { readFileSync } = await import('fs')
+    const { join } = await import('path')
+    const countsPath = join(process.cwd(), 'public', 'data', 'site-counts.json')
+    const counts = JSON.parse(readFileSync(countsPath, 'utf-8'))
+    totalCount       = counts.japan ?? totalCount
+    gbifCount        = counts.gbif  ?? gbifCount
+    worldReportCount = counts.world ?? worldReportCount
+  } catch { /* フォールバック値を使用 */ }
 
   // 地図・リスト表示用に直近データのみロード（全量は不要）
   const allBearData = loadBearData()
@@ -145,13 +158,11 @@ export default async function PortalTop() {
 
   const [youtubeNews] = await Promise.all([getYouTubeNews()])
 
-  // 固定値（SSR軽量化・Vercelメモリ節約）
+  // 固定値（SSR軽量化）
   const prefectureCount = 34
   const guideCount = 36
-  const worldReportCount = 113
 
   // GBIFカウントは軽量な固定値（大容量JSONのSSR読み込みを避ける）
-  const gbifCount = 19316   // launchdで自動取得中・毎日増加
   const globalTotalCount = totalCount + gbifCount
 
   return (
