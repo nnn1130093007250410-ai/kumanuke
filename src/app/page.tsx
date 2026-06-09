@@ -8,6 +8,8 @@ import {
   DANGER_COLORS,
   DANGER_LABELS,
 } from '@/lib/bear-data'
+import BuyNowBanner from '@/components/ui/BuyNowBanner'
+import TrustBadge from '@/components/ui/TrustBadge'
 
 // メタデータは軽量な固定値（SSRの重さを避けるため）
 export const metadata: Metadata = {
@@ -277,26 +279,29 @@ export default async function PortalTop() {
               fontWeight: 800,
               color: '#fff',
               lineHeight: 1.2,
-              marginBottom: 20,
+              marginBottom: 16,
               fontFamily: 'var(--font-noto-serif, serif)',
             }}
           >
-            熊・野生動物の情報を
+            今すぐあなたの地域の
             <br />
-            <span style={{ color: '#5EC97C' }}>ひとつの場所</span>で
+            <span style={{ color: '#5EC97C' }}>クマ出没状況</span>を確認
           </h1>
 
           <p
             style={{
-              fontSize: 'clamp(14px, 2vw, 17px)',
+              fontSize: 'clamp(14px, 2vw, 16px)',
               color: 'rgba(255,255,255,0.72)',
               lineHeight: 1.85,
               maxWidth: 560,
-              marginBottom: 36,
+              marginBottom: 12,
             }}
           >
-            国内{totalCount.toLocaleString()}件＋海外{gbifCount.toLocaleString()}件＝累計{globalTotalCount.toLocaleString()}件の熊データ、{guideCount}本の対策ガイドを集約。
-            山・農地・住宅地のリスクを正しく把握し、適切な対策を。
+            政府・自治体の公式データ{globalTotalCount.toLocaleString()}件を集約した日本最大級のクマ出没情報インフラ。
+            あなたの地域のリスクを地図・統計・ランキングで可視化します。
+          </p>
+          <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.45)', marginBottom: 28, maxWidth: 480 }}>
+            🏛 全国ArcGIS・自治体公開データから自動収集　📡 毎日自動更新
           </p>
 
           {/* Stats strip */}

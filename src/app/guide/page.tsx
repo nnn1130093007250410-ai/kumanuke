@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import GuideArticleGrid from './GuideArticleGrid'
+import SiteSearch from '@/components/ui/SiteSearch'
 
 export const metadata: Metadata = {
   title: '熊・野生動物対策ガイド | KUMANUKE',
@@ -37,6 +38,11 @@ export default function GuidePage() {
       </div>
 
       <div style={{ maxWidth: 860, margin: '0 auto', padding: '40px 24px 80px' }}>
+
+        {/* ── サイト内検索 ── */}
+        <div style={{ marginBottom: 32 }}>
+          <SiteSearch />
+        </div>
 
         {/* ── 注目特集 ── */}
         <div style={{ marginBottom: 48 }}>

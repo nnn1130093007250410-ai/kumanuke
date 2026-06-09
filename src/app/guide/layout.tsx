@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import ScrollProgress from '@/components/ui/ScrollProgress'
+import BuyNowBanner from '@/components/ui/BuyNowBanner'
 import BackToTop from '@/components/ui/BackToTop'
 
 export const metadata: Metadata = {
@@ -113,6 +114,7 @@ export default function GuideLayout({ children }: { children: React.ReactNode })
       </div>
       <style>{`@keyframes ping { 75%, 100% { transform: scale(2.2); opacity: 0; } }`}</style>
 
+      <BuyNowBanner variant="compact" />
       <footer style={{ background: '#0A0A09', borderTop: '1px solid rgba(255,255,255,0.06)', padding: '52px 24px 32px' }}>
         <div style={{ maxWidth: 900, margin: '0 auto' }}>
           {/* サイトマップ */}

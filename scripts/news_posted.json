@@ -22,7 +22,13 @@
     "ce7bca37537fcd96",
     "da734b1dd16c6de3",
     "a1f7cfe0fb6329ff",
-    "45775908fa98a4a3"
+    "45775908fa98a4a3",
+    "d11828c6e1ed6b35",
+    "27ae4b5190fce3f4",
+    "acfb17b53246d287",
+    "c7ba8b37369b249e",
+    "a07b27c7575f7097",
+    "00d21bc2ce9f8aa3"
   ],
   "incidents": [
     "incident_2026-06-04_福島",
@@ -34,6 +40,10 @@
     "incident_2026-06-06_宮城",
     "incident_2026-06-06_福島",
     "incident_2026-06-07_兵庫",
-    "incident_2026-06-07_新潟"
+    "incident_2026-06-07_新潟",
+    "incident_2026-06-09_岩手",
+    "incident_2026-06-09_新潟",
+    "incident_2026-06-09_福島",
+    "incident_2026-06-09_秋田"
   ]
 }

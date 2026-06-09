@@ -19,6 +19,8 @@ import {
 } from '@/lib/bear-world'
 import { WORLD_EVENT_TYPE_CONFIG, WORLD_COUNTRY_JA, type WorldEventType } from '@/lib/bear-constants'
 import { PREFECTURES, getSlugByName } from '@/lib/prefectures'
+import BuyNowBanner from '@/components/ui/BuyNowBanner'
+import TrustBadge from '@/components/ui/TrustBadge'
 import { loadBearHistory } from '@/lib/bear-history'
 import HistoryAccordion from './HistoryAccordion'
 
@@ -249,6 +251,7 @@ export default async function MapPage({
         </div>
       </div>
 
+      <BuyNowBanner variant="compact" />
       <div style={{ maxWidth: 1080, margin: '0 auto', padding: '40px 20px 80px' }}>
         {/* Prefecture quick filter */}
         <div style={{ marginBottom: 32 }}>
