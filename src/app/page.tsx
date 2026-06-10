@@ -140,8 +140,9 @@ export default async function PortalTop() {
   const lastUpdate = lastEntry?.date ?? '–'
 
   // site-counts.json（軽量・GBIFが更新されるたびに自動更新）からカウント取得
-  let totalCount = 115464
-  let gbifCount  = 19316
+  // フォールバック値は site-counts.json の最新値を反映して随時更新すること
+  let totalCount = 115503
+  let gbifCount  = 57600
   let worldReportCount = 113
   try {
     const { readFileSync } = await import('fs')
