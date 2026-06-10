@@ -130,6 +130,7 @@ export function Footer() {
     ],
     'お問い合わせ': [
       { href: '#wholesale', label: '卸・法人向け' },
+      { href: '/monitor', label: 'モニター施設募集' },
       { href: 'mailto:kumanuke@bubuworks.co.jp', label: 'メールでのお問い合わせ' },
       { href: '/privacy', label: 'プライバシーポリシー' },
     ],

@@ -182,6 +182,7 @@ export default function GuideLayout({ children }: { children: React.ReactNode })
             </Link>
             <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap' }}>
               <Link href="/products/kumanuke" style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', textDecoration: 'none' }}>製品情報</Link>
+              <Link href="/monitor" style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', textDecoration: 'none' }}>モニター募集</Link>
               <Link href="/privacy" style={{ fontSize: 11, color: 'rgba(255,255,255,0.25)', textDecoration: 'none' }}>プライバシー</Link>
               <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.2)' }}>© 2026 BUBUWORKS合同会社</span>
             </div>

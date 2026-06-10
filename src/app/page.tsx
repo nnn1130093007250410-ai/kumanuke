@@ -1005,6 +1005,7 @@ export default async function PortalTop() {
               © 2026 BUBUWORKS合同会社. All rights reserved.
             </p>
             <div style={{ display: 'flex', gap: 20 }}>
+              <Link href="/monitor" style={{ fontSize: 11, color: 'rgba(255,255,255,0.45)', textDecoration: 'none' }}>モニター募集</Link>
               <Link href="/privacy" style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', textDecoration: 'none' }}>プライバシーポリシー</Link>
             </div>
           </div>
