@@ -157,6 +157,25 @@ def fetch_occurrences(taxon_key: int, limit_per_species: int = 30000) -> list[di
     return records
 
 
+MAX_RECORDS = 80000   # GitHubファイルサイズ上限対策（100MB制限）
+
+
+def _trim_to_limit(records: list[dict], max_count: int) -> list[dict]:
+    """情報量の高い順に上限件数まで絞り込む"""
+    if len(records) <= max_count:
+        return records
+    def score(d):
+        s = 0
+        if d.get('locality'):     s += 3
+        if d.get('municipality'): s += 2
+        if d.get('region'):       s += 1
+        if d.get('remarks'):      s += 2
+        if d.get('photo_url'):    s += 3
+        if d.get('date'):         s += 1
+        return s
+    return sorted(records, key=score, reverse=True)[:max_count]
+
+
 def main():
     print('=== GBIF クマ出現記録 取得開始 ===\n')
 
@@ -210,10 +229,17 @@ def main():
 
         print(f'  → {added:,}件追加 / 総計{len(all_records):,}件\n')
 
+        # 上限チェック：超えた場合は品質順に絞り込む
+        if len(all_records) > MAX_RECORDS:
+            before = len(all_records)
+            all_records = _trim_to_limit(all_records, MAX_RECORDS)
+            seen_keys = {r.get('id','') for r in all_records}
+            print(f'  ✂ 上限調整: {before:,}件 → {len(all_records):,}件（品質優先）\n')
+
         # 種ごとに中間保存＆push（長時間実行でも途中結果をデプロイ）
         if added > 0:
             with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
-                json.dump(all_records, f, ensure_ascii=False)
+                json.dump(all_records, f, ensure_ascii=False, separators=(',', ':'))
             _update_site_counts(PROJECT_ROOT)
         _push(all_records, bear_type_ja)
 
