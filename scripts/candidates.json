@@ -1,0 +1,26 @@
+[
+  {
+    "title": "北海道: ヒグマが移動できる森林",
+    "url": "https://services8.arcgis.com/TZuJIMPpKf9L0ri3/arcgis/rest/services/ヒグマが移動できる森林/FeatureServer",
+    "source": "prefecture_arcgis:北海道",
+    "name": "ヒグマが移動できる森林"
+  },
+  {
+    "title": "長野県: choujyumokugekijoho2019_Density_kuma",
+    "url": "https://services1.arcgis.com/4GMefrLcjv8z16wh/arcgis/rest/services/choujyumokugekijoho2019_Density_kuma/FeatureServer",
+    "source": "prefecture_arcgis:長野県",
+    "name": "choujyumokugekijoho2019_Density_kuma"
+  },
+  {
+    "title": "長野県: ツキノワグマゾーニング公開用_gdb",
+    "url": "https://services1.arcgis.com/4GMefrLcjv8z16wh/arcgis/rest/services/ツキノワグマゾーニング公開用_gdb/FeatureServer",
+    "source": "prefecture_arcgis:長野県",
+    "name": "ツキノワグマゾーニング公開用_gdb"
+  },
+  {
+    "title": "長野県: クマ出没マップ",
+    "url": "https://services1.arcgis.com/4GMefrLcjv8z16wh/arcgis/rest/services/クマ出没マップ/FeatureServer",
+    "source": "prefecture_arcgis:長野県",
+    "name": "クマ出没マップ"
+  }
+]
