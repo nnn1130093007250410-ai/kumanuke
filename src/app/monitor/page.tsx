@@ -4,7 +4,7 @@ import MonitorForm from './MonitorForm'
 
 export const metadata: Metadata = {
   title: '野生動物対策モニター施設募集 | KUMANUKE',
-  description: 'キャンプ場・RVパーク・グランピング施設・山小屋など、KUMANUKEをモニター利用いただける施設を募集しています。商品1本を無償提供。費用は一切かかりません。',
+  description: 'キャンプ場・RVパーク・グランピング施設・山小屋など、KUMANUKEをモニター利用いただける施設を募集しています。実際の現場での使用データ収集にご協力ください。',
   alternates: { canonical: 'https://kumanuke.bubuworks.co.jp/monitor' },
 }
 
@@ -22,7 +22,7 @@ const FACILITIES = [
 const FAQS = [
   {
     q: '費用はかかりますか？',
-    a: '一切かかりません。商品（KUMANUKE 1本）を無償でご提供します。送料も弊社が負担いたします。',
+    a: 'モニタープログラムへのご参加に費用は一切かかりません。詳細はお問い合わせいただいた後にご案内いたします。',
   },
   {
     q: 'モニター利用後に購入義務はありますか？',
@@ -49,8 +49,8 @@ const FAQS = [
     a: '応募多数の場合は、利用環境・用途・地域などを考慮した上で弊社にて選考いたします。選考結果はメールにてご連絡します。ご了承ください。',
   },
   {
-    q: '1施設で複数本の申請はできますか？',
-    a: '今回は1施設につき1本のご提供です。広い敷地での活用など特別なご事情がある場合は、応募フォームの「利用予定場所・状況」欄にご記載ください。別途ご相談させていただきます。',
+    q: '複数の利用場所がある場合はどうすればよいですか？',
+    a: '応募フォームの「利用予定場所・状況」欄に詳しくご記載ください。内容を確認した上で、別途ご相談させていただきます。',
   },
   {
     q: 'どのような動物に効果がありますか？',
@@ -92,10 +92,10 @@ export default function MonitorPage() {
 
           <p style={{ fontSize: 'clamp(14px,2vw,17px)', color: 'rgba(255,255,255,0.72)', lineHeight: 1.85, maxWidth: 580, margin: '0 auto 16px' }}>
             KUMANUKEを実際の現場でご利用いただける施設様を募集しています。<br />
-            商品は無償でご提供。費用は一切かかりません。
+            ご利用後の購入義務・継続契約は一切ありません。
           </p>
           <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.45)', marginBottom: 40 }}>
-            ご利用後の購入義務・継続契約は一切ありません
+            多様な環境・現場での実使用データの収集にご協力ください
           </p>
 
           <Link href="#form" style={{ display: 'inline-block', background: '#E07A30', color: '#fff', fontWeight: 800, fontSize: 16, padding: '18px 48px', borderRadius: 6, textDecoration: 'none', letterSpacing: '0.04em' }}>
@@ -104,9 +104,9 @@ export default function MonitorPage() {
 
           <div style={{ marginTop: 48, display: 'flex', gap: 32, justifyContent: 'center', flexWrap: 'wrap' }}>
             {[
-              { value: '無償', label: '商品提供' },
-              { value: '0円', label: '費用負担' },
+              { value: '0円', label: '参加費用' },
               { value: '不要', label: '購入義務' },
+              { value: '任意', label: '写真提供' },
             ].map(s => (
               <div key={s.label} style={{ textAlign: 'center' }}>
                 <div style={{ fontSize: 28, fontWeight: 900, color: '#5EC97C', fontFamily: 'var(--font-dm-sans)', lineHeight: 1 }}>{s.value}</div>
@@ -181,7 +181,7 @@ export default function MonitorPage() {
               </div>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
                 {[
-                  { icon: '🐻', text: 'KUMANUKE 1本（200ml）を無償提供' },
+                  { icon: '🐻', text: 'KUMANUKE（200ml）のご提供' },
                   { icon: '📄', text: '利用方法・散布ガイドのご案内' },
                   { icon: '✉️', text: '利用前後のサポート対応' },
                 ].map(item => (
