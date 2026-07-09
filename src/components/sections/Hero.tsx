@@ -69,9 +69,9 @@ export default function Hero() {
           style={{ display: 'flex', justifyContent: 'center', margin: '20px 0 24px' }}
         >
           <Image
-            src="/product-overview.jpg"
+            src="/product-bottle.png"
             alt="KUMANUKE ベアリペレントエリアスプレー 商品本体"
-            width={180}
+            width={135}
             height={360}
             style={{
               width: 'auto',

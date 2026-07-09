@@ -32,9 +32,9 @@ export default function WhatIs() {
             {/* 商品ボトル画像 */}
             <div style={{ margin: '0 0 20px', lineHeight: 0 }}>
               <Image
-                src="/product-overview.jpg"
+                src="/product-bottle.png"
                 alt="KUMANUKE ベアリペレントエリアスプレー 商品本体"
-                width={150}
+                width={112}
                 height={300}
                 style={{
                   width: 'auto',
