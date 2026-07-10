@@ -53,6 +53,12 @@ const scenes: { label: string; title: string; text: string; src: string; pos: st
     alt: '山岳トレイルを歩くハイカー',
   },
   {
+    label: '釣り・レジャー', title: '渓流釣り・湖釣り',
+    text: '沢・源流・湖畔は熊の生息域と重なります。釣り座・テント設営地の周辺に事前散布して釣行の備えに。',
+    src: '/scene-fishing.jpg', pos: 'center center',
+    alt: '緑豊かな渓流で釣りをするアングラー',
+  },
+  {
     label: '農業・畑', title: '農地・畑の周囲',
     text: '農地外周・入口付近への定期散布。作物へのアクセス対策を目的とした継続使用に。',
     src: '/scene-farm.jpg', pos: 'center center',
