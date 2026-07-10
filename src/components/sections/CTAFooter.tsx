@@ -34,8 +34,8 @@ const SHOPS = [
     color: '#FF6600',
   },
   {
-    label: 'Amazon（近日公開）',
-    href: 'https://www.amazon.co.jp/s?k=KUMANUKE&__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&crid=PTKJQI2JZQCR&sprefix=kumanuke%2Caps%2C244&ref=nb_sb_noss_2',
+    label: 'Amazon',
+    href: 'https://www.amazon.co.jp/dp/B0H5L7CLK4',
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect width="24" height="24" rx="4" fill="#FF9900"/>
@@ -44,7 +44,6 @@ const SHOPS = [
       </svg>
     ),
     color: '#FF9900',
-    soon: true,
   },
 ]
 
@@ -93,18 +92,10 @@ export function CTA() {
               borderRadius: 4,
               textDecoration: 'none',
               border: '1px solid rgba(255,255,255,0.15)',
-              opacity: s.soon ? 0.7 : 1,
             }}
           >
             {s.icon}
-            <span>
-              {s.label}
-              {s.soon && (
-                <span style={{ display: 'block', fontSize: 9, color: 'rgba(255,255,255,0.5)', letterSpacing: '0.05em', lineHeight: 1 }}>
-                  2週間後に販売開始
-                </span>
-              )}
-            </span>
+            <span>{s.label}</span>
           </a>
         ))}
       </div>
@@ -126,7 +117,7 @@ export function Footer() {
       { href: 'https://search.rakuten.co.jp/search/mall/KUMANUKE/', label: '楽天市場', external: true },
       { href: 'https://shopping.yahoo.co.jp/search/KUMANUKE/0/?first=1&tab_ex=commerce&fr=shp-prop&mcr=9053ed4f8a7f7469bbbfc0f9b3760435&ts=1779687394&sretry=1&sc_i=shopping-pc-web-search-suggest-suggest-kwd-sgstfrom-top--h_srch-kwd&area=13', label: 'Yahoo!ショッピング', external: true },
       { href: 'https://wowma.jp/itemlist?at=FP&e_scope=O&non_gr=ex&spe_id=header_search&keyword=KUMANUKE', label: 'au PAYマーケット', external: true },
-      { href: 'https://www.amazon.co.jp/s?k=KUMANUKE&__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&crid=PTKJQI2JZQCR&sprefix=kumanuke%2Caps%2C244&ref=nb_sb_noss_2', label: 'Amazon（近日公開）', external: true },
+      { href: 'https://www.amazon.co.jp/dp/B0H5L7CLK4', label: 'Amazon', external: true },
     ],
     'お問い合わせ': [
       { href: '#wholesale', label: '卸・法人向け' },
