@@ -21,7 +21,7 @@ export default function Image() {
           植物由来成分 ／ 国内企画・品質管理
         </div>
 
-        <div style={{ fontSize: 48, fontWeight: 700, color: '#fff', lineHeight: 1.4, marginBottom: 16, display: 'flex' }}>熊との遭遇を防ぐ、</div>
+        <div style={{ fontSize: 48, fontWeight: 700, color: '#fff', lineHeight: 1.4, marginBottom: 16, display: 'flex' }}>熊を近づけないための、</div>
         <div style={{ fontSize: 48, fontWeight: 700, color: '#E07A30', lineHeight: 1.4, marginBottom: 24, display: 'flex' }}>予防型対策を。</div>
 
         <div style={{ fontSize: 80, fontWeight: 900, color: '#fff', letterSpacing: '0.08em', lineHeight: 1, marginBottom: 28, display: 'flex' }}>

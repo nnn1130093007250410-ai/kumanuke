@@ -46,7 +46,7 @@ export default function Hero() {
             marginBottom: 8,
           }}
         >
-          熊との遭遇を防ぐ、<br />
+          熊を近づけないための、<br />
           <em style={{ fontStyle: 'normal', color: '#E07A30' }}>予防型対策</em>を。
         </h1>
         <p
