@@ -75,6 +75,14 @@ const articles: {
     category: 'GUIDE',
   },
   {
+    slug: 'stream-fishing-bear-prevention',
+    title: '渓流釣り・湖釣りでの熊対策｜釣り場のリスクと事前散布のポイント',
+    description: '渓流・源流・湖畔は熊の生息域と重なります。水音・早朝薄暮・単独釣行など釣り場特有のリスクと、釣行前・釣り座周辺でできる事前対策を解説します。',
+    tag: 'アウトドア・レジャー',
+    tagColor: '#1F5C2E',
+    category: 'GUIDE',
+  },
+  {
     slug: 'farm-bear-prevention',
     title: '農地・畑を熊から守る方法｜農家のための熊対策',
     description: '農作物被害を防ぐための農地外周散布・収穫前の対策など、農業従事者向けの熊忌避対策を詳しく解説します。',
