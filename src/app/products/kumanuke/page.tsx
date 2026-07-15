@@ -42,9 +42,9 @@ export default function ProductPage() {
         <GuideTeaser />
         <Research />
         <Caution />
-        <Wholesale />
         <StoresBanner />
         <CTA />
+        <Wholesale />
       </main>
       <Footer />
     </>
