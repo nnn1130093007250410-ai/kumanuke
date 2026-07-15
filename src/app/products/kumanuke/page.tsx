@@ -12,6 +12,7 @@ import GuideTeaser from '@/components/sections/GuideTeaser'
 import Research from '@/components/sections/Research'
 import Caution from '@/components/sections/Caution'
 import Wholesale from '@/components/sections/Wholesale'
+import StoresBanner from '@/components/sections/StoresBanner'
 import CTA from '@/components/sections/CTA'
 import Footer from '@/components/sections/Footer'
 import ScrollObserver from '@/components/ui/ScrollObserver'
@@ -42,6 +43,7 @@ export default function ProductPage() {
         <Research />
         <Caution />
         <Wholesale />
+        <StoresBanner />
         <CTA />
       </main>
       <Footer />
