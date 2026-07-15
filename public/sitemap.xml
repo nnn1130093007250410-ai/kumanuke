@@ -9,6 +9,14 @@
     <priority>1.0</priority>
   </url>
 
+  <!-- ── 取扱店舗一覧 ── -->
+  <url>
+    <loc>https://kumanuke.bubuworks.co.jp/stores</loc>
+    <lastmod>2026-07-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- ── 最新出没情報 ── -->
   <url>
     <loc>https://kumanuke.bubuworks.co.jp/recent</loc>

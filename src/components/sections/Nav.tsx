@@ -14,6 +14,7 @@ const NAV_LINKS = [
   { href: '#scenes', label: '使用シーン' },
   { href: '#faq',    label: 'FAQ' },
   { href: '/guide',  label: '対策ガイド' },
+  { href: '/stores', label: '取扱店' },
   { href: '/data',   label: '📊 環境省データ' },
 ]
 

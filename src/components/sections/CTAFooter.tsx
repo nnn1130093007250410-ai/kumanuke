@@ -114,6 +114,7 @@ export function Footer() {
       { href: '/map', label: '🗺 熊出没マップ' },
     ],
     '購入': [
+      { href: '/stores', label: '取扱店舗一覧' },
       { href: 'https://search.rakuten.co.jp/search/mall/KUMANUKE/', label: '楽天市場', external: true },
       { href: 'https://shopping.yahoo.co.jp/search/KUMANUKE/0/?first=1&tab_ex=commerce&fr=shp-prop&mcr=9053ed4f8a7f7469bbbfc0f9b3760435&ts=1779687394&sretry=1&sc_i=shopping-pc-web-search-suggest-suggest-kwd-sgstfrom-top--h_srch-kwd&area=13', label: 'Yahoo!ショッピング', external: true },
       { href: 'https://wowma.jp/itemlist?at=FP&e_scope=O&non_gr=ex&spe_id=header_search&keyword=KUMANUKE', label: 'au PAYマーケット', external: true },
