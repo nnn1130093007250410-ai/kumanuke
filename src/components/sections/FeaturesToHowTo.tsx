@@ -178,7 +178,7 @@ export function Ingredients() {
             </ul>
             <div style={{ background: '#EFF5F0', border: '1px solid #C8DFC9', borderLeft: '3px solid #1F5C2E', borderRadius: '0 6px 6px 0', padding: '18px 18px', marginTop: 20 }}>
               <p style={{ fontSize: 13, color: '#143D1E', lineHeight: 1.8 }}>
-                <strong>研究・参考情報：</strong>野生動物の忌避に関する研究において、特定の植物由来揮発性成分が動物の行動に影響を与える可能性が示唆されています（各国研究機関による文献より参考）。KUMANUKEはこれらの研究知見を参考に開発されていますが、すべての状況・個体において同等の効果を保証するものではありません。
+                <strong>研究・参考情報：</strong>植物由来の成分が動物の忌避・採食行動に影響し得ることは、昆虫等を対象とした研究で広く報告されているほか、タンニン・植物油（ヒマシ油・ニンニク油・シナモン油）を配合した忌避剤がイノシシ（飼育個体）の採食行動を抑制したとする試験（Parkら 2024, J. Prev. Vet. Med. 48(3):189–192）でも示されています。KUMANUKEはこうした一般的な知見を参考に開発されていますが、本製品そのものの効果や、クマを含むすべての状況・個体への忌避効果を保証・実証するものではありません。
               </p>
             </div>
           </div>
