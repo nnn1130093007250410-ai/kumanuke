@@ -40,7 +40,7 @@ export default function Image() {
               KUMA<span style={{ color: '#E07A30' }}>NUKE</span>
             </div>
             <div style={{ width: 1, height: 20, background: 'rgba(255,255,255,0.2)', display: 'flex' }} />
-            <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', letterSpacing: '0.06em', display: 'flex' }}>日本最大級クマ情報ポータル</div>
+            <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', letterSpacing: '0.06em', display: 'flex' }}>全国のクマ出没情報ポータル</div>
           </div>
 
           {/* メインキャッチ */}

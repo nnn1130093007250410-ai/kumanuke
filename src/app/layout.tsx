@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     template: '%s | KUMANUKE',
   },
   description:
-    '日本最大級の熊・野生動物情報インフラ。全国110,000件超の出没データをマップ・ランキング・統計で可視化。対策ガイド35本・世界の熊情報も網羅。熊よけスプレーKUMANUKEも販売。',
+    '全国の熊・野生動物の出没データ110,000件超を集約し、マップ・ランキング・統計で可視化。対策ガイド35本・世界の熊情報も網羅した情報サイト。熊よけスプレーKUMANUKEも販売。',
   keywords: [
     '熊出没マップ', 'クマ出没情報', '熊情報ポータル', '野生動物情報',
     '全国熊出没', '熊対策ガイド', '熊よけスプレー', '熊被害統計',
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     siteName: 'KUMANUKE',
     title: 'KUMANUKE | 熊・野生動物情報ポータル',
     description:
-      '日本最大級の熊・野生動物情報インフラ。全国110,000件超の出没データをマップ・ランキング・統計で可視化。',
+      '全国の熊・野生動物の出没データ110,000件超を集約し、マップ・ランキング・統計で可視化した情報サイト。',
   },
   twitter: {
     card: 'summary_large_image',
@@ -66,7 +66,7 @@ const jsonLd = {
     {
       '@type': 'Product',
       name: 'KUMANUKE 野生動物対策スプレー',
-      image: 'https://kumanuke.bubuworks.co.jp/product-overview.jpg',
+      image: 'https://kumanuke.bubuworks.co.jp/product-og.jpg',
       description:
         '植物由来成分を使用したエリア散布型の野生動物対策スプレー。熊との遭遇予防を目的とした事前散布型対策。OCガス・カプサイシン不使用。',
       brand: { '@type': 'Brand', name: 'KUMANUKE' },

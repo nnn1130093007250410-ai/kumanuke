@@ -15,7 +15,7 @@ import TrustBadge from '@/components/ui/TrustBadge'
 export const metadata: Metadata = {
   title: 'KUMANUKE | 熊・野生動物情報ポータル — 全国11万件+のデータ',
   description:
-    '日本最大級の熊・野生動物情報インフラ。全国116,000件超の出没データをマップ・ランキング・統計で可視化。対策ガイド・世界情報も網羅。',
+    '全国の熊・野生動物の出没データ116,000件超を集約し、マップ・ランキング・統計で可視化。対策ガイド・世界情報も網羅した情報サイト。',
   keywords: [
     '熊出没マップ', 'クマ出没情報', '熊情報ポータル', '野生動物情報',
     '全国熊出没', '熊対策ガイド', '熊よけスプレー', '熊被害統計',
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     title: 'KUMANUKE | 熊・野生動物情報ポータル',
-    description: '日本最大級の熊・野生動物情報インフラ。全国116,000件超の出没データをリアルタイムに近い形でマップ表示。',
+    description: '全国の熊・野生動物の出没データ116,000件超を集約し、リアルタイムに近い形でマップ表示する情報サイト。',
     url: 'https://kumanuke.bubuworks.co.jp',
   },
 }
@@ -298,7 +298,7 @@ export default async function PortalTop() {
               marginBottom: 12,
             }}
           >
-            政府・自治体の公式データ{globalTotalCount.toLocaleString()}件を集約した日本最大級のクマ出没情報インフラ。
+            政府・自治体の公式データ{globalTotalCount.toLocaleString()}件を集約したクマ出没情報サイト。
             あなたの地域のリスクを地図・統計・ランキングで可視化します。
           </p>
           <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.45)', marginBottom: 28, maxWidth: 480 }}>
