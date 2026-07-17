@@ -46,8 +46,8 @@ export default function Hero() {
             marginBottom: 8,
           }}
         >
-          熊を近づけないための、<br />
-          <em style={{ fontStyle: 'normal', color: '#E07A30' }}>予防型対策</em>を。
+          熊との遭遇に備える、<br />
+          <em style={{ fontStyle: 'normal', color: '#E07A30' }}>予防対策</em>を。
         </h1>
         <p
           style={{
