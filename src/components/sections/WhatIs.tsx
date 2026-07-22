@@ -53,7 +53,9 @@ export default function WhatIs() {
               <div style={{ fontSize: 12, color: '#9A9A95', textDecoration: 'line-through' }}>通常価格 ¥4,980（税抜）</div>
             </div>
             <a
-              href="#cta"
+              href="https://kumanuke.jp/"
+              target="_blank"
+              rel="noopener noreferrer"
               style={{ marginTop: 16, background: '#E07A30', color: '#fff', fontWeight: 700, fontSize: 13, padding: '10px 22px', borderRadius: 4, textDecoration: 'none', display: 'inline-block' }}
             >
               購入・詳細を見る
