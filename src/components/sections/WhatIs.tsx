@@ -50,7 +50,7 @@ export default function WhatIs() {
                 <span style={{ fontFamily: 'var(--font-en)', fontSize: 28, fontWeight: 700, color: '#143D1E' }}>¥3,980</span>
                 <span style={{ fontSize: 12, color: '#5A5A55' }}>(税込)</span>
               </div>
-              <div style={{ fontSize: 12, color: '#9A9A95', textDecoration: 'line-through' }}>通常価格 ¥4,980（税込）</div>
+              <div style={{ fontSize: 12, color: '#9A9A95', textDecoration: 'line-through' }}>メーカー希望小売価格 ¥4,980（税込）</div>
             </div>
             <a
               href="https://kumanuke.jp/"
