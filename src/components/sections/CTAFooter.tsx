@@ -143,6 +143,20 @@ export function Footer() {
               BUBUWORKS合同会社<br />
               福島県郡山市安積荒井1-169 C102
             </p>
+            <a
+              href="https://www.instagram.com/kumanuke2026/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="公式Instagram @kumanuke2026"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, marginTop: 16, color: 'rgba(255,255,255,0.55)', textDecoration: 'none', fontSize: 12 }}
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="2.5" y="2.5" width="19" height="19" rx="5.5" stroke="currentColor" strokeWidth="1.6" />
+                <circle cx="12" cy="12" r="4.2" stroke="currentColor" strokeWidth="1.6" />
+                <circle cx="17.4" cy="6.6" r="1.2" fill="currentColor" />
+              </svg>
+              <span>公式Instagram ＠kumanuke2026</span>
+            </a>
           </div>
           {Object.entries(footerLinks).map(([title, links]) => (
             <div key={title}>
