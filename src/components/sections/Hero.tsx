@@ -134,7 +134,9 @@ export default function Hero() {
             卸・法人向けお問い合わせ
           </a>
           <a
-            href="/products/kumanuke"
+            href="https://kumanuke.jp/"
+            target="_blank"
+            rel="noopener noreferrer"
             style={{
               background: 'transparent',
               color: 'rgba(255,255,255,0.7)',
