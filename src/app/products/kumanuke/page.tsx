@@ -2,6 +2,7 @@ import Nav from '@/components/sections/Nav'
 import Hero from '@/components/sections/Hero'
 import Problem from '@/components/sections/Problem'
 import WhatIs from '@/components/sections/WhatIs'
+import InstagramBand from '@/components/sections/InstagramBand'
 import Features from '@/components/sections/Features'
 import Scenes from '@/components/sections/Scenes'
 import Ingredients from '@/components/sections/Ingredients'
@@ -33,6 +34,7 @@ export default function ProductPage() {
         <Hero />
         <Problem />
         <WhatIs />
+        <InstagramBand />
         <Features />
         <Scenes />
         <Ingredients />
