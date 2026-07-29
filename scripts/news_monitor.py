@@ -188,13 +188,14 @@ def fetch_rss(query: str) -> list[dict]:
 
 # ── 時間フィルター ──────────────────────────────────────────────────────────
 
+MAX_AGE_HOURS = 48  # 直近この時間以内に公開された記事のみ投稿対象
+
 def is_recent_article(pub_dt) -> bool:
-    """記事が今日（JST）に公開されたか確認。日時不明な記事は通す"""
+    """記事が直近 MAX_AGE_HOURS 時間以内に公開されたか確認。日時不明な記事は通す"""
     if pub_dt is None:
         return True
-    today_jst = datetime.now(JST).date()
-    pub_date_jst = pub_dt.astimezone(JST).date()
-    return pub_date_jst == today_jst
+    age = datetime.now(timezone.utc) - pub_dt.astimezone(timezone.utc)
+    return age <= timedelta(hours=MAX_AGE_HOURS)
 
 # ── 同一インシデント重複検知 ────────────────────────────────────────────────
 
