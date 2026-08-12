@@ -34,7 +34,7 @@ export default function JapanRegionalBearDataPage() {
         <div style={{ background: '#EFF6FF', border: '1px solid #93C5FD', borderRadius: 8, padding: '16px 20px', marginBottom: 32, fontSize: 13, color: '#1E3A5F' }}>
           <p style={{ fontWeight: 700, marginBottom: 6, fontSize: 14 }}>📊 本記事のデータについて</p>
           <p style={{ margin: 0, lineHeight: 1.7 }}>
-            本記事はKUMANUKEが全国の自治体オープンデータ・ArcGIS公開データ・報道情報等から独自に収集・統合した<strong>116,615件（2026年8月時点）</strong>の出没記録を分析したものです。自治体ごとに収集体制が異なるため、件数は「実際の出没数」ではなく「報告・捕捉された件数」を反映しています。過小報告の可能性を念頭に置いてください。
+            本記事はKUMANUKEが全国の自治体オープンデータ・ArcGIS公開データ・報道情報等から独自に収集・統合した<strong>116,619件（2026年8月時点）</strong>の出没記録を分析したものです。自治体ごとに収集体制が異なるため、件数は「実際の出没数」ではなく「報告・捕捉された件数」を反映しています。過小報告の可能性を念頭に置いてください。
             <br /><Link href="/map" style={{ color: '#1E3A5F', fontWeight: 700 }}>→ 全データをマップで確認する</Link>
           </p>
         </div>
