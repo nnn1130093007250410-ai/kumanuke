@@ -69,7 +69,19 @@ const jsonLd = {
       image: 'https://kumanuke.bubuworks.co.jp/product-og.jpg',
       description:
         '植物由来成分を使用したエリア散布型の野生動物対策スプレー。熊との遭遇予防を目的とした事前散布型対策。OCガス・カプサイシン不使用。',
-      brand: { '@type': 'Brand', name: 'KUMANUKE' },
+      brand: {
+        '@type': 'Brand',
+        '@id': 'https://kumanuke.bubuworks.co.jp/#brand',
+        name: 'KUMANUKE',
+        alternateName: ['クマヌケ', 'クマヌケ 熊よけスプレー'],
+        url: 'https://kumanuke.bubuworks.co.jp',
+        logo: 'https://kumanuke.bubuworks.co.jp/product-og.jpg',
+        sameAs: [
+          'https://www.instagram.com/kumanuke2026/',
+          'https://www.amazon.co.jp/dp/B0H5L7CLK4',
+          'https://search.rakuten.co.jp/search/mall/KUMANUKE/',
+        ],
+      },
       offers: {
         '@type': 'Offer',
         price: '3980',
@@ -84,8 +96,12 @@ const jsonLd = {
     },
     {
       '@type': 'WebSite',
+      '@id': 'https://kumanuke.bubuworks.co.jp/#website',
       url: 'https://kumanuke.bubuworks.co.jp',
       name: 'KUMANUKE',
+      alternateName: ['クマヌケ', 'KUMANUKE 公式', '熊よけスプレー KUMANUKE'],
+      inLanguage: 'ja',
+      publisher: { '@id': 'https://kumanuke.bubuworks.co.jp/#organization' },
       description: '熊・野生動物情報ポータル — 全国出没データ・対策ガイド・世界情報を集約',
       potentialAction: {
         '@type': 'SearchAction',
@@ -115,9 +131,17 @@ const jsonLd = {
     },
     {
       '@type': 'Organization',
+      '@id': 'https://kumanuke.bubuworks.co.jp/#organization',
       name: 'BUBUWORKS合同会社',
+      alternateName: 'KUMANUKE',
       url: 'https://kumanuke.bubuworks.co.jp',
+      logo: 'https://kumanuke.bubuworks.co.jp/product-og.jpg',
       email: 'kumanuke@bubuworks.co.jp',
+      sameAs: [
+        'https://www.instagram.com/kumanuke2026/',
+        'https://www.amazon.co.jp/dp/B0H5L7CLK4',
+        'https://search.rakuten.co.jp/search/mall/KUMANUKE/',
+      ],
       address: {
         '@type': 'PostalAddress',
         streetAddress: '安積荒井1-169 C102',
