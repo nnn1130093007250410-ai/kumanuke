@@ -4,6 +4,8 @@ import Image from 'next/image'
 const photos: { src: string; label: string; alt: string; pos?: string }[] = [
   { src: '/ugc/ugc-fishing-1.jpg', label: '渓流釣りにて', alt: '渓流釣りのタックルとKUMANUKE' },
   { src: '/ugc/ugc-hike-spray.jpg', label: '登山｜装備にスプレー', alt: '登山で装備にKUMANUKEをスプレーする様子', pos: 'center 30%' },
+  { src: '/ugc/ugc-group-1.jpg', label: 'グループ登山での使用', alt: 'グループ登山でKUMANUKEを使用する様子' },
+  { src: '/ugc/ugc-group-2.jpg', label: '登山｜仲間と使用', alt: '登山で仲間とKUMANUKEを装備に使用する様子' },
   { src: '/ugc/ugc-stream-1.jpg', label: '渓流フィールドにて', alt: '渓流の岩の上に置かれたKUMANUKE' },
   { src: '/ugc/ugc-sign.jpg', label: '登山口での携行（山梨・南アルプス）', alt: '熊出没注意の看板前でKUMANUKEを携行' },
   { src: '/ugc/ugc-fishing-2.jpg', label: '渓流釣りの携行品と', alt: '渓流釣りのロッドとKUMANUKE' },
