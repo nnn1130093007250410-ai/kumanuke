@@ -5,6 +5,7 @@ import WhatIs from '@/components/sections/WhatIs'
 import InstagramBand from '@/components/sections/InstagramBand'
 import Features from '@/components/sections/Features'
 import Scenes from '@/components/sections/Scenes'
+import UserGallery from '@/components/sections/UserGallery'
 import Ingredients from '@/components/sections/Ingredients'
 import Comparison from '@/components/sections/Comparison'
 import HowToUse from '@/components/sections/HowToUse'
@@ -37,6 +38,7 @@ export default function ProductPage() {
         <InstagramBand />
         <Features />
         <Scenes />
+        <UserGallery />
         <Ingredients />
         <Comparison />
         <HowToUse />
