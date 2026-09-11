@@ -124,6 +124,12 @@ export default function PrefecturePage({ params }: { params: { prefecture: strin
   if (prefSightings.length === 0) notFound()
 
   const latest = getLatestSightings(prefSightings, 30)
+  // 地図には最新分のみを渡してページ容量を抑える（全件だと数MB〜10MB超になり
+  // Google が「クロール済み-インデックス未登録」と判定する主因になっていた）。
+  // 統計・概況テキストは prefSightings（全件）を使うため件数表示は正確なまま。
+  const mapSightings = [...prefSightings]
+    .sort((a, b) => b.date.localeCompare(a.date))
+    .slice(0, 1500)
   const monthly = getMonthlyCounts(prefSightings)
   const maxMonthCount = Math.max(...monthly.map((m) => m.count), 1)
 
@@ -198,7 +204,7 @@ export default function PrefecturePage({ params }: { params: { prefecture: strin
             }}
           >
             <MapClient
-              sightings={prefSightings}
+              sightings={mapSightings}
               centerLng={info.center[0]}
               centerLat={info.center[1]}
               zoom={info.zoom}
@@ -208,6 +214,11 @@ export default function PrefecturePage({ params }: { params: { prefecture: strin
       </div>
 
       <div style={{ maxWidth: 1080, margin: '0 auto', padding: '36px 20px 72px' }}>
+        {prefSightings.length > mapSightings.length && (
+          <p style={{ fontSize: 11, color: '#8A8A85', margin: '0 0 20px', textAlign: 'right' }}>
+            ※ 地図には最新 {mapSightings.length.toLocaleString('ja-JP')} 件を表示しています（全 {prefSightings.length.toLocaleString('ja-JP')} 件）
+          </p>
+        )}
         <div
           style={{
             display: 'grid',
