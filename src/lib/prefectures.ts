@@ -27,6 +27,7 @@ export const PREFECTURES: PrefectureInfo[] = [
   { name: '福井県', slug: 'fukui',      center: [136.2, 36.0],  zoom: 8,   bearType: 'ツキノワグマ' },
   { name: '山梨県', slug: 'yamanashi',  center: [138.6, 35.7],  zoom: 8,   bearType: 'ツキノワグマ' },
   { name: '長野県', slug: 'nagano',     center: [138.0, 36.3],  zoom: 7,   bearType: 'ツキノワグマ' },
+  { name: '岐阜県', slug: 'gifu',       center: [137.0, 35.8],  zoom: 8,   bearType: 'ツキノワグマ' },
   { name: '静岡県', slug: 'shizuoka',   center: [138.4, 35.0],  zoom: 7.5, bearType: 'ツキノワグマ' },
   { name: '愛知県', slug: 'aichi',      center: [137.2, 35.1],  zoom: 8,   bearType: 'ツキノワグマ' },
   { name: '三重県', slug: 'mie',        center: [136.5, 34.5],  zoom: 7.5, bearType: 'ツキノワグマ' },
