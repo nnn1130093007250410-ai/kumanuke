@@ -25,6 +25,14 @@
     <priority>0.90</priority>
   </url>
 
+  <!-- ── 環境省データまとめ ── -->
+  <url>
+    <loc>https://kumanuke.bubuworks.co.jp/data</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
   <!-- ── MAP ── -->
   <url>
     <loc>https://kumanuke.bubuworks.co.jp/map</loc>
@@ -471,12 +479,5 @@
     <priority>0.7</priority>
   </url>
 
-  <!-- ── その他 ── -->
-  <url>
-    <loc>https://kumanuke.bubuworks.co.jp/privacy</loc>
-    <lastmod>2025-05-25</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
 
 </urlset>
