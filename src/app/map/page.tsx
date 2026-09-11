@@ -743,6 +743,35 @@ export default async function MapPage({
           </div>
         </div>
 
+        {/* 埋め込みウィジェット導線 */}
+        <a
+          href="/widget"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: 16,
+            flexWrap: 'wrap',
+            marginTop: 32,
+            background: '#0F2E16',
+            borderRadius: 10,
+            padding: '20px 24px',
+            textDecoration: 'none',
+          }}
+        >
+          <div>
+            <p style={{ fontSize: 15, fontWeight: 700, color: '#fff', margin: '0 0 4px' }}>
+              このクマ出没マップを、あなたのサイトに掲載できます（無料）
+            </p>
+            <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.7)', margin: 0 }}>
+              ブログ・自治体サイト・登山／釣り関連ページに、コードを貼るだけで設置。毎週自動更新。
+            </p>
+          </div>
+          <span style={{ fontSize: 14, fontWeight: 700, color: '#0F2E16', background: '#5EC97C', padding: '10px 20px', borderRadius: 8, whiteSpace: 'nowrap' }}>
+            無料ウィジェットを入手 →
+          </span>
+        </a>
+
         {/* Disclaimer */}
         <div
           style={{

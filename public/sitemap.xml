@@ -33,6 +33,14 @@
     <priority>0.85</priority>
   </url>
 
+  <!-- ── 埋め込みウィジェット（被リンク獲得） ── -->
+  <url>
+    <loc>https://kumanuke.bubuworks.co.jp/widget</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <!-- ── MAP ── -->
   <url>
     <loc>https://kumanuke.bubuworks.co.jp/map</loc>
